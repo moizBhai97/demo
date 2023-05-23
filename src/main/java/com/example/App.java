@@ -252,6 +252,8 @@ public class App extends Application {
         });
         root.add(button13, 0, 12);
 
+
+
         
 
 
@@ -272,6 +274,11 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+        System.out.println("Gay world");
+        System.out.println("Gay world");
+        System.out.println("Gay world");
+
+
     }
 
 }
