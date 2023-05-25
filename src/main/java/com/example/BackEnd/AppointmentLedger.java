@@ -10,6 +10,8 @@ public class AppointmentLedger {
 
     AppointmentLedger()
     {
+        dbFactory = DBFactory.getInstance();
+
         appointments = new ArrayList<Appointment>();
     }
 
@@ -19,13 +21,9 @@ public class AppointmentLedger {
 
         appointments.add(appointment);
 
-        dbFactory = DBFactory.getInstance();
-
         dbFactory.createHandler("SQL").saveAppointment(date, time, problem, patId);
 
         return appointment;
     }
 
-
-    
 }

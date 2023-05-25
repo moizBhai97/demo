@@ -10,7 +10,7 @@ public class PatientLedger {
     PatientLedger()
     {
         patients = new ArrayList<Patient>();
-        patients.add(new Patient(1));
+        patients.add(new Patient(1)); // for testing
     }
 
     public Patient getPatient(int patId)
@@ -24,8 +24,6 @@ public class PatientLedger {
         }
 
         return null;
-    } 
-
-    
+    }    
     
 }

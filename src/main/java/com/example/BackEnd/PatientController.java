@@ -1,5 +1,6 @@
 package com.example.BackEnd;
 
+import org.json.simple.JSONObject;
 public class PatientController {
 
     private DoctorLedger doctorLedger;
@@ -11,11 +12,9 @@ public class PatientController {
         patientLedger = new PatientLedger();
     }
 
-    public String bookAppointment(int docId, String date, String time, String problem, int patId)
+    public JSONObject bookAppointment(int docId, String date, String time, String problem, int patId)
     {
-        return patientLedger.getPatient(patId).bookAppointment(docId, date, time, problem).getDetails();
-
-
+        return patientLedger.getPatient(patId).bookAppointment(patId, date, time, problem).getDetails();
     }
     
 }

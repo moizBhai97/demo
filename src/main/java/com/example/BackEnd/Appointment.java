@@ -1,5 +1,11 @@
 package com.example.BackEnd;
 
+import java.io.FileReader;
+import java.util.Set;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+
 public class Appointment {
     
     private String date;
@@ -9,31 +15,70 @@ public class Appointment {
 
     Appointment()
     {
-        this.date="";
-        this.time="";
-        this.problem="";
-        this.patId=0;
+        this.date = "";
+        this.time = "";
+        this.problem = "";
+        this.patId = 0;
     }
 
     Appointment(String date, String time, String problem, int patId)
     {
-        this.date=date;
-        this.time=time;
-        this.problem=problem;
-        this.patId=patId;
+        this.date = date;
+        this.time = time;
+        this.problem = problem;
+        this.patId = patId;
     }
 
-    public String getDetails()
+    public String get(String value)
     {
-        String s="";
-        s=s+date+"\n";
-        s=s+time+"\n";
-        s=s+problem+"\n";
-        s=s+patId+"\n";
+        if(value.equals("date"))
+            return date;
+        
+        else if(value.equals("time"))
+            return time;
+        
+        else if(value.equals("problem"))
+            return problem;
+        
+        else if(value.equals("patId"))
+            return patId + "";
 
-        return s;
+        return "NULL";
+        
+    }
+
+    public JSONObject getDetails()
+    {
+        try
+        {
+            JSONParser parser = new JSONParser(); 
+
+            JSONObject obj = (JSONObject) parser.parse(new FileReader("Appointment.json"));
+            
+            Set<String> keyset = obj.keySet();
+            
+            for(String key : keyset)
+            {
+                if(!get(key).equals("NULL"))
+                    obj.put(key, get(key));            //put values in json object
+            }
+
+            return obj;
+
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+
+            return null;
+        }
+
+        // String s="";
+        // s=s+date+"\n";
+        // s=s+time+"\n";
+        // s=s+problem+"\n";
+        // s=s+patId+"\n";
+
+        // return s;
     } 
-
-
-
 }
