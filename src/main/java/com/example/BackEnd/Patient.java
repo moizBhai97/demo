@@ -26,4 +26,14 @@ public class Patient {
     {
         return appointmentLedger.createAppointment(docId, date, time, problem, docId);
     }
+
+    public String getAppointList()
+    {
+        return appointmentLedger.getAppointList(this.patId);
+    }
+
+    public Boolean cancelAppointment(String Reason, int appId)
+    {
+        return appointmentLedger.updateAppointment(Reason, appId, true);
+    }
 }
