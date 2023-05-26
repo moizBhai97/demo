@@ -54,7 +54,7 @@ public class Appointment {
             JSONParser parser = new JSONParser(); 
 
             JSONObject obj = new JSONObject(parser.parse(new FileReader("Appointment.json")).toString());
-            
+
             Set<String> keyset = obj.keySet();
             
             for(String key : keyset)

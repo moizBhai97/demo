@@ -3,6 +3,8 @@ module com.example {
     requires javafx.fxml;
     requires java.sql;
     requires org.json;
+    requires com.google.gson;
+    requires com.fasterxml.jackson.databind;
     requires json.simple;
     requires com.microsoft.sqlserver.jdbc;
 

@@ -28,9 +28,10 @@ public class Main {
         try
         {
            //using json.simple.* a simple way to parse read and write json files and json objects
-           //using org.json.* for manipulating json objects
+           //using org.json.* for manipulating simple json objects
            //to convert from one json type to another using string
            //both libraries are included in the project module info
+           //There is also gson,jackson library included if you want more advanced options
 
             JSONParser parser = new JSONParser(); 
 
