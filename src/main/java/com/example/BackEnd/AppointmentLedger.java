@@ -47,9 +47,7 @@ public class AppointmentLedger {
 
     public String getAppointList(int patId)
     {
-        try
-        {
-            JSONArray objs = new JSONArray();
+        JSONArray objs = new JSONArray();
             
             for(int i = 0; i < appointments.size(); i++ )
             {
@@ -60,13 +58,5 @@ public class AppointmentLedger {
             }
 
             return objs.toString();
-
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
-
-            return null;
-        }
     }
 }
