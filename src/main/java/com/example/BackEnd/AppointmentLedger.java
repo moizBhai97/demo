@@ -38,7 +38,7 @@ public class AppointmentLedger {
         {
             JSONParser parser = new JSONParser();
 
-            JSONObject obj = new JSONObject(parser.parse(new FileReader("Appointment.json")).toString());
+            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Appointment.json")).toString());
 
             Set<String> keyset = obj.keySet();
 
