@@ -1,13 +1,10 @@
 package com.example.BackEnd;
 
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 public class AppointmentLedger {
 
@@ -32,29 +29,34 @@ public class AppointmentLedger {
         return appointment;
     }
 
+    public Boolean updateAppointment(String Reason, int appId, Boolean flag)
+    {
+        if(flag)
+        {
+            getAppointment(appId);
+            return true;
+        }
+
+        else return true;
+    }
+
+    public Appointment getAppointment(int appId)
+    {
+        return appointments.get(appId);
+    }
+
     public String getAppointList(int patId)
     {
         try
         {
-            JSONParser parser = new JSONParser();
-
-            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Appointment.json")).toString());
-
-            Set<String> keyset = obj.keySet();
-
             JSONArray objs = new JSONArray();
             
             for(int i = 0; i < appointments.size(); i++ )
             {
-                JSONObject newObj = new JSONObject();
-
-                for(String key : keyset)
-                {
-                    if(!appointments.get(i).get(key).equals("NULL"))
-                        newObj.put(key, appointments.get(i).get(key));            //put values in json object
-                }
-
-                objs.put(newObj);
+                 
+                JSONObject obj = new JSONObject(appointments.get(i).getDetails());
+                
+                objs.put(obj);
             }
 
             return objs.toString();

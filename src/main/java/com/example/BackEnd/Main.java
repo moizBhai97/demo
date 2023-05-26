@@ -10,6 +10,22 @@ import org.json.JSONObject;
 
 public class Main {
     
+    public static void printJsonArray(JSONArray objs)
+    {
+        if(objs != null)
+        {
+            for(int i=0; i<objs.length(); i++)
+            {
+                JSONObject obj = (JSONObject) objs.get(i);
+
+                System.out.println();
+                
+                //Print json object
+                printJson(obj);
+            }
+        }
+    }
+    
     public static void printJson(JSONObject obj)
     {
         if(obj != null)
@@ -62,6 +78,10 @@ public class Main {
         
         //print a json object
         printJson(obj);
+
+        JSONArray objs = new JSONArray(pc.getAppointList(1));
+
+        printJsonArray(objs);
         
         //read array of values from json
         readJson();
