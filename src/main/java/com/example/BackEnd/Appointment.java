@@ -5,6 +5,7 @@ import java.util.Set;
 
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
+ 
 
 public class Appointment {
     
@@ -53,7 +54,7 @@ public class Appointment {
         {
             JSONParser parser = new JSONParser(); 
 
-            JSONObject obj = new JSONObject(parser.parse(new FileReader("Appointment.json")).toString());
+            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Appointment.json")).toString());
 
             Set<String> keyset = obj.keySet();
             
