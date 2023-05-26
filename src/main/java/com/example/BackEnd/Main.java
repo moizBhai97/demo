@@ -35,7 +35,7 @@ public class Main {
 
             JSONParser parser = new JSONParser(); 
 
-            JSONArray jsonArray = new JSONArray(parser.parse(new FileReader("Moiz.json")).toString());
+            JSONArray jsonArray = new JSONArray(parser.parse(new FileReader("src/main/resources/JSONPackage/Moiz.json")).toString());
 
             for(int i=0; i<jsonArray.length(); i++)
             {

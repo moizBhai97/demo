@@ -5,7 +5,6 @@ import java.util.Set;
 
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
- 
 
 public class Appointment {
     

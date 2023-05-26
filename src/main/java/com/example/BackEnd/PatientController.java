@@ -15,5 +15,10 @@ public class PatientController {
     {
         return patientLedger.getPatient(patId).bookAppointment(patId, date, time, problem).getDetails();
     }
+
+    public String getAppointList(int patId)
+    {
+        return patientLedger.getPatient(patId).getAppointList();
+    }
     
 }
