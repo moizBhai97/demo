@@ -3,7 +3,7 @@ package com.example.BackEnd;
 import java.io.FileReader;
 import java.util.Set;
 
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 public class Appointment {
@@ -47,13 +47,13 @@ public class Appointment {
         
     }
 
-    public JSONObject getDetails()
+    public String getDetails()
     {
         try
         {
             JSONParser parser = new JSONParser(); 
 
-            JSONObject obj = (JSONObject) parser.parse(new FileReader("Appointment.json"));
+            JSONObject obj = new JSONObject(parser.parse(new FileReader("Appointment.json")).toString());
             
             Set<String> keyset = obj.keySet();
             
@@ -62,8 +62,10 @@ public class Appointment {
                 if(!get(key).equals("NULL"))
                     obj.put(key, get(key));            //put values in json object
             }
+            
+            String Obj = obj.toString();
 
-            return obj;
+            return Obj;
 
         }
         catch(Exception e)

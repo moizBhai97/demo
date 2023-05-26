@@ -3,9 +3,10 @@ package com.example.BackEnd;
 import java.io.FileReader;
 import java.util.Set;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Main {
     
@@ -27,16 +28,17 @@ public class Main {
         try
         {
            //using json.simple.* a simple way to parse read and write json files and json objects
-           //org.json.* is also powerfull you guyz can explore
+           //using org.json.* for manipulating json objects
+           //to convert from one json type to another using string
            //both libraries are included in the project module info
 
             JSONParser parser = new JSONParser(); 
 
-            JSONArray objs = (JSONArray) parser.parse(new FileReader("Moiz.json")); //parse json file and return as jsonArray
-            
-            for(int i=0; i<objs.size(); i++)
+            JSONArray jsonArray = new JSONArray(parser.parse(new FileReader("Moiz.json")).toString());
+
+            for(int i=0; i<jsonArray.length(); i++)
             {
-                JSONObject obj = (JSONObject) objs.get(i); //get jsonObject from jsonArray
+                JSONObject obj = (JSONObject) jsonArray.get(i); //get jsonObject from jsonArray
                 
                 System.out.println();
                 
@@ -54,8 +56,8 @@ public class Main {
         
         PatientController pc = new PatientController();
         
-        //get json object(implmented in Appointment.java "getDetails()" )
-        JSONObject obj = pc.bookAppointment(3, "2020-12-10", "12:00:00", "Heart", 1);
+        //get jsonstring (implmented in Appointment.java "getDetails()") and convert to jsonObject
+        JSONObject obj = new JSONObject(pc.bookAppointment(3, "2020-12-10", "12:00:00", "Heart", 1));
         
         //print a json object
         printJson(obj);
