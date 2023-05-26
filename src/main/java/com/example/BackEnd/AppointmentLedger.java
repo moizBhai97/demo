@@ -49,14 +49,14 @@ public class AppointmentLedger {
     {
         JSONArray objs = new JSONArray();
             
-            for(int i = 0; i < appointments.size(); i++ )
-            {
-                 
-                JSONObject obj = new JSONObject(appointments.get(i).getDetails());
+        for(int i = 0; i < appointments.size(); i++ )
+        {
                 
-                objs.put(obj);
-            }
+            JSONObject obj = new JSONObject(appointments.get(i).getDetails());
+            
+            objs.put(obj);
+        }
 
-            return objs.toString();
+        return objs.toString();
     }
 }
