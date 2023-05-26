@@ -7,7 +7,6 @@ public class Patient {
 
     Patient()
     {
-        patId = 0;
         appointmentLedger = new AppointmentLedger();
     }
 
@@ -22,9 +21,16 @@ public class Patient {
         return patId;
     }
 
-    public Appointment bookAppointment(int docId, String date, String time, String problem)
+    public void bookAppointment(String info)
     {
-        return appointmentLedger.createAppointment(docId, date, time, problem, docId);
+        try
+        {
+            appointmentLedger.createAppointment(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     public String getAppointList()
@@ -32,8 +38,15 @@ public class Patient {
         return appointmentLedger.getAppointList(this.patId);
     }
 
-    public Boolean cancelAppointment(String Reason, int appId)
+    public void cancelAppointment(String Reason, int appId)
     {
-        return appointmentLedger.updateAppointment(Reason, appId, true);
+        try
+        {
+            appointmentLedger.updateAppointment(Reason, appId, 1);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);  
+        }
     }
 }
