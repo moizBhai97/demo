@@ -27,6 +27,8 @@ public class PrimaryController {
     ImageView filter_img;
     @FXML
     Pane big_pane;
+    @FXML
+    Button filter_btn;
     public void filter_toggle(ActionEvent event){
         try{
             if(filter_Pane.isVisible()){
