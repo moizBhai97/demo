@@ -67,8 +67,8 @@ public class Appointment {
 
         return "NULL";
     }
-
-    public String getDetails()
+    @Override
+    public String toString()
     {
         try
         {
