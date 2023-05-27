@@ -1,7 +1,5 @@
 package com.example.BackEnd;
 
-import java.security.cert.CertPathValidatorException.Reason;
-
 public class PatientController {
 
     private DoctorLedger doctorLedger;
@@ -13,9 +11,16 @@ public class PatientController {
         patientLedger = new PatientLedger();
     }
 
-    public String bookAppointment(int docId, String date, String time, String problem, int patId)
+    public void bookAppointment(String info, int patId)
     {
-        return patientLedger.getPatient(patId).bookAppointment(patId, date, time, problem).getDetails();
+        try
+        {
+            patientLedger.getPatient(patId).bookAppointment(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     public String getAppointList(int patId)
@@ -23,9 +28,16 @@ public class PatientController {
         return patientLedger.getPatient(patId).getAppointList();
     }
 
-    public Boolean cancelAppointment(String Reason, int patId, int appId)
+    public void cancelAppointment(String Reason, int patId, int appId)
     {
-        return patientLedger.getPatient(patId).cancelAppointment(Reason, appId);
+        try
+        {
+            patientLedger.getPatient(patId).cancelAppointment(Reason, appId);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     public String searchDoctor(String name){

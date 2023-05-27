@@ -11,22 +11,41 @@ public class Appointment {
     private String date;
     private String time;
     private String problem;
-    private int patId;
+    private int docId;
+    private String status;
 
     Appointment()
     {
         this.date = "";
         this.time = "";
         this.problem = "";
-        this.patId = 0;
+        this.docId = 0;
+        this.status = "Booked";
     }
 
-    Appointment(String date, String time, String problem, int patId)
+    Appointment(String date, String time, String problem, int docId)
     {
         this.date = date;
         this.time = time;
         this.problem = problem;
-        this.patId = patId;
+        this.docId = docId;
+        this.status = "Booked";
+    }
+
+    Appointment(String info)
+    {
+        JSONObject obj = new JSONObject(info);
+
+        this.date = obj.getString("date");
+        this.time = obj.getString("time");
+        this.problem = obj.getString("problem");
+        this.docId = obj.getInt("docId");
+        this.status = "Booked";
+    }
+
+    public void setStatus(String s)
+    {
+        status = s;
     }
 
     public String get(String value)
@@ -39,12 +58,14 @@ public class Appointment {
         
         else if(value.equals("problem"))
             return problem;
+
+        else if(value.equals("status"))
+            return status;
         
-        else if(value.equals("patId"))
-            return patId + "";
+        else if(value.equals("docId"))
+            return docId + "";
 
         return "NULL";
-        
     }
 
     public String getDetails()
@@ -62,11 +83,8 @@ public class Appointment {
                 if(!get(key).equals("NULL"))
                     obj.put(key, get(key));            //put values in json object
             }
-            
-            String Obj = obj.toString();
 
-            return Obj;
-
+            return obj.toString();
         }
         catch(Exception e)
         {
@@ -74,13 +92,5 @@ public class Appointment {
 
             return null;
         }
-
-        // String s="";
-        // s=s+date+"\n";
-        // s=s+time+"\n";
-        // s=s+problem+"\n";
-        // s=s+patId+"\n";
-
-        // return s;
     } 
 }

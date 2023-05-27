@@ -18,26 +18,38 @@ public class AppointmentLedger {
         appointments = new ArrayList<Appointment>();
     }
 
-    public Appointment createAppointment(int docId, String date, String time, String problem, int patId)
+    public void createAppointment(String info)
     {
-        Appointment appointment = new Appointment(date, time, problem, patId);
+        try
+        {
+            Appointment appointment = new Appointment(info);
 
-        appointments.add(appointment);
+            appointments.add(appointment);
 
-        dbFactory.createHandler("SQL").saveAppointment(date, time, problem, patId);
-
-        return appointment;
+            dbFactory.createHandler("SQL").saveAppointment(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
-    public Boolean updateAppointment(String Reason, int appId, Boolean flag)
+    public void updateAppointment(String Reason, int appId, int value)
     {
-        if(flag)
+        try
         {
-            getAppointment(appId);
-            return true;
+            if(value == 1)
+            {
+                dbFactory.createHandler("SQL").updateAppointment(appId, Reason, value);
+                
+                getAppointment(appId).setStatus("Cancel");
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
         }
 
-        else return true;
     }
 
     public Appointment getAppointment(int appId)
@@ -51,8 +63,7 @@ public class AppointmentLedger {
             
         for(int i = 0; i < appointments.size(); i++ )
         {
-                
-            JSONObject obj = new JSONObject(appointments.get(i).getDetails());
+            JSONObject obj = new JSONObject(getAppointment(i).getDetails());
             
             objs.put(obj);
         }
