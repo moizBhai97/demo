@@ -19,7 +19,7 @@ public class PatientController {
         }
         catch(Exception e)
         {
-            System.out.println(e + " " + getClass().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
 
@@ -36,7 +36,19 @@ public class PatientController {
         }
         catch(Exception e)
         {
-            System.out.println(e + " " + getClass().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
+    public void reschAppointment(String Reason, int patId, int appId)
+    {
+        try
+        {
+            patientLedger.getPatient(patId).cancelAppointment(Reason, appId);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
 

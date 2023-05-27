@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class DoctorLedger {
     private ArrayList<Doctor> doctorList;
 
-    DoctorLedger()
+    public DoctorLedger()
     {
         doctorList = new ArrayList<Doctor>();
     }

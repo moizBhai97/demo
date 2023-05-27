@@ -57,7 +57,7 @@ public class Main {
         }
         catch(Exception e)
         {
-            System.out.println(e + " " + "Main");
+            System.out.println(e + "\nClass: " + "Main" + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
 
             return null;
         }

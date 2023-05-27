@@ -11,7 +11,7 @@ public class AppointmentLedger {
     private List<Appointment> appointments;
     private DBFactory dbFactory;
 
-    AppointmentLedger()
+    public AppointmentLedger()
     {
         dbFactory = DBFactory.getInstance();
 
@@ -30,7 +30,7 @@ public class AppointmentLedger {
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
 
@@ -47,7 +47,7 @@ public class AppointmentLedger {
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
 
     }
@@ -68,9 +68,6 @@ public class AppointmentLedger {
             objs.put(obj);
             
         }
-        String last= objs.get(2).toString();
-        //put it back into the json array
-        objs.put(last);
 
         return objs.toString();
     }

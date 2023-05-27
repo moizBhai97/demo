@@ -104,7 +104,7 @@ public class Doctor {
     public String toString() {
         try {
             JSONParser parser = new JSONParser();
-            JSONObject obj =  new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json").toString()) ); // to get
+            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString()); // to get
             Set<String> keyset = obj.keySet();
             for (String key : keyset) {
                 if (get(key) != null)
@@ -113,7 +113,7 @@ public class Doctor {
             System.out.println(obj.toString());
             return obj.toString();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             return null;
         }
     }
