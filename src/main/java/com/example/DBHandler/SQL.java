@@ -15,10 +15,17 @@ import org.json.JSONObject;
 
 public class SQL extends DBHandler{
 
-    public void saveAppointment(String info)
+    public void saveAppointment(String info, int patId)
     {
-        JSONObject obj = new JSONObject();
-        System.out.println(obj.getString("date") + " " + obj.getString("time") + " " + obj.getString("problem") + " " + obj.getString("docId") + " " + "Booked");
+        try
+        {
+            JSONObject obj = new JSONObject(info);
+            System.out.println(patId + " " + obj.getString("date") + " " + obj.getString("time") + " " + obj.getString("problem") + " " + obj.getString("docId") + " " + "Booked");
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + " " + getClass().getName());
+        }
     }
 
     public void updateAppointment(int appId, String Reason, int value)
@@ -32,7 +39,7 @@ public class SQL extends DBHandler{
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            System.out.println(e + " " + getClass().getName());
         }
     }
     

@@ -19,7 +19,7 @@ public class PatientController {
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            System.out.println(e + " " + getClass().getName());
         }
     }
 
@@ -36,7 +36,7 @@ public class PatientController {
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            System.out.println(e + " " + getClass().getName());
         }
     }
 

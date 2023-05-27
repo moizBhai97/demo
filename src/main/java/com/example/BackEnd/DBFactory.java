@@ -9,7 +9,7 @@ public class DBFactory {
 
     private DBFactory()
     {
-
+        dbHandler = null;
     }
 
     public static synchronized DBFactory getInstance()
@@ -24,7 +24,7 @@ public class DBFactory {
 
     public DBHandler createHandler(String type)
     {
-        if(type.equals("SQL"))
+        if(type.equals("SQL") && dbHandler == null)
         {
             dbHandler = new SQL();
         }
