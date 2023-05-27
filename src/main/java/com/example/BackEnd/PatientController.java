@@ -27,5 +27,8 @@ public class PatientController {
     {
         return patientLedger.getPatient(patId).cancelAppointment(Reason, appId);
     }
-    
+
+    public String searchDoctor(String name){
+         return doctorLedger.getDoctor(name);
+    }
 }

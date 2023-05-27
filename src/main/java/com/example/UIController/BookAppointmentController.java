@@ -2,13 +2,19 @@ package com.example.UIController;
 
 import com.example.App;
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.layout.Pane;
 
-public class book_apt_Controller {
+import com.example.BackEnd.PatientController;
 
+public class BookAppointmentController implements Initializable {
+
+    PatientController patientController;
     @FXML
     private void switchToPrimary() throws IOException {
         App.setRoot("primary");
@@ -43,6 +49,27 @@ public class book_apt_Controller {
             System.out.println(e);
         }
     }
+
+
+    public void setPatientController(PatientController patientController){
+        this.patientController = patientController;
+    }
+    //initialize
+   @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        refresh();
+        return;
+    }
+
+    public void refresh(){
+        try{
+          //get data from database
+
+        }catch(Exception e){
+            System.out.println(e);
+        }
+    }
+
 
     
 

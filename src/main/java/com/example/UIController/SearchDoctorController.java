@@ -25,6 +25,8 @@ import com.example.BackEnd.PatientController;
 public class SearchDoctorController implements Initializable{
     // @FXML
     // GridPane results_grid;
+
+    PatientController patientController;
     
     @FXML
     private Button alphabetical_sort_btn;
@@ -106,6 +108,10 @@ public class SearchDoctorController implements Initializable{
         refresh();
         return;
     }
+
+    public void setPatientController(PatientController patientController){
+        this.patientController = patientController;
+    }
   
     public void refresh(){
 
@@ -151,6 +157,8 @@ public class SearchDoctorController implements Initializable{
 
     public void searchTextKeyPressed(ActionEvent event){
         System.out.println("searched");
+        patientController.searchDoctor(searchBar.getText());
+
     }
 
 
