@@ -78,4 +78,28 @@ public class AppointmentLedger {
 
         return objs.toString();
     }
+
+    public void setAppointments(int patId)
+    {
+        try
+        {
+            String appointmentsInfo = dbFactory.createHandler("SQL").getAppointments(patId);
+
+            JSONArray objs = new JSONArray(appointmentsInfo);
+
+            for(int i = 0; i < objs.length(); i++)
+            {
+                JSONObject obj = objs.getJSONObject(i);
+
+                Appointment appointment = new Appointment(obj.toString());
+
+                appointments.add(appointment);
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
 }

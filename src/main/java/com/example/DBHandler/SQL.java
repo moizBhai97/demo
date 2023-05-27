@@ -113,8 +113,7 @@ public class SQL extends DBHandler{
     }
 
     public String getPatient(String info){
-        
-        
+
         try
         {
             System.out.println("SQL getPatient");
@@ -148,6 +147,38 @@ public class SQL extends DBHandler{
             return null;
         }
 
+    }
+
+    public String getAppointments(int patId)
+    {
+        try{
+
+            System.out.println("SQL getAppointments");
+            // query the database and return the appointments of the patient
+            
+            JSONArray appointments = new JSONArray();
+            JSONParser parser = new JSONParser();
+
+            for(int i = 0; i < 3; i++)
+            {
+                JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Appointment.json")).toString());
+                
+                obj.put("date", "1/1/2001");
+                obj.put("time", "02:00");
+                obj.put("problem", "Heart");
+                obj.put("status", "Booked");
+                obj.put("docId", i + 1);
+
+                appointments.put(obj);
+            }
+
+            return appointments.toString();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
+        }
     }
 
     // public static void main(String[] args) throws Exception {

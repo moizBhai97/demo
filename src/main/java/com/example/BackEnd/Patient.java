@@ -57,6 +57,11 @@ public class Patient {
         return appointmentLedger.getAppointList(this.patId);
     }
 
+    public void setAppointments()
+    {
+        appointmentLedger.setAppointments(this.patId);
+    }
+
     public void cancelAppointment(String Reason, int appId)
     {
         try
