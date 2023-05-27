@@ -252,7 +252,22 @@ public class App extends Application {
         });
         root.add(button13, 0, 12);
 
-
+        Button button14 = new Button("Start");
+        button14.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("start.fxml"));
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        root.add(button14, 0, 13);
 
         
 
