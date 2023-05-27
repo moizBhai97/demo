@@ -58,9 +58,9 @@ public class SignupController implements Initializable
     }
 
     public void signupButton(ActionEvent event){
-        
-        
         System.out.println("Signup button pressed");
+        
+        
     }
 
     public void loginHyperlink(ActionEvent event){

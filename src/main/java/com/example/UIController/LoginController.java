@@ -5,6 +5,10 @@ import java.lang.String;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.json.JSONObject;
+
+import com.example.BackEnd.PatientController;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,20 +23,29 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class LoginController implements Initializable{
-
     @FXML
     private Button loginButon;
-
     @FXML
     private TextField passwordTextField;
-
     @FXML
     private TextField usernameTextField;
+
+    PatientController patientController = new PatientController();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // TODO Auto-generated method stub
         return;
+    }
+
+    public void loginButton(ActionEvent event){
+        System.out.println("Login Button pressed");
+
+        JSONObject loginInfo = new JSONObject();
+        loginInfo.put("username", this.usernameTextField.getText());
+        loginInfo.put("password", this.passwordTextField.getText());
+
+        patientController.login(loginInfo.toString());
     }
 
     public void signupHyperlink(ActionEvent event){

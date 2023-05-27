@@ -11,6 +11,22 @@ public class PatientController {
         patientLedger = new PatientLedger();
     }
 
+    public String login(String info)
+    {
+        try{
+
+            Patient patient = patientLedger.getPatient(info);
+
+
+            
+            
+        }catch (Exception e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return "";
+        }
+        
+    }
+
     public void bookAppointment(String info, int patId)
     {
         try
