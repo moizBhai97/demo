@@ -18,7 +18,7 @@ public class PatientController {
             Patient patient = patientLedger.getPatient(info);
             patient.setAppointments();
 
-            doctorLedger.setDoctors();
+            //doctorLedger.setDoctors();
 
             return patient.toString();
             

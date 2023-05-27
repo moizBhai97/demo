@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,7 +25,7 @@ import javafx.stage.Stage;
 
 public class LoginController implements Initializable{
     @FXML
-    private Button loginButon;
+    private Button loginButton;
     @FXML
     private TextField passwordTextField;
     @FXML
@@ -45,14 +46,32 @@ public class LoginController implements Initializable{
         loginInfo.put("username", this.usernameTextField.getText());
         loginInfo.put("password", this.passwordTextField.getText());
 
-        patientController.login(loginInfo.toString());
+        String patientInfo = patientController.login(loginInfo.toString());
+
+        Stage stage = (Stage)(((Node) event.getSource()).getScene().getWindow());
+        stage.close();
+
+        try {
+            this.loginButton.getScene().getWindow().hide();
+
+            
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
+            Parent root = loader.load();
+            stage.setUserData(patientInfo);
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.err.println(String.format("Error: %s", e.getMessage()));
+        }
     }
 
     public void signupHyperlink(ActionEvent event){
         System.out.println("Signup hyperlink pressed");
 
         try {
-            this.loginButon.getScene().getWindow().hide();
+            this.loginButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/signup.fxml")));

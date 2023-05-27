@@ -29,6 +29,7 @@ public class SearchDoctorController implements Initializable{
     // @FXML
     // GridPane results_grid;
 
+    int patId;
     PatientController patientController;
     
     @FXML
