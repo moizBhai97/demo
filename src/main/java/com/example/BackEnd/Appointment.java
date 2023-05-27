@@ -88,7 +88,7 @@ public class Appointment {
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            System.out.println(e + " " + getClass().getName());
 
             return null;
         }

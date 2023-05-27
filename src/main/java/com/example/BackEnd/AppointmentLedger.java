@@ -18,7 +18,7 @@ public class AppointmentLedger {
         appointments = new ArrayList<Appointment>();
     }
 
-    public void createAppointment(String info)
+    public void createAppointment(String info, int patId)
     {
         try
         {
@@ -26,7 +26,7 @@ public class AppointmentLedger {
 
             appointments.add(appointment);
 
-            dbFactory.createHandler("SQL").saveAppointment(info);
+            dbFactory.createHandler("SQL").saveAppointment(info, patId);
         }
         catch(Exception e)
         {

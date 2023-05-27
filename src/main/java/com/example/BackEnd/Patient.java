@@ -25,11 +25,11 @@ public class Patient {
     {
         try
         {
-            appointmentLedger.createAppointment(info);
+            appointmentLedger.createAppointment(info, patId);
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            System.out.println(e + " " + getClass().getName());
         }
     }
 
@@ -46,7 +46,7 @@ public class Patient {
         }
         catch(Exception e)
         {
-            System.out.println(e);  
+            System.out.println(e + " " + getClass().getName());
         }
     }
 }
