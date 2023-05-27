@@ -15,17 +15,39 @@ public class DoctorCardController {
 
     private SearchDoctorController parentController;
 
+    
     @FXML
-    Label card1_doc_label;
+    private Pane card1;
 
     @FXML
-    Label card1_speciality_label;
+    private Button card1_book_apt_btn;
 
     @FXML
-    Label card1_dist_label;
+    private Label card1_doc_label;
 
     @FXML
-    Button card1_book_button;
+    private Label card1_exp_label;
+
+    @FXML
+    private Pane card1_hbox_exp_pane;
+
+    @FXML
+    private Pane card1_hbox_satisfied_pane;
+
+    @FXML
+    private Label card1_location_label;
+
+    @FXML
+    private Label card1_satisfied_label;
+
+    @FXML
+    private Button card1_view_prof_btn;
+
+    @FXML
+    private Label fee_amount;
+
+    @FXML
+    private Label specialization;
 
     public void setParentController(SearchDoctorController parentController) {
         this.parentController = parentController;
@@ -34,8 +56,15 @@ public class DoctorCardController {
     public void setDoctor(DoctorTemp doctor) {
         card1_doc_label.setText(doctor.name);
       //  card1_speciality_label.setText(doctor.speciality);
-        card1_dist_label.setText(Float.toString(doctor.distance));
     }
+    public void setDoctor(String name, String specialization, double price, String rating) {
+        card1_doc_label.setText(name);
+        this.specialization.setText(specialization);
+        fee_amount.setText(String.valueOf(price));
+        card1_satisfied_label.setText(rating);
+
+    }
+
 
     //button action
     public void book(ActionEvent event) {

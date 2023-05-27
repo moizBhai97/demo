@@ -63,10 +63,14 @@ public class AppointmentLedger {
             
         for(int i = 0; i < appointments.size(); i++ )
         {
-            JSONObject obj = new JSONObject(getAppointment(i).getDetails());
+            JSONObject obj = new JSONObject(getAppointment(i).toString());
             
             objs.put(obj);
+            
         }
+        String last= objs.get(2).toString();
+        //put it back into the json array
+        objs.put(last);
 
         return objs.toString();
     }

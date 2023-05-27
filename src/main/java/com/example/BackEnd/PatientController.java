@@ -5,7 +5,7 @@ public class PatientController {
     private DoctorLedger doctorLedger;
     private PatientLedger patientLedger;
 
-    PatientController()
+    public PatientController()
     {
         doctorLedger = new DoctorLedger();
         patientLedger = new PatientLedger();
