@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 public class DoctorLedger {
+
     private ArrayList<Doctor> doctorList;
 
     public DoctorLedger()
@@ -16,6 +17,18 @@ public class DoctorLedger {
         doctorList.add(doctor);
     }
 
+    public Doctor getDoctor(int docId)
+    {
+        for(int i = 0; i < doctorList.size(); i++)
+        {
+            if(doctorList.get(i).getId() == docId)
+            {
+                return doctorList.get(i);
+            }
+        }
+
+        return null;
+    }
 
     public String getDoctor(String name)
     {

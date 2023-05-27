@@ -5,5 +5,9 @@ abstract public class DBHandler {
   public abstract void saveAppointment(String info, int patId);
   public abstract void updateAppointment(int appID, String Reason, int value);
   public abstract String getDoctors(String name);
+<<<<<<< HEAD
   public abstract String getPatient(String name);
+=======
+  public abstract String getReviewList(int docId);
+>>>>>>> 98c9120c2832e5436133a47adb1a701e930639ea
 }

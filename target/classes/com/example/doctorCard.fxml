@@ -35,6 +35,11 @@
                <font>
                   <Font size="49.0" />
                </font></Label>
+            <Label fx:id="fee_amount" layoutX="37.0" layoutY="6.0" prefHeight="25.0" prefWidth="34.0" style="-fx-font-size: 15;" text="Fee:">
+               <font>
+                  <Font size="49.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
       <Button fx:id="card1_view_prof_btn" layoutX="14.0" layoutY="147.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" styleClass="view_prof_btn" stylesheets="@search_doctors.css" text="View Profile" />
@@ -44,6 +49,7 @@
             <Image url="@../../images/image%2020.png" />
          </image>
       </ImageView>
-      <Label fx:id="card1_location_label" layoutX="73.0" layoutY="23.0" prefHeight="17.0" prefWidth="188.0" style="-fx-font-size: 10;" text="Advanced Diagnostic Centre (G-8 Mar..." />
+      <Label fx:id="card1_location_label" layoutX="70.0" layoutY="35.0" prefHeight="17.0" prefWidth="188.0" style="-fx-font-size: 10;" text="Advanced Diagnostic Centre (G-8 Mar..." />
+      <Label fx:id="specialization" layoutX="70.0" layoutY="20.0" prefHeight="17.0" prefWidth="188.0" style="-fx-font-size: 10;" text="Death" />
    </children>
 </Pane>

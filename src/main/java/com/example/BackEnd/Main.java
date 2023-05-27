@@ -63,6 +63,29 @@ public class Main {
         }
     }
 
+    public static String getNewInfo()
+    {
+        try
+        {
+            JSONParser parser = new JSONParser(); 
+
+            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/reschAppointment.json")).toString());
+
+            obj.put("date", "2021-12-10");
+            obj.put("time", "11:00:00");
+            obj.put("reason", "Lazy");
+            
+
+            return obj.toString();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + "Main" + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+
+            return null;
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         
         PatientController pc = new PatientController();
@@ -70,6 +93,12 @@ public class Main {
         pc.bookAppointment(getInfo(), 1);
 
         JSONArray objs = new JSONArray(pc.getAppointList(1));
+
+        printJsonArray(objs);
+
+        pc.reschAppointment(getNewInfo(), 1, 0);
+
+        objs = new JSONArray(pc.getAppointList(1));
 
         printJsonArray(objs);
 

@@ -1,0 +1,13 @@
+{
+    "specialization": "{{specialization}}",
+    "description": "{{description}}",
+    "location": "{{location}}",
+    "stats": "{{stats}}",
+    "patients": "{{patients}}",
+    "experience": "{{experience}}",
+    "rating": "{{rating}}",
+    "services": "{{services}}",
+    "start": "{{start}}",
+    "end": "{{end}}",
+    "fee": "{{fee}}"
+}

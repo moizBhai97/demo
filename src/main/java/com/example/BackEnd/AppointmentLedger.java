@@ -34,15 +34,22 @@ public class AppointmentLedger {
         }
     }
 
-    public void updateAppointment(String Reason, int appId, int value)
+    public void updateAppointment(String info, int appId, int value)
     {
         try
         {
             if(value == 1)
             {
-                dbFactory.createHandler("SQL").updateAppointment(appId, Reason, value);
+                dbFactory.createHandler("SQL").updateAppointment(appId, info, value);
                 
                 getAppointment(appId).setStatus("Cancel");
+            }
+
+            if(value == 2)
+            {
+                dbFactory.createHandler("SQL").updateAppointment(appId, info, value);
+
+                getAppointment(appId).update(info);
             }
         }
         catch(Exception e)

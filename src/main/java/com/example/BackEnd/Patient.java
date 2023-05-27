@@ -68,4 +68,16 @@ public class Patient {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
+
+    public void reschAppointment(String info, int appId)
+    {
+        try
+        {
+            appointmentLedger.updateAppointment(info, appId, 2);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
 }

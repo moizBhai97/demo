@@ -15,7 +15,14 @@ public class Doctor {
     private double price;
     private double rating;
     private String image;
-    // private //String description;
+
+    private DoctorDetails doctorDetails;
+    
+    
+    public DoctorDetails getDoctorDetails()
+    {
+        return doctorDetails;
+    }
 
     public int getId() {
         return id;
@@ -104,7 +111,7 @@ public class Doctor {
     public String toString() {
         try {
             JSONParser parser = new JSONParser();
-            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString()); // to get
+            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString());
             Set<String> keyset = obj.keySet();
             for (String key : keyset) {
                 if (get(key) != null)

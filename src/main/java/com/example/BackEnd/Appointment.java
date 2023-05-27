@@ -68,6 +68,30 @@ public class Appointment {
         return "NULL";
     }
 
+    public void update(String info)
+    {
+        try
+        {
+            JSONObject obj = new JSONObject(info);
+
+            this.date = obj.getString("date");
+            this.time = obj.getString("time");
+
+            // Set<String> keyset = obj.keySet();
+            
+            // for(String key : keyset)
+            // {
+            //     if(!get(key).equals("NULL"))
+            //         get(key)=obj.get(key);
+            // }
+            
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
     @Override
     public String toString()
     {
