@@ -8,11 +8,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.json.JSONObject;
+
 public class SQL extends DBHandler{
 
-    public void saveAppointment(String date, String time, String problem, int patId)
+    public void saveAppointment(String info)
     {
-        System.out.println(date+" "+time+" "+problem+" "+patId);
+        JSONObject obj = new JSONObject();
+        System.out.println(obj.getString("date") + " " + obj.getString("time") + " " + obj.getString("problem") + " " + obj.getString("docId") + " " + "Booked");
+    }
+
+    public void updateAppointment(int appId, String Reason, int value)
+    {
+        try
+        {
+            if(value == 1)
+            {
+                System.out.println(appId+ " " + Reason + " " + "Canceled");
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     // public static void main(String[] args) throws Exception {

@@ -133,3 +133,20 @@
 
     
 }
+.scroll_pane{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-border-style: solid;
+
+}
+
+.scroll_pane .viewport{
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-border-style: solid;
+
+}

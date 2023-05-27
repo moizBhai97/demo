@@ -11,11 +11,33 @@ public class PatientController {
         patientLedger = new PatientLedger();
     }
 
-    public String bookAppointment(int docId, String date, String time, String problem, int patId)
+    public void bookAppointment(String info, int patId)
     {
-        return patientLedger.getPatient(patId).bookAppointment(docId, date, time, problem).getDetails();
+        try
+        {
+            patientLedger.getPatient(patId).bookAppointment(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
 
+    public String getAppointList(int patId)
+    {
+        return patientLedger.getPatient(patId).getAppointList();
+    }
 
+    public void cancelAppointment(String Reason, int patId, int appId)
+    {
+        try
+        {
+            patientLedger.getPatient(patId).cancelAppointment(Reason, appId);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
     
 }

@@ -49,7 +49,7 @@ public class App extends Application {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("search_doctors_noSearch.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("search_doctors.fxml"));
                     Scene scene = new Scene(root);
                     Stage stage = new Stage();
                     stage.setScene(scene);
@@ -252,6 +252,8 @@ public class App extends Application {
         });
         root.add(button13, 0, 12);
 
+
+
         
 
 
@@ -272,6 +274,12 @@ public class App extends Application {
 
     public static void main(String[] args) {
         launch();
+        System.out.println("Gay world");
+
+      
+
+
     }
+    
 
 }
