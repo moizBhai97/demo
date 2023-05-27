@@ -33,22 +33,5 @@ public class ReviewLedger {
         return objs.toString();
         
     }
-
-    public String toString(int docId)
-    {
-        getReviewList(docId);
-
-        JSONArray objs = new JSONArray();
-            
-        for(int i = 0; i < reviews.size(); i++ )
-        {
-            JSONObject obj = new JSONObject(reviews.get(i).toString());
-            
-            objs.put(obj);
-            
-        }
-
-        return objs.toString();
-    }
     
 }

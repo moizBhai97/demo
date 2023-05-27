@@ -20,6 +20,8 @@ public class DoctorDetails {
     private String end;
     private float fee;
 
+    private ReviewLedger reviewLedger;
+
     public DoctorDetails()
     {
         this.specialization = "NULL";
@@ -72,6 +74,11 @@ public class DoctorDetails {
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
+    }
+
+    public ReviewLedger getReviewLedger()
+    {
+        return reviewLedger;
     }
 
 

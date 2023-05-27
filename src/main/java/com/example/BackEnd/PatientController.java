@@ -52,15 +52,29 @@ public class PatientController {
         }
     }
 
-    public void getDoctorDetails(int docId)
+    public String getDocDetails(int docId)
     {
         try
         {
-            //doctorLedger.getDoctor(docId).getDoctorDetails();
+            return doctorLedger.getDoctor(docId).getDoctorDetails().toString();
         }
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
+        }
+    }
+
+    public String getReviews(int docId)
+    {
+        try
+        {
+            return doctorLedger.getDoctor(docId).getDoctorDetails().getReviewLedger().getReviewList(docId);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
         }
     }
 

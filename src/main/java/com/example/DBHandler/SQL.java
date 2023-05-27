@@ -2,16 +2,21 @@ package com.example.DBHandler;
 
 import com.example.BackEnd.DBHandler;
 import com.example.BackEnd.Doctor;
+import com.fasterxml.jackson.core.JsonParser;
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
+
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class SQL extends DBHandler{
 
@@ -47,6 +52,33 @@ public class SQL extends DBHandler{
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
+    public String getReviewList(int docId)
+    {
+        try
+        {
+            ResultSet rs = null;
+            
+            JSONParser parser = new JSONParser(); 
+
+            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Review.json")).toString());
+
+            Set<String> keyset = obj.keySet();
+            
+            for(String key : keyset)
+            {
+                if(rs.getString(key) != null)
+                    obj.put(key, rs.getString(key));
+            }
+
+            return obj.toString();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
         }
     }
     

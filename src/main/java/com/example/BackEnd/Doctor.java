@@ -15,7 +15,14 @@ public class Doctor {
     private double price;
     private double rating;
     private String image;
-    // private //String description;
+
+    private DoctorDetails doctorDetails;
+    
+    
+    public DoctorDetails getDoctorDetails()
+    {
+        return doctorDetails;
+    }
 
     public int getId() {
         return id;
