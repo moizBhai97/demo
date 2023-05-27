@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="700.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label layoutX="298.0" layoutY="28.0" prefHeight="23.0" prefWidth="193.0" text="HealthySense" textFill="#2854c3">
+         <font>
+            <Font name="SansSerif Bold" size="25.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="105.0" fitWidth="96.0" layoutX="218.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/image%2011.png" />
+         </image>
+      </ImageView>
+      <Pane layoutX="98.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 1; -fx-border-color: black;">
+         <children>
+            <ImageView fitHeight="200.0" fitWidth="200.0" layoutX="2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../images/download.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane layoutX="403.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-width: 1; -fx-border-color: black;">
+         <children>
+            <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+         </children>
+      </Pane>
+      <Label layoutX="129.0" layoutY="365.0" text="Continue As Doctor" textFill="#2854c3">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label layoutX="434.0" layoutY="365.0" text="Continue As Patient" textFill="#2854c3">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>
