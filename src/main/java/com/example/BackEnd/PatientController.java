@@ -40,11 +40,23 @@ public class PatientController {
         }
     }
 
-    public void reschAppointment(String Reason, int patId, int appId)
+    public void reschAppointment(String info, int patId, int appId)
     {
         try
         {
-            patientLedger.getPatient(patId).cancelAppointment(Reason, appId);
+            patientLedger.getPatient(patId).reschAppointment(info, appId);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
+    public void getDoctorDetails(int docId)
+    {
+        try
+        {
+            //doctorLedger.getDoctor(docId).getDoctorDetails();
         }
         catch(Exception e)
         {

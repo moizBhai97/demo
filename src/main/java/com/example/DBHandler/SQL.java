@@ -20,6 +20,7 @@ public class SQL extends DBHandler{
         try
         {
             JSONObject obj = new JSONObject(info);
+            obj.put("status", "Booked");
             System.out.println(patId + " " + obj.getString("date") + " " + obj.getString("time") + " " + obj.getString("problem") + " " + obj.getString("docId") + " " + "Booked");
         }
         catch(Exception e)
@@ -28,13 +29,19 @@ public class SQL extends DBHandler{
         }
     }
 
-    public void updateAppointment(int appId, String Reason, int value)
+    public void updateAppointment(int appId, String info, int value)
     {
         try
         {
             if(value == 1)
             {
-                System.out.println(appId+ " " + Reason + " " + "Canceled");
+                System.out.println(appId+ " " + info + " " + "Canceled");
+            }
+
+            else if(value == 2)
+            {
+                JSONObject obj = new JSONObject(info);
+                System.out.println(obj.getString("date") + " " + obj.getString("time") + " " + obj.getString("reason"));
             }
         }
         catch(Exception e)
