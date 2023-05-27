@@ -7,7 +7,7 @@ public class PatientLedger {
 
     private List<Patient> patients;
 
-    PatientLedger()
+    public PatientLedger()
     {
         patients = new ArrayList<Patient>();
         patients.add(new Patient(1)); // for testing

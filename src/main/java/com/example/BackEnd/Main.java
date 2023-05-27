@@ -57,7 +57,7 @@ public class Main {
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            System.out.println(e + "\nClass: " + "Main" + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
 
             return null;
         }
@@ -74,6 +74,10 @@ public class Main {
         printJsonArray(objs);
 
         pc.cancelAppointment("Im am in love", 1, 0);
+
+        objs = new JSONArray(pc.getAppointList(1));
+
+        printJsonArray(objs);
 
         //using json.simple.* a simple way to parse read and write json files and json objects
         //using org.json.* for manipulating simple json objects

@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +28,8 @@ import com.example.BackEnd.PatientController;
 public class SearchDoctorController implements Initializable{
     // @FXML
     // GridPane results_grid;
+
+    PatientController patientController;
     
     @FXML
     private Button alphabetical_sort_btn;
@@ -94,23 +99,32 @@ public class SearchDoctorController implements Initializable{
 
     @FXML
     private Button settings_btn;
-
+    
     @FXML
     private AnchorPane side_anchor;
-
+    
     @FXML
     private Pane top_pane;
-
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        results_grid = new GridPane();
+
+        patientController = new PatientController();
+         results_grid.setHgap(10);
+        results_grid.setVgap(10);
         refresh();
         return;
+    }
+    GridPane results_grid;
+
+    public void setPatientController(PatientController patientController){
+        this.patientController = patientController;
     }
   
     public void refresh(){
 
         List<DoctorTemp> doctors=DoctorTemp.getDummyDoctor();
-        GridPane results_grid = new GridPane();
         results_grid.setHgap(10);
         results_grid.setVgap(10);
         results_grid.getChildren().clear();
@@ -149,8 +163,56 @@ public class SearchDoctorController implements Initializable{
         
     }
 
+    public void searchDoctor(String value){
+        String result = patientController.searchDoctor(value);
+        //read json and create doctorCard for each doctor
+
+
+    }
+
+    public void createDoctorCards(String result) {
+        try {
+            
+        results_grid.getChildren().clear();
+        results_scrollpane.getChildrenUnmodifiable().clear();
+
+            JSONArray doctors = new JSONArray(result);
+
+            int rowindex = 0;
+            int columnindex = 0;
+            for (Object obj : doctors) {
+                JSONObject doctor = (JSONObject) obj;
+                String name = (String) doctor.get("name");
+                String specialization = (String) doctor.get("specialization");
+                double price = (double) doctor.get("price");
+                String rating = (String) doctor.get("rating");
+                // create doctorCard with these values
+
+                 FXMLLoader loader = new FXMLLoader();
+                
+                loader.setLocation((new URL("file:src/main/resources/com/example/DoctorCard.fxml")));
+                Pane doctorCard = loader.load();
+
+                DoctorCardController controller = loader.getController();
+                controller.setDoctor(name, specialization, price, rating);
+                //controller.setParentController(this);
+                results_grid.add(doctorCard, columnindex, rowindex);
+                if(columnindex==2){
+                    columnindex=0;
+                    rowindex++;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    
+
     public void searchTextKeyPressed(ActionEvent event){
         System.out.println("searched");
+        searchDoctor(searchBar.getText());
+
     }
 
 

@@ -11,14 +11,14 @@ public class AppointmentLedger {
     private List<Appointment> appointments;
     private DBFactory dbFactory;
 
-    AppointmentLedger()
+    public AppointmentLedger()
     {
         dbFactory = DBFactory.getInstance();
 
         appointments = new ArrayList<Appointment>();
     }
 
-    public void createAppointment(String info)
+    public void createAppointment(String info, int patId)
     {
         try
         {
@@ -26,11 +26,11 @@ public class AppointmentLedger {
 
             appointments.add(appointment);
 
-            dbFactory.createHandler("SQL").saveAppointment(info);
+            dbFactory.createHandler("SQL").saveAppointment(info, patId);
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
 
@@ -47,7 +47,7 @@ public class AppointmentLedger {
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
 
     }
@@ -63,9 +63,10 @@ public class AppointmentLedger {
             
         for(int i = 0; i < appointments.size(); i++ )
         {
-            JSONObject obj = new JSONObject(getAppointment(i).getDetails());
+            JSONObject obj = new JSONObject(getAppointment(i).toString());
             
             objs.put(obj);
+            
         }
 
         return objs.toString();

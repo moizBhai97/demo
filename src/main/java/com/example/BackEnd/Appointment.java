@@ -14,7 +14,7 @@ public class Appointment {
     private int docId;
     private String status;
 
-    Appointment()
+    public Appointment()
     {
         this.date = "";
         this.time = "";
@@ -23,7 +23,7 @@ public class Appointment {
         this.status = "Booked";
     }
 
-    Appointment(String date, String time, String problem, int docId)
+    public Appointment(String date, String time, String problem, int docId)
     {
         this.date = date;
         this.time = time;
@@ -32,7 +32,7 @@ public class Appointment {
         this.status = "Booked";
     }
 
-    Appointment(String info)
+    public Appointment(String info)
     {
         JSONObject obj = new JSONObject(info);
 
@@ -68,7 +68,8 @@ public class Appointment {
         return "NULL";
     }
 
-    public String getDetails()
+    @Override
+    public String toString()
     {
         try
         {
@@ -88,8 +89,7 @@ public class Appointment {
         }
         catch(Exception e)
         {
-            System.out.println(e);
-
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             return null;
         }
     } 

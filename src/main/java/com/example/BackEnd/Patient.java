@@ -5,12 +5,12 @@ public class Patient {
     private int patId;
     private AppointmentLedger appointmentLedger;
 
-    Patient()
+    public Patient()
     {
         appointmentLedger = new AppointmentLedger();
     }
 
-    Patient(int patId)
+    public Patient(int patId)
     {
         this.patId = patId;
         appointmentLedger = new AppointmentLedger();
@@ -25,11 +25,11 @@ public class Patient {
     {
         try
         {
-            appointmentLedger.createAppointment(info);
+            appointmentLedger.createAppointment(info, patId);
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
 
@@ -46,7 +46,7 @@ public class Patient {
         }
         catch(Exception e)
         {
-            System.out.println(e);  
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
 }
