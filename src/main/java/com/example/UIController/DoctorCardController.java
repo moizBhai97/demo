@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 public class DoctorCardController {
 
@@ -47,6 +48,9 @@ public class DoctorCardController {
     private Label fee_amount;
 
     @FXML
+    private ImageView ratingStar;
+
+    @FXML
     private Label specialization;
 
     public void setParentController(SearchDoctorController parentController) {
@@ -63,6 +67,12 @@ public class DoctorCardController {
         fee_amount.setText(String.valueOf(price));
             String formattedRating = String.format("%.2f", Double.parseDouble(rating) );
         card1_satisfied_label.setText(formattedRating);
+
+        double ratingPercentage = Double.parseDouble(rating) / 5.0;
+
+        Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage, ratingStar.getBoundsInLocal().getHeight());
+        ratingStar.setClip(clip);
+
 
     }
 

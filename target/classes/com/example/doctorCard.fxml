@@ -26,9 +26,17 @@
                <children>
                   <Label fx:id="card1_satisfied_label" layoutX="31.0" layoutY="1.0" style="-fx-font-size: 10;" text="4.00" />
                   <Label layoutX="29.0" layoutY="15.0" style="-fx-font-size: 9; -fx-text-fill: #979797;" text="Rating" />
-                  <ImageView fx:id="filterRating1Icon" fitHeight="13.0" fitWidth="10.0" layoutX="51.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="ratingStar" fitHeight="10.0" fitWidth="10.0" layoutX="51.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/image%2033.png" />
+                     </image>
+                     <effect>
+                        <Shadow height="0.0" radius="0.0" width="0.0" />
+                     </effect>
+                  </ImageView>
+                  <ImageView fx:id="starOutline" fitHeight="13.0" fitWidth="13.0" layoutX="48.5" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/starOutline.png" />
                      </image>
                      <effect>
                         <Shadow height="0.0" radius="0.0" width="0.0" />

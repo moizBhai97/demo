@@ -200,7 +200,7 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Rating layoutX="20.0" prefHeight="32.0" prefWidth="186.0">
+                        <Rating minHeight="-Infinity" minWidth="-Infinity" partialRating="true" prefHeight="29.0" prefWidth="186.0" rating="5.0">
                            <effect>
                               <InnerShadow height="255.0" radius="68.5">
                                  <color>
@@ -236,7 +236,7 @@
                         </HBox>
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER_LEFT" layoutX="377.0" layoutY="224.0" prefHeight="170.0" prefWidth="208.0" spacing="10.0">
+                  <VBox alignment="CENTER_LEFT" layoutX="377.0" layoutY="217.0" prefHeight="170.0" prefWidth="208.0" spacing="10.0">
                      <children>
                         <Label text="Rate the checkup" textFill="#2854c3">
                            <font>
@@ -290,15 +290,6 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Rating layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" partialRating="true" prefHeight="29.0" prefWidth="186.0" rating="5.0">
-                     <effect>
-                        <InnerShadow height="255.0" radius="68.5">
-                           <color>
-                              <Color red="0.1568627506494522" green="0.3294117748737335" blue="0.7647058963775635" />
-                           </color>
-                        </InnerShadow>
-                     </effect>
-                  </Rating>
                </children>
                <effect>
                   <InnerShadow />
