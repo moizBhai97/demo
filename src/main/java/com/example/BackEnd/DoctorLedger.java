@@ -21,6 +21,31 @@ public class DoctorLedger {
         topDoctors = new ArrayList<Doctor>();
     }
 
+    public void setTopDoctors()
+    {
+        System.out.println("Ledger Setting top doctors");
+        try
+        {
+            String doctors = DBFactory.getInstance().createHandler("SQL").getTopDoctors();
+            //doctors.toString();
+
+            JSONArray jsonArray = new JSONArray(doctors);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Doctor doctor = new Doctor(jsonObject.toString());
+                topDoctors.add(doctor);
+                doctor.toString();
+            }
+
+            topDoctors.toString();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
     public void addDoctor(Doctor doctor) {
         doctorList.add(doctor);
     }
@@ -46,14 +71,11 @@ public class DoctorLedger {
         doctorList.addAll(doctors);
         removeDuplicates();
 
-        topDoctors.add(doctors.get(0));
-        topDoctors.add(doctors.get(1));
-        topDoctors.add(doctors.get(2));
-        topDoctors.add(doctors.get(3));
 
 
         
 
+ //       System.out.println(doctorList.toString());
 
         return json.toString();
     }
@@ -134,15 +156,19 @@ public class DoctorLedger {
     }
     public Doctor getDoctor(int docId)
     {
-        for(int i = 0; i < doctorList.size(); i++)
-        {
-            if(doctorList.get(i).getId() == docId)
-            {
-                return doctorList.get(i);
-            }
-        }
+        Doctor doc = new Doctor();
+        doc.setId(docId);
+        return doc;
 
-        return null;
+        // for(int i = 0; i < doctorList.size(); i++)
+        // {
+        //     if(doctorList.get(i).getId() == docId)
+        //     {
+        //         return doctorList.get(i);
+        //     }
+        // }
+
+        // return null;
     }
 
     public String sortByRating(String name, Boolean reversed, double ratingFilter, String specialtyFilter) {
@@ -183,12 +209,13 @@ public class DoctorLedger {
 
     public String getTopDoctors(){
         
-
+        System.out.println("Ledger Getting top doctors");
         JSONArray doctors = new JSONArray();
         for (int i = 0; i < topDoctors.size(); i++) {
             doctors.put(new JSONObject(topDoctors.get(i).toString()));
+            System.out.println(topDoctors.get(i).toString());
         }
-        // System.out.println(doctors.toString());
+        
         return doctors.toString();
     }
 

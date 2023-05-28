@@ -22,7 +22,7 @@ public class DoctorDetails {
 
     private ReviewLedger reviewLedger;
 
-    public DoctorDetails()
+    public DoctorDetails(int docId)
     {
         this.specialization = "NULL";
         this.description = "NULL";
@@ -35,9 +35,11 @@ public class DoctorDetails {
         this.start = "NULL";
         this.end = "NULL";
         this.fee = 0;
+
+        reviewLedger = new ReviewLedger(docId);
     }
 
-    public DoctorDetails(String specialization, String description, String location, int stats, int patients, int experience, float rating, String services, String start, String end, float fee)
+    public DoctorDetails(String specialization, String description, String location, int stats, int patients, int experience, float rating, String services, String start, String end, float fee, int docId)
     {
         this.specialization = specialization;
         this.description = description;
@@ -50,9 +52,11 @@ public class DoctorDetails {
         this.start = start;
         this.end = end;
         this.fee = fee;
+
+        reviewLedger = new ReviewLedger(docId);
     }
 
-    public DoctorDetails(String info)
+    public DoctorDetails(String info, int docId)
     {
         try
         {
@@ -69,6 +73,8 @@ public class DoctorDetails {
             this.start = obj.getString("start");
             this.end = obj.getString("end");
             this.fee = obj.getFloat("fee");
+
+            reviewLedger = new ReviewLedger(docId);
         }
         catch(Exception e)
         {
@@ -125,19 +131,34 @@ public class DoctorDetails {
     {
         try
         {
+            System.out.println("hi");
+            //System.out.println(obj.toString());
+
             JSONParser parser = new JSONParser(); 
 
             JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/DoctorDetails.json")).toString());
 
-            Set<String> keyset = obj.keySet();
+            // Set<String> keyset = obj.keySet();
             
-            for(String key : keyset)
-            {
-                if(!get(key).equals("NULL"))
-                    obj.put(key, get(key));
-            }
+            // for(String key : keyset)
+            // {
+            //     if(!get(key).equals("NULL"))
+            //         obj.put(key, get(key));
+            // }
 
-            return obj.toString();
+            obj.put("specialization", "Dentist");
+            obj.put("description", "Dr. Moiz is dentist specialist in NUCES hospital. He is available for private consultation.");
+            obj.put("location", "NUCES Hospital");
+            obj.put("patients", 100);
+            obj.put("experience", 3);
+            obj.put("services", "Dental Checkup\nDental Implant\nDental Surgery");
+            obj.put("start", "09:00");
+            obj.put("end", "17:00");
+            obj.put("fee", "1000");
+
+            String details = reviewLedger.getAvgRating(obj.toString());
+
+            return details;
         }
         catch(Exception e)
         {

@@ -366,7 +366,7 @@ public class SearchDoctorController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         results_grid = new GridPane();
 
-        patientController = new PatientController();
+        //patientController = new PatientController();
         results_grid.setHgap(10);
         results_grid.setVgap(10);
 
