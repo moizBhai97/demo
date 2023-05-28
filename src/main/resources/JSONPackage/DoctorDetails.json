@@ -1,4 +1,5 @@
 {
+    "name": "{{name}}",
     "specialization": "{{specialization}}",
     "description": "{{description}}",
     "location": "{{location}}",
@@ -7,11 +8,11 @@
     "experience": "{{experience}}",
     "rating": "{{rating}}",
     "services": "{{services}}",
-    "start": "{{start}}",
-    "end": "{{end}}",
+    "workingHours": "{{workingHours}}",
     "fee": "{{fee}}",
     "checkupRating": "{{checkupRating}}",
     "environmentRating": "{{environmentRating}}",
     "staffRating": "{{staffRating}}",
-    "reviews": "{{reviews}}"
+    "reviews": "{{reviews}}",
+    "availability": "{{availability}}"
 }

@@ -10,6 +10,7 @@ import com.example.BackEnd.PatientController;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 
@@ -65,6 +66,9 @@ public class DoctorDetailsController implements Initializable{
     private Label avgStaff;
 
     @FXML
+    private Label availability;
+
+    @FXML
     private ProgressBar checkProgress;
 
     @FXML
@@ -72,6 +76,9 @@ public class DoctorDetailsController implements Initializable{
 
     @FXML
     private ProgressBar staffProgress;
+
+    @FXML
+    private Button bookButton;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
@@ -82,7 +89,7 @@ public class DoctorDetailsController implements Initializable{
 
         JSONObject obj = new JSONObject(info);
 
-        //name.setText(obj.getString("name"));
+        name.setText(obj.getString("name"));
         specialization.setText(obj.getString("specialization"));
         description.setText(obj.getString("description"));
         location.setText(obj.getString("location"));
@@ -91,9 +98,10 @@ public class DoctorDetailsController implements Initializable{
         experience.setText(obj.getInt("experience") + "");
         rating.setText(String.format("%.1f", obj.getFloat("rating")));
         services.setText(obj.getString("services"));
-        timing.setText(obj.getString("start") + " - " + obj.getString("end"));
+        timing.setText(obj.getString("workingHours"));
         fee.setText(String.format("%.1f", obj.getFloat("fee")));
-        reviews.setText(obj.getInt("experience") + "");
+        availability.setText(obj.getString("availability"));
+        reviews.setText(obj.getInt("reviews") + "");
         avgCheckup.setText(String.format("%.1f", obj.getFloat("checkupRating")) + "%");
         avgEnv.setText(String.format("%.1f", obj.getFloat("environmentRating")) + "%");
         avgStaff.setText(String.format("%.1f", obj.getFloat("staffRating")) + "%");
@@ -102,7 +110,11 @@ public class DoctorDetailsController implements Initializable{
         envProgress.setProgress(obj.getFloat("environmentRating") / 100);
         staffProgress.setProgress(obj.getFloat("staffRating") / 100);
 
-
+        if(availability.getText().equals("Available"))
+            bookButton.setDisable(false);
+        else
+            bookButton.setDisable(true);
+        
     }
 
     public void setData(PatientController pc, int id, int patId)

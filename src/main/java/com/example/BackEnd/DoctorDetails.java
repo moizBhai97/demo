@@ -16,13 +16,13 @@ public class DoctorDetails {
     private int experience;
     private float rating;
     private String services;
-    private String start;
-    private String end;
+    private String workingHours;
     private float fee;
+    private Boolean availability;
 
     private ReviewLedger reviewLedger;
 
-    public DoctorDetails(int docId)
+    public DoctorDetails()
     {
         this.specialization = "NULL";
         this.description = "NULL";
@@ -32,14 +32,14 @@ public class DoctorDetails {
         this.experience = 0;
         this.rating = 0;
         this.services = "NULL";
-        this.start = "NULL";
-        this.end = "NULL";
+        this.workingHours = "NULL";
         this.fee = 0;
+        this.availability = false;
 
-        reviewLedger = new ReviewLedger(docId);
+        reviewLedger = new ReviewLedger();
     }
 
-    public DoctorDetails(String specialization, String description, String location, int stats, int patients, int experience, float rating, String services, String start, String end, float fee, int docId)
+    public DoctorDetails(String specialization, String description, String location, int stats, int patients, int experience, float rating, String services, String workingHours, float fee, Boolean avail, int docId)
     {
         this.specialization = specialization;
         this.description = description;
@@ -49,9 +49,9 @@ public class DoctorDetails {
         this.experience = experience;
         this.rating = rating;
         this.services = services;
-        this.start = start;
-        this.end = end;
+        this.workingHours = workingHours;
         this.fee = fee;
+        this.availability = avail;
 
         reviewLedger = new ReviewLedger(docId);
     }
@@ -70,9 +70,9 @@ public class DoctorDetails {
             this.experience = obj.getInt("experience");
             this.rating = obj.getFloat("rating");
             this.services = obj.getString("services");
-            this.start = obj.getString("start");
-            this.end = obj.getString("end");
+            this.workingHours = obj.getString("workingHours");
             this.fee = obj.getFloat("fee");
+            this.availability = obj.getBoolean("availability");
 
             reviewLedger = new ReviewLedger(docId);
         }
@@ -80,6 +80,11 @@ public class DoctorDetails {
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
+    }
+
+    public ReviewLedger getReviewLedger()
+    {
+        return reviewLedger;
     }
 
     public String getReviewList(int docId)
@@ -114,14 +119,14 @@ public class DoctorDetails {
         else if(value.equals("services"))
             return services;
         
-        else if(value.equals("start"))
-            return start;
-        
-        else if(value.equals("end"))
-            return end;
+        else if(value.equals("workingHours"))
+            return workingHours;
         
         else if(value.equals("fee"))
             return fee + "";
+        
+        else if(value.equals("availability"))
+            return availability + "";
 
         else return "NULL";
     }
@@ -146,15 +151,20 @@ public class DoctorDetails {
             //         obj.put(key, get(key));
             // }
 
-            obj.put("specialization", "Dentist");
-            obj.put("description", "Dr. Moiz is dentist specialist in NUCES hospital. He is available for private consultation.");
-            obj.put("location", "NUCES Hospital");
-            obj.put("patients", 100);
-            obj.put("experience", 3);
-            obj.put("services", "Dental Checkup\nDental Implant\nDental Surgery");
-            obj.put("start", "09:00");
-            obj.put("end", "17:00");
-            obj.put("fee", "1000");
+            String s = DBFactory.getInstance().createHandler("SQL").getDoctorDetails(101);
+
+            JSONObject obj1 = new JSONObject(s);
+
+            obj.put("name", obj1.getString("name"));
+            obj.put("specialization", obj1.getString("specialization"));
+            obj.put("description", obj1.getString("description"));
+            obj.put("location", obj1.getString("location"));
+            obj.put("patients", obj1.getInt("patients"));
+            obj.put("experience", obj1.getInt("experience"));
+            obj.put("services", obj1.getString("services"));
+            obj.put("workingHours", obj1.getString("workingHours"));
+            obj.put("fee", obj1.getFloat("fee"));
+            obj.put("availability", obj1.getString("availability"));
 
             String details = reviewLedger.getAvgRating(obj.toString());
 
