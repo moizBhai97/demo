@@ -57,6 +57,7 @@ public class Doctor {
     }
 
     public void setId(int id) {
+        doctorDetails = new DoctorDetails(id);
         this.id = id;
     }
 

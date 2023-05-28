@@ -60,21 +60,37 @@ public class SQL extends DBHandler{
     {
         try
         {
-            ResultSet rs = null;
+            //ResultSet rs = null;
             
             JSONParser parser = new JSONParser(); 
 
             JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Review.json")).toString());
 
             Set<String> keyset = obj.keySet();
-            
-            for(String key : keyset)
+
+            //get array of reviews from database
+            JSONArray reviews = new JSONArray();
+            for(int i = 0; i < 3; i++)
             {
-                if(rs.getString(key) != null)
-                    obj.put(key, rs.getString(key));
+                JSONObject temp = new JSONObject();
+                temp.put("comment", "Good");
+                temp.put("experience", (int)(Math.random() * 5) + 1);
+                temp.put("recommend", true);
+                temp.put("checkupRating", (int)(Math.random() * 100) + 1);
+                temp.put("environmentRating", (int)(Math.random() * 100) + 1);
+                temp.put("staffRating", (int)(Math.random() * 100) + 1);
+                reviews.put(temp);
             }
 
-            return obj.toString();
+            // for(String key : keyset)
+            // {
+            //     if(rs.getString(key) != null)
+            //         obj.put(key, rs.getString(key));
+            // }
+
+            System.out.println(reviews.toString());
+
+            return reviews.toString();
         }
         catch(Exception e)
         {

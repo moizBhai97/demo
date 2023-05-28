@@ -9,5 +9,9 @@
     "services": "{{services}}",
     "start": "{{start}}",
     "end": "{{end}}",
-    "fee": "{{fee}}"
+    "fee": "{{fee}}",
+    "checkupRating": "{{checkupRating}}",
+    "environmentRating": "{{environmentRating}}",
+    "staffRating": "{{staffRating}}",
+    "reviews": "{{reviews}}"
 }

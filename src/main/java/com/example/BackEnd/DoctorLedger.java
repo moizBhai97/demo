@@ -125,15 +125,19 @@ public class DoctorLedger {
     }
     public Doctor getDoctor(int docId)
     {
-        for(int i = 0; i < doctorList.size(); i++)
-        {
-            if(doctorList.get(i).getId() == docId)
-            {
-                return doctorList.get(i);
-            }
-        }
+        Doctor doc = new Doctor();
+        doc.setId(docId);
+        return doc;
 
-        return null;
+        // for(int i = 0; i < doctorList.size(); i++)
+        // {
+        //     if(doctorList.get(i).getId() == docId)
+        //     {
+        //         return doctorList.get(i);
+        //     }
+        // }
+
+        // return null;
     }
 
     public String sortByRating(String name, Boolean reversed, double ratingFilter, String specialtyFilter) {
