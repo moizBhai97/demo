@@ -44,7 +44,6 @@ public class DummyController implements Initializable{
         System.out.println(patId);
 
     }
-<<<<<<< HEAD
 
     public void detailsButton(ActionEvent event){
         System.out.println("Details Button pressed");
@@ -76,6 +75,4 @@ public class DummyController implements Initializable{
     }
 
     
-=======
->>>>>>> a2efffe078ae01a39fffe117132834ef0b8196ae
 }

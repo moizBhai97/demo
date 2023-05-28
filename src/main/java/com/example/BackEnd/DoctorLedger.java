@@ -75,10 +75,7 @@ public class DoctorLedger {
 
         
 
-<<<<<<< HEAD
  //       System.out.println(doctorList.toString());
-=======
->>>>>>> 537472f61c08c47b8a45b56f6e38510a160eef79
 
         return json.toString();
     }
