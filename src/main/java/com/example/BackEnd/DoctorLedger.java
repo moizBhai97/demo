@@ -48,21 +48,21 @@ public class DoctorLedger {
     }
 
     // private void removeDuplicates() {
-    //     Set<Doctor> doctorSet = new TreeSet<>(new Comparator<Doctor>() {
-    //         @Override
-    //         public int compare(Doctor d1, Doctor d2) {
-    //             if (d1.getName().equals(d2.getName()) && d1.getId() == d2.getId()
-    //                     && d1.getSpecialization().equals(d2.getSpecialization())
-    //                     && d1.getLocation().equals(d2.getLocation())) {
-    //                 return 0;
-    //             } else {
-    //                 return 1;
-    //             }
-    //         }
-    //     });
-    //     doctorSet.addAll(doctorList);
-    //     doctorList.clear();
-    //     doctorList.addAll(doctorSet);
+    // Set<Doctor> doctorSet = new TreeSet<>(new Comparator<Doctor>() {
+    // @Override
+    // public int compare(Doctor d1, Doctor d2) {
+    // if (d1.getName().equals(d2.getName()) && d1.getId() == d2.getId()
+    // && d1.getSpecialization().equals(d2.getSpecialization())
+    // && d1.getLocation().equals(d2.getLocation())) {
+    // return 0;
+    // } else {
+    // return 1;
+    // }
+    // }
+    // });
+    // doctorSet.addAll(doctorList);
+    // doctorList.clear();
+    // doctorList.addAll(doctorSet);
     // }
 
     private void removeDuplicates() {
@@ -77,22 +77,22 @@ public class DoctorLedger {
                     j--;
                 }
             }
+
         }
     }
 
-    public Doctor getDoctorInstance(String info)
-    {
-        try{
+    public Doctor getDoctorInstance(String info) {
+        try {
 
             String doctorInfo = DBFactory.getInstance().createHandler("SQL").getDoctor(info);
-            
+
             Doctor doctor = new Doctor(doctorInfo);
             doctorList.add(doctor);
-            
+
             return doctor;
-        } catch(Exception e)
-        {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        } catch (Exception e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
+            }.getClass().getEnclosingMethod().getName());
             return null;
         }
     }
@@ -191,7 +191,7 @@ public class DoctorLedger {
         // System.out.println(doctors.toString());
 
         // print doctors
-        
+
         return doctors.toString();
     }
 
@@ -249,7 +249,7 @@ public class DoctorLedger {
 
     public String getTopDoctors() {
 
-       // System.out.println("Ledger Getting top doctors");
+        // System.out.println("Ledger Getting top doctors");
         JSONArray doctors = new JSONArray();
         for (int i = 0; i < topDoctors.size(); i++) {
             doctors.put(new JSONObject(topDoctors.get(i).toString()));
