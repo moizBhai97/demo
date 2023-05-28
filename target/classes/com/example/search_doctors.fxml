@@ -139,13 +139,14 @@
                   </Pane>
                   <Pane layoutX="508.0" layoutY="34.0">
                      <children>
-                        <Button fx:id="filter_btn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#filter_toggle" onMouseClicked="#filter_toggle" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #2854c3; -fx-text-fill: #ffffff;" />
-                        <Label layoutX="30.0" layoutY="4.0" onMouseClicked="#filter_toggle" style="-fx-text-fill: #ffffff;" text="Filters" />
-                        <ImageView fitHeight="17.0" fitWidth="31.0" layoutX="3.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/image%2028.png" />
-                           </image>
-                        </ImageView>
+                        <Button fx:id="filter_btn" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#filter_toggle" onMouseClicked="#filter_toggle" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #2854c3; -fx-text-fill: #ffffff;" text="Filters">
+                           <graphic>
+                              <ImageView fitHeight="17.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2028.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></Button>
                      </children>
                   </Pane>
                   <Button fx:id="review_sort_btn" layoutX="103.0" layoutY="70.0" mnemonicParsing="false" onAction="#reviewSortPressed" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="Rating" />
@@ -171,7 +172,7 @@
                <children>
                   <Label layoutX="81.0" layoutY="11.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Filters" />
                   <Label layoutX="8.0" layoutY="52.0" style="-fx-font-weight: bold;" text="Specialty" />
-                  <Label layoutX="8.0" layoutY="114.0" style="-fx-font-weight: bold;" text="Rating" />
+                  <Label layoutX="8.0" layoutY="114.0" style="-fx-font-weight: bold;" text="Minimum Rating" />
                   <ComboBox fx:id="specialtiesList" layoutX="11.0" layoutY="72.0" prefWidth="150.0" promptText="Specialty" styleClass="filter_dropdown" stylesheets="@search_doctors_Searched.css">
                      <items>
                         <FXCollections fx:factory="observableArrayList">
