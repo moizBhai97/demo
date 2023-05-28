@@ -66,15 +66,16 @@ public class DoctorLedger {
     // }
 
     private void removeDuplicates() {
-    for (int i = 0; i < doctorList.size(); i++) {
-        Doctor doctor1 = doctorList.get(i);
-        for (int j = i + 1; j < doctorList.size(); j++) {
-            Doctor doctor2 = doctorList.get(j);
-            if (doctor1.getName().equals(doctor2.getName())
-                    && doctor1.getSpecialization().equals(doctor2.getSpecialization())
-                    && doctor1.getLocation().equals(doctor2.getLocation())) {
-                doctorList.remove(j);
-                j--;
+        for (int i = 0; i < doctorList.size(); i++) {
+            Doctor doctor1 = doctorList.get(i);
+            for (int j = i + 1; j < doctorList.size(); j++) {
+                Doctor doctor2 = doctorList.get(j);
+                if (doctor1.getName().equals(doctor2.getName())
+                        && doctor1.getSpecialization().equals(doctor2.getSpecialization())
+                        && doctor1.getLocation().equals(doctor2.getLocation())) {
+                    doctorList.remove(j);
+                    j--;
+                }
             }
         }
     }
