@@ -132,7 +132,7 @@
                               </ImageView>
                            </children>
                         </Pane>
-                        <Label layoutX="85.0" layoutY="14.0" text="Dr. Amna Irum" textFill="#979797">
+                        <Label fx:id="doctorName" layoutX="85.0" layoutY="14.0" text="Dr. Amna Irum" textFill="#979797">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
