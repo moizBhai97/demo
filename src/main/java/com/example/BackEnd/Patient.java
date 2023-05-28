@@ -56,9 +56,9 @@ public class Patient {
         }
     }
 
-    public String getAppointList()
+    public String getAppointList(int value)
     {
-        return appointmentLedger.getAppointList(this.patId);
+        return appointmentLedger.getAppointList(this.patId, value);
     }
 
     public void setAppointments()

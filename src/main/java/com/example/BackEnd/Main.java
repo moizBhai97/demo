@@ -50,7 +50,7 @@ public class Main {
             obj.put("date", "2020-12-10");
             obj.put("time", "12:00:00");
             obj.put("problem", "Heart");
-            obj.put("docId", "3");
+            obj.put("docId", "101");
             
 
             return obj.toString();
@@ -92,19 +92,19 @@ public class Main {
 
         pc.bookAppointment(getInfo(), 1);
 
-        JSONArray objs = new JSONArray(pc.getAppointList(1));
+        JSONArray objs = new JSONArray(pc.getAppointList(1, 1));
 
         printJsonArray(objs);
 
-        pc.reschAppointment(getNewInfo(), 1, 0);
+        pc.reschAppointment(getNewInfo(), 1, 6);
 
-        objs = new JSONArray(pc.getAppointList(1));
+        objs = new JSONArray(pc.getAppointList(1, 1));
 
         printJsonArray(objs);
 
-        pc.cancelAppointment("Im am in love", 1, 0);
+        pc.cancelAppointment("Im am in love", 1, 6);
 
-        objs = new JSONArray(pc.getAppointList(1));
+        objs = new JSONArray(pc.getAppointList(1, 2));
 
         printJsonArray(objs);
 

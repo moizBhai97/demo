@@ -122,7 +122,7 @@ public class DoctorCardController {
             
             DoctorDetailsController doctorDetailsController= new DoctorDetailsController();
             
-            //doctorDetailsController.setData(patientController,doctorId, patId);
+            doctorDetailsController.setData(patientController,doctorId, patientId);
             loader.setController(doctorDetailsController);
             
             Parent root = loader.load();

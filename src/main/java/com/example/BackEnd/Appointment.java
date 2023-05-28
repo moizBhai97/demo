@@ -8,6 +8,7 @@ import org.json.simple.parser.JSONParser;
 
 public class Appointment {
     
+    private int appId;
     private String date;
     private String time;
     private String problem;
@@ -18,6 +19,7 @@ public class Appointment {
 
     public Appointment()
     {
+        this.appId = 0;
         this.date = "";
         this.time = "";
         this.problem = "";
@@ -26,8 +28,9 @@ public class Appointment {
         this.payment = null;
     }
 
-    public Appointment(String date, String time, String problem, int docId)
+    public Appointment(int appId, String date, String time, String problem, int docId)
     {
+        this.appId = appId;
         this.date = date;
         this.time = time;
         this.problem = problem;
@@ -36,10 +39,11 @@ public class Appointment {
         this.payment = null;
     }
 
-    public Appointment(String info)
+    public Appointment(String info, int appId)
     {
         JSONObject obj = new JSONObject(info);
-
+        
+        this.appId = appId;
         this.date = obj.getString("date");
         this.time = obj.getString("time");
         this.problem = obj.getString("problem");
@@ -47,15 +51,40 @@ public class Appointment {
         this.status = "Booked";
         this.payment = null;
     }
+    public Appointment(String info)
+    {
+        JSONObject obj = new JSONObject(info);
+        
+        this.appId = obj.getInt("appId");
+        this.date = obj.getString("date");
+        this.time = obj.getString("time");
+        this.problem = obj.getString("problem");
+        this.docId = obj.getInt("docId");
+        this.status = obj.getString("status");
+        this.payment = null;
+    }
+
+    public int getAppId()
+    {
+        return appId;
+    }
 
     public void setStatus(String s)
     {
         status = s;
     }
 
+    public String getStatus()
+    {
+        return status;
+    }
+
     public String get(String value)
     {
-        if(value.equals("date"))
+        if(value.equals("appId"))
+            return appId + "";
+        
+        else if(value.equals("date"))
             return date;
         
         else if(value.equals("time"))

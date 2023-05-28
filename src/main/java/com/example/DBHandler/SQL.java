@@ -9,10 +9,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -32,72 +35,112 @@ public class SQL extends DBHandler {
                 "IntegratedSecurity=true" + ";encrypt=true;trustServerCertificate=true";
     }
 
-    public void saveAppointment(String info, int patId) {
-        try {
+  
+    public int saveAppointment(String info, int patId)
+    {
+        try (Connection con = DriverManager.getConnection(connectionUrl)) 
+        {
+            String SQL = "INSERT INTO Appointments (DATE, TIME, PROBLEM, DOCTOR_ID, PATIENT_ID, STATUS) VALUES (?, ?, ?, ?, ?, ?);";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            
             JSONObject obj = new JSONObject(info);
-            obj.put("status", "Booked");
-            System.out.println(patId + " " + obj.getString("date") + " " + obj.getString("time") + " "
-                    + obj.getString("problem") + " " + obj.getString("docId") + " " + "Booked");
-        } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+
+            pstmt.setString(1, obj.getString("date"));
+            pstmt.setString(2, obj.getString("time"));
+            pstmt.setString(3, obj.getString("problem"));
+            pstmt.setInt(4, obj.getInt("docId"));
+            pstmt.setInt(5, patId);
+            pstmt.setString(6, "Booked");
+            pstmt.executeUpdate();
+
+            pstmt.close();
+
+            SQL = "SELECT COUNT(ID) FROM Appointments";
+            pstmt = con.prepareStatement(SQL);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            int appId = rs.getInt(1);
+
+            return appId;
+
+        } 
+        catch (SQLException e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
+            return -1;
         }
     }
 
-    public void updateAppointment(int appId, String info, int value) {
-        try {
-            if (value == 1) {
-                System.out.println(appId + " " + info + " " + "Canceled");
+    public void updateAppointment(int appId, String info, int value)
+    {
+        try (Connection con = DriverManager.getConnection(connectionUrl)) 
+        {
+            if(value == 1)
+            {
+                String SQL = "UPDATE Appointments SET STATUS = 'Cancelled' WHERE ID = ?;";
+                PreparedStatement pstmt = con.prepareStatement(SQL);
+                pstmt.setInt(1, appId);
+                pstmt.executeUpdate();
             }
 
-            else if (value == 2) {
+            else if(value == 2)
+            {
+                String SQL = "UPDATE Appointments SET DATE = ?, TIME = ?, UPDATE_REASON= ? WHERE ID = ?;";
+                PreparedStatement pstmt = con.prepareStatement(SQL);
+                
                 JSONObject obj = new JSONObject(info);
-                System.out.println(obj.getString("date") + " " + obj.getString("time") + " " + obj.getString("reason"));
+
+                pstmt.setString(1, obj.getString("date"));
+                pstmt.setString(2, obj.getString("time"));
+                pstmt.setString(3, obj.getString("reason"));
+                pstmt.setInt(4, appId);
+                pstmt.executeUpdate();
             }
-        } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+        } 
+        catch (SQLException e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
-    public String getReviewList(int docId) {
-        try {
-            // ResultSet rs = null;
+    public String getReviewList(int docId)
+    {
+        try (Connection con = DriverManager.getConnection(connectionUrl)) 
+        {
+            System.out.println("SQL getReviewList");
 
-            JSONParser parser = new JSONParser();
+            String SQL = "SELECT * FROM Reviews WHERE DOCTOR_ID = ?;";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, docId);
+            ResultSet rs = pstmt.executeQuery();
 
-            JSONObject obj = new JSONObject(
-                    parser.parse(new FileReader("src/main/resources/JSONPackage/Review.json")).toString());
-
-            Set<String> keyset = obj.keySet();
-
-            // get array of reviews from database
             JSONArray reviews = new JSONArray();
-            for (int i = 0; i < 3; i++) {
-                JSONObject temp = new JSONObject();
-                temp.put("comment", "Good");
-                temp.put("experience", (int) (Math.random() * 5) + 1);
-                temp.put("recommend", true);
-                temp.put("checkupRating", (int) (Math.random() * 100) + 1);
-                temp.put("environmentRating", (int) (Math.random() * 100) + 1);
-                temp.put("staffRating", (int) (Math.random() * 100) + 1);
-                reviews.put(temp);
-            }
 
-            // for(String key : keyset)
-            // {
-            // if(rs.getString(key) != null)
-            // obj.put(key, rs.getString(key));
-            // }
+            while(rs.next())
+            {
+                JSONObject newObj = new JSONObject();
+                newObj.put("comment", rs.getString("COMMENT"));
+                newObj.put("experience", rs.getFloat("EXPERIENCE"));
+                newObj.put("recommend", rs.getBoolean("RECOMMEND"));
+                newObj.put("checkupRating", rs.getFloat("CHECKUPRATING"));
+                newObj.put("environmentRating", rs.getFloat("ENVIRONMENTRATING"));
+                newObj.put("staffRating", rs.getFloat("STAFFRATING"));
+
+                reviews.put(newObj);
+            }
 
             System.out.println(reviews.toString());
 
             return reviews.toString();
-        } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+        } 
+        catch (Exception e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();            
             return null;
-        }
+        } 
     }
 
     public void addPayment(String info, int appId) {
@@ -111,63 +154,98 @@ public class SQL extends DBHandler {
         }
     }
 
-    // public String getDummyDoctor(String name) {
-    // ArrayList<Doctor> dummyDoctors = new ArrayList<Doctor>();
-    // String[] specializations = { "Cardiologist", "Dermatologist", "Dentist",
-    // "Psychiatrist" };
-    // String[] hospitals = { "Mayo Clinic", "Johns Hopkins Hospital", "Cleveland
-    // Clinic",
-    // "Massachusetts General Hospital", "UCSF Medical Center", "Brigham and Women's
-    // Hospital",
-    // "New York-Presbyterian Hospital", "Stanford Health Care-Stanford Hospital",
-    // "Hospitals of the University of Pennsylvania-Penn Presbyterian",
-    // "Cedars-Sinai Medical Center" };
-    // List<DoctorTemp> doctorTemps = new ArrayList<DoctorTemp>();
-    // char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+    public String getDoctorDetails(int docId)
+    {
+        try (Connection con = DriverManager.getConnection(connectionUrl)) 
+        {
+            String SQL = "SELECT NAME, SPECIALIZATION, DESCRIPTION, LOCATION, EXPERIENCE, WORKING_HOURS, FEE, AVAILABILITY FROM Doctors WHERE ID = ?;";
 
-    // // generate random doctorTemps
-    // for (int i = 0; i < 10; i++) {
-    // StringBuilder sb = new StringBuilder();
-    // sb.append("M ");
-    // for (int j = 0; j < 10; j++) {
-    // sb.append(chars[(int) (Math.random() * chars.length)]);
-    // }
-    // Doctor doctor = new Doctor();
-    // doctor.setName(sb.toString());
-    // doctor.setSpecialization(specializations[i % 4]);
-    // doctor.setExperience((i + 1) * 5 + " years");
-    // doctor.setRating((Math.random() * 5));
-    // doctor.setLocation(hospitals[i]);
-    // doctor.setPrice((i + 1) * 100);
-    // dummyDoctors.add(doctor);
-    // }
-    // // create a doctors json object and save it in the json folder
-    // JSONArray doctors = new JSONArray();
-    // for (int i = 0; i < dummyDoctors.size(); i++) {
-    // doctors.put(new JSONObject(dummyDoctors.get(i).toString()));
-    // }
-    // // System.out.println(doctors.toString());
-    // return doctors.toString();
+            PreparedStatement pstmt = con.prepareStatement(SQL);
 
-    // }
+            pstmt.setInt(1, docId);
 
-    public String getDoctors(String name) {
+            ResultSet rs = pstmt.executeQuery();
+
+            rs.next();
+
+            JSONObject obj = new JSONObject();
+
+            obj.put("name", rs.getString("NAME"));
+            obj.put("specialization", rs.getString("SPECIALIZATION"));
+            obj.put("description", rs.getString("DESCRIPTION"));
+            obj.put("location", rs.getString("LOCATION"));
+            obj.put("experience", rs.getInt("EXPERIENCE"));
+            obj.put("workingHours", rs.getString("WORKING_HOURS"));
+            obj.put("fee", rs.getFloat("FEE"));
+            obj.put("availability", rs.getString("AVAILABILITY"));
+
+            pstmt.close();
+
+            SQL ="SELECT DESCRIPTION FROM SERVICES WHERE DOCTOR_ID = ?;";
+            pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, docId);
+            rs = pstmt.executeQuery();
+            
+            String services = "";
+            while(rs.next())
+            {
+                services += rs.getString("DESCRIPTION") + "\n";
+            }
+            obj.put("services", services);
+
+            pstmt.close();
+
+            SQL = "SELECT COUNT(ID) FROM Appointments WHERE DOCTOR_ID = ? AND STATUS = 'Completed' ;";
+            pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, docId);
+            rs = pstmt.executeQuery();
+            rs.next();
+            obj.put("patients", rs.getInt(1));
+
+            System.out.println(obj.toString());
+
+            return obj.toString();
+        } 
+        catch (Exception e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();            
+            return null;
+        } 
+    }
+    
+// public String getDummyDoctor(String name){
+//     ArrayList<Doctor> dummyDoctors = new ArrayList<Doctor>();
+//     String[] specializations = {"Cardiologist", "Dermatologist", "Dentist", "Psychiatrist"};
+//     String[] hospitals = {"Mayo Clinic", "Johns Hopkins Hospital", "Cleveland Clinic", "Massachusetts General Hospital", "UCSF Medical Center", "Brigham and Women's Hospital", "New York-Presbyterian Hospital", "Stanford Health Care-Stanford Hospital", "Hospitals of the University of Pennsylvania-Penn Presbyterian", "Cedars-Sinai Medical Center"};
+//     List<DoctorTemp> doctorTemps = new ArrayList<DoctorTemp>();
+//         char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        
+        
+//         //generate random doctorTemps
+//         for(int i=0;i<10;i++){
+//             StringBuilder sb = new StringBuilder();
+//             sb.append("M ");
+//             for (int j = 0; j < 10; j++) {
+//                 sb.append(chars[(int) (Math.random() * chars.length)]);
+//             }
+//             con.close();
+//             return doctors.toString();
+
+//         } catch (SQLException | JSONException | IOException | ParseException e) {
+//             // con.close();
+
+//             e.printStackTrace();
+//         }
+
+//         return "[]";
+
+//         //
+//     }
+
+     public String getDoctors(String name) {
         System.out.println("SQL getDoctors");
-        /*
-         * NAME VARCHAR(50) NOT NULL,
-         * ID INT NOT NULL,
-         * EMAIL VARCHAR(50) NOT NULL,
-         * PASSWORD VARCHAR(50) NOT NULL,
-         * DOB DATE NOT NULL,
-         * PHONE_NUMBER VARCHAR(11) NOT NULL CHECK (PHONE_NUMBER LIKE
-         * '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
-         * GENDER VARCHAR(6) NOT NULL CHECK (GENDER IN ('Male', 'Female')),
-         * RATING DECIMAL(2, 1) NOT NULL CHECK (RATING BETWEEN 0 AND 5),
-         * LOCATION VARCHAR(50) NOT NULL,
-         * EXPERIENCE INT NOT NULL,
-         * FEE INT NOT NULL,
-         * SPECIALIZATION VARCHAR(50) NOT NULL,
-         */
+     
 
         String connectionUrl = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;" +
                 "databaseName=SDA;" +
@@ -205,7 +283,6 @@ public class SQL extends DBHandler {
 
         //
     }
-
     public String getTopDoctors() {
         try {
             System.out.println("SQL getTopDoctors");
