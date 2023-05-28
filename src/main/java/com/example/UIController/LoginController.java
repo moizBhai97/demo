@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -24,11 +25,13 @@ import javafx.stage.Stage;
 
 public class LoginController implements Initializable{
     @FXML
-    private Button loginButon;
+    private Button loginButton;
     @FXML
     private TextField passwordTextField;
     @FXML
     private TextField usernameTextField;
+
+    DummyController dummyController;
 
     PatientController patientController = new PatientController();
 
@@ -45,14 +48,43 @@ public class LoginController implements Initializable{
         loginInfo.put("username", this.usernameTextField.getText());
         loginInfo.put("password", this.passwordTextField.getText());
 
-        patientController.login(loginInfo.toString());
+        String patientInfo = patientController.login(loginInfo.toString());
+        System.out.println(patientInfo);
+
+        //Stage stage = (Stage)(((Node) event.getSource()).getScene().getWindow());
+        //stage.close();
+
+        try {
+            this.loginButton.getScene().getWindow().hide();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/dummyScreen.fxml")));
+            
+            //-------------------------------------------------------------------------------------------------//
+            dummyController = new DummyController();
+            
+            int dummyPatId = 1;
+            dummyController.setData(patientController, dummyPatId);
+            loader.setController(dummyController);
+            //-------------------------------------------------------------------------------------------------//
+            
+            Parent root = loader.load();
+            //stage.setUserData(patientInfo);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            
+        } catch (IOException e) {
+            System.err.println(String.format("Error: %s", e.getMessage()));
+        }
     }
 
     public void signupHyperlink(ActionEvent event){
         System.out.println("Signup hyperlink pressed");
 
         try {
-            this.loginButon.getScene().getWindow().hide();
+            this.loginButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/signup.fxml")));
