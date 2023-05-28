@@ -103,7 +103,7 @@ public class DoctorLedger {
                     .filter(doctor -> doctor.getRating() >= ratingFilter)
                     .collect(Collectors.toList());
         }
-        if (specialtyFilter != "All" && specialtyFilter != null) {
+        if (specialtyFilter != null && !specialtyFilter.equals("All") ) {
             // Filter the list to only include doctors with the given specialty
             tempDoctors = tempDoctors.stream()
                     .filter(doctor -> doctor.getSpecialization().equals(specialtyFilter))
@@ -151,7 +151,7 @@ public class DoctorLedger {
                     .filter(doctor -> doctor.getRating() >= ratingFilter)
                     .collect(Collectors.toList());
         }
-        if (specialtyFilter != "All" && specialtyFilter != null) {
+        if (specialtyFilter != null && !specialtyFilter.equals("All") ) {
             // Filter the list to only include doctors with the given specialty
             tempDoctors = tempDoctors.stream()
                     .filter(doctor -> doctor.getSpecialization().equals(specialtyFilter))
