@@ -98,16 +98,16 @@ public class DoctorCardController {
 
     public void setDoctor(String result){
         JSONObject jsonObject = new JSONObject(result);
-        docName.setText(jsonObject.getString("doctorName"));
+        docName.setText(jsonObject.getString("name"));
         specialization.setText(jsonObject.getString("specialization"));
-        fee_amount.setText(jsonObject.getString("fee"));
+        fee_amount.setText(jsonObject.getString("price"));
         card1_satisfied_label.setText(jsonObject.getString("rating"));
         double ratingPercentage = Double.parseDouble(jsonObject.getString("rating")) / 5.0;
 
         Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage, ratingStar.getBoundsInLocal().getHeight());
         ratingStar.setClip(clip);
 
-        doctorId = jsonObject.getInt("doctorID");
+        doctorId = jsonObject.getInt("id");
     }
 
 
@@ -118,7 +118,7 @@ public class DoctorCardController {
             this.card1_book_apt_btn.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
+            loader.setLocation((new URL("file:src/main/resources/com/example/doctor_details.fxml")));
             
             DoctorDetailsController doctorDetailsController= new DoctorDetailsController();
             
