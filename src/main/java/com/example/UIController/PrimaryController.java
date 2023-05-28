@@ -22,13 +22,13 @@ public class PrimaryController {
     @FXML
     Button button_big;
     @FXML
-    Pane filter_Pane;
-    @FXML
-    ImageView filter_img;
-    @FXML
     Pane big_pane;
     @FXML
     Button filter_btn;
+    @FXML
+    Pane filter_Pane;
+    @FXML
+    ImageView filter_img;
     public void filter_toggle(ActionEvent event){
         try{
             if(filter_Pane.isVisible()){

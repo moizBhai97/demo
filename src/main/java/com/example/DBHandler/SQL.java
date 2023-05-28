@@ -2,6 +2,7 @@ package com.example.DBHandler;
 
 import com.example.BackEnd.DBHandler;
 import com.example.BackEnd.Doctor;
+import com.example.UIController.DoctorTemp;
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -45,15 +47,26 @@ public class SQL extends DBHandler{
     
 public String getDummyDoctor(String name){
     ArrayList<Doctor> dummyDoctors = new ArrayList<Doctor>();
-    String[] specializations = {"Cardiology", "Dermatology", "Endocrinology", "Gastroenterology", "Hematology", "Neurology", "Oncology", "Pediatrics", "Psychiatry", "Urology"};
+    String[] specializations = {"Cardiologist", "Dermatologist", "Dentist", "Psychiatrist"};
     String[] hospitals = {"Mayo Clinic", "Johns Hopkins Hospital", "Cleveland Clinic", "Massachusetts General Hospital", "UCSF Medical Center", "Brigham and Women's Hospital", "New York-Presbyterian Hospital", "Stanford Health Care-Stanford Hospital", "Hospitals of the University of Pennsylvania-Penn Presbyterian", "Cedars-Sinai Medical Center"};
-    for(int i = 0; i < 10; i++){
+    List<DoctorTemp> doctorTemps = new ArrayList<DoctorTemp>();
+        char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        
+        
+        //generate random doctorTemps
+        for(int i=0;i<10;i++){
+            StringBuilder sb = new StringBuilder();
+            sb.append("M ");
+            for (int j = 0; j < 10; j++) {
+                sb.append(chars[(int) (Math.random() * chars.length)]);
+            }
         Doctor doctor = new Doctor();
-        doctor.setName(name + " " + i);
-        doctor.setSpecialization(specializations[i]);
+        doctor.setName(sb.toString());
+        doctor.setSpecialization(specializations[i % 4] );
         doctor.setExperience((i + 1) * 5 + " years");
         doctor.setRating( (Math.random() * 5));
         doctor.setLocation(hospitals[i]);
+        doctor.setPrice((i + 1) * 100);
         dummyDoctors.add(doctor);
     }
     //create a doctors json object and save it in the json folder
@@ -61,7 +74,7 @@ public String getDummyDoctor(String name){
     for(int i = 0; i < dummyDoctors.size(); i++){
         doctors.put(new JSONObject(dummyDoctors.get(i).toString() ));
     }
-    System.out.println(doctors.toString());
+   // System.out.println(doctors.toString());
     return doctors.toString();
 
 }

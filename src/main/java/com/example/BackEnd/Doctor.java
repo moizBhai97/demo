@@ -14,8 +14,32 @@ public class Doctor {
     private String experience;
     private double price;
     private double rating;
-    private String image;
+
+    //private String image;
     // private //String description;
+
+    public Doctor(String doctorName, String specialization, String location, String experience, Double priceDouble, Double ratingDouble) {
+        this.name = doctorName;
+        this.specialization = specialization;
+        this.location = location;
+        this.experience = experience;
+        this.price = priceDouble;
+        this.rating = ratingDouble;
+
+    }
+    public Doctor(String data){
+        JSONObject jsonObject = new JSONObject(data);
+        this.id = jsonObject.getInt("id");
+        this.name = jsonObject.getString("name");
+        this.location = jsonObject.getString("location");
+        this.specialization = jsonObject.getString("specialization");
+        this.experience = jsonObject.getString("experience");
+        this.price = jsonObject.getDouble("price");
+        this.rating = jsonObject.getDouble("rating");
+    }
+    public Doctor(){
+
+    }
 
     public int getId() {
         return id;
@@ -104,7 +128,7 @@ public class Doctor {
     public String toString() {
         try {
             JSONParser parser = new JSONParser();
-            JSONObject obj =  new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json").toString()) ); // to get
+            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString());
             Set<String> keyset = obj.keySet();
             for (String key : keyset) {
                 if (get(key) != null)
