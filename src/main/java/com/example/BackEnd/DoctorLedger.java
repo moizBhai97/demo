@@ -19,6 +19,8 @@ public class DoctorLedger {
         doctorList = new ArrayList<Doctor>();
     }
 
+    //public void setDoctors()
+
     public void addDoctor(Doctor doctor) {
         doctorList.add(doctor);
     }
