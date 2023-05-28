@@ -1,6 +1,7 @@
 package com.example.BackEnd;
 
 import java.io.FileReader;
+import java.util.Objects;
 import java.util.Set;
 
 import org.json.JSONObject;
@@ -15,21 +16,20 @@ public class Doctor {
     private double price;
     private double rating;
 
-    //private String image;
+    // private String image;
 
     private DoctorDetails doctorDetails;
-    
-    public DoctorDetails getDoctorDetails()
-    {
+
+    public DoctorDetails getDoctorDetails() {
         return doctorDetails;
     }
-    
-    public String getDetails()
-    {
+
+    public String getDetails() {
         return doctorDetails.toString();
     }
 
-    public Doctor(String doctorName, String specialization, String location, String experience, Double priceDouble, Double ratingDouble) {
+    public Doctor(String doctorName, String specialization, String location, String experience, Double priceDouble,
+            Double ratingDouble) {
         this.name = doctorName;
         this.specialization = specialization;
         this.location = location;
@@ -38,7 +38,8 @@ public class Doctor {
         this.rating = ratingDouble;
 
     }
-    public Doctor(String data){
+
+    public Doctor(String data) {
         System.out.println("Constructing JSON doctor");
 
         JSONObject jsonObject = new JSONObject(data);
@@ -50,7 +51,8 @@ public class Doctor {
         this.price = jsonObject.getDouble("price");
         this.rating = jsonObject.getDouble("rating");
     }
-    public Doctor(){
+
+    public Doctor() {
 
     }
 
@@ -142,7 +144,8 @@ public class Doctor {
     public String toString() {
         try {
             JSONParser parser = new JSONParser();
-            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString());
+            JSONObject obj = new JSONObject(
+                    parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString());
             Set<String> keyset = obj.keySet();
             for (String key : keyset) {
                 if (get(key) != null)
@@ -151,9 +154,24 @@ public class Doctor {
             System.out.println(obj.toString());
             return obj.toString();
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
+            }.getClass().getEnclosingMethod().getName());
             return null;
         }
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (!(obj instanceof Doctor)) {
+            return false;
+        }
+        Doctor other = (Doctor) obj;
+        return Objects.equals(name, other.name) && Objects.equals(id, other.id)
+                && Objects.equals(specialization, other.specialization)
+                && Objects.equals(location, other.location);
     }
 
 }

@@ -1,9 +1,17 @@
 package com.example.UIController;
+import java.net.URL;
+
+import org.json.JSONObject;
+
+import com.example.BackEnd.PatientController;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,11 +19,15 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 public class DoctorCardController {
 
     private SearchDoctorController parentController;
+    private PatientController patientController;
 
+    int doctorId;
+    int patientId;
     
     @FXML
     private Pane card1;
@@ -57,6 +69,14 @@ public class DoctorCardController {
         this.parentController = parentController;
     }
 
+    public void setPatientController(PatientController patientController) {
+        this.patientController = patientController;
+    }   
+
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
+    }
+
     public void setDoctor(DoctorTemp doctor) {
         docName.setText(doctor.name);
       //  card1_speciality_label.setText(doctor.speciality);
@@ -76,18 +96,42 @@ public class DoctorCardController {
 
     }
 
+    public void setDoctor(String result){
+        JSONObject jsonObject = new JSONObject(result);
+        docName.setText(jsonObject.getString("doctorName"));
+        specialization.setText(jsonObject.getString("specialization"));
+        fee_amount.setText(jsonObject.getString("fee"));
+        card1_satisfied_label.setText(jsonObject.getString("rating"));
+        double ratingPercentage = Double.parseDouble(jsonObject.getString("rating")) / 5.0;
+
+        Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage, ratingStar.getBoundsInLocal().getHeight());
+        ratingStar.setClip(clip);
+
+        doctorId = jsonObject.getInt("doctorID");
+    }
+
 
     //button action
     public void book(ActionEvent event) {
         System.out.println("book button clicked");
         try {
-          //print message box of doctor name
+            this.card1_book_apt_btn.getScene().getWindow().hide();
 
-          Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Book Appointment");
-            alert.setHeaderText("Appointment Booked");
-            alert.setContentText("Appointment booked with Dr. " + docName.getText());
-            alert.showAndWait();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
+            
+            DoctorDetailsController doctorDetailsController= new DoctorDetailsController();
+            
+            //doctorDetailsController.setData(patientController,doctorId, patId);
+            loader.setController(doctorDetailsController);
+            
+            Parent root = loader.load();
+            //stage.setUserData(patientInfo);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            
         } catch (Exception e) {
             e.printStackTrace();
         }
