@@ -1,0 +1,9 @@
+{
+    "id": "{{id}}",
+    "name": "{{name}}",
+    "location": "{{location}}",
+    "specialization": "{{specialization}}",
+    "experience": "{{experience}}",
+    "price": "{{price}}",
+    "rating": "{{rating}}"
+  }

@@ -403,6 +403,7 @@ public class SearchDoctorController implements Initializable {
         results_grid.setStyle("-fx-background-color: transparent;");
 
         createDoctorCards(patientController.getTopDoctors());
+        results_scrollpane.setContent(results_grid);
         doc_count.setText("Top Doctors");
 
     }
