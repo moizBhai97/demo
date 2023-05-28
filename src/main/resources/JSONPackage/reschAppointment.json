@@ -1,5 +1,5 @@
 {
     "date": "{{date}}",
     "time": "{{time}}",
-    "raeson": "{{reason}}"
+    "reason": "{{reason}}"
 }

@@ -18,10 +18,14 @@ public class Doctor {
 
     private DoctorDetails doctorDetails;
     
-    
     public DoctorDetails getDoctorDetails()
     {
         return doctorDetails;
+    }
+    
+    public String getDetails()
+    {
+        return doctorDetails.toString();
     }
 
     public int getId() {

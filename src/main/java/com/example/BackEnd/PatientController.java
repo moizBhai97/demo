@@ -56,7 +56,7 @@ public class PatientController {
     {
         try
         {
-            return doctorLedger.getDoctor(docId).getDoctorDetails().toString();
+            return doctorLedger.getDoctor(docId).getDetails();
         }
         catch(Exception e)
         {
@@ -69,12 +69,24 @@ public class PatientController {
     {
         try
         {
-            return doctorLedger.getDoctor(docId).getDoctorDetails().getReviewLedger().getReviewList(docId);
+            return doctorLedger.getDoctor(docId).getDoctorDetails().getReviewList(docId);
         }
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             return null;
+        }
+    }
+
+    public void makePayment(String info, int patId, int appId)
+    {
+        try
+        {
+            patientLedger.getPatient(patId).makePayment(info, appId);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
 

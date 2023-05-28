@@ -76,9 +76,9 @@ public class DoctorDetails {
         }
     }
 
-    public ReviewLedger getReviewLedger()
+    public String getReviewList(int docId)
     {
-        return reviewLedger;
+        return reviewLedger.getReviewList(docId);
     }
 
 
@@ -134,7 +134,7 @@ public class DoctorDetails {
             for(String key : keyset)
             {
                 if(!get(key).equals("NULL"))
-                    obj.put(key, get(key));            //put values in json object
+                    obj.put(key, get(key));
             }
 
             return obj.toString();

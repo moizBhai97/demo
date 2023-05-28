@@ -81,6 +81,19 @@ public class SQL extends DBHandler{
             return null;
         }
     }
+
+    public void addPayment(String info, int appId)
+    {
+        try
+        {
+            JSONObject obj = new JSONObject(info);
+            System.out.println(obj.getString("date") + " " + obj.getString("time") + " " + obj.getString("amount") + " " + appId);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
     
 public String getDummyDoctor(String name){
     ArrayList<Doctor> dummyDoctors = new ArrayList<Doctor>();

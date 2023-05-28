@@ -6,4 +6,5 @@ abstract public class DBHandler {
   public abstract void updateAppointment(int appID, String Reason, int value);
   public abstract String getDoctors(String name);
   public abstract String getReviewList(int docId);
+  public abstract void addPayment(String info, int appId);
 }
