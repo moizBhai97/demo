@@ -13,10 +13,12 @@ import org.json.JSONObject;
 public class DoctorLedger {
 
     private ArrayList<Doctor> doctorList;
+    private ArrayList<Doctor> topDoctors;
 
     public DoctorLedger()
     {
         doctorList = new ArrayList<Doctor>();
+        topDoctors = new ArrayList<Doctor>();
     }
 
     public void addDoctor(Doctor doctor) {
@@ -43,6 +45,14 @@ public class DoctorLedger {
 
         doctorList.addAll(doctors);
         removeDuplicates();
+
+        topDoctors.add(doctors.get(0));
+        topDoctors.add(doctors.get(1));
+        topDoctors.add(doctors.get(2));
+        topDoctors.add(doctors.get(3));
+
+
+        
 
         System.out.println(doctorList.toString());
 
@@ -167,6 +177,17 @@ public class DoctorLedger {
         JSONArray doctors = new JSONArray();
         for (int i = 0; i < tempDoctors.size(); i++) {
             doctors.put(new JSONObject(tempDoctors.get(i).toString()));
+        }
+        // System.out.println(doctors.toString());
+        return doctors.toString();
+    }
+
+    public String getTopDoctors(){
+        
+
+        JSONArray doctors = new JSONArray();
+        for (int i = 0; i < topDoctors.size(); i++) {
+            doctors.put(new JSONObject(topDoctors.get(i).toString()));
         }
         // System.out.println(doctors.toString());
         return doctors.toString();

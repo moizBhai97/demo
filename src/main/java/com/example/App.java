@@ -11,6 +11,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+
+import org.json.JSONObject;
+
+import com.example.UIController.SearchDoctorController;
 
 /**
  * JavaFX App
@@ -41,7 +46,7 @@ public class App extends Application {
                     e.printStackTrace();
                 }
             }
-        }); 
+        });
         root.add(button, 0, 0);
 
         Button button2 = new Button("Search Doctors Screen 1");
@@ -49,7 +54,16 @@ public class App extends Application {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("search_doctors.fxml"));
+
+                    FXMLLoader loader =  new FXMLLoader();
+                    loader.setLocation(getClass().getResource("search_doctors.fxml"));
+                    //loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
+                    
+                    SearchDoctorController searchDoctorController = new SearchDoctorController();
+
+                    //searchDoctorController.setData(patientController, info.getInt("patId"));
+                    loader.setController(searchDoctorController);
+                    Parent root = loader.load();
                     Scene scene = new Scene(root);
                     Stage stage = new Stage();
                     stage.setScene(scene);
@@ -269,9 +283,6 @@ public class App extends Application {
         });
         root.add(button14, 0, 13);
 
-        
-
-
         stage.setScene(scene);
 
         stage.show();
@@ -291,6 +302,5 @@ public class App extends Application {
         launch();
         System.out.println("Gay world");
     }
-    
 
 }

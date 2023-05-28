@@ -108,6 +108,10 @@ public class PatientController {
         return doctorLedger.getDoctor(name);
     }
 
+    public String getTopDoctors(){
+        return doctorLedger.getTopDoctors();
+    }
+
 
     
     public String sortDoctors(String name, String type,Boolean reversed, double ratingFilter, String specialtyFilter) {
