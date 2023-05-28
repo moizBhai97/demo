@@ -111,8 +111,6 @@ public class PatientController {
     public String getTopDoctors(){
         return doctorLedger.getTopDoctors();
     }
-
-
     
     public String sortDoctors(String name, String type,Boolean reversed, double ratingFilter, String specialtyFilter) {
 
@@ -127,5 +125,15 @@ public class PatientController {
         }
             return "Invalid type";
         
+    }
+
+    public String editDetails(String info, int patId) {
+        try {
+         //   patientLedger.editPatientDetails(info);
+            return "Details edited successfully";
+        }
+        catch(Exception e) {
+            return "Error editing details";
+        }
     }
 }

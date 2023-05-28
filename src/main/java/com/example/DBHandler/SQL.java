@@ -245,7 +245,21 @@ public class SQL extends DBHandler {
 
      public String getDoctors(String name) {
         System.out.println("SQL getDoctors");
-     
+        /*
+         * NAME VARCHAR(50) NOT NULL,
+         * ID INT NOT NULL,
+         * EMAIL VARCHAR(50) NOT NULL,
+         * PASSWORD VARCHAR(50) NOT NULL,
+         * DOB DATE NOT NULL,
+         * PHONE_NUMBER VARCHAR(11) NOT NULL CHECK (PHONE_NUMBER LIKE
+         * '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+         * GENDER VARCHAR(6) NOT NULL CHECK (GENDER IN ('Male', 'Female')),
+         * RATING DECIMAL(2, 1) NOT NULL CHECK (RATING BETWEEN 0 AND 5),
+         * LOCATION VARCHAR(50) NOT NULL,
+         * EXPERIENCE INT NOT NULL,
+         * FEE INT NOT NULL,
+         * SPECIALIZATION VARCHAR(50) NOT NULL,
+         */
 
         String connectionUrl = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;" +
                 "databaseName=SDA;" +
@@ -350,6 +364,54 @@ public class SQL extends DBHandler {
 
     }
 
+    public String getDoctor(String info){
+
+        try
+        {
+            System.out.println("SQL getDoctor");
+            // query the database and return the Doctot info if username and password matches
+
+            
+            JSONParser parser = new JSONParser(); 
+            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString());
+            Set<String> keyset = obj.keySet();      //gets all keys from .json
+            
+
+            // for(String key : keyset)
+            // {
+            //     if(!get(key).equals("NULL"))
+            //         obj.put(key, get(key));            //put values in json object
+            // }
+
+            // "id": "{{id}}",
+            // "name": "{{name}}",
+            // "location": "{{location}}",
+            // "specialization": "{{specialization}}",
+            // "experience": "{{experience}}",
+            // "price": "{{price}}",
+            // "rating": "{{rating}}"
+
+            // dummy data
+            obj.put("id", "1");
+            obj.put("name", "Musa");
+            obj.put("location", "Lahore");
+            obj.put("specialization", "Heart");
+            obj.put("experience", "5 years");
+            obj.put("price", "500");
+            obj.put("rating", "5");
+            
+
+            System.out.println(obj.toString());
+            return obj.toString();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
+        }
+
+    }
+
     public String getAppointments(int patId) {
         try {
 
@@ -381,12 +443,12 @@ public class SQL extends DBHandler {
     }
 
     // public static void main(String[] args) throws Exception {
-    // String connectionUrl = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;" +
-    // "databaseName=DB_Lab13;" +
+    // String connectionUrl = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;" +
+    // "databaseName=SDA;" +
     // "IntegratedSecurity=true" + ";encrypt=true;trustServerCertificate=true";
     // try (Connection con = DriverManager.getConnection(connectionUrl); Statement
     // stmt = con.createStatement()) {
-    // String SQL = "SELECT * FROM tb1Employee";
+    // String SQL = "SELECT * FROM Patients";
     // ResultSet rs = stmt.executeQuery(SQL);
     // //print all columns and rows in resultset
 

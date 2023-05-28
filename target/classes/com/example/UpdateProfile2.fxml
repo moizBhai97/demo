@@ -154,7 +154,7 @@
                                     <HBox prefHeight="11.0" prefWidth="257.0">
                                        <children>
                                           <Label prefHeight="25.0" prefWidth="14.0" text="3." />
-                                          <Button fx:id="btn_add1" mnemonicParsing="false" prefHeight="16.0" prefWidth="45.0" style="-fx-background-color: transparent;" styleClass="button_add1" text="Add+" textFill="#00000080">
+                                          <Button fx:id="btn_add1" mnemonicParsing="false" onAction="#addCertification" prefHeight="16.0" prefWidth="45.0" style="-fx-background-color: transparent;" styleClass="button_add1" text="Add+" textFill="#00000080">
                                              <font>
                                                 <Font name="System Italic" size="12.0" />
                                              </font>

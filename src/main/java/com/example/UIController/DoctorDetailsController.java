@@ -138,7 +138,7 @@ public class DoctorDetailsController implements Initializable{
             
             //-------------------------------------------------------------------------------------------------//
             BookAppointmentController bookAppointmentController = new BookAppointmentController();
-            bookAppointmentController.setData(pc, docId, patId);
+            //bookAppointmentController.setData(pc, docId, patId);
 
             loader.setController(bookAppointmentController);
             //-------------------------------------------------------------------------------------------------//
