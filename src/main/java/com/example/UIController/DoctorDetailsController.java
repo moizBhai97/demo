@@ -88,7 +88,8 @@ public class DoctorDetailsController implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
     {
-        pc = new PatientController();
+         
+        System.out.println(docId);
 
         String info = pc.getDocDetails(docId);
 
