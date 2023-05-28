@@ -11,9 +11,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class DoctorLedger {
+
     private ArrayList<Doctor> doctorList;
 
-    DoctorLedger() {
+    public DoctorLedger()
+    {
         doctorList = new ArrayList<Doctor>();
     }
 
@@ -120,6 +122,18 @@ public class DoctorLedger {
         }
         // System.out.println(doctors.toString());
         return doctors.toString();
+    }
+    public Doctor getDoctor(int docId)
+    {
+        for(int i = 0; i < doctorList.size(); i++)
+        {
+            if(doctorList.get(i).getId() == docId)
+            {
+                return doctorList.get(i);
+            }
+        }
+
+        return null;
     }
 
     public String sortByRating(String name, Boolean reversed, double ratingFilter, String specialtyFilter) {

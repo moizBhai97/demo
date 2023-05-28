@@ -16,7 +16,18 @@ public class Doctor {
     private double rating;
 
     //private String image;
-    // private //String description;
+
+    private DoctorDetails doctorDetails;
+    
+    public DoctorDetails getDoctorDetails()
+    {
+        return doctorDetails;
+    }
+    
+    public String getDetails()
+    {
+        return doctorDetails.toString();
+    }
 
     public Doctor(String doctorName, String specialization, String location, String experience, Double priceDouble, Double ratingDouble) {
         this.name = doctorName;
@@ -137,7 +148,7 @@ public class Doctor {
             System.out.println(obj.toString());
             return obj.toString();
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             return null;
         }
     }

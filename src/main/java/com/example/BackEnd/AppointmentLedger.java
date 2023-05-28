@@ -11,7 +11,7 @@ public class AppointmentLedger {
     private List<Appointment> appointments;
     private DBFactory dbFactory;
 
-    AppointmentLedger()
+    public AppointmentLedger()
     {
         dbFactory = DBFactory.getInstance();
 
@@ -30,24 +30,31 @@ public class AppointmentLedger {
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
 
-    public void updateAppointment(String Reason, int appId, int value)
+    public void updateAppointment(String info, int appId, int value)
     {
         try
         {
             if(value == 1)
             {
-                dbFactory.createHandler("SQL").updateAppointment(appId, Reason, value);
+                dbFactory.createHandler("SQL").updateAppointment(appId, info, value);
                 
                 getAppointment(appId).setStatus("Cancel");
+            }
+
+            if(value == 2)
+            {
+                dbFactory.createHandler("SQL").updateAppointment(appId, info, value);
+
+                getAppointment(appId).update(info);
             }
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
 
     }
@@ -68,10 +75,45 @@ public class AppointmentLedger {
             objs.put(obj);
             
         }
-        String last= objs.get(2).toString();
-        //put it back into the json array
-        objs.put(last);
 
         return objs.toString();
     }
+
+    public void addPayment(String info, int appId)
+    {
+        try
+        {
+            dbFactory.createHandler("SQL").addPayment(info, appId);
+
+            getAppointment(appId).addPayment(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
+    public void setAppointments(int patId)
+    {
+        try
+        {
+            String appointmentsInfo = dbFactory.createHandler("SQL").getAppointments(patId);
+
+            JSONArray objs = new JSONArray(appointmentsInfo);
+
+            for(int i = 0; i < objs.length(); i++)
+            {
+                JSONObject obj = objs.getJSONObject(i);
+
+                Appointment appointment = new Appointment(obj.toString());
+
+                appointments.add(appointment);
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
 }

@@ -14,25 +14,29 @@ public class Appointment {
     private int docId;
     private String status;
 
-    Appointment()
+    private Payment payment;
+
+    public Appointment()
     {
         this.date = "";
         this.time = "";
         this.problem = "";
         this.docId = 0;
         this.status = "Booked";
+        this.payment = null;
     }
 
-    Appointment(String date, String time, String problem, int docId)
+    public Appointment(String date, String time, String problem, int docId)
     {
         this.date = date;
         this.time = time;
         this.problem = problem;
         this.docId = docId;
         this.status = "Booked";
+        this.payment = null;
     }
 
-    Appointment(String info)
+    public Appointment(String info)
     {
         JSONObject obj = new JSONObject(info);
 
@@ -41,6 +45,7 @@ public class Appointment {
         this.problem = obj.getString("problem");
         this.docId = obj.getInt("docId");
         this.status = "Booked";
+        this.payment = null;
     }
 
     public void setStatus(String s)
@@ -67,6 +72,51 @@ public class Appointment {
 
         return "NULL";
     }
+
+    public void set(String value, String data)
+    {
+        if(value.equals("date"))
+            date = data;
+        
+        else if(value.equals("time"))
+            time = data;
+        
+        else if(value.equals("problem"))
+            problem = data;
+
+        else if(value.equals("status"))
+            status = data;
+        
+        else if(value.equals("docId"))
+            docId = Integer.parseInt(data);
+    }
+
+    public void addPayment(String info)
+    {
+        payment = new Payment(info);
+    }
+
+    public void update(String info)
+    {
+        try
+        {
+            JSONObject obj = new JSONObject(info);
+
+            Set<String> keyset = obj.keySet();
+            
+            for(String key : keyset)
+            {
+                if(!get(key).equals("NULL"))
+                    set(key, obj.getString(key));
+            }
+            
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
     @Override
     public String toString()
     {
@@ -81,15 +131,14 @@ public class Appointment {
             for(String key : keyset)
             {
                 if(!get(key).equals("NULL"))
-                    obj.put(key, get(key));            //put values in json object
+                    obj.put(key, get(key));
             }
 
             return obj.toString();
         }
         catch(Exception e)
         {
-            System.out.println(e + " " + getClass().getName());
-
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             return null;
         }
     } 

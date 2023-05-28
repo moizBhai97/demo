@@ -10,11 +10,33 @@ public class PatientController {
         patientLedger = new PatientLedger();
     }
 
-    public void bookAppointment(String info, int patId) {
-        try {
+    public String login(String info)
+    {
+        try{
+
+            Patient patient = patientLedger.getPatient(info);
+            patient.setAppointments();
+
+            //doctorLedger.setDoctors();
+
+            return patient.toString();
+            
+        }catch (Exception e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return "";
+        }
+        
+    }
+
+    public void bookAppointment(String info, int patId)
+    {
+        try
+        {
             patientLedger.getPatient(patId).bookAppointment(info);
-        } catch (Exception e) {
-            System.out.println(e + " " + getClass().getName());
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
 
@@ -25,8 +47,60 @@ public class PatientController {
     public void cancelAppointment(String Reason, int patId, int appId) {
         try {
             patientLedger.getPatient(patId).cancelAppointment(Reason, appId);
-        } catch (Exception e) {
-            System.out.println(e + " " + getClass().getName());
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
+    public void reschAppointment(String info, int patId, int appId)
+    {
+        try
+        {
+            patientLedger.getPatient(patId).reschAppointment(info, appId);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
+    public String getDocDetails(int docId)
+    {
+        try
+        {
+            return doctorLedger.getDoctor(docId).getDetails();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
+        }
+    }
+
+    public String getReviews(int docId)
+    {
+        try
+        {
+            return doctorLedger.getDoctor(docId).getDoctorDetails().getReviewList(docId);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
+        }
+    }
+
+    public void makePayment(String info, int patId, int appId)
+    {
+        try
+        {
+            patientLedger.getPatient(patId).makePayment(info, appId);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
 

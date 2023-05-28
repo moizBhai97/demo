@@ -4,6 +4,8 @@ import com.example.BackEnd.DBHandler;
 import com.example.BackEnd.Doctor;
 import com.example.UIController.DoctorTemp;
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
+
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,9 +13,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class SQL extends DBHandler{
 
@@ -22,26 +26,73 @@ public class SQL extends DBHandler{
         try
         {
             JSONObject obj = new JSONObject(info);
+            obj.put("status", "Booked");
             System.out.println(patId + " " + obj.getString("date") + " " + obj.getString("time") + " " + obj.getString("problem") + " " + obj.getString("docId") + " " + "Booked");
         }
         catch(Exception e)
         {
-            System.out.println(e + " " + getClass().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
 
-    public void updateAppointment(int appId, String Reason, int value)
+    public void updateAppointment(int appId, String info, int value)
     {
         try
         {
             if(value == 1)
             {
-                System.out.println(appId+ " " + Reason + " " + "Canceled");
+                System.out.println(appId+ " " + info + " " + "Canceled");
+            }
+
+            else if(value == 2)
+            {
+                JSONObject obj = new JSONObject(info);
+                System.out.println(obj.getString("date") + " " + obj.getString("time") + " " + obj.getString("reason"));
             }
         }
         catch(Exception e)
         {
-            System.out.println(e + " " + getClass().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
+    public String getReviewList(int docId)
+    {
+        try
+        {
+            ResultSet rs = null;
+            
+            JSONParser parser = new JSONParser(); 
+
+            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Review.json")).toString());
+
+            Set<String> keyset = obj.keySet();
+            
+            for(String key : keyset)
+            {
+                if(rs.getString(key) != null)
+                    obj.put(key, rs.getString(key));
+            }
+
+            return obj.toString();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
+        }
+    }
+
+    public void addPayment(String info, int appId)
+    {
+        try
+        {
+            JSONObject obj = new JSONObject(info);
+            System.out.println(obj.getString("date") + " " + obj.getString("time") + " " + obj.getString("amount") + " " + appId);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
     
@@ -79,12 +130,80 @@ public String getDummyDoctor(String name){
 
 }
 
-
     public String getDoctors(String name){
         System.out.println("SQL getDoctors");
         return getDummyDoctor(name);
 
         //
+    }
+
+    public String getPatient(String info){
+
+        try
+        {
+            System.out.println("SQL getPatient");
+            // query the database and return the patient info if username and password matches
+
+            
+            JSONParser parser = new JSONParser(); 
+            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());
+            Set<String> keyset = obj.keySet();      //gets all keys from .json
+            
+
+            // for(String key : keyset)
+            // {
+            //     if(!get(key).equals("NULL"))
+            //         obj.put(key, get(key));            //put values in json object
+            // }
+            
+            // dummy data
+            obj.put("patId", "1");
+            obj.put("name", "Musa");
+            obj.put("email", "musa@gmail.com");
+            obj.put("DOB", "1/1/2001");
+            obj.put("phoneNumber", "03369420888");
+            obj.put("gender", "Female");
+
+            return obj.toString();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
+        }
+
+    }
+
+    public String getAppointments(int patId)
+    {
+        try{
+
+            System.out.println("SQL getAppointments");
+            // query the database and return the appointments of the patient
+            
+            JSONArray appointments = new JSONArray();
+            JSONParser parser = new JSONParser();
+
+            for(int i = 0; i < 3; i++)
+            {
+                JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Appointment.json")).toString());
+                
+                obj.put("date", "1/1/2001");
+                obj.put("time", "02:00");
+                obj.put("problem", "Heart");
+                obj.put("status", "Booked");
+                obj.put("docId", i + 1);
+
+                appointments.put(obj);
+            }
+
+            return appointments.toString();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
+        }
     }
 
     // public static void main(String[] args) throws Exception {
