@@ -139,6 +139,7 @@ public class SQL extends DBHandler{
             obj.put("phoneNumber", "03369420888");
             obj.put("gender", "Female");
 
+            System.out.println(obj.toString());
             return obj.toString();
         }
         catch(Exception e)

@@ -31,6 +31,8 @@ public class LoginController implements Initializable{
     @FXML
     private TextField usernameTextField;
 
+    DummyController dummyController;
+
     PatientController patientController = new PatientController();
 
     @Override
@@ -47,21 +49,32 @@ public class LoginController implements Initializable{
         loginInfo.put("password", this.passwordTextField.getText());
 
         String patientInfo = patientController.login(loginInfo.toString());
+        System.out.println(patientInfo);
 
-        Stage stage = (Stage)(((Node) event.getSource()).getScene().getWindow());
-        stage.close();
+        //Stage stage = (Stage)(((Node) event.getSource()).getScene().getWindow());
+        //stage.close();
 
         try {
             this.loginButton.getScene().getWindow().hide();
 
-            
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
+            loader.setLocation((new URL("file:src/main/resources/com/example/dummyScreen.fxml")));
+            
+            //-------------------------------------------------------------------------------------------------//
+            dummyController = new DummyController();
+            
+            int dummyPatId = 1;
+            dummyController.setData(patientController, dummyPatId);
+            loader.setController(dummyController);
+            //-------------------------------------------------------------------------------------------------//
+            
             Parent root = loader.load();
-            stage.setUserData(patientInfo);
+            //stage.setUserData(patientInfo);
             Scene scene = new Scene(root);
+            Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
+            
         } catch (IOException e) {
             System.err.println(String.format("Error: %s", e.getMessage()));
         }
