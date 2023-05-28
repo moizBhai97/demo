@@ -257,20 +257,20 @@ public String getDummyDoctor(String name){
         }
     }
 
-    // public static void main(String[] args) throws Exception {
-    //     String connectionUrl = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;" +
-    //                 "databaseName=DB_Lab13;" +
-    //                 "IntegratedSecurity=true" + ";encrypt=true;trustServerCertificate=true";
-    //         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
-    //             String SQL = "SELECT * FROM tb1Employee";
-    //             ResultSet rs = stmt.executeQuery(SQL);
-    //             //print all columns and rows in resultset
+    public static void main(String[] args) throws Exception {
+        String connectionUrl = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;" +
+                    "databaseName=SDA;" +
+                    "IntegratedSecurity=true" + ";encrypt=true;trustServerCertificate=true";
+            try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
+                String SQL = "SELECT * FROM Patients";
+                ResultSet rs = stmt.executeQuery(SQL);
+                //print all columns and rows in resultset
 
 
-    //         } catch (SQLException e) {
-    //             e.printStackTrace();
-    //         }
-    //   }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+      }
 
     public void addComplaint(int patID, String details) {
         try

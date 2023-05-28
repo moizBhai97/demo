@@ -129,7 +129,7 @@ public class PatientController {
 
     public String editDetails(String info, int patId) {
         try {
-            patientLedger.editPatientDetails(info);
+         //   patientLedger.editPatientDetails(info);
             return "Details edited successfully";
         }
         catch(Exception e) {
