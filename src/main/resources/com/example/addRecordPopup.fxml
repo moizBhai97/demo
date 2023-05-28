@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane fx:id="pane_add_rec" prefHeight="200.0" prefWidth="204.0" style="-fx-border-radius: 5; -fx-background-color: ededed;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutY="45.0" prefHeight="111.0" prefWidth="203.0" spacing="6.0" style="-fx-background-color: ededed; -fx-border-radius: 5;">
+         <children>
+            <Label prefHeight="17.0" prefWidth="32.0" text="Type">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="typeComboBox" editable="true" prefHeight="25.0" prefWidth="185.0" promptText="Allergy">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:id="type_1" fx:value="Allergy" />
+                     <String fx:id="type_2" fx:value="Injury" />    
+                     <String fx:id="type_3" fx:value="Illness" />
+                     <String fx:id="type_4" fx:value="Surgery" />
+                     <String fx:id="type_5" fx:value="Other" />
+                  </FXCollections>
+               </items>
+            </ComboBox>
+            <Label prefHeight="17.0" prefWidth="67.0" text="Description">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="descriptionTextBox" promptText="Milk" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+      <Label contentDisplay="CENTER" layoutX="56.0" layoutY="14.0" prefHeight="25.0" prefWidth="91.0" text="Add Record">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Line endX="103.0" layoutX="87.0" layoutY="45.0" startX="-72.0" stroke="#bebebe" />
+      <Button fx:id="addButton" layoutX="83.0" layoutY="167.0" mnemonicParsing="false" style="-fx-background-color: #2854C3;" text="Add" textFill="WHITE" />
+   </children>
+</Pane>
