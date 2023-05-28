@@ -79,7 +79,6 @@ public class AppointmentLedger {
         return objs.toString();
     }
 
-<<<<<<< HEAD
     public void addPayment(String info, int appId)
     {
         try
@@ -87,7 +86,13 @@ public class AppointmentLedger {
             dbFactory.createHandler("SQL").addPayment(info, appId);
 
             getAppointment(appId).addPayment(info);
-=======
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
     public void setAppointments(int patId)
     {
         try
@@ -104,15 +109,11 @@ public class AppointmentLedger {
 
                 appointments.add(appointment);
             }
->>>>>>> 83d1be6f875ba7d84706f2fe449c752ccc7b70f5
         }
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
-<<<<<<< HEAD
-=======
 
->>>>>>> 83d1be6f875ba7d84706f2fe449c752ccc7b70f5
 }
