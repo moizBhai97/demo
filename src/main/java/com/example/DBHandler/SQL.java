@@ -221,4 +221,17 @@ public String getDummyDoctor(String name){
     //             e.printStackTrace();
     //         }
     //   }
+
+    public void addComplaint(int patID, String details) {
+        try
+        {
+            System.out.println("SQL addComplaint");
+            // query the database and add the complaint of the patient
+            System.out.println(patID + " " + details);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
 }
