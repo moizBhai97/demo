@@ -11,7 +11,7 @@ public class DoctorController {
         doctorLedger = new DoctorLedger();
     }
 
-    public void setDate()
+    //public void setDate()
 
     public void newComplaint(int patID, String details){
         complaintCatalog.newComplaint(patID, details);

@@ -191,6 +191,8 @@ public class SQL extends DBHandler{
             }
             obj.put("services", services);
 
+            pstmt.close();
+
             SQL = "SELECT COUNT(ID) FROM Appointments WHERE DOCTOR_ID = ? AND STATUS = 'Completed' ;";
             pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, docId);

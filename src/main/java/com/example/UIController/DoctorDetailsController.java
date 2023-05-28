@@ -8,11 +8,16 @@ import org.json.JSONObject;
 
 import com.example.BackEnd.PatientController;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.stage.Stage;
 
 public class DoctorDetailsController implements Initializable{
     
@@ -122,5 +127,31 @@ public class DoctorDetailsController implements Initializable{
         this.pc = pc;
         this.patId = patId;
         this.docId = id;
+    }
+
+    public void bookButton(ActionEvent event){
+        try {
+            this.bookButton.getScene().getWindow().hide();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/book_apt.fxml")));
+            
+            //-------------------------------------------------------------------------------------------------//
+            BookAppointmentController bookAppointmentController = new BookAppointmentController();
+            //bookAppointmentController.setData(pc, docId, patId);
+
+            loader.setController(bookAppointmentController);
+            //-------------------------------------------------------------------------------------------------//
+            
+            Parent root = loader.load();
+            //stage.setUserData(patientInfo);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

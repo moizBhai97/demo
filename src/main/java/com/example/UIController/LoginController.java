@@ -48,13 +48,12 @@ public class LoginController implements Initializable{
     }
 
     public void loginButton(ActionEvent event){
-        // System.out.println("Login Button pressed");
+        System.out.println("Login Button pressed");
 
-        // JSONObject loginInfo = new JSONObject();
-        // loginInfo.put("username", this.usernameTextField.getText());
-        // loginInfo.put("password", this.passwordTextField.getText());
+        JSONObject loginInfo = new JSONObject();
+        loginInfo.put("username", this.usernameTextField.getText());
+        loginInfo.put("password", this.passwordTextField.getText());
 
-<<<<<<< HEAD
         if(isPatient){
 
             int patId = Integer.parseInt(patientController.login(loginInfo.toString()));
@@ -62,23 +61,15 @@ public class LoginController implements Initializable{
 
             try {
             this.loginButton.getScene().getWindow().hide();
-=======
-        // int patId = Integer.parseInt(patientController.login(loginInfo.toString()));
-        // System.out.println(patId);
 
-        // try {
-        //     this.loginButton.getScene().getWindow().hide();
->>>>>>> 0e56d7edfe116cd67ae16dc6c2cf4b3a06d7645c
-
-        //     FXMLLoader loader = new FXMLLoader();
-        //     loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
             
-        //     searchDoctorController = new SearchDoctorController();
+            searchDoctorController = new SearchDoctorController();
             
-        //     searchDoctorController.setData(patientController, patId);
-        //     loader.setController(searchDoctorController);
+            searchDoctorController.setData(patientController, patId);
+            loader.setController(searchDoctorController);
             
-<<<<<<< HEAD
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -93,18 +84,6 @@ public class LoginController implements Initializable{
 
             int docId = Integer.parseInt(doctorController.login(loginInfo.toString()));
             System.out.println(docId);
-=======
-        //     Parent root = loader.load();
-        //     //stage.setUserData(patientInfo);
-        //     Scene scene = new Scene(root);
-        //     Stage stage = new Stage();
-        //     stage.setScene(scene);
-        //     stage.show();
-            
-        // } catch (IOException e) {
-        //     System.err.println(String.format("Error: %s", e.getMessage()));
-        // }
->>>>>>> 0e56d7edfe116cd67ae16dc6c2cf4b3a06d7645c
 
             try {
             this.loginButton.getScene().getWindow().hide();
@@ -135,18 +114,20 @@ public class LoginController implements Initializable{
 
 
 
-                     // pass data between screens
+        /*              pass data between screens
         try {
             this.loginButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/dummyScreen.fxml")));
-
-            DummyController dummyController = new DummyController();
+            
+            //-------------------------------------------------------------------------------------------------//
+            dummyController = new DummyController();
             
             int dummyPatId = 1;
             dummyController.setData(patientController, dummyPatId);
             loader.setController(dummyController);
+            //-------------------------------------------------------------------------------------------------//
             
             Parent root = loader.load();
             //stage.setUserData(patientInfo);
@@ -158,7 +139,7 @@ public class LoginController implements Initializable{
         } catch (IOException e) {
             System.err.println(String.format("Error: %s", e.getMessage()));
         }
-        
+        */
     }
 
     public void signupHyperlink(ActionEvent event){
