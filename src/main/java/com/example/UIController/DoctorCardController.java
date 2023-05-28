@@ -112,7 +112,7 @@ public class DoctorCardController {
 
 
     //button action
-    public void book(ActionEvent event) {
+    public void viewProfileBtn(ActionEvent event) {
         System.out.println("book button clicked");
         try {
             this.card1_book_apt_btn.getScene().getWindow().hide();
