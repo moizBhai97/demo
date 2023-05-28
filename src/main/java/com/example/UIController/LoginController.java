@@ -49,8 +49,8 @@ public class LoginController implements Initializable{
         loginInfo.put("username", this.usernameTextField.getText());
         loginInfo.put("password", this.passwordTextField.getText());
 
-        String patientInfo = patientController.login(loginInfo.toString());
-        System.out.println(patientInfo);
+        int patId = Integer.parseInt(patientController.login(loginInfo.toString()));
+        System.out.println(patId);
 
         try {
             this.loginButton.getScene().getWindow().hide();
@@ -59,9 +59,8 @@ public class LoginController implements Initializable{
             loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
             
             searchDoctorController = new SearchDoctorController();
-            JSONObject info = new JSONObject(patientInfo);
             
-            searchDoctorController.setData(patientController, info.getInt("patId"));
+            searchDoctorController.setData(patientController, patId);
             loader.setController(searchDoctorController);
             
             Parent root = loader.load();

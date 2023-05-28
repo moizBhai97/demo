@@ -137,6 +137,40 @@ public String getDummyDoctor(String name){
         //
     }
 
+    public String getTopDoctors()
+    {
+        try
+        {
+            System.out.println("SQL getTopDoctors");
+            // query the database and return the top doctors
+
+            JSONArray doctors = new JSONArray();
+            JSONParser parser = new JSONParser();
+
+            for(int i = 0; i < 4; i++)
+            {
+                JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString());
+                
+                obj.put("id", i + 1);
+                obj.put("name", "Musa" + (i+1));
+                obj.put("specialization", "Heart");
+                obj.put("experience", i+5 + " years");
+                obj.put("rating", "5");
+                obj.put("location", "Lahore");
+                obj.put("price", "500");
+
+                doctors.put(obj);
+            }
+
+            return doctors.toString();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
+        }
+    }
+
     public String getPatient(String info){
 
         try

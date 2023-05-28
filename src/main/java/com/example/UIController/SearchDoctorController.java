@@ -340,9 +340,10 @@ public class SearchDoctorController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         results_grid = new GridPane();
 
-        patientController = new PatientController();
+        //patientController = new PatientController();
         results_grid.setHgap(10);
         results_grid.setVgap(10);
+
         whiteStarIcon = new ImageView(filterRatingAllIcon.getImage());
         whiteStarIcon.setFitWidth(filterRatingAllIcon.getFitWidth());
         whiteStarIcon.setFitHeight(filterRatingAllIcon.getFitHeight());
@@ -380,7 +381,6 @@ public class SearchDoctorController implements Initializable {
 
     public void refresh() {
 
-        List<DoctorTemp> doctors = DoctorTemp.getDummyDoctor();
         results_grid.setHgap(10);
         results_grid.setVgap(10);
         results_grid.getChildren().clear();
@@ -389,30 +389,11 @@ public class SearchDoctorController implements Initializable {
         results_grid.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
         // set transparent background
         results_grid.setStyle("-fx-background-color: transparent;");
-        int rowindex = 0;
-        int columnindex = 0;
-        for (int i = 0; i < 10; i++) {
-            try {
-                FXMLLoader loader = new FXMLLoader();
+        
+        createDoctorCards( patientController.getTopDoctors());
+        doc_count.setText("Top Doctors");
 
-                loader.setLocation((new URL("file:src/main/resources/com/example/DoctorCard.fxml")));
-                Pane doctorCard = loader.load();
-                DoctorCardController controller = loader.getController();
-                controller.setDoctor(doctors.get(i));
-                // controller.setParentController(this);
-                results_grid.add(doctorCard, rowindex, columnindex);
-                rowindex++;
-                if (rowindex == 2) {
-                    rowindex = 0;
-                    columnindex++;
-                }
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        results_scrollpane.setContent(results_grid);
 
     }
 

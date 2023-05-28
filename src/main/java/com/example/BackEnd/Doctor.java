@@ -39,6 +39,8 @@ public class Doctor {
 
     }
     public Doctor(String data){
+        System.out.println("Constructing JSON doctor");
+
         JSONObject jsonObject = new JSONObject(data);
         this.id = jsonObject.getInt("id");
         this.name = jsonObject.getString("name");
