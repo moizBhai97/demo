@@ -7,10 +7,13 @@ module com.example {
     requires com.fasterxml.jackson.databind;
     requires json.simple;
     requires com.microsoft.sqlserver.jdbc;
+    requires javafx.media;
 
     opens com.example to javafx.fxml;
+
     exports com.example;
 
     opens com.example.UIController to javafx.fxml;
+
     exports com.example.UIController;
 }

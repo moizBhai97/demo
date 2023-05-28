@@ -17,6 +17,12 @@
             <version>20230227</version>
         </dependency>
 
+        <dependency>
+        <groupId>org.openjfx</groupId>
+         <artifactId>javafx-media</artifactId>
+          <version>16</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
