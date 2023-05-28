@@ -35,6 +35,4 @@ public class DummyController implements Initializable{
         System.out.println(patId);
 
     }
-
-    
 }

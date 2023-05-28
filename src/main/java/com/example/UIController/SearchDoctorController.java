@@ -35,6 +35,7 @@ public class SearchDoctorController implements Initializable {
     // GridPane results_grid;
 
     PatientController patientController;
+    int patId;
 
     @FXML
     Label doc_count;
@@ -362,6 +363,13 @@ public class SearchDoctorController implements Initializable {
         // filter_Pane.getChildren().add(filterRatingAllIcon);
         refresh();
         return;
+    }
+
+    public void setData(PatientController patientController, int patId)
+    {
+        this.patientController = patientController;
+        this.patId = patId;
+        System.out.println(patId);
     }
 
     GridPane results_grid;
