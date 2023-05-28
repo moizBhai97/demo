@@ -93,14 +93,14 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <ImageView fitHeight="30.0" fitWidth="28.0" layoutX="50.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/gallery.png" />
-                     </image>
-                  </ImageView>
                   <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="528.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/cross.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="30.0" fitWidth="28.0" layoutX="50.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/gallery.png" />
                      </image>
                   </ImageView>
                </children>

@@ -406,6 +406,8 @@ public class SearchDoctorController implements Initializable {
 
     public void refresh() {
 
+        patientController = new PatientController();
+        
         results_grid.setHgap(10);
         results_grid.setVgap(10);
         results_grid.getChildren().clear();
@@ -416,6 +418,7 @@ public class SearchDoctorController implements Initializable {
         results_grid.setStyle("-fx-background-color: transparent;");
 
         createDoctorCards(patientController.getTopDoctors());
+        results_scrollpane.setContent(results_grid);
         doc_count.setText("Top Doctors");
 
     }
