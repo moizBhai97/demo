@@ -54,7 +54,6 @@ public class DoctorLedger {
 
         
 
-        System.out.println(doctorList.toString());
 
         return json.toString();
     }
