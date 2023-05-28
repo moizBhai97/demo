@@ -1,0 +1,8 @@
+{
+    "patId": "{{patId}}",
+    "name": "{{name}}",
+    "email": "{{email}}",
+    "DOB": "{{DOB}}",
+    "phoneNumber": "{{phoneNumber}}",
+    "gender": "{{gender}}"
+}
