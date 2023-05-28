@@ -22,8 +22,23 @@ public class Doctor {
         return doctorDetails;
     }
 
+    public void setDoctorDetails(String info, int docId) {
+        this.doctorDetails = new DoctorDetails(info, docId);
+    }
+
     public String getDetails() {
-        return doctorDetails.toString();
+
+        System.out.println("Doctor details");
+
+        String details = doctorDetails.toString();
+
+        System.out.println("Details: " + details);
+
+        JSONObject obj = new JSONObject(details);
+
+        obj.put("name", name);
+
+        return obj.toString();
     }
 
     public Doctor(String doctorName, String specialization, String location, String experience, Double priceDouble,
@@ -61,8 +76,6 @@ public class Doctor {
     }
 
     public void setId(int id) {
-        doctorDetails = new DoctorDetails();
-        doctorDetails.getReviewLedger().populateReviews(id);
         this.id = id;
     }
 

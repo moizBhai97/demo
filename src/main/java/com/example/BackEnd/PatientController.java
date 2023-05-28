@@ -70,7 +70,7 @@ public class PatientController {
     {
         try
         {
-            return doctorLedger.getDoctor(docId).getDetails();
+            return doctorLedger.getDetails(docId);
         }
         catch(Exception e)
         {
