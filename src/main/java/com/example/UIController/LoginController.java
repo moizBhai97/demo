@@ -56,7 +56,7 @@ public class LoginController implements Initializable{
             this.loginButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctor.fxml")));
+            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
             
             searchDoctorController = new SearchDoctorController();
             JSONObject info = new JSONObject(patientInfo);
