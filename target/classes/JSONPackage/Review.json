@@ -4,5 +4,9 @@
     "recommend": "{{recommend}}",
     "checkupRating": "{{checkupRating}}",
     "environmentRating": "{{environmentRating}}",
+<<<<<<< HEAD
     "clinicRating": "{{clinicRating}}"
+=======
+    "staffRating": "{{staffRating}}"
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
 }

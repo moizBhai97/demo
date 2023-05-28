@@ -9,5 +9,13 @@
     "services": "{{services}}",
     "start": "{{start}}",
     "end": "{{end}}",
+<<<<<<< HEAD
     "fee": "{{fee}}"
+=======
+    "fee": "{{fee}}",
+    "checkupRating": "{{checkupRating}}",
+    "environmentRating": "{{environmentRating}}",
+    "staffRating": "{{staffRating}}",
+    "reviews": "{{reviews}}"
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
 }
