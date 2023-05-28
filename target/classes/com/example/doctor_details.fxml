@@ -14,7 +14,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
+<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.PrimaryController">
+=======
 <HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
    <children>
       <Pane prefHeight="640.0" prefWidth="924.0">
          <children>
@@ -126,25 +130,42 @@
                               </ImageView>
                            </children>
                         </Pane>
+<<<<<<< HEAD
+                        <Label layoutX="85.0" layoutY="14.0" text="Dr. Amna Irum" textFill="#979797">
+=======
                         <Label fx:id="name" layoutX="85.0" layoutY="14.0" text="Dr. Amna Irum" textFill="#979797">
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
+<<<<<<< HEAD
+                        <Label layoutX="85.0" layoutY="38.0" text="Dermatologist" textFill="#979797" />
+                        <Label layoutX="85.0" layoutY="57.0" text="NUCES FAST Isb" textFill="#979797" />
+=======
                         <Label fx:id="specialization" layoutX="85.0" layoutY="38.0" text="Dermatologist" textFill="#979797" />
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
                      </children></Pane>
                   <Pane layoutY="116.0" prefHeight="119.0" prefWidth="525.0" styleClass="big_pane" stylesheets="@doctor_details.css">
                      <children>
                         <Pane fx:id="circle_pane" layoutX="35.0" layoutY="25.0" prefHeight="49.0" prefWidth="48.0" styleClass="circle_pane" stylesheets="@doctor_details.css">
                            <children>
+<<<<<<< HEAD
+                              <Label layoutX="13.0" layoutY="16.0" text="97%" textFill="WHITE">
+=======
                               <Label fx:id="stats" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="16.0" prefHeight="17.0" prefWidth="38.0" text="97%" textFill="WHITE">
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
                            </children>
                         </Pane>
+<<<<<<< HEAD
+                        <Label alignment="TOP_LEFT" layoutX="101.0" layoutY="32.0" prefHeight="55.0" prefWidth="112.0" text="Satisfied out of 681 patients" wrapText="true">
+=======
                         <Label alignment="TOP_LEFT" layoutX="101.0" layoutY="32.0" prefHeight="55.0" prefWidth="112.0" text="Satisfied patients" wrapText="true">
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -154,12 +175,21 @@
                         <Label layoutX="245.0" layoutY="77.0" text="Staff Behaviour" />
                         <Pane layoutX="349.0" prefHeight="119.0" prefWidth="175.0">
                            <children>
+<<<<<<< HEAD
+                              <ProgressBar fx:id="progress" layoutX="14.0" layoutY="27.0" prefHeight="18.0" prefWidth="86.0" progress="0.97" styleClass="progress" stylesheets="@doctor_details.css" />
+                              <ProgressBar fx:id="progress1" layoutX="14.0" layoutY="55.0" prefHeight="18.0" prefWidth="86.0" progress="0.97" styleClass="progress" stylesheets="@doctor_details.css" />
+                              <ProgressBar fx:id="progress2" layoutX="14.0" layoutY="82.0" prefHeight="18.0" prefWidth="86.0" progress="0.97" styleClass="progress" stylesheets="@doctor_details.css" />
+                              <Label layoutX="114.0" layoutY="24.0" text="97%" />
+                              <Label layoutX="114.0" layoutY="52.0" text="97%" />
+                              <Label layoutX="114.0" layoutY="79.0" text="97%" />
+=======
                               <ProgressBar fx:id="checkProgress" layoutX="14.0" layoutY="27.0" prefHeight="18.0" prefWidth="86.0" progress="0.97" styleClass="progress" stylesheets="@doctor_details.css" />
                               <ProgressBar fx:id="envProgress" layoutX="14.0" layoutY="55.0" prefHeight="18.0" prefWidth="86.0" progress="0.97" styleClass="progress" stylesheets="@doctor_details.css" />
                               <ProgressBar fx:id="staffProgress" layoutX="14.0" layoutY="82.0" prefHeight="18.0" prefWidth="86.0" progress="0.97" styleClass="progress" stylesheets="@doctor_details.css" />
                               <Label fx:id="avgCheckup" alignment="CENTER" contentDisplay="CENTER" layoutX="114.0" layoutY="24.0" text="97%" />
                               <Label fx:id="avgEnv" alignment="CENTER" contentDisplay="CENTER" layoutX="114.0" layoutY="52.0" text="97%" />
                               <Label fx:id="avgStaff" alignment="CENTER" contentDisplay="CENTER" layoutX="114.0" layoutY="79.0" text="97%" />
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
                            </children>
                         </Pane>
                      </children>
@@ -175,7 +205,11 @@
                               </ImageView>
                            </children>
                         </Pane>
+<<<<<<< HEAD
+                        <Label fx:id="texty" layoutX="43.0" layoutY="47.0" styleClass="texty" stylesheets="@doctor_details.css" text="90+">
+=======
                         <Label fx:id="patients" alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="49.0" prefHeight="25.0" prefWidth="41.0" styleClass="texty" stylesheets="@doctor_details.css" text="90" textAlignment="CENTER">
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
                            <font>
                               <Font name="Serif Regular" size="16.0" />
                            </font>
@@ -194,17 +228,24 @@
                               </ImageView>
                            </children>
                         </Pane>
+<<<<<<< HEAD
+                        <Label layoutX="25.0" layoutY="47.0" styleClass="texty" stylesheets="@doctor_details.css" text="5+ Years">
+=======
                         <Label fx:id="experience" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="47.0" prefHeight="25.0" prefWidth="31.0" styleClass="texty" stylesheets="@doctor_details.css" text="5" textAlignment="CENTER">
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
                            <font>
                               <Font name="Serif Regular" size="16.0" />
                            </font>
                         </Label>
                         <Label layoutX="28.0" layoutY="72.0" text="Experience" />
+<<<<<<< HEAD
+=======
                         <Label fx:id="experience1" alignment="CENTER" contentDisplay="CENTER" layoutX="46.0" layoutY="47.0" styleClass="texty" stylesheets="@doctor_details.css" text="+ Years">
                            <font>
                               <Font name="Serif Regular" size="16.0" />
                            </font>
                         </Label>
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
                      </children>
                   </Pane>
                   <Pane fx:id="inner_big_pane112" layoutX="536.0" layoutY="22.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
@@ -218,7 +259,11 @@
                               </ImageView>
                            </children>
                         </Pane>
+<<<<<<< HEAD
+                        <Label layoutX="46.0" layoutY="47.0" styleClass="texty" stylesheets="@doctor_details.css" text="4.8">
+=======
                         <Label fx:id="rating" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="47.0" prefHeight="25.0" prefWidth="45.0" styleClass="texty" stylesheets="@doctor_details.css" text="4.8">
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
                            <font>
                               <Font name="Serif Regular" size="16.0" />
                            </font>
@@ -237,13 +282,21 @@
                               </ImageView>
                            </children>
                         </Pane>
+<<<<<<< HEAD
+                        <Label layoutX="44.0" layoutY="47.0" styleClass="texty" stylesheets="@doctor_details.css" text="355" textFill="WHITE">
+=======
                         <Label fx:id="reviews" alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="47.0" prefHeight="25.0" prefWidth="57.0" styleClass="texty" stylesheets="@doctor_details.css" text="355" textAlignment="CENTER" textFill="WHITE">
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
                            <font>
                               <Font name="Serif Regular" size="16.0" />
                            </font>
                         </Label>
                         <Label layoutX="35.0" layoutY="72.0" text="Reviews" />
+<<<<<<< HEAD
+                        <Button fx:id="inner_big_pane21" layoutX="6.0" layoutY="8.0" mnemonicParsing="false" opacity="0.0" prefHeight="79.0" prefWidth="103.0" styleClass="inner_big_pane3" stylesheets="@doctor_details.css" text="Button" />
+=======
                         <Button fx:id="reviewButton" layoutX="5.0" layoutY="8.0" mnemonicParsing="false" opacity="0.0" prefHeight="79.0" prefWidth="103.0" styleClass="inner_big_pane3" stylesheets="@doctor_details.css" text="Button" />
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
                      </children>
                   </Pane>
                   <Pane fx:id="inner_big_pane3" layoutX="24.0" layoutY="257.0" prefHeight="279.0" prefWidth="624.0" styleClass="inner_big_pane3" stylesheets="@doctor_details.css">
@@ -258,15 +311,39 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
+<<<<<<< HEAD
+                        <Label alignment="TOP_LEFT" layoutX="48.0" layoutY="49.0" prefHeight="55.0" prefWidth="548.0" text="      Dr. Amna Irum is the top most dermatologist specialist in NUCES hospital at FAST. She achived several award for her wonderful contribution in her own field. She is available for private consultation." textFill="#979797" wrapText="true" />
+                        <Label alignment="TOP_LEFT" layoutX="58.0" layoutY="112.0" prefHeight="55.0" prefWidth="135.0" text="- Acne &amp; Melasma Clinic - Acne Scar Removal       - Anti Aging" textFill="#979797" wrapText="true" />
+                        <Label alignment="TOP_LEFT" layoutX="207.0" layoutY="112.0" prefHeight="55.0" prefWidth="127.0" text="- Anti Aging Solutions  - Cosmetic Surgery" textFill="#979797" wrapText="true" />
+=======
                         <Label fx:id="description" alignment="TOP_LEFT" layoutX="58.0" layoutY="49.0" prefHeight="55.0" prefWidth="548.0" text="      Dr. Amna Irum is the top most dermatologist specialist in NUCES hospital at FAST. She achived several award for her wonderful contribution in her own field. She is available for private consultation." textFill="#979797" wrapText="true" />
+<<<<<<< HEAD
                         <Label fx:id="services" alignment="TOP_LEFT" layoutX="58.0" layoutY="112.0" prefHeight="55.0" prefWidth="309.0" text="- Acne &amp; Melasma Clinic - Acne Scar Removal               - Anti Aging" textFill="#979797" wrapText="true" />
+=======
+                        <Label fx:id="services" alignment="TOP_LEFT" layoutX="58.0" layoutY="112.0" prefHeight="55.0" prefWidth="266.0" text="- Acne &amp; Melasma Clinic - Acne Scar Removal       - Anti Aging" textFill="#979797" wrapText="true" />
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
+>>>>>>> 793ace9e080ac4587ee59821c188e1ae201aceec
                         <Label layoutX="48.0" layoutY="173.0" text="Working Hours" textFill="#979797">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
+<<<<<<< HEAD
+                        <Label alignment="TOP_LEFT" layoutX="65.0" layoutY="190.0" prefHeight="31.0" prefWidth="175.0" text="Mon-Fri 09:00 am - 08:00 pm" textFill="#979797" wrapText="true" />
+                        <Button fx:id="button_big" layoutX="48.0" layoutY="220.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="41.0" styleClass="button_big" stylesheets="@doctor_details.css" textFill="#2854c3">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2025.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="button_big1" layoutX="125.0" layoutY="220.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@doctor_details.css" text="Book Appointment" textFill="WHITE">
+=======
                         <Label fx:id="timing" alignment="TOP_LEFT" layoutX="65.0" layoutY="190.0" prefHeight="31.0" prefWidth="175.0" text="Mon-Fri 09:00 am - 08:00 pm" textFill="#979797" wrapText="true" />
                         <Button fx:id="bookButton" layoutX="48.0" layoutY="221.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@doctor_details.css" text="Book Appointment" textFill="WHITE">
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -290,20 +367,37 @@
                                  </font>
                               </Label>
                               <Label layoutX="78.0" layoutY="24.0" styleClass="texty" stylesheets="@doctor_details.css" text="Starting from" />
+<<<<<<< HEAD
+                              <Label layoutX="155.0" layoutY="24.0" text="Rs. 2,000" />
+=======
                               <Label fx:id="fee" layoutX="170.0" layoutY="24.0" text="2,000" />
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
                               <Label layoutX="12.0" layoutY="70.0" text="Address:" textFill="#979797">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
+<<<<<<< HEAD
+                              <Label layoutX="86.0" layoutY="70.0" text="Iqra Medical Complex" />
+                              <Circle fill="#26b937" layoutX="25.0" layoutY="119.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                              <Label layoutX="40.0" layoutY="110.0" text="Available now" textFill="#26b937">
+=======
                               <Label fx:id="location" layoutX="86.0" layoutY="70.0" text="Iqra Medical Complex" />
                               <Circle fill="#26b937" layoutX="25.0" layoutY="119.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+<<<<<<< HEAD
                               <Label fx:id="availability" layoutX="40.0" layoutY="110.0" text="Available" textFill="#26b937">
+=======
+                              <Label layoutX="40.0" layoutY="110.0" text="Available" textFill="#26b937">
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
+>>>>>>> 793ace9e080ac4587ee59821c188e1ae201aceec
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
+<<<<<<< HEAD
+=======
                               <Label fx:id="fee1" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="155.0" layoutY="24.0" text="Rs." />
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
                            </children>
                         </Pane>
                      </children>

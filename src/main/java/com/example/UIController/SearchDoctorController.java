@@ -225,6 +225,9 @@ public class SearchDoctorController implements Initializable {
                     ratingFilter, specialty));
         filter_Pane.setVisible(false);
         filter_img.setVisible(false);
+        // results_scrollpane.setContent(results_grid);
+        // doc_count.setText(results_grid.getChildren().size() + " Results");
+
     }
 
     @FXML
@@ -266,6 +269,9 @@ public class SearchDoctorController implements Initializable {
             // sortByAlphabetical();
             createDoctorCards(
                     patientController.sortDoctors(searhcedName, "A-Z", !ascen_sort_toggle.isSelected(), -1, "All"));
+            // results_scrollpane.setContent(results_grid);
+            // doc_count.setText(results_grid.getChildren().size() + " Results");
+
         }
     }
 
@@ -321,6 +327,8 @@ public class SearchDoctorController implements Initializable {
 
         createDoctorCards(patientController.sortDoctors(searhcedName, selectedToggle.getText(),
                 !ascen_sort_toggle.isSelected(), -1, "All"));
+        // results_scrollpane.setContent(results_grid);
+        // doc_count.setText(results_grid.getChildren().size() + " Results");
 
     }
 
@@ -332,6 +340,8 @@ public class SearchDoctorController implements Initializable {
             selectedToggle = price_sort_btn;
             createDoctorCards(
                     patientController.sortDoctors(searhcedName, "Price", !ascen_sort_toggle.isSelected(), -1, "All"));
+            // results_scrollpane.setContent(results_grid);
+            // doc_count.setText(results_grid.getChildren().size() + " Results");
 
         }
 
@@ -345,6 +355,9 @@ public class SearchDoctorController implements Initializable {
             createDoctorCards(
                     patientController.sortDoctors(searhcedName, "Rating", !ascen_sort_toggle.isSelected(), -1, "All"));
             selectedToggle = review_sort_btn;
+            // results_scrollpane.setContent(results_grid);
+            // doc_count.setText(results_grid.getChildren().size() + " Results");
+
         }
 
     }
@@ -393,6 +406,8 @@ public class SearchDoctorController implements Initializable {
 
     public void refresh() {
 
+        patientController = new PatientController();
+        
         results_grid.setHgap(10);
         results_grid.setVgap(10);
         results_grid.getChildren().clear();
@@ -403,6 +418,7 @@ public class SearchDoctorController implements Initializable {
         results_grid.setStyle("-fx-background-color: transparent;");
 
         createDoctorCards(patientController.getTopDoctors());
+        results_scrollpane.setContent(results_grid);
         doc_count.setText("Top Doctors");
 
     }
@@ -410,6 +426,7 @@ public class SearchDoctorController implements Initializable {
     public void searchDoctor(String value) {
         String result = patientController.searchDoctor(value);
         createDoctorCards(result);
+
         // read json and create doctorCard for each doctor
 
     }
@@ -419,7 +436,6 @@ public class SearchDoctorController implements Initializable {
 
             results_grid.getChildren().clear();
             JSONArray doctors = new JSONArray(result);
-            doc_count.setText(doctors.length() + " Results");
 
             int rowindex = 0;
             int columnindex = 0;
@@ -447,25 +463,18 @@ public class SearchDoctorController implements Initializable {
                 }
             }
             // results_scrollpane.setContent(results_grid);
+            results_scrollpane.setContent(results_grid);
+            doc_count.setText(results_grid.getChildren().size() + " Results");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    // public void searchTextKeyPressed(ActionEvent event) {
-    // System.out.println("searched");
-    // searhcedName = searchBar.getText();
-
-    // searchDoctor(searhcedName);
-    // resetSortColors();
-
-    // }
     public void searchTextKeyPressed(ActionEvent event) {
         System.out.println("searched");
         searhcedName = searchBar.getText();
 
-        // Load the MP4 video
         Media media = null;
         try {
             File file = new File("src/Rectangle.mp4");
@@ -478,62 +487,115 @@ public class SearchDoctorController implements Initializable {
         mediaPlayer.setAutoPlay(true);
         MediaView mediaView = new MediaView(mediaPlayer);
         mediaView.setFitWidth(200);
-mediaView.setFitHeight(200);
+        mediaView.setFitHeight(200);
 
-// Create a StackPane to center the MediaView in the ScrollPane
-StackPane stackPane = new StackPane();
-stackPane.getChildren().add(mediaView);
-stackPane.setPrefWidth(results_scrollpane.getViewportBounds().getWidth());
-stackPane.setPrefHeight(results_scrollpane.getViewportBounds().getHeight());
+        // Create a StackPane to center the MediaView in the ScrollPane
+        StackPane stackPane = new StackPane();
+        stackPane.getChildren().add(mediaView);
+        stackPane.setPrefWidth(results_scrollpane.getViewportBounds().getWidth());
+        stackPane.setPrefHeight(results_scrollpane.getViewportBounds().getHeight());
 
-// Calculate the size of the MediaView
-double mediaWidth = stackPane.getPrefWidth() * 0.7;
-double mediaHeight = stackPane.getPrefHeight() * 0.7;
+        // Calculate the size of the MediaView
+        double mediaWidth = stackPane.getPrefWidth() * 0.7;
+        double mediaHeight = stackPane.getPrefHeight() * 0.7;
 
-// Set the size of the MediaView
-mediaView.setFitWidth(mediaWidth);
-mediaView.setFitHeight(mediaHeight);
+        // Set the size of the MediaView
+        mediaView.setFitWidth(mediaWidth);
+        mediaView.setFitHeight(mediaHeight);
 
-// Center the MediaView in the StackPane
-StackPane.setAlignment(mediaView, Pos.CENTER);
+        // Center the MediaView in the StackPane
+        StackPane.setAlignment(mediaView, Pos.CENTER);
 
-results_scrollpane.setContent(stackPane);
+        results_scrollpane.setContent(stackPane);
 
-        // Run the searchDoctor method in a background task
-        Task<Void> task = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
+        mediaPlayer.setOnEndOfMedia(() -> {
+            // // Call the searchDoctor method after the animation ends
+            // Platform.runLater(() -> {
+
                 searchDoctor(searhcedName);
-                return null;
-            }
+        });
 
-            @Override
-            protected void succeeded() {
-                // Set the content of the scroll pane to the results grid
-              mediaPlayer.setOnEndOfMedia(() -> {
-    // Call the searchDoctor method after the animation ends
-    Platform.runLater(() -> {
 
-        results_scrollpane.setContent(results_grid);
-    });
-});
-                resetSortColors();
-            }
+        resetSortColors();
 
-            @Override
-            protected void failed() {
-                // Remove the media view when the search fails
-                mediaPlayer.setOnEndOfMedia(() -> {
-    // Call the searchDoctor method after the animation ends
-    Platform.runLater(() -> {
-
-        results_scrollpane.setContent(results_grid);
-    });
-});
-                resetSortColors();
-                // e.printStackTrace();
-            }
-        };
-        new Thread(task).start();
     }
+    // public void searchTextKeyPressed(ActionEvent event) {
+    // System.out.println("searched");
+    // searhcedName = searchBar.getText();
+
+    // // Load the MP4 video
+    // Media media = null;
+    // try {
+    // File file = new File("src/Rectangle.mp4");
+    // String path = file.getAbsolutePath();
+    // media = new Media(new File(path).toURI().toString());
+    // } catch (Exception e) {
+    // e.printStackTrace();
+    // }
+    // MediaPlayer mediaPlayer = new MediaPlayer(media);
+    // mediaPlayer.setAutoPlay(true);
+    // MediaView mediaView = new MediaView(mediaPlayer);
+    // mediaView.setFitWidth(200);
+    // mediaView.setFitHeight(200);
+
+    // // Create a StackPane to center the MediaView in the ScrollPane
+    // StackPane stackPane = new StackPane();
+    // stackPane.getChildren().add(mediaView);
+    // stackPane.setPrefWidth(results_scrollpane.getViewportBounds().getWidth());
+    // stackPane.setPrefHeight(results_scrollpane.getViewportBounds().getHeight());
+
+    // // Calculate the size of the MediaView
+    // double mediaWidth = stackPane.getPrefWidth() * 0.7;
+    // double mediaHeight = stackPane.getPrefHeight() * 0.7;
+
+    // // Set the size of the MediaView
+    // mediaView.setFitWidth(mediaWidth);
+    // mediaView.setFitHeight(mediaHeight);
+
+    // // Center the MediaView in the StackPane
+    // StackPane.setAlignment(mediaView, Pos.CENTER);
+
+    // results_scrollpane.setContent(stackPane);
+
+    // // Run the searchDoctor method in a background task
+    // Task<Void> task = new Task<Void>() {
+    // @Override
+    // protected Void call() throws Exception {
+    // searchDoctor(searhcedName);
+    // return null;
+    // }
+
+    // @Override
+    // protected void succeeded() {
+    // // Set the content of the scroll pane to the results grid
+    // mediaPlayer.setOnEndOfMedia(() -> {
+    // // Call the searchDoctor method after the animation ends
+    // Platform.runLater(() -> {
+
+    // results_scrollpane.setContent(results_grid);
+    // doc_count.setText(results_grid.getChildren().size() + " Results");
+
+    // });
+    // });
+    // resetSortColors();
+    // }
+
+    // @Override
+    // protected void failed() {
+    // // Remove the media view when the search fails
+    // mediaPlayer.setOnEndOfMedia(() -> {
+    // // Call the searchDoctor method after the animation ends
+    // Platform.runLater(() -> {
+
+    // results_scrollpane.setContent(results_grid);
+    // doc_count.setText(results_grid.getChildren().size() + " Results");
+
+    // });
+    // });
+    // resetSortColors();
+    // // e.printStackTrace();
+    // }
+    // };
+    // new Thread(task).start();
+    // }
 }
