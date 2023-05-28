@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,6 +16,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.SearchDoctorController">
@@ -134,21 +139,20 @@
                   </Pane>
                   <Pane layoutX="508.0" layoutY="34.0">
                      <children>
-                        <Button fx:id="filter_btn" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #2854c3; -fx-text-fill: #ffffff;" />
-                        <Label layoutX="30.0" layoutY="4.0" style="-fx-text-fill: #ffffff;" text="Filters" />
-                        <ImageView fx:id="filter_img" fitHeight="17.0" fitWidth="31.0" layoutX="3.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+                        <Button fx:id="filter_btn" contentDisplay="CENTER" mnemonicParsing="false" onAction="#filter_toggle" onMouseClicked="#filter_toggle" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #2854c3; -fx-text-fill: #ffffff;" />
+                        <Label layoutX="30.0" layoutY="4.0" onMouseClicked="#filter_toggle" style="-fx-text-fill: #ffffff;" text="Filters" />
+                        <ImageView fitHeight="17.0" fitWidth="31.0" layoutX="3.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../images/image%2028.png" />
                            </image>
                         </ImageView>
                      </children>
                   </Pane>
-                  <Button fx:id="review_sort_btn" layoutX="103.0" layoutY="70.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="Reviews" />
-                  <Button fx:id="location_sort_btn" layoutX="169.0" layoutY="70.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="Location" />
-                  <Button fx:id="price_sort_btn" layoutX="235.0" layoutY="70.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="Price" />
-                  <Label layoutX="32.0" layoutY="107.0" style="-fx-font-size: 12px; -fx-font-weight: bold;" text="Top Doctors" />
+                  <Button fx:id="review_sort_btn" layoutX="103.0" layoutY="70.0" mnemonicParsing="false" onAction="#reviewSortPressed" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="Rating" />
+                  <Button fx:id="price_sort_btn" layoutX="169.0" layoutY="70.0" mnemonicParsing="false" onAction="#priceSelected" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="Price" />
+                  <Label fx:id="doc_count" layoutX="32.0" layoutY="107.0" style="-fx-font-size: 12px; -fx-font-weight: bold;" text="Top Doctors" />
                   <ScrollPane fx:id="results_scrollpane" fitToWidth="true" layoutX="13.0" layoutY="122.0" prefHeight="411.0" prefWidth="637.0" styleClass="scroll_pane" stylesheets="@search_doctors.css" />
-                  <ToggleButton fx:id="ascen_sort_toggle" layoutX="300.0" layoutY="70.0" mnemonicParsing="false" styleClass="sort_btn" stylesheets="@search_doctors.css">
+                  <ToggleButton fx:id="ascen_sort_toggle" layoutX="235.0" layoutY="70.0" mnemonicParsing="false" onAction="#ascendingPressed" styleClass="sort_btn" stylesheets="@search_doctors.css">
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -156,10 +160,96 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="sortingButtons" />
+                     </toggleGroup>
                   </ToggleButton>
-                  <Button fx:id="alphabetical_sort_btn" layoutX="37.0" layoutY="70.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="Reviews" />
+                  <Button fx:id="alphabetical_sort_btn" layoutX="37.0" layoutY="70.0" mnemonicParsing="false" onAction="#alphabeticalSortPressed" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="A-Z" />
                </children>
             </Pane>
+            <Pane fx:id="filter_Pane" layoutX="544.0" layoutY="169.0" prefHeight="202.0" prefWidth="200.0" styleClass="filter_pane" stylesheets="@search_doctors_Searched.css">
+               <children>
+                  <Label layoutX="81.0" layoutY="11.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Filters" />
+                  <Label layoutX="8.0" layoutY="52.0" style="-fx-font-weight: bold;" text="Specialty" />
+                  <Label layoutX="8.0" layoutY="114.0" style="-fx-font-weight: bold;" text="Rating" />
+                  <ComboBox fx:id="specialtiesList" layoutX="11.0" layoutY="72.0" prefWidth="150.0" promptText="Specialty" styleClass="filter_dropdown" stylesheets="@search_doctors_Searched.css">
+                     <items>
+                        <FXCollections fx:factory="observableArrayList">
+                           <String fx:id="specialty_0" fx:value="All" />
+                           <String fx:id="specialty_1" fx:value="Dentist" />
+                           <String fx:id="specialty_2" fx:value="Cardiologist" />
+                           <String fx:id="specialty_3" fx:value="Psychiatrist" />
+                           <String fx:id="specialty_4" fx:value="Dermatologist" />
+                        </FXCollections>
+                     </items>
+                  </ComboBox>
+                  <HBox layoutX="-1.0" layoutY="135.0" prefHeight="26.0" prefWidth="200.0" spacing="1.0">
+                     <children>
+                        <Button fx:id="filterRatingAll" alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="37.0" style="-fx-font-size: 10;" styleClass="filter_rating" text="All">
+                           <graphic>
+                              <ImageView fx:id="filterRatingAllIcon" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/Vector.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="filterRating1" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="32.0" styleClass="filter_rating" text="1">
+                           <graphic>
+                              <ImageView fx:id="filterRating1Icon" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2033.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="filterRating2" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="32.0" styleClass="filter_rating" text="2">
+                           <graphic>
+                              <ImageView fx:id="filterRating2Icon" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2033.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="filterRating3" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="32.0" styleClass="filter_rating" text="3">
+                           <graphic>
+                              <ImageView fx:id="filterRating3Icon" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2033.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="filterRating4" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="32.0" styleClass="filter_rating" text="4">
+                           <graphic>
+                              <ImageView fx:id="filterRating4Icon" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2033.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                        <Button fx:id="filterRating5" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="32.0" styleClass="filter_rating" text="5">
+                           <graphic>
+                              <ImageView fx:id="filterRating5Icon" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2033.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </HBox>
+                  <Line endX="80.0" layoutX="100.0" layoutY="37.0" startX="-80.0" style="-fx-stroke: #979797;" />
+                  <Button fx:id="filterApply" contentDisplay="CENTER" layoutX="56.0" layoutY="168.0" mnemonicParsing="false" onAction="#filterApplyPressed" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #2854c3; -fx-text-fill: #ffffff;" text="Apply" />
+               </children>
+            </Pane>
+            <ImageView fx:id="filter_img" fitHeight="24.0" fitWidth="28.0" layoutX="676.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../images/Polygon%201.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </children>

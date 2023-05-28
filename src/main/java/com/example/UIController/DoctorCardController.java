@@ -23,7 +23,7 @@ public class DoctorCardController {
     private Button card1_book_apt_btn;
 
     @FXML
-    private Label card1_doc_label;
+    private Label docName;
 
     @FXML
     private Label card1_exp_label;
@@ -54,14 +54,15 @@ public class DoctorCardController {
     }
 
     public void setDoctor(DoctorTemp doctor) {
-        card1_doc_label.setText(doctor.name);
+        docName.setText(doctor.name);
       //  card1_speciality_label.setText(doctor.speciality);
     }
-    public void setDoctor(String name, String specialization, double price, String rating) {
-        card1_doc_label.setText(name);
+    public void setDoctor(String name, String specialization, String price, String rating) {
+        docName.setText(name);
         this.specialization.setText(specialization);
         fee_amount.setText(String.valueOf(price));
-        card1_satisfied_label.setText(rating);
+            String formattedRating = String.format("%.2f", Double.parseDouble(rating) );
+        card1_satisfied_label.setText(formattedRating);
 
     }
 
@@ -75,7 +76,7 @@ public class DoctorCardController {
           Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Book Appointment");
             alert.setHeaderText("Appointment Booked");
-            alert.setContentText("Appointment booked with Dr. " + card1_doc_label.getText());
+            alert.setContentText("Appointment booked with Dr. " + docName.getText());
             alert.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();

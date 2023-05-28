@@ -144,7 +144,7 @@
                            <graphic>
                               <Label onMouseClicked="#filter_toggle" prefHeight="17.0" prefWidth="71.0" style="-fx-text-fill: #ffffff;" text="Filters">
                                  <graphic>
-                                    <ImageView fx:id="filter_img" fitHeight="17.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                                    <ImageView fitHeight="17.0" fitWidth="31.0" onMouseClicked="#filter_toggle" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../images/image%2028.png" />
                                        </image>
@@ -351,12 +351,12 @@
                         </Pane>
                      </children>
                   </GridPane>
-                   <Pane fx:id="filter_Pane" layoutX="423.0" layoutY="75.0" prefHeight="182.0" prefWidth="200.0" styleClass="filter_pane" stylesheets="@search_doctors_Searched.css" visible="false">
+                   <Pane fx:id="filter_Pane" layoutX="423.0" layoutY="75.0" prefHeight="202.0" prefWidth="200.0" styleClass="filter_pane" stylesheets="@search_doctors_Searched.css">
                      <children>
                         <Label layoutX="81.0" layoutY="11.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Filters" />
                         <Label layoutX="8.0" layoutY="52.0" style="-fx-font-weight: bold;" text="Specialty" />
                         <Label layoutX="8.0" layoutY="114.0" style="-fx-font-weight: bold;" text="Rating" />
-                        <ComboBox fx:id="specialties_list" layoutX="11.0" layoutY="72.0" prefWidth="150.0" promptText="Specialty" styleClass="filter_dropdown" stylesheets="@search_doctors_Searched.css">
+                        <ComboBox fx:id="specialtiesList" layoutX="11.0" layoutY="72.0" prefWidth="150.0" promptText="Specialty" styleClass="filter_dropdown" stylesheets="@search_doctors_Searched.css">
                           <items>
                            <FXCollections fx:factory="observableArrayList">
                             <String fx:id="specialty_1" fx:value="Dermatologist" />
@@ -369,75 +369,88 @@
                         </ComboBox>
                         <HBox layoutX="7.0" layoutY="135.0" prefHeight="26.0" prefWidth="190.0" spacing="1.0">
                            <children>
-                              <Pane prefHeight="26.0" prefWidth="36.0" styleClass="filter_rating_selected">
-                                 <children>
-                                    <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="6.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                              <Button fx:id="filterRatingAll" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="47.0" style="-fx-font-size: 9;" styleClass="filter_rating_selected" text="All">
+                                 <graphic>
+                                    <ImageView fx:id="filterRatingAllIcon" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../../images/Vector.png" />
                                        </image>
                                     </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="filterRating2" alignment="BASELINE_LEFT" cacheShape="false" graphicTextGap="0.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="32.0" style="-fx-font-size: 10;" styleClass="filter_rating" text="2">
+                                 <graphic>
+                                    <ImageView fx:id="filterRating2Icon" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/image%2033.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Button>
+                              <Pane prefHeight="26.0" prefWidth="36.0" styleClass="filter_rating_selected">
+                                 <children>
                                     <Label layoutX="21.0" layoutY="7.0" style="-fx-text-fill: ffffff; -fx-font-size: 9;" text="All" />
-                                    <Button fx:id="filter_rating_all_btn" layoutX="3.0" layoutY="1.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="32.0" style="-fx-background-color: transparent;" />
                                  </children>
                               </Pane>
                               <Pane prefHeight="26.0" prefWidth="29.0" styleClass="filter_rating">
                                  <children>
-                                    <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="4.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../images/image%2033.png" />
-                                       </image>
-                                    </ImageView>
                                     <Label layoutX="18.0" layoutY="7.0" style="-fx-text-fill: #2854c3; -fx-font-size: 9;" text="1" />
-                                    <Button fx:id="filter_rating_btn1" layoutX="-2.0" layoutY="1.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="32.0" style="-fx-background-color: transparent;" />
+                                    <Button fx:id="filterRating1" alignment="BASELINE_LEFT" layoutX="-2.0" layoutY="1.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="32.0" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <ImageView fx:id="filterRating1Icon" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../images/image%2033.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></Button>
                                  </children>
                               </Pane>
                               <Pane prefHeight="26.0" prefWidth="29.0" styleClass="filter_rating">
                                  <children>
-                                    <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="4.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../images/image%2033.png" />
-                                       </image>
-                                    </ImageView>
-                                    <Label layoutX="18.0" layoutY="7.0" style="-fx-text-fill: #2854c3; -fx-font-size: 9;" text="2" />
-                                    <Button fx:id="filter_rating_btn2" layoutX="-2.0" layoutY="1.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="32.0" style="-fx-background-color: transparent;" />
-                                 </children>
-                              </Pane>
-                              <Pane prefHeight="26.0" prefWidth="29.0" styleClass="filter_rating">
-                                 <children>
-                                    <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="4.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../images/image%2033.png" />
-                                       </image>
-                                    </ImageView>
                                     <Label layoutX="18.0" layoutY="7.0" style="-fx-text-fill: #2854c3; -fx-font-size: 9;" text="3" />
-                                    <Button fx:id="filter_rating_btn3" layoutX="-2.0" layoutY="1.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="32.0" style="-fx-background-color: transparent;" />
+                                    <Button fx:id="filterRating3" alignment="BASELINE_LEFT" layoutX="-2.0" layoutY="1.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="32.0" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <ImageView fx:id="filterRating3Icon" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../images/image%2033.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></Button>
                                  </children>
                               </Pane>
                               <Pane prefHeight="26.0" prefWidth="29.0" styleClass="filter_rating">
                                  <children>
-                                    <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="4.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../images/image%2033.png" />
-                                       </image>
-                                    </ImageView>
                                     <Label layoutX="18.0" layoutY="7.0" style="-fx-text-fill: #2854c3; -fx-font-size: 9;" text="4" />
-                                    <Button fx:id="filter_rating_btn4" layoutX="-2.0" layoutY="1.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="32.0" style="-fx-background-color: transparent;" />
+                                    <Button fx:id="filterRating4" alignment="BASELINE_LEFT" contentDisplay="GRAPHIC_ONLY" layoutX="-2.0" layoutY="1.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="32.0" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <ImageView fx:id="filterRating4Icon" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../images/image%2033.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></Button>
                                  </children>
                               </Pane>
                               <Pane prefHeight="26.0" prefWidth="29.0" styleClass="filter_rating">
                                  <children>
-                                    <ImageView fitHeight="13.0" fitWidth="13.0" layoutX="4.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../images/image%2033.png" />
-                                       </image>
-                                    </ImageView>
                                     <Label layoutX="18.0" layoutY="7.0" style="-fx-text-fill: #2854c3; -fx-font-size: 9;" text="5" />
-                                    <Button fx:id="filter_rating_btn5" layoutX="-2.0" layoutY="1.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="32.0" style="-fx-background-color: transparent;" />
+                                    <Button fx:id="filterRating5" alignment="BASELINE_LEFT" layoutX="-2.0" layoutY="1.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="32.0" style="-fx-background-color: transparent;">
+                                       <graphic>
+                                          <ImageView fx:id="filterRating5Icon" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../images/image%2033.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></Button>
                                  </children>
                               </Pane>
                            </children>
                         </HBox>
                         <Line endX="80.0" layoutX="100.0" layoutY="37.0" startX="-80.0" style="-fx-stroke: #979797;" />
+                        <Button fx:id="filterApply" contentDisplay="CENTER" layoutX="56.0" layoutY="168.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #2854c3; -fx-text-fill: #ffffff;" text="Apply" />
                      </children>
                   </Pane>
                   <ImageView fx:id="filter_img" fitHeight="24.0" fitWidth="28.0" layoutX="555.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true" visible="false">
