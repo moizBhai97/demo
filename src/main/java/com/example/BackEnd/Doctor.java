@@ -15,8 +15,6 @@ public class Doctor {
     private double price;
     private double rating;
 
-    //private String image;
-
     private DoctorDetails doctorDetails;
     
     public DoctorDetails getDoctorDetails()
@@ -38,6 +36,7 @@ public class Doctor {
         this.rating = ratingDouble;
 
     }
+
     public Doctor(String data){
         System.out.println("Constructing JSON doctor");
 
@@ -50,7 +49,8 @@ public class Doctor {
         this.price = jsonObject.getDouble("price");
         this.rating = jsonObject.getDouble("rating");
     }
-    public Doctor(){
+    public Doctor()
+    {
 
     }
 
@@ -59,7 +59,8 @@ public class Doctor {
     }
 
     public void setId(int id) {
-        doctorDetails = new DoctorDetails(id);
+        doctorDetails = new DoctorDetails();
+        doctorDetails.getReviewLedger().populateReviews(id);
         this.id = id;
     }
 
@@ -110,14 +111,6 @@ public class Doctor {
     public void setRating(double rating) {
         this.rating = rating;
     }
-
-    // public String getImage() {
-    // return image;
-    // }
-
-    // public void setImage(String image) {
-    // this.image = image;
-    // }
 
     private String get(String key) {
         if (key.equals("id")) {

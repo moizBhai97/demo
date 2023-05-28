@@ -259,7 +259,15 @@
                            </font>
                         </Label>
                         <Label fx:id="description" alignment="TOP_LEFT" layoutX="58.0" layoutY="49.0" prefHeight="55.0" prefWidth="548.0" text="      Dr. Amna Irum is the top most dermatologist specialist in NUCES hospital at FAST. She achived several award for her wonderful contribution in her own field. She is available for private consultation." textFill="#979797" wrapText="true" />
+<<<<<<< HEAD
+                        <Label fx:id="services" alignment="TOP_LEFT" layoutX="58.0" layoutY="112.0" prefHeight="55.0" prefWidth="309.0" text="- Acne &amp; Melasma Clinic - Acne Scar Removal               - Anti Aging" textFill="#979797" wrapText="true" />
+=======
                         <Label fx:id="services" alignment="TOP_LEFT" layoutX="58.0" layoutY="112.0" prefHeight="55.0" prefWidth="266.0" text="- Acne &amp; Melasma Clinic - Acne Scar Removal       - Anti Aging" textFill="#979797" wrapText="true" />
+<<<<<<< HEAD
+=======
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
+>>>>>>> 793ace9e080ac4587ee59821c188e1ae201aceec
+>>>>>>> 0e56d7edfe116cd67ae16dc6c2cf4b3a06d7645c
                         <Label layoutX="48.0" layoutY="173.0" text="Working Hours" textFill="#979797">
                            <font>
                               <Font name="System Bold" size="12.0" />
@@ -298,7 +306,15 @@
                               </Label>
                               <Label fx:id="location" layoutX="86.0" layoutY="70.0" text="Iqra Medical Complex" />
                               <Circle fill="#26b937" layoutX="25.0" layoutY="119.0" radius="5.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+<<<<<<< HEAD
+                              <Label fx:id="availability" layoutX="40.0" layoutY="110.0" text="Available" textFill="#26b937">
+=======
                               <Label layoutX="40.0" layoutY="110.0" text="Available" textFill="#26b937">
+<<<<<<< HEAD
+=======
+>>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
+>>>>>>> 793ace9e080ac4587ee59821c188e1ae201aceec
+>>>>>>> 0e56d7edfe116cd67ae16dc6c2cf4b3a06d7645c
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>

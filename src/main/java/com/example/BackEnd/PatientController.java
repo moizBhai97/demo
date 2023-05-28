@@ -40,8 +40,8 @@ public class PatientController {
         }
     }
 
-    public String getAppointList(int patId) {
-        return patientLedger.getPatient(patId).getAppointList();
+    public String getAppointList(int patId, int value) {
+        return patientLedger.getPatient(patId).getAppointList(value);
     }
 
     public void cancelAppointment(String Reason, int patId, int appId) {

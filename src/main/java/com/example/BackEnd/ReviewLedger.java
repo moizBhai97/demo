@@ -11,6 +11,12 @@ public class ReviewLedger {
     private List<Review> reviews;
     private DBFactory dbFactory;
 
+    public ReviewLedger()
+    {
+        dbFactory = DBFactory.getInstance();
+        reviews = new ArrayList<>();
+    }
+
     public ReviewLedger(int docId)
     {
         dbFactory = DBFactory.getInstance();
@@ -77,12 +83,14 @@ public class ReviewLedger {
 
         float stats = (float)((checkupRating + environmentRating + staffRating) / 3.0);
 
-        obj.put("checkupRating", checkupRating);
-        obj.put("environmentRating", environmentRating);
-        obj.put("staffRating", staffRating);
+        obj.put("checkupRating", checkupRating*(100/5));
+        obj.put("environmentRating", environmentRating*(100/5));
+        obj.put("staffRating", staffRating*(100/5));
         obj.put("rating", experience);
-        obj.put("stats", stats);
+        obj.put("stats", stats*(100/5));
         obj.put("reviews", reviews.size());
+
+        System.out.println(obj.toString());
 
         return obj.toString();
     }

@@ -22,11 +22,11 @@ public class AppointmentLedger {
     {
         try
         {
-            Appointment appointment = new Appointment(info);
+            int appId = dbFactory.createHandler("SQL").saveAppointment(info, patId);
+
+            Appointment appointment = new Appointment(info, appId);
 
             appointments.add(appointment);
-
-            dbFactory.createHandler("SQL").saveAppointment(info, patId);
         }
         catch(Exception e)
         {
@@ -61,18 +61,35 @@ public class AppointmentLedger {
 
     public Appointment getAppointment(int appId)
     {
-        return appointments.get(appId);
+        for(int i = 0; i < appointments.size(); i++)
+        {
+            if(appointments.get(i).getAppId() == appId)
+            {
+                return appointments.get(i);
+            }
+        }
+
+        return null;
     }
 
-    public String getAppointList(int patId)
+    public String getAppointList(int patId, int value)
     {
         JSONArray objs = new JSONArray();
             
         for(int i = 0; i < appointments.size(); i++ )
         {
-            JSONObject obj = new JSONObject(getAppointment(i).toString());
-            
-            objs.put(obj);
+            if(appointments.get(i).getStatus().equals("Booked") && value == 1)
+            {
+                JSONObject obj = new JSONObject(appointments.get(i).toString());
+                
+                objs.put(obj);
+            }
+            else if(value == 2)
+            {
+                JSONObject obj = new JSONObject(appointments.get(i).toString());
+                
+                objs.put(obj);
+            }
             
         }
 
