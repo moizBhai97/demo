@@ -93,7 +93,6 @@
                         <Font size="16.0" />
                      </font>
                   </Button>
-<<<<<<< HEAD
                   <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="528.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/cross.png" />
@@ -102,16 +101,6 @@
                   <ImageView fitHeight="30.0" fitWidth="28.0" layoutX="50.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../images/gallery.png" />
-=======
-                  <ImageView fitHeight="30.0" fitWidth="28.0" layoutX="50.0" layoutY="318.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/gallery.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="528.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/cross.png" />
->>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
                      </image>
                   </ImageView>
                </children>

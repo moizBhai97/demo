@@ -366,6 +366,7 @@ public class SearchDoctorController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         results_grid = new GridPane();
 
+
         //patientController = new PatientController();
         results_grid.setHgap(10);
         results_grid.setVgap(10);
@@ -441,19 +442,19 @@ public class SearchDoctorController implements Initializable {
             int columnindex = 0;
             for (Object obj : doctors) {
                 JSONObject doctor = (JSONObject) obj;
-                String name = (String) doctor.get("name");
-                String specialization = (String) doctor.get("specialization");
-                String price = (String) doctor.get("price");
-                String rating = (String) doctor.get("rating");
+            
                 // create doctorCard with these values
-
+            
+                
                 FXMLLoader loader = new FXMLLoader();
 
                 loader.setLocation((new URL("file:src/main/resources/com/example/DoctorCard.fxml")));
                 Pane doctorCard = loader.load();
 
                 DoctorCardController controller = loader.getController();
-                controller.setDoctor(name, specialization, price, rating);
+                controller.setDoctor(doctor.toString()  );
+                controller.setPatientController(patientController);
+                controller.setPatientId(1);
                 // controller.setParentController(this);
                 results_grid.add(doctorCard, columnindex, rowindex);
                 columnindex++;
@@ -514,7 +515,7 @@ public class SearchDoctorController implements Initializable {
 
                 searchDoctor(searhcedName);
         });
-
+        selectedToggle = null;
 
         resetSortColors();
 

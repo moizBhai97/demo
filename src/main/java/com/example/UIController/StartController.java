@@ -51,4 +51,22 @@ public class StartController implements Initializable{
         }
     }
 
+    public void doctorButton(ActionEvent event){
+        System.out.println("Doctor Button pressed");
+
+        try {
+            this.patientButton.getScene().getWindow().hide();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/login.fxml")));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
