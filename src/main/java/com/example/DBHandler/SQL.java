@@ -225,6 +225,54 @@ public String getDummyDoctor(String name){
 
     }
 
+    public String getDoctor(String info){
+
+        try
+        {
+            System.out.println("SQL getDoctor");
+            // query the database and return the Doctot info if username and password matches
+
+            
+            JSONParser parser = new JSONParser(); 
+            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString());
+            Set<String> keyset = obj.keySet();      //gets all keys from .json
+            
+
+            // for(String key : keyset)
+            // {
+            //     if(!get(key).equals("NULL"))
+            //         obj.put(key, get(key));            //put values in json object
+            // }
+
+            // "id": "{{id}}",
+            // "name": "{{name}}",
+            // "location": "{{location}}",
+            // "specialization": "{{specialization}}",
+            // "experience": "{{experience}}",
+            // "price": "{{price}}",
+            // "rating": "{{rating}}"
+
+            // dummy data
+            obj.put("id", "1");
+            obj.put("name", "Musa");
+            obj.put("location", "Lahore");
+            obj.put("specialization", "Heart");
+            obj.put("experience", "5 years");
+            obj.put("price", "500");
+            obj.put("rating", "5");
+            
+
+            System.out.println(obj.toString());
+            return obj.toString();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
+        }
+
+    }
+
     public String getAppointments(int patId)
     {
         try{
@@ -257,20 +305,20 @@ public String getDummyDoctor(String name){
         }
     }
 
-    public static void main(String[] args) throws Exception {
-        String connectionUrl = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;" +
-                    "databaseName=SDA;" +
-                    "IntegratedSecurity=true" + ";encrypt=true;trustServerCertificate=true";
-            try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
-                String SQL = "SELECT * FROM Patients";
-                ResultSet rs = stmt.executeQuery(SQL);
-                //print all columns and rows in resultset
+    // public static void main(String[] args) throws Exception {
+    //     String connectionUrl = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;" +
+    //                 "databaseName=SDA;" +
+    //                 "IntegratedSecurity=true" + ";encrypt=true;trustServerCertificate=true";
+    //         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
+    //             String SQL = "SELECT * FROM Patients";
+    //             ResultSet rs = stmt.executeQuery(SQL);
+    //             //print all columns and rows in resultset
 
 
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-      }
+    //         } catch (SQLException e) {
+    //             e.printStackTrace();
+    //         }
+    //   }
 
     public void addComplaint(int patID, String details) {
         try

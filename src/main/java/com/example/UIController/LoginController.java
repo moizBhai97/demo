@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import org.json.JSONObject;
 
+import com.example.BackEnd.DoctorController;
 import com.example.BackEnd.PatientController;
 
 import javafx.event.ActionEvent;
@@ -33,8 +34,12 @@ public class LoginController implements Initializable{
 
     //DummyController dummyController;
 
-    SearchDoctorController searchDoctorController;
+    boolean isPatient = true;
     PatientController patientController = new PatientController();
+    SearchDoctorController searchDoctorController;
+
+    DoctorController doctorController = new DoctorController();
+    DoctorDetailsController doctorDetailsController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,10 +54,12 @@ public class LoginController implements Initializable{
         loginInfo.put("username", this.usernameTextField.getText());
         loginInfo.put("password", this.passwordTextField.getText());
 
-        int patId = Integer.parseInt(patientController.login(loginInfo.toString()));
-        System.out.println(patId);
+        if(isPatient){
 
-        try {
+            int patId = Integer.parseInt(patientController.login(loginInfo.toString()));
+            System.out.println(patId);
+
+            try {
             this.loginButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
@@ -64,16 +71,43 @@ public class LoginController implements Initializable{
             loader.setController(searchDoctorController);
             
             Parent root = loader.load();
-            //stage.setUserData(patientInfo);
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.show();
             
-        } catch (IOException e) {
-            System.err.println(String.format("Error: %s", e.getMessage()));
+            } catch (IOException e) {
+                System.err.println(String.format("Error: %s", e.getMessage()));
+            }
         }
+        else if (!isPatient){
 
+            int docId = Integer.parseInt(doctorController.login(loginInfo.toString()));
+            System.out.println(docId);
+
+            try {
+            this.loginButton.getScene().getWindow().hide();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/doctor_details.fxml")));
+            
+            doctorDetailsController = new DoctorDetailsController();
+            
+            //doctorDetailsController.setData(doctorController, docId);
+            loader.setController(doctorDetailsController);
+            
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            
+            } catch (IOException e) {
+                System.err.println(String.format("Error: %s", e.getMessage()));
+            }
+
+        }
+        
 
 
 

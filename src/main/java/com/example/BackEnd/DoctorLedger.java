@@ -56,6 +56,23 @@ public class DoctorLedger {
         doctorList.addAll(doctorSet);
     }
 
+    public Doctor getDoctorInstance(String info)
+    {
+        try{
+
+            String doctorInfo = DBFactory.getInstance().createHandler("SQL").getDoctor(info);
+            
+            Doctor doctor = new Doctor(doctorInfo);
+            doctorList.add(doctor);
+            
+            return doctor;
+        } catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
+        }
+    }
+
     public String getDoctor(String name) {
         String json = DBFactory.getInstance().createHandler("SQL").getDoctors(name);
 

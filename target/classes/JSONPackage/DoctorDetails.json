@@ -1,0 +1,17 @@
+{
+    "specialization": "{{specialization}}",
+    "description": "{{description}}",
+    "location": "{{location}}",
+    "stats": "{{stats}}",
+    "patients": "{{patients}}",
+    "experience": "{{experience}}",
+    "rating": "{{rating}}",
+    "services": "{{services}}",
+    "start": "{{start}}",
+    "end": "{{end}}",
+    "fee": "{{fee}}",
+    "checkupRating": "{{checkupRating}}",
+    "environmentRating": "{{environmentRating}}",
+    "staffRating": "{{staffRating}}",
+    "reviews": "{{reviews}}"
+}

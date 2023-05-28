@@ -6,7 +6,8 @@ abstract public class DBHandler {
   public abstract void updateAppointment(int appID, String Reason, int value);
   public abstract String getDoctors(String name);
   public abstract String getTopDoctors();
-  public abstract String getPatient(String name);
+  public abstract String getPatient(String info);
+  public abstract String getDoctor(String info);
   public abstract String getReviewList(int docId);
   public abstract void addPayment(String info, int appId);
   public abstract String getAppointments(int patId);
