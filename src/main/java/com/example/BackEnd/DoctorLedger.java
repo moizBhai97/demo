@@ -13,10 +13,37 @@ import org.json.JSONObject;
 public class DoctorLedger {
 
     private ArrayList<Doctor> doctorList;
+    private ArrayList<Doctor> topDoctors;
 
     public DoctorLedger()
     {
         doctorList = new ArrayList<Doctor>();
+        topDoctors = new ArrayList<Doctor>();
+    }
+
+    public void setTopDoctors()
+    {
+        System.out.println("Ledger Setting top doctors");
+        try
+        {
+            String doctors = DBFactory.getInstance().createHandler("SQL").getTopDoctors();
+            //doctors.toString();
+
+            JSONArray jsonArray = new JSONArray(doctors);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Doctor doctor = new Doctor(jsonObject.toString());
+                topDoctors.add(doctor);
+                doctor.toString();
+            }
+
+            topDoctors.toString();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
     }
 
     public void addDoctor(Doctor doctor) {
@@ -44,7 +71,14 @@ public class DoctorLedger {
         doctorList.addAll(doctors);
         removeDuplicates();
 
-        System.out.println(doctorList.toString());
+
+
+        
+
+<<<<<<< HEAD
+ //       System.out.println(doctorList.toString());
+=======
+>>>>>>> 537472f61c08c47b8a45b56f6e38510a160eef79
 
         return json.toString();
     }
@@ -103,7 +137,7 @@ public class DoctorLedger {
                     .filter(doctor -> doctor.getRating() >= ratingFilter)
                     .collect(Collectors.toList());
         }
-        if (specialtyFilter != "All" && specialtyFilter != null) {
+        if (specialtyFilter != null && !specialtyFilter.equals("All") ) {
             // Filter the list to only include doctors with the given specialty
             tempDoctors = tempDoctors.stream()
                     .filter(doctor -> doctor.getSpecialization().equals(specialtyFilter))
@@ -155,7 +189,7 @@ public class DoctorLedger {
                     .filter(doctor -> doctor.getRating() >= ratingFilter)
                     .collect(Collectors.toList());
         }
-        if (specialtyFilter != "All" && specialtyFilter != null) {
+        if (specialtyFilter != null && !specialtyFilter.equals("All") ) {
             // Filter the list to only include doctors with the given specialty
             tempDoctors = tempDoctors.stream()
                     .filter(doctor -> doctor.getSpecialization().equals(specialtyFilter))
@@ -173,6 +207,18 @@ public class DoctorLedger {
             doctors.put(new JSONObject(tempDoctors.get(i).toString()));
         }
         // System.out.println(doctors.toString());
+        return doctors.toString();
+    }
+
+    public String getTopDoctors(){
+        
+        System.out.println("Ledger Getting top doctors");
+        JSONArray doctors = new JSONArray();
+        for (int i = 0; i < topDoctors.size(); i++) {
+            doctors.put(new JSONObject(topDoctors.get(i).toString()));
+            System.out.println(topDoctors.get(i).toString());
+        }
+        
         return doctors.toString();
     }
 

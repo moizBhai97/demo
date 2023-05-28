@@ -1,18 +1,30 @@
 package com.example.UIController;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 //JAVA FX IMPORTS
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -27,6 +39,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 import com.example.BackEnd.PatientController;
 
@@ -35,6 +48,7 @@ public class SearchDoctorController implements Initializable {
     // GridPane results_grid;
 
     PatientController patientController;
+    int patId;
 
     @FXML
     Label doc_count;
@@ -339,9 +353,10 @@ public class SearchDoctorController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         results_grid = new GridPane();
 
-        patientController = new PatientController();
+        //patientController = new PatientController();
         results_grid.setHgap(10);
         results_grid.setVgap(10);
+
         whiteStarIcon = new ImageView(filterRatingAllIcon.getImage());
         whiteStarIcon.setFitWidth(filterRatingAllIcon.getFitWidth());
         whiteStarIcon.setFitHeight(filterRatingAllIcon.getFitHeight());
@@ -364,6 +379,12 @@ public class SearchDoctorController implements Initializable {
         return;
     }
 
+    public void setData(PatientController patientController, int patId) {
+        this.patientController = patientController;
+        this.patId = patId;
+        System.out.println(patId);
+    }
+
     GridPane results_grid;
 
     public void setPatientController(PatientController patientController) {
@@ -372,7 +393,6 @@ public class SearchDoctorController implements Initializable {
 
     public void refresh() {
 
-        List<DoctorTemp> doctors = DoctorTemp.getDummyDoctor();
         results_grid.setHgap(10);
         results_grid.setVgap(10);
         results_grid.getChildren().clear();
@@ -381,30 +401,9 @@ public class SearchDoctorController implements Initializable {
         results_grid.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
         // set transparent background
         results_grid.setStyle("-fx-background-color: transparent;");
-        int rowindex = 0;
-        int columnindex = 0;
-        for (int i = 0; i < 10; i++) {
-            try {
-                FXMLLoader loader = new FXMLLoader();
 
-                loader.setLocation((new URL("file:src/main/resources/com/example/DoctorCard.fxml")));
-                Pane doctorCard = loader.load();
-                DoctorCardController controller = loader.getController();
-                controller.setDoctor(doctors.get(i));
-                // controller.setParentController(this);
-                results_grid.add(doctorCard, rowindex, columnindex);
-                rowindex++;
-                if (rowindex == 2) {
-                    rowindex = 0;
-                    columnindex++;
-                }
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        results_scrollpane.setContent(results_grid);
+        createDoctorCards(patientController.getTopDoctors());
+        doc_count.setText("Top Doctors");
 
     }
 
@@ -447,19 +446,94 @@ public class SearchDoctorController implements Initializable {
                     rowindex++;
                 }
             }
-            results_scrollpane.setContent(results_grid);
+            // results_scrollpane.setContent(results_grid);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    // public void searchTextKeyPressed(ActionEvent event) {
+    // System.out.println("searched");
+    // searhcedName = searchBar.getText();
+
+    // searchDoctor(searhcedName);
+    // resetSortColors();
+
+    // }
     public void searchTextKeyPressed(ActionEvent event) {
         System.out.println("searched");
         searhcedName = searchBar.getText();
-        searchDoctor(searhcedName);
-        resetSortColors();
 
+        // Load the MP4 video
+        Media media = null;
+        try {
+            File file = new File("src/Rectangle.mp4");
+            String path = file.getAbsolutePath();
+            media = new Media(new File(path).toURI().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
+        MediaView mediaView = new MediaView(mediaPlayer);
+        mediaView.setFitWidth(200);
+mediaView.setFitHeight(200);
+
+// Create a StackPane to center the MediaView in the ScrollPane
+StackPane stackPane = new StackPane();
+stackPane.getChildren().add(mediaView);
+stackPane.setPrefWidth(results_scrollpane.getViewportBounds().getWidth());
+stackPane.setPrefHeight(results_scrollpane.getViewportBounds().getHeight());
+
+// Calculate the size of the MediaView
+double mediaWidth = stackPane.getPrefWidth() * 0.7;
+double mediaHeight = stackPane.getPrefHeight() * 0.7;
+
+// Set the size of the MediaView
+mediaView.setFitWidth(mediaWidth);
+mediaView.setFitHeight(mediaHeight);
+
+// Center the MediaView in the StackPane
+StackPane.setAlignment(mediaView, Pos.CENTER);
+
+results_scrollpane.setContent(stackPane);
+
+        // Run the searchDoctor method in a background task
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                searchDoctor(searhcedName);
+                return null;
+            }
+
+            @Override
+            protected void succeeded() {
+                // Set the content of the scroll pane to the results grid
+              mediaPlayer.setOnEndOfMedia(() -> {
+    // Call the searchDoctor method after the animation ends
+    Platform.runLater(() -> {
+
+        results_scrollpane.setContent(results_grid);
+    });
+});
+                resetSortColors();
+            }
+
+            @Override
+            protected void failed() {
+                // Remove the media view when the search fails
+                mediaPlayer.setOnEndOfMedia(() -> {
+    // Call the searchDoctor method after the animation ends
+    Platform.runLater(() -> {
+
+        results_scrollpane.setContent(results_grid);
+    });
+});
+                resetSortColors();
+                // e.printStackTrace();
+            }
+        };
+        new Thread(task).start();
     }
-
 }

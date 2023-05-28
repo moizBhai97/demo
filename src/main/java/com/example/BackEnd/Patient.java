@@ -1,6 +1,10 @@
 package com.example.BackEnd;
 
+import java.io.FileReader;
+import java.util.Set;
+
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class Patient {
     
@@ -59,6 +63,9 @@ public class Patient {
 
     public void setAppointments()
     {
+        if(appointmentLedger == null)
+            appointmentLedger = new AppointmentLedger();
+            
         appointmentLedger.setAppointments(this.patId);
     }
 
@@ -97,4 +104,53 @@ public class Patient {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
+
+    public String get(String value)
+    {
+        if(value.equals("patId"))
+            return patId + "";
+
+        else if(value.equals("name"))
+            return name;
+
+        else if(value.equals("email"))
+            return email;
+        
+        else if(value.equals("DOB"))
+            return DOB;
+
+        else if(value.equals("phoneNumber"))
+            return phoneNumber;
+        
+        else if(value.equals("gender"))
+            return gender;
+
+        return "NULL";
+    }
+
+    @Override
+    public String toString()
+    {
+        try
+        {
+            JSONParser parser = new JSONParser(); 
+
+            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());
+
+            Set<String> keyset = obj.keySet();
+            
+            for(String key : keyset)
+            {
+                if(!get(key).equals("NULL"))
+                    obj.put(key, get(key));
+            }
+
+            return obj.toString();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
+        }
+    } 
 }

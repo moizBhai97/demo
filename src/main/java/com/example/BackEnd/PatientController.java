@@ -17,9 +17,9 @@ public class PatientController {
             Patient patient = patientLedger.getPatient(info);
             patient.setAppointments();
 
-            //doctorLedger.setDoctors();
+            doctorLedger.setTopDoctors();
 
-            return patient.toString();
+            return "" + (patient.getpatId());
             
         }catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
@@ -106,6 +106,10 @@ public class PatientController {
 
     public String searchDoctor(String name) {
         return doctorLedger.getDoctor(name);
+    }
+
+    public String getTopDoctors(){
+        return doctorLedger.getTopDoctors();
     }
 
 
