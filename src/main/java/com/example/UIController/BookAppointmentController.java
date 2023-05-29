@@ -16,10 +16,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 import com.example.BackEnd.PatientController;
+import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 public class BookAppointmentController implements Initializable {
 
     PatientController patientController;
+    int docId;
+    int patId;
 
     @FXML
     private void switchToPrimary() throws IOException {
@@ -66,8 +69,10 @@ public class BookAppointmentController implements Initializable {
         }
     }
 
-    public void setPatientController(PatientController patientController) {
+    public void setData(PatientController patientController, int Id, int patId) {
         this.patientController = patientController;
+        this.docId = Id;
+        this.patId = patId;
     }
 
     // initialize
@@ -93,6 +98,9 @@ datePicker.getEditor().setOpacity(1);
         String dateUnformatted = (datePicker.getValue().toString());
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate dateConvert = LocalDate.parse(dateUnformatted, inputFormatter);
+
+        System.out.println(patientController.getSchedule(docId, dateConvert.toString(), 1));
+
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d MMMM, EEEE", Locale.ENGLISH);
         String formattedDate = dateConvert.format(outputFormatter);
         System.out.println(formattedDate);

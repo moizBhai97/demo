@@ -18,27 +18,35 @@ public class Doctor {
 
     private DoctorDetails doctorDetails;
 
-    public DoctorDetails getDoctorDetails() {
+    public DoctorDetails getDoctorDetails() 
+    {
         return doctorDetails;
     }
 
-    public void setDoctorDetails(String info, int docId) {
-        this.doctorDetails = new DoctorDetails(info, docId);
-    }
+    public String getDetails() 
+    {
+        try 
+        {
+            if(doctorDetails == null)
+            {
+                String json = DBFactory.getInstance().createHandler("SQL").getDoctorDetails(id);
+                this.doctorDetails = new DoctorDetails(json, id);
+            }
 
-    public String getDetails() {
+            String details = doctorDetails.toString();
 
-        System.out.println("Doctor details");
+            JSONObject obj = new JSONObject(details);
 
-        String details = doctorDetails.toString();
+            obj.put("name", name);
 
-        System.out.println("Details: " + details);
-
-        JSONObject obj = new JSONObject(details);
-
-        obj.put("name", name);
-
-        return obj.toString();
+            return obj.toString();
+            
+        } 
+        catch (Exception e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            return null;
+        }
     }
 
     public Doctor(String doctorName, String specialization, String location, String experience, Double priceDouble,

@@ -245,6 +245,6 @@ SELECT (SELECT COUNT(ID) FROM Appointments WHERE DOCTOR_ID = 101 AND STATUS = 'C
 
 Select * from REVIEWS;
 
-Select * from DOCTORS;
+Select * from APPOINTMENT_SLOTS;
 
 SElect count(*) from APPOINTMENTS;

@@ -122,6 +122,7 @@ public class Appointment {
 
     public void addPayment(String info)
     {
+        DBFactory.getInstance().createHandler("SQL").addPayment(info, appId);
         payment = new Payment(info);
     }
 

@@ -195,26 +195,8 @@ public class DoctorLedger {
         return doctors.toString();
     }
 
-    public String getDetails(int docId) {
-        try {
-            if(getDoctor(docId).getDoctorDetails() == null)
-            {
-                String json = DBFactory.getInstance().createHandler("SQL").getDoctorDetails(docId);
-                getDoctor(docId).setDoctorDetails(json, docId);
-            }
-
-            return getDoctor(docId).getDetails();
-            
-        } 
-        catch (Exception e) 
-        {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
-            return null;
-        }
-    }
-
-    public Doctor getDoctor(int docId) {
-
+    public Doctor getDoctor(int docId) 
+    {
         for(int i = 0; i < doctorList.size(); i++)
         {
             if(doctorList.get(i).getId() == docId)

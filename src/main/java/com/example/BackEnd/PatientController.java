@@ -63,8 +63,10 @@ public class PatientController {
         return patientLedger.getPatient(patId).getAppointList(value);
     }
 
-    public void cancelAppointment(String Reason, int patId, int appId) {
-        try {
+    public void cancelAppointment(String Reason, int patId, int appId) 
+    {
+        try 
+        {
             patientLedger.getPatient(patId).cancelAppointment(Reason, appId);
         }
         catch(Exception e)
@@ -89,7 +91,7 @@ public class PatientController {
     {
         try
         {
-            return doctorLedger.getDetails(docId);
+            return doctorLedger.getDoctor(docId).getDetails();
         }
         catch(Exception e)
         {
@@ -120,6 +122,19 @@ public class PatientController {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
+    public String getSchedule(int docId, String date, int value)
+    {
+        try
+        {
+            return doctorLedger.getDoctor(docId).getDoctorDetails().getSchedule(docId, date, value);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
         }
     }
 

@@ -143,12 +143,15 @@ public class SQL extends DBHandler {
         } 
     }
 
-    public void addPayment(String info, int appId) {
+    public void addPayment(String info, int appId) 
+    {
         try {
             JSONObject obj = new JSONObject(info);
             System.out.println(
                     obj.getString("date") + " " + obj.getString("time") + " " + obj.getString("amount") + " " + appId);
-        } catch (Exception e) {
+        } 
+        catch (Exception e) 
+        {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
             }.getClass().getEnclosingMethod().getName());
         }
@@ -205,6 +208,40 @@ public class SQL extends DBHandler {
             System.out.println(obj.toString());
 
             return obj.toString();
+        } 
+        catch (Exception e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();            
+            return null;
+        } 
+    }
+
+    public String getSchedule(int docId, String date)
+    {
+        try (Connection con = DriverManager.getConnection(connectionUrl)) 
+        {
+
+            String SQL = "SELECT * FROM APPOINTMENT_SLOTS WHERE DOCTOR_ID = ?;";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, docId);
+            ResultSet rs = pstmt.executeQuery();
+
+            JSONArray schedule = new JSONArray();
+
+            while(rs.next())
+            {
+                JSONObject newObj = new JSONObject();
+                newObj.put("date", rs.getString("DATE"));
+                newObj.put("time", rs.getString("TIME"));
+                newObj.put("available", rs.getBoolean("AVAILABLE"));
+
+                schedule.put(newObj);
+            }
+
+            System.out.println(schedule.toString());
+
+            return schedule.toString();
         } 
         catch (Exception e) 
         {

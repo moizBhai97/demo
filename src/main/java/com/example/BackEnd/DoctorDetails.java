@@ -3,6 +3,7 @@ package com.example.BackEnd;
 import java.io.FileReader;
 import java.util.Set;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -25,6 +26,7 @@ public class DoctorDetails {
     private int reviews;
 
     private ReviewLedger reviewLedger;
+    private String schedule;
 
     public DoctorDetails()
     {
@@ -113,6 +115,51 @@ public class DoctorDetails {
     public void addReview(String info, int patId, int docId)
     {
         reviewLedger.addReview(info, patId, docId);
+    }
+
+    private boolean isDayTime(String time) 
+    {
+        // Assuming day time slots are from 9 AM to 6 PM
+        return time.compareTo("09:00") >= 0 && time.compareTo("18:00") < 0;
+    }
+    
+    private boolean isNightTime(String time) 
+    {
+        //Assuming night time slots are from 6 PM to 10 PM
+        return time.compareTo("18:00") >= 0 && time.compareTo("22:00") < 0;
+    }
+
+    public String getSchedule(int docId, String date, int value)
+    {
+        try 
+        {
+            String json = DBFactory.getInstance().createHandler("SQL").getSchedule(docId, date);
+
+            this.schedule = json;
+
+            JSONArray arr = new JSONArray(json);
+
+            JSONArray filtered = new JSONArray();
+
+            for(int i = 0; i < arr.length(); i++)
+            {
+                JSONObject obj = arr.getJSONObject(i);
+
+                if(isDayTime(obj.getString("time")) && date.equals(obj.getString("date")) && value == 1)
+                    filtered.put(obj);
+
+                else if(isNightTime(obj.getString("time")) && date.equals(obj.getString("date")) && value == 2)
+                    filtered.put(obj);
+            }
+
+            return filtered.toString();
+            
+        } 
+        catch (Exception e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            return null;
+        }
     }
 
     public String get(String value)

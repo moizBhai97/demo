@@ -109,7 +109,7 @@ public class Patient {
     {
         try
         {
-            appointmentLedger.addPayment(info, appId);
+            appointmentLedger.getAppointment(appId).addPayment(info);
         }
         catch(Exception e)
         {
