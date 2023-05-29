@@ -102,7 +102,7 @@ public class Main {
 
         printJsonArray(objs);
 
-        pc.cancelAppointment("Im am in love", 1, 6);
+        pc.cancelAppointment("He left me", 1, 6);
 
         objs = new JSONArray(pc.getAppointList(1, 2));
 

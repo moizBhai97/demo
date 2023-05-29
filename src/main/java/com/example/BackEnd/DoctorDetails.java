@@ -110,6 +110,11 @@ public class DoctorDetails {
         return reviewLedger.getReviewList(docId);
     }
 
+    public void addReview(String info, int patId, int docId)
+    {
+        reviewLedger.addReview(info, patId, docId);
+    }
+
     public String get(String value)
     {
         if(value.equals("specialization"))

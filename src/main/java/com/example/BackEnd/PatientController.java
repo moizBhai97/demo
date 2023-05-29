@@ -28,6 +28,25 @@ public class PatientController {
         
     }
 
+    public void updateProfile(int patId, String info)
+    {
+        patientLedger.updateProfile(patId, info);
+
+    }
+
+    public void submitReview(String info, int docId, int patId)
+    {
+        try
+        {
+            doctorLedger.getDoctor(docId).getDoctorDetails().addReview(info, patId, docId);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+
+        }
+    }
+
     public void bookAppointment(String info, int patId)
     {
         try

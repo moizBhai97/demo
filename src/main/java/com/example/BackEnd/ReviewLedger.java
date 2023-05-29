@@ -94,5 +94,14 @@ public class ReviewLedger {
 
         return obj.toString();
     }
+
+    public void addReview(String info, int patId, int docId)
+    {
+        JSONObject obj = new JSONObject(info);
+        Review review = new Review(obj.toString());
+        reviews.add(review);
+
+        //dbFactory.createHandler("SQL").addReview(info);
+    }
     
 }
