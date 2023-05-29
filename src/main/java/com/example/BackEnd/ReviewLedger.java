@@ -98,6 +98,11 @@ public class ReviewLedger {
     public void addReview(String info, int patId, int docId)
     {
         JSONObject obj = new JSONObject(info);
+        JSONObject reviewObj = new JSONObject();
+
+        //review.put(info, review)
+
+
         Review review = new Review(obj.toString());
         reviews.add(review);
 
