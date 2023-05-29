@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.json.JSONArray;
@@ -15,19 +16,16 @@ public class DoctorLedger {
     private ArrayList<Doctor> doctorList;
     private ArrayList<Doctor> topDoctors;
 
-    public DoctorLedger()
-    {
+    public DoctorLedger() {
         doctorList = new ArrayList<Doctor>();
         topDoctors = new ArrayList<Doctor>();
     }
 
-    public void setTopDoctors()
-    {
+    public void setTopDoctors() {
         System.out.println("Ledger Setting top doctors");
-        try
-        {
+        try {
             String doctors = DBFactory.getInstance().createHandler("SQL").getTopDoctors();
-            //doctors.toString();
+            // doctors.toString();
 
             JSONArray jsonArray = new JSONArray(doctors);
 
@@ -39,10 +37,9 @@ public class DoctorLedger {
             }
 
             topDoctors.toString();
-        }
-        catch(Exception e)
-        {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        } catch (Exception e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
+            }.getClass().getEnclosingMethod().getName());
         }
     }
 
@@ -50,25 +47,52 @@ public class DoctorLedger {
         doctorList.add(doctor);
     }
 
+    // private void removeDuplicates() {
+    // Set<Doctor> doctorSet = new TreeSet<>(new Comparator<Doctor>() {
+    // @Override
+    // public int compare(Doctor d1, Doctor d2) {
+    // if (d1.getName().equals(d2.getName()) && d1.getId() == d2.getId()
+    // && d1.getSpecialization().equals(d2.getSpecialization())
+    // && d1.getLocation().equals(d2.getLocation())) {
+    // return 0;
+    // } else {
+    // return 1;
+    // }
+    // }
+    // });
+    // doctorSet.addAll(doctorList);
+    // doctorList.clear();
+    // doctorList.addAll(doctorSet);
+    // }
+
     private void removeDuplicates() {
-        Set<Doctor> doctorSet = new HashSet<>(doctorList);
-        doctorList.clear();
-        doctorList.addAll(doctorSet);
+        for (int i = 0; i < doctorList.size(); i++) {
+            Doctor doctor1 = doctorList.get(i);
+            for (int j = i + 1; j < doctorList.size(); j++) {
+                Doctor doctor2 = doctorList.get(j);
+                if (doctor1.getName().equals(doctor2.getName())
+                        && doctor1.getSpecialization().equals(doctor2.getSpecialization())
+                        && doctor1.getLocation().equals(doctor2.getLocation())) {
+                    doctorList.remove(j);
+                    j--;
+                }
+            }
+
+        }
     }
 
-    public Doctor getDoctorInstance(String info)
-    {
-        try{
+    public Doctor getDoctorInstance(String info) {
+        try {
 
             String doctorInfo = DBFactory.getInstance().createHandler("SQL").getDoctor(info);
-            
+
             Doctor doctor = new Doctor(doctorInfo);
             doctorList.add(doctor);
-            
+
             return doctor;
-        } catch(Exception e)
-        {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        } catch (Exception e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
+            }.getClass().getEnclosingMethod().getName());
             return null;
         }
     }
@@ -88,11 +112,7 @@ public class DoctorLedger {
         doctorList.addAll(doctors);
         removeDuplicates();
 
-
-
-        
-
- //       System.out.println(doctorList.toString());
+        // System.out.println(doctorList.toString());
 
         return json.toString();
     }
@@ -113,7 +133,7 @@ public class DoctorLedger {
                     .filter(doctor -> doctor.getRating() >= ratingFilter)
                     .collect(Collectors.toList());
         }
-        if (specialtyFilter != null && !specialtyFilter.equals("All") ) {
+        if (specialtyFilter != null && !specialtyFilter.equals("All")) {
             // Filter the list to only include doctors with the given specialty
             tempDoctors = tempDoctors.stream()
                     .filter(doctor -> doctor.getSpecialization().equals(specialtyFilter))
@@ -151,7 +171,7 @@ public class DoctorLedger {
                     .filter(doctor -> doctor.getRating() >= ratingFilter)
                     .collect(Collectors.toList());
         }
-        if (specialtyFilter != null && !specialtyFilter.equals("All") ) {
+        if (specialtyFilter != null && !specialtyFilter.equals("All")) {
             // Filter the list to only include doctors with the given specialty
             tempDoctors = tempDoctors.stream()
                     .filter(doctor -> doctor.getSpecialization().equals(specialtyFilter))
@@ -169,23 +189,41 @@ public class DoctorLedger {
             doctors.put(new JSONObject(tempDoctors.get(i).toString()));
         }
         // System.out.println(doctors.toString());
+
+        // print doctors
+
         return doctors.toString();
     }
-    public Doctor getDoctor(int docId)
-    {
-        Doctor doc = new Doctor();
-        doc.setId(docId);
-        return doc;
 
-        // for(int i = 0; i < doctorList.size(); i++)
-        // {
-        //     if(doctorList.get(i).getId() == docId)
-        //     {
-        //         return doctorList.get(i);
-        //     }
-        // }
+    public String getDetails(int docId) {
+        try {
+            if(getDoctor(docId).getDoctorDetails() == null)
+            {
+                String json = DBFactory.getInstance().createHandler("SQL").getDoctorDetails(docId);
+                getDoctor(docId).setDoctorDetails(json, docId);
+            }
 
-        // return null;
+            return getDoctor(docId).getDetails();
+            
+        } 
+        catch (Exception e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            return null;
+        }
+    }
+
+    public Doctor getDoctor(int docId) {
+
+        for(int i = 0; i < doctorList.size(); i++)
+        {
+            if(doctorList.get(i).getId() == docId)
+            {
+                return doctorList.get(i);
+            }
+        }
+
+        return null;
     }
 
     public String sortByRating(String name, Boolean reversed, double ratingFilter, String specialtyFilter) {
@@ -203,7 +241,7 @@ public class DoctorLedger {
                     .filter(doctor -> doctor.getRating() >= ratingFilter)
                     .collect(Collectors.toList());
         }
-        if (specialtyFilter != null && !specialtyFilter.equals("All") ) {
+        if (specialtyFilter != null && !specialtyFilter.equals("All")) {
             // Filter the list to only include doctors with the given specialty
             tempDoctors = tempDoctors.stream()
                     .filter(doctor -> doctor.getSpecialization().equals(specialtyFilter))
@@ -224,15 +262,15 @@ public class DoctorLedger {
         return doctors.toString();
     }
 
-    public String getTopDoctors(){
-        
-        System.out.println("Ledger Getting top doctors");
+    public String getTopDoctors() {
+
+        // System.out.println("Ledger Getting top doctors");
         JSONArray doctors = new JSONArray();
         for (int i = 0; i < topDoctors.size(); i++) {
             doctors.put(new JSONObject(topDoctors.get(i).toString()));
             System.out.println(topDoctors.get(i).toString());
         }
-        
+
         return doctors.toString();
     }
 

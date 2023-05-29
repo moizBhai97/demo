@@ -11,6 +11,6 @@ abstract public class DBHandler {
   public abstract String getReviewList(int docId);
   public abstract void addPayment(String info, int appId);
   public abstract String getAppointments(int patId);
-  public abstract void addComplaint(int patID, String details);
   public abstract String getDoctorDetails(int docID);
+  public abstract void addComplaint(int patID, String details, int docID);
 }

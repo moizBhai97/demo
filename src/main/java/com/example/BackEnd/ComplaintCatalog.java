@@ -11,11 +11,11 @@ public class ComplaintCatalog {
         complaints = new ArrayList<>();
     }
 
-    public void newComplaint(int patID, String details){
-        complaints.add(new Complaint(patID, details));
+    public void newComplaint(int patID, String details, int docID){
+        complaints.add(new Complaint(patID, details, docID));
         //call db to add complaint
 
-         DBFactory.getInstance().createHandler("SQL").addComplaint(patID, details);
+         DBFactory.getInstance().createHandler("SQL").addComplaint(patID, details, docID);
     }
 
 

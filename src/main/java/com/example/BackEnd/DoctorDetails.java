@@ -18,7 +18,11 @@ public class DoctorDetails {
     private String services;
     private String workingHours;
     private float fee;
-    private Boolean availability;
+    private String availability;
+    private float checkupRating;
+    private float environmentRating;
+    private float staffRating;
+    private int reviews;
 
     private ReviewLedger reviewLedger;
 
@@ -34,12 +38,16 @@ public class DoctorDetails {
         this.services = "NULL";
         this.workingHours = "NULL";
         this.fee = 0;
-        this.availability = false;
+        this.availability = "NULL";
+        this.checkupRating = 0;
+        this.environmentRating = 0;
+        this.staffRating = 0;
+        this.reviews = 0;
 
         reviewLedger = new ReviewLedger();
     }
 
-    public DoctorDetails(String specialization, String description, String location, int stats, int patients, int experience, float rating, String services, String workingHours, float fee, Boolean avail, int docId)
+    public DoctorDetails(String specialization, String description, String location, int stats, int patients, int experience, float rating, String services, String workingHours, float fee, String avail, float checkupRating, float environmentRating, float staffRating, int reviews, int docId)
     {
         this.specialization = specialization;
         this.description = description;
@@ -52,6 +60,10 @@ public class DoctorDetails {
         this.workingHours = workingHours;
         this.fee = fee;
         this.availability = avail;
+        this.checkupRating = checkupRating;
+        this.environmentRating = environmentRating;
+        this.staffRating = staffRating;
+        this.reviews = reviews;
 
         reviewLedger = new ReviewLedger(docId);
     }
@@ -60,6 +72,10 @@ public class DoctorDetails {
     {
         try
         {
+            reviewLedger = new ReviewLedger(docId);
+
+            info = reviewLedger.getAvgRating(info);
+
             JSONObject obj = new JSONObject(info);
 
             this.specialization = obj.getString("specialization");
@@ -72,13 +88,15 @@ public class DoctorDetails {
             this.services = obj.getString("services");
             this.workingHours = obj.getString("workingHours");
             this.fee = obj.getFloat("fee");
-            this.availability = obj.getBoolean("availability");
-
-            reviewLedger = new ReviewLedger(docId);
+            this.availability = obj.getString("availability");
+            this.checkupRating = obj.getFloat("checkupRating");
+            this.environmentRating = obj.getFloat("environmentRating");
+            this.staffRating = obj.getFloat("staffRating");
+            this.reviews = obj.getInt("reviews");
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            System.out.println(e + "\nError in DoctorDetails constructor.");
         }
     }
 
@@ -91,7 +109,6 @@ public class DoctorDetails {
     {
         return reviewLedger.getReviewList(docId);
     }
-
 
     public String get(String value)
     {
@@ -127,6 +144,18 @@ public class DoctorDetails {
         
         else if(value.equals("availability"))
             return availability + "";
+        
+        else if(value.equals("checkupRating"))
+            return checkupRating + "";
+        
+        else if(value.equals("environmentRating"))
+            return environmentRating + "";
+        
+        else if(value.equals("staffRating"))
+            return staffRating + "";
+
+        else if(value.equals("reviews"))
+            return reviews + "";
 
         else return "NULL";
     }
@@ -136,39 +165,19 @@ public class DoctorDetails {
     {
         try
         {
-            System.out.println("hi");
-            //System.out.println(obj.toString());
-
             JSONParser parser = new JSONParser(); 
 
             JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/DoctorDetails.json")).toString());
 
-            // Set<String> keyset = obj.keySet();
+            Set<String> keyset = obj.keySet();
             
-            // for(String key : keyset)
-            // {
-            //     if(!get(key).equals("NULL"))
-            //         obj.put(key, get(key));
-            // }
+            for(String key : keyset)
+            {
+                if(!get(key).equals("NULL"))
+                    obj.put(key, get(key));
+            }
 
-            String s = DBFactory.getInstance().createHandler("SQL").getDoctorDetails(101);
-
-            JSONObject obj1 = new JSONObject(s);
-
-            obj.put("name", obj1.getString("name"));
-            obj.put("specialization", obj1.getString("specialization"));
-            obj.put("description", obj1.getString("description"));
-            obj.put("location", obj1.getString("location"));
-            obj.put("patients", obj1.getInt("patients"));
-            obj.put("experience", obj1.getInt("experience"));
-            obj.put("services", obj1.getString("services"));
-            obj.put("workingHours", obj1.getString("workingHours"));
-            obj.put("fee", obj1.getFloat("fee"));
-            obj.put("availability", obj1.getString("availability"));
-
-            String details = reviewLedger.getAvgRating(obj.toString());
-
-            return details;
+            return obj.toString();
         }
         catch(Exception e)
         {
