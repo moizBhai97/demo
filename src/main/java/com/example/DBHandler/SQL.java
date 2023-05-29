@@ -30,7 +30,7 @@ public class SQL extends DBHandler {
 
     public SQL() {
 
-         connectionUrl = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;" +
+         connectionUrl = "jdbc:sqlserver://MOIZ-KHAN;" +
                         "databaseName=SDA;" +
                         "IntegratedSecurity=true" + ";encrypt=true;trustServerCertificate=true";
     }
@@ -261,7 +261,7 @@ public class SQL extends DBHandler {
          * SPECIALIZATION VARCHAR(50) NOT NULL,
          */
 
-        String connectionUrl = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;" +
+        String connectionUrl = "jdbc:sqlserver://MOIZ-KHAN;" +
                 "databaseName=SDA;" +
                 "IntegratedSecurity=true" + ";encrypt=true;trustServerCertificate=true";
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
