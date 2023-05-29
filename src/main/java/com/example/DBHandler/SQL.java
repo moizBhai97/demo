@@ -260,10 +260,6 @@ public class SQL extends DBHandler {
          * FEE INT NOT NULL,
          * SPECIALIZATION VARCHAR(50) NOT NULL,
          */
-
-        String connectionUrl = "jdbc:sqlserver://MOIZ-KHAN;" +
-                "databaseName=SDA;" +
-                "IntegratedSecurity=true" + ";encrypt=true;trustServerCertificate=true";
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
             String SQL = "SELECT id,name,location,specialization,experience,fee,rating FROM Doctors WHERE name LIKE '%"
                     + name + "%'";
