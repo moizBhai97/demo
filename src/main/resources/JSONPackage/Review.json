@@ -4,7 +4,5 @@
     "recommend": "{{recommend}}",
     "checkupRating": "{{checkupRating}}",
     "environmentRating": "{{environmentRating}}",
-    "staffRating": "{{staffRating}}",
-    "patId": "{{patId}}",
-    "docId": "{{docId}}"
+    "staffRating": "{{staffRating}}"
 }
