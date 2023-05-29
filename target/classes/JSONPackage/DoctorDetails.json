@@ -8,30 +8,11 @@
     "experience": "{{experience}}",
     "rating": "{{rating}}",
     "services": "{{services}}",
-<<<<<<< HEAD
     "workingHours": "{{workingHours}}",
-=======
-    "start": "{{start}}",
-    "end": "{{end}}",
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-    "fee": "{{fee}}"
-=======
->>>>>>> 793ace9e080ac4587ee59821c188e1ae201aceec
->>>>>>> 0e56d7edfe116cd67ae16dc6c2cf4b3a06d7645c
     "fee": "{{fee}}",
     "checkupRating": "{{checkupRating}}",
     "environmentRating": "{{environmentRating}}",
     "staffRating": "{{staffRating}}",
-<<<<<<< HEAD
     "reviews": "{{reviews}}",
     "availability": "{{availability}}"
-=======
-    "reviews": "{{reviews}}"
-<<<<<<< HEAD
-=======
->>>>>>> 101c7dd9ddc8658c570d52096c2fd42aedec8429
->>>>>>> 793ace9e080ac4587ee59821c188e1ae201aceec
->>>>>>> 0e56d7edfe116cd67ae16dc6c2cf4b3a06d7645c
 }
