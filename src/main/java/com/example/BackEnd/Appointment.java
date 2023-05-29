@@ -102,24 +102,6 @@ public class Appointment {
         return "NULL";
     }
 
-    public void set(String value, String data)
-    {
-        if(value.equals("date"))
-            date = data;
-        
-        else if(value.equals("time"))
-            time = data;
-        
-        else if(value.equals("problem"))
-            problem = data;
-
-        else if(value.equals("status"))
-            status = data;
-        
-        else if(value.equals("docId"))
-            docId = Integer.parseInt(data);
-    }
-
     public void addPayment(String info)
     {
         DBFactory.getInstance().createHandler("SQL").addPayment(info, appId);
@@ -132,14 +114,8 @@ public class Appointment {
         {
             JSONObject obj = new JSONObject(info);
 
-            Set<String> keyset = obj.keySet();
-            
-            for(String key : keyset)
-            {
-                if(!get(key).equals("NULL"))
-                    set(key, obj.getString(key));
-            }
-            
+            date = obj.getString("date");
+            time = obj.getString("time");
         }
         catch(Exception e)
         {

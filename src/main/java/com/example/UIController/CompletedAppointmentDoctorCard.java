@@ -37,9 +37,9 @@ public class CompletedAppointmentDoctorCard {
 
     int appointID;
 
-     public void setCard(String reeult){
+     public void setCard(String result){
 
-        JSONObject  jsonObject = new JSONObject(reeult);
+        JSONObject  jsonObject = new JSONObject(result);
         appointID = jsonObject.getInt("appID");
         doctorName.setText(jsonObject.getString("doctorName"));
         date.setText(jsonObject.getString("date"));

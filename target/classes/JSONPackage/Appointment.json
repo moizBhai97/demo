@@ -1,4 +1,5 @@
 {
+    "name": "{{name}}",
     "appId": "{{appId}}",
     "date": "{{date}}",
     "time": "{{time}}",

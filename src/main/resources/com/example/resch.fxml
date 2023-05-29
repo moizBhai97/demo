@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.PrimaryController">
+<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.ReschAppointmentController">
    <children>
       <Pane prefHeight="640.0" prefWidth="924.0">
          <children>
@@ -213,7 +213,7 @@
                         <RadioButton fx:id="radio11" layoutX="58.0" layoutY="84.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@resch.css" text="I’m having a schedule clash" textFill="#8c8f85" toggleGroup="$radios" />
                         <RadioButton fx:id="radio1211" layoutX="58.0" layoutY="115.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@resch.css" text="I donot want to tell" textFill="#8c8f85" toggleGroup="$radios" />
                         <RadioButton fx:id="radio12111" layoutX="58.0" layoutY="145.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@resch.css" text="Other" textFill="#8c8f85" toggleGroup="$radios" />
-                        <TextArea layoutX="54.0" layoutY="179.0" prefHeight="104.0" prefWidth="254.0" promptText="Enter Reason" />
+                        <TextArea fx:id="reason" layoutX="54.0" layoutY="179.0" prefHeight="104.0" prefWidth="254.0" promptText="Enter Reason" />
                      </children>
                   </Pane>
                   <Pane fx:id="big_pane11" layoutX="333.0" layoutY="151.0" prefHeight="262.0" prefWidth="299.0" styleClass="big_pane" stylesheets="@resch.css">
@@ -225,15 +225,15 @@
                                     <Image url="@../../images/Calendar.png" />
                                  </image>
                               </ImageView>
-                              <DatePicker fx:id="date" editable="false" layoutX="-1.0" layoutY="3.0" prefHeight="18.0" prefWidth="160.0" styleClass="date-picker" stylesheets="@resch.css" />
-                              <Label alignment="BASELINE_LEFT" prefHeight="31.0" prefWidth="134.0" text="21 January, Friday" textFill="#8c8fa5" wrapText="true">
+                              <DatePicker fx:id="datePicker" editable="false" layoutX="-1.0" layoutY="3.0" onAction="#datePickerPressed" prefHeight="18.0" prefWidth="160.0" styleClass="date-picker" stylesheets="@resch.css" />
+                              <Label fx:id="datePick" alignment="BASELINE_LEFT" prefHeight="31.0" prefWidth="134.0" text="21 January, Friday" textFill="#8c8fa5" wrapText="true">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
                            </children>
                         </Pane>
-                        <ToggleButton alignment="BASELINE_LEFT" layoutX="14.0" layoutY="64.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="134.0" selected="true" styleClass="button_big" stylesheets="@resch.css" text="Morning" textFill="WHITE">
+                        <ToggleButton fx:id="day" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="64.0" mnemonicParsing="false" onAction="#morningButton" prefHeight="49.0" prefWidth="134.0" selected="true" styleClass="button_big" stylesheets="@resch.css" text="Day" textFill="WHITE">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -245,7 +245,7 @@
                               <ToggleGroup fx:id="period" />
                            </toggleGroup>
                         </ToggleButton>
-                        <ToggleButton alignment="BASELINE_LEFT" layoutX="165.0" layoutY="64.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="134.0" styleClass="button_night" stylesheets="@resch.css" text="Evening" toggleGroup="$period">
+                        <ToggleButton fx:id="night" alignment="BASELINE_LEFT" layoutX="165.0" layoutY="64.0" mnemonicParsing="false" onAction="#nightButton" prefHeight="49.0" prefWidth="134.0" styleClass="button_night" stylesheets="@resch.css" text="Night" toggleGroup="$period">
                            <graphic>
                               <ImageView fitHeight="24.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -254,16 +254,20 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <ToggleButton layoutX="14.0" layoutY="133.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="button_big" stylesheets="@resch.css" text="9:30 am" textFill="WHITE">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="time" />
-                           </toggleGroup>
-                        </ToggleButton>
-                        <ToggleButton layoutX="114.0" layoutY="133.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@resch.css" text="10:30 am" toggleGroup="$time" />
-                        <ToggleButton layoutX="214.0" layoutY="133.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@resch.css" text="11:30 am" toggleGroup="$time" />
+                        <HBox fx:id="timesBox" layoutX="14.0" layoutY="131.0" prefHeight="50.0" prefWidth="286.0">
+                           <children>
+                              <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="button_big" stylesheets="@resch.css" text="9:30 am" textFill="WHITE">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="times" />
+                                 </toggleGroup>
+                              </ToggleButton>
+                              <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@resch.css" text="10:30 am" toggleGroup="$times" />
+                              <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@resch.css" text="11:30 am" toggleGroup="$times" />
+                           </children>
+                        </HBox>
                      </children>
                   </Pane>
-                  <Button fx:id="button_big111" layoutX="360.0" layoutY="450.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@resch.css" text="Reschedule Appointment" textFill="WHITE">
+                  <Button fx:id="reschButton" layoutX="360.0" layoutY="450.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@resch.css" text="Reschedule Appointment" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

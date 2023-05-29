@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.PrimaryController">
+<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="640.0" prefWidth="924.0">
          <children>
@@ -196,7 +196,7 @@
                         <Label layoutX="37.0" layoutY="72.0" text="Ratings" />
                      </children>
                   </Pane>
-                  <Button fx:id="button_big111" layoutX="396.0" layoutY="464.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@cancel.css" text="Cancel Appointment" textFill="WHITE">
+                  <Button fx:id="cancelButton" layoutX="396.0" layoutY="464.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@cancel.css" text="Cancel Appointment" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
@@ -218,7 +218,7 @@
                         <RadioButton fx:id="radio121" layoutX="58.0" layoutY="145.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@cancel.css" text="I have recovered from the disease" textFill="#8c8f85" toggleGroup="$radios" />
                         <RadioButton fx:id="radio1211" layoutX="58.0" layoutY="175.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@cancel.css" text="I donot want to tell" textFill="#8c8f85" toggleGroup="$radios" />
                         <RadioButton fx:id="radio12111" layoutX="58.0" layoutY="205.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@cancel.css" text="Other" textFill="#8c8f85" toggleGroup="$radios" />
-                        <TextArea layoutX="64.0" layoutY="239.0" prefHeight="134.0" prefWidth="254.0" promptText="Enter Reason" />
+                        <TextArea fx:id="reason" layoutX="64.0" layoutY="239.0" prefHeight="134.0" prefWidth="254.0" promptText="Enter Reason" />
                         <Label layoutX="64.0" layoutY="379.0" text="Note: Only 50% of the funds will be returned to you" textFill="#979797">
                            <font>
                               <Font size="10.0" />

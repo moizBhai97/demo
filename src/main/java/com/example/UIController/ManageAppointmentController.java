@@ -30,6 +30,7 @@ public class ManageAppointmentController implements Initializable {
     private GridPane pendingAppointmentsGridPane;
 
     private PatientController patientController;
+    private int patId;
 
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
@@ -52,6 +53,12 @@ public class ManageAppointmentController implements Initializable {
         fillCompletedAppointments();
     }
 
+    public void setData(PatientController pc, int patId) 
+    {
+        this.patientController = pc;
+        this.patId = patId;
+    }
+
     public void fillPendingAppointments() {
         try {
             String result = getPendingAppointments();
@@ -69,6 +76,7 @@ public class ManageAppointmentController implements Initializable {
                     Pane pane = fxmlLoader.load();
                     PendingAppointmentDoctorCard pendingAppointmentDoctorCard = fxmlLoader.getController();
                     pendingAppointmentDoctorCard.setCard(jsonArray.getJSONObject(i).toString());
+                    pendingAppointmentDoctorCard.setData(patientController, patId);
                     pendingAppointmentsGridPane.add(pane, columnindex, rowindex);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -87,14 +95,14 @@ public class ManageAppointmentController implements Initializable {
 
     public String getPendingAppointments() {
         // Dummy Data for JSON array
-        String result = "[{\"doctorName\":\"Dr. John Doe\",\"date\":\"12/12/2020\",\"timing\":\"12:00 PM\",\"rating\":\"2.5\"},{\"doctorName\":\"Dr. John Doe\",\"date\":\"12/12/2020\",\"timing\":\"12:00 PM\",\"rating\":\"4.5\"},{\"doctorName\":\"Dr. John Doe\",\"date\":\"12/12/2020\",\"timing\":\"12:00 PM\",\"rating\":\"4.5\"},{\"doctorName\":\"Dr. John Doe\",\"date\":\"12/12/2020\",\"timing\":\"12:00 PM\",\"rating\":\"4.5\"},{\"doctorName\":\"Dr. John Doe\",\"date\":\"12/12/2020\",\"timing\":\"12:00 PM\",\"rating\":\"4.5\"}]";
+        String result = patientController.getAppointList(patId, 1);
 
         return result;
     }
 
     public String getCompletedAppointments() {
         // Dummy Data for JSON array
-        String result = "[{\"doctorName\":\"Dr. John Doe\",\"date\":\"12/12/2020\",\"timing\":\"12:00 PM\",\"rating\":\"1.5\"},{\"doctorName\":\"Dr. John Doe\",\"date\":\"12/12/2020\",\"timing\":\"12:00 PM\",\"rating\":\"4.5\"},{\"doctorName\":\"Dr. John Doe\",\"date\":\"12/12/2020\",\"timing\":\"12:00 PM\",\"rating\":\"4.5\"},{\"doctorName\":\"Dr. John Doe\",\"date\":\"12/12/2020\",\"timing\":\"12:00 PM\",\"rating\":\"4.5\"},{\"doctorName\":\"Dr. John Doe\",\"date\":\"12/12/2020\",\"timing\":\"12:00 PM\",\"rating\":\"4.5\"}]";
+        String result = patientController.getAppointList(patId, 2);
 
         return result;
     }
