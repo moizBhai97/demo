@@ -60,7 +60,7 @@
          </children>
       </Pane>
       <Button fx:id="card1_view_prof_btn" layoutX="14.0" layoutY="147.0" mnemonicParsing="false" onAction="#viewProfileBtn" prefHeight="25.0" prefWidth="127.0" styleClass="view_prof_btn" stylesheets="@search_doctors.css" text="View Profile" />
-      <Button fx:id="card1_book_apt_btn" layoutX="153.0" layoutY="147.0" mnemonicParsing="false"  prefHeight="25.0" prefWidth="127.0" styleClass="book_apt_btn" stylesheets="@search_doctors.css" text="Book Appointment" />
+      <Button fx:id="card1_book_apt_btn" layoutX="153.0" layoutY="147.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" styleClass="book_apt_btn" stylesheets="@search_doctors.css" text="Book Appointment" />
       <ImageView fitHeight="51.0" fitWidth="55.0" layoutX="12.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../images/image%2020.png" />

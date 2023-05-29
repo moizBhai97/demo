@@ -44,6 +44,18 @@ public class Patient {
         return patId;
     }
 
+    public void updateProfile(String info)
+    {
+        JSONObject obj = new JSONObject(info);
+
+        this.patId = obj.getInt("patId");
+        this.name = obj.getString("name");
+        this.email = obj.getString("email");
+        this.DOB = obj.getString("DOB");
+        this.phoneNumber = obj.getString("phoneNumber");
+        this.gender = obj.getString("gender");
+    }
+
     public void bookAppointment(String info)
     {
         try

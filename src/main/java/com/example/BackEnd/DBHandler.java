@@ -13,4 +13,5 @@ abstract public class DBHandler {
   public abstract String getAppointments(int patId);
   public abstract String getDoctorDetails(int docID);
   public abstract void addComplaint(int patID, String details, int docID);
+  public abstract void updatePatientProfile(int patId, String info);
 }

@@ -328,6 +328,14 @@ public class SQL extends DBHandler {
         }
     }
 
+    public void updatePatientProfile(int patId, String info)
+    {
+        System.out.println("SQL updatePatientProfile");
+
+        // database mein update karo
+
+    }
+
     public String getPatient(String info) {
 
         try {
