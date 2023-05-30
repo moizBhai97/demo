@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.ReschAppointmentController">
+<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Pane prefHeight="640.0" prefWidth="924.0">
          <children>
@@ -133,7 +133,7 @@
                               </ImageView>
                            </children>
                         </Pane>
-                        <Label layoutX="85.0" layoutY="14.0" text="Dr. Amna Irum" textFill="#979797">
+                        <Label fx:id="docName" layoutX="85.0" layoutY="14.0" text="Dr. Amna Irum" textFill="#979797">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
@@ -267,7 +267,7 @@
                         </HBox>
                      </children>
                   </Pane>
-                  <Button fx:id="reschButton" layoutX="360.0" layoutY="450.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@resch.css" text="Reschedule Appointment" textFill="WHITE">
+                  <Button fx:id="reschButton" layoutX="360.0" layoutY="450.0" mnemonicParsing="false" onAction="#reschButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@resch.css" text="Reschedule Appointment" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>

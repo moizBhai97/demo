@@ -87,6 +87,7 @@ public class ManageAppointmentController implements Initializable {
 
     public String getPendingAppointments() {
         // Dummy Data for JSON array
+        System.out.println("Pending Appointments");
         String result = patientController.getAppointList(patId, 1);
 
         return result;
@@ -94,6 +95,7 @@ public class ManageAppointmentController implements Initializable {
 
     public String getCompletedAppointments() {
         // Dummy Data for JSON array
+        System.out.println("Completed Appointments");
         String result = patientController.getAppointList(patId, 2);
 
         return result;
@@ -111,11 +113,12 @@ public class ManageAppointmentController implements Initializable {
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(
-                        (new URL("file:src/main/resources/com/example/CompletedAppointmentDoctorCard.fxml")));
+                        (new URL("file:src/main/resources/com/example/PendingAppointmentDoctorCard.fxml")));
                 try {
                     Pane pane = fxmlLoader.load();
-                    CompletedAppointmentDoctorCard completedAppointmentDoctorCard = fxmlLoader.getController();
-                    completedAppointmentDoctorCard.setCard(jsonArray.getJSONObject(i).toString());
+                    PendingAppointmentDoctorCard pendingAppointmentDoctorCard = fxmlLoader.getController();
+                    pendingAppointmentDoctorCard.setCard(jsonArray.getJSONObject(i).toString());
+                    pendingAppointmentDoctorCard.setData(patientController, patId);
                     completedAppointmentsGridPane.add(pane, columnindex, rowindex);
                 } catch (Exception e) {
                     e.printStackTrace();

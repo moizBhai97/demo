@@ -83,7 +83,7 @@ public class DoctorCardController {
         fee_amount.setText(String.valueOf(price));
             String formattedRating = String.format("%.2f", Double.parseDouble(rating) );
         card1_satisfied_label.setText(formattedRating);
-
+        ;
         double ratingPercentage = Double.parseDouble(rating) / 5.0;
 
         Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage, ratingStar.getBoundsInLocal().getHeight());
@@ -101,6 +101,7 @@ public class DoctorCardController {
         fee_amount.setText(String.format("%.1f", innerObject.getFloat("fee")));
         card1_satisfied_label.setText(String.format("%.1f", innerObject.getFloat("rating")));
         double ratingPercentage = innerObject.getFloat("rating") / 5.0;
+
 
         Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage, ratingStar.getBoundsInLocal().getHeight());
         ratingStar.setClip(clip);

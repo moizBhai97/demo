@@ -130,6 +130,11 @@ public class Patient {
         }
     }
 
+    public String getAppointment(int appId)
+    {
+        return appointmentLedger.getAppointment(appId).toString();
+    }
+
     public String get(String value)
     {
         if(value.equals("patId"))

@@ -151,7 +151,7 @@
                               <ToggleButton layoutX="238.0" layoutY="124.0" mnemonicParsing="false" onAction="#timeSelected" prefHeight="36.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@book_apt.css" text="11:30 am" toggleGroup="$time" />
                               <Pane layoutX="43.0" layoutY="16.0" prefHeight="31.0" prefWidth="160.0">
                                  <children>
-                                    <Label fx:id="date" accessibleRole="DATE_PICKER" alignment="BASELINE_LEFT" layoutX="33.0" layoutY="6.0" prefHeight="20.0" prefWidth="128.0" text="21 January, Friday" textFill="#8c8fa5" wrapText="true">
+                                    <Label fx:id="date" accessibleRole="DATE_PICKER" alignment="BASELINE_LEFT" layoutX="33.0" layoutY="6.0" text="21 January, Friday" textFill="#8c8fa5" wrapText="true">
                                        <font>
                                           <Font name="System Bold" size="12.0" />
                                        </font>
@@ -161,6 +161,7 @@
                                           <Image url="@../../images/Calendar.png" />
                                        </image>
                                     </ImageView>
+                                    <DatePicker fx:id="datePicker" editable="false" layoutX="-3.0" layoutY="-2.0" onAction="#datePickerPressed" prefHeight="33.0" prefWidth="50.0" styleClass="date-picker" stylesheets="@book_apt.css" />
                                  </children>
                               </Pane>
                               <Label alignment="BASELINE_LEFT" layoutX="41.0" layoutY="175.0" prefHeight="31.0" prefWidth="134.0" text="Describe your problem" textFill="#8c8fa5" wrapText="true">
@@ -193,7 +194,6 @@
                               <Label layoutX="202.0" layoutY="5.0" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" text="Rs/Session" />
                            </children>
                         </Pane>
-                        <DatePicker fx:id="datePicker" editable="false" layoutX="354.0" layoutY="119.0" onAction="#datePickerPressed" prefHeight="25.0" prefWidth="155.0" styleClass="date-picker" stylesheets="@book_apt.css" />
                      </children>
                   </Pane>
                   <Pane fx:id="confirm_pane" layoutX="192.0" layoutY="131.0" prefHeight="232.0" prefWidth="236.0" style="-fx-background-color: #ededed;" styleClass="inner_big_pane1" visible="false">

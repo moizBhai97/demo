@@ -216,26 +216,19 @@
     
   }
 
-  .date-picker:editable > .arrow-button > * {
-    -fx-opacity: 0; /* Set the node in the button to be visible */
-}
-
-.date-picker > .arrow-button {
-    -fx-background-image: url("../../images/Calendar.png"); /* Url of the icon */
-    -fx-background-size: 100% 100%; /* Can be `cover` or `100% 100%` ect. */
-    -fx-background-repeat: no-repeat;
-    -fx-background-position: center center; /* Put the icon in the center */
-    -fx-background-color: white; /* Remove the background color */
-}
+  .date-picker .arrow-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+  }
    
-  /* .date-picker .arrow-button:hover {
+  .date-picker .arrow-button:hover {
     -fx-background-color: transparent;
   }
    
   .date-picker .arrow-button .arrow {
     
     -fx-background-color: transparent;
-  } */
+  }
 
   .date-picker .text-field {
 
