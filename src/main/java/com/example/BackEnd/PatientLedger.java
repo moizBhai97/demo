@@ -3,27 +3,49 @@ package com.example.BackEnd;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class PatientLedger {
 
     DBFactory dbFactory;
-    private List<Patient> patients;
+    private List<Patient> patientList;
 
     public PatientLedger()
     {
         dbFactory = DBFactory.getInstance();
-        patients = new ArrayList<Patient>();
-        patients.add(new Patient(1)); // for testing
+        patientList = new ArrayList<Patient>();
+        patientList.add(new Patient(1)); // for testing
     }
 
-    
+    public void setAppointmentPatients(int docId)
+    {
+        try {
+            String patients = DBFactory.getInstance().createHandler("SQL").getAppointmentPatients(docId);
+
+            JSONArray jsonArray = new JSONArray(patients);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Patient patient = new Patient(jsonObject.toString());
+                patientList.add(patient);
+            }
+
+            System.out.println(patientList.toString());
+
+        } catch (Exception e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
+            }.getClass().getEnclosingMethod().getName());
+        }
+    }
 
     public Patient getPatient(int patId)
     {
-        for(int i = 0; i < patients.size(); i++)
+        for(int i = 0; i < patientList.size(); i++)
         {
-            if(patients.get(i).getpatId() == patId)
+            if(patientList.get(i).getpatId() == patId)
             {
-                return patients.get(i);
+                return patientList.get(i);
             }
         }
 
@@ -37,9 +59,9 @@ public class PatientLedger {
             String patientInfo = dbFactory.createHandler("SQL").getPatient(info);
             System.out.println(patientInfo);
 
-            
+
             Patient patient = new Patient(patientInfo);
-            patients.add(patient);
+            patientList.add(patient);
             
             return patient;
         } catch(Exception e)

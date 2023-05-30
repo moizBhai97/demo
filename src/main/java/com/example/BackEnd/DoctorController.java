@@ -3,10 +3,12 @@ package com.example.BackEnd;
 public class DoctorController {
     private ComplaintCatalog complaintCatalog;
     private DoctorLedger doctorLedger;
+    private PatientLedger patientLedger;
 
     public DoctorController() {
 
         doctorLedger = new DoctorLedger();
+        patientLedger = new PatientLedger();
     }
 
     //public void setDate()
@@ -22,6 +24,7 @@ public class DoctorController {
 
             Doctor doctor = doctorLedger.getDoctorInstance(info);
             doctor.setAppointments();
+            patientLedger.setAppointmentPatients(doctor.getId());
             //doctor.setDetails();
 
             return "" + (doctor.getId());

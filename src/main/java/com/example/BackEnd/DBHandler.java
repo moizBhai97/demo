@@ -9,6 +9,7 @@ abstract public class DBHandler {
   public abstract String getDoctors(String name);
   public abstract String getTopDoctors();
   public abstract String getAppointmentDoctors(int patId);
+  public abstract String getAppointmentPatients(int docId);
   public abstract String getPatient(String info);
   public abstract String getDoctor(String info);
   public abstract String getReviewList(int docId);

@@ -51,6 +51,8 @@ public class DoctorLedger {
                 doctorList.add(doctor);
             }
 
+            //System.out.println(doctorList.toString());
+
         } catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
             }.getClass().getEnclosingMethod().getName());

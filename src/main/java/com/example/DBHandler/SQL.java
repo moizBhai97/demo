@@ -487,24 +487,6 @@ public class SQL extends DBHandler {
                 pstmt.setString(2, information.getString("password"));
 
                 ResultSet rs = pstmt.executeQuery();
-                
-                /*
-                   "specialization": "{{specialization}}",
-                    "description": "{{description}}",
-                    "location": "{{location}}",
-                    "stats": "{{stats}}",
-                    "patients": "{{patients}}",
-                    "experience": "{{experience}}",
-                    "rating": "{{rating}}",
-                    "services": "{{services}}",
-                    "workingHours": "{{workingHours}}",
-                    "fee": "{{fee}}",
-                    "checkupRating": "{{checkupRating}}",
-                    "environmentRating": "{{environmentRating}}",
-                    "staffRating": "{{staffRating}}",
-                    "reviews": "{{reviews}}",
-                    "availability": "{{availability}}"
-                 */
 
                 rs.next();
                 JSONObject doctorObj = new JSONObject();
@@ -583,6 +565,8 @@ public class SQL extends DBHandler {
                 appointments.put(obj);
             }
 
+            //System.out.println(appointments.toString());
+
             return appointments.toString();
         } catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
@@ -644,7 +628,6 @@ public class SQL extends DBHandler {
 
                 JSONObject detailsObj = new JSONObject();
                 detailsObj.put("email", rs.getString("email"));
-                detailsObj.put("dob", rs.getString("dob"));
                 detailsObj.put("phoneNumber", rs.getString("phone_number"));
                 detailsObj.put("gender", rs.getString("gender"));
                 detailsObj.put("specialization", rs.getString("specialization"));
@@ -657,6 +640,18 @@ public class SQL extends DBHandler {
                 detailsObj.put("workingHours", rs.getString("working_hours"));
                 detailsObj.put("fee", rs.getInt("fee"));
                 detailsObj.put("availability", rs.getString("availability"));
+
+                SQL ="SELECT DESCRIPTION FROM SERVICES WHERE DOCTOR_ID = ?;";
+                PreparedStatement pstmt2 = con.prepareStatement(SQL);
+                pstmt2.setInt(1, doctorObj.getInt("id"));
+                ResultSet rs2 = pstmt2.executeQuery();
+
+                String services = "";
+                while(rs2.next())
+                {
+                    services += rs2.getString("DESCRIPTION") + "\n";
+                }
+                detailsObj.put("services", services);
                 
                 doctorObj.put("details", detailsObj);
 
@@ -664,6 +659,43 @@ public class SQL extends DBHandler {
             }
 
             return doctors.toString();
+        } 
+        catch (Exception e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();            
+            return null;
+        } 
+    }
+
+    public String getAppointmentPatients(int docId)
+    {
+        try (Connection con = DriverManager.getConnection(connectionUrl)) 
+        {
+            System.out.println("SQL getAppointmentPatients");
+
+            String SQL = "SELECT * FROM Doctors WHERE ID IN (SELECT DOCTOR_ID FROM Appointments WHERE PATIENT_ID = ? AND STATUS = 'Booked');";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, docId);
+            ResultSet rs = pstmt.executeQuery();
+
+            JSONArray patients = new JSONArray();
+
+            while(rs.next())
+            {
+                JSONParser parser = new JSONParser();
+                JSONObject patientObj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());                
+                patientObj.put("patId", rs.getInt("id"));
+                patientObj.put("name", rs.getString("name"));
+                patientObj.put("email", rs.getString("email"));
+                patientObj.put("DOB", rs.getString("dob"));
+                patientObj.put("phoneNumber", rs.getString("phone_number"));
+                patientObj.put("gender", rs.getString("gender"));
+
+                patients.put(patientObj);
+            }
+
+            return patients.toString();
         } 
         catch (Exception e) 
         {
