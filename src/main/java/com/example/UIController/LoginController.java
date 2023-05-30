@@ -47,6 +47,12 @@ public class LoginController implements Initializable{
         return;
     }
 
+    public void setData(DoctorController dc, PatientController pc, boolean isPatient){
+        this.doctorController = dc;
+        this.patientController = pc;
+        this.isPatient = isPatient;
+    }
+
     public void loginButton(ActionEvent event){
         System.out.println("Login Button pressed");
 
@@ -66,8 +72,8 @@ public class LoginController implements Initializable{
             loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
             
             searchDoctorController = new SearchDoctorController();
-            
             searchDoctorController.setData(patientController, patId);
+ 
             loader.setController(searchDoctorController);
             
             Parent root = loader.load();
