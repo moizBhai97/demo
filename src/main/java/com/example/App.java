@@ -56,7 +56,9 @@ public class App extends Application {
                 try {
 
                     FXMLLoader loader =  new FXMLLoader();
-                    loader.setLocation(getClass().getResource("search_doctors.fxml"));
+                   // loader.setLocation(getClass().getResource("search_doctors.fxml"));
+                                        loader.setLocation(getClass().getResource("search_doctors - Copy.fxml"));
+
                     //loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
                     
                     SearchDoctorController searchDoctorController = new SearchDoctorController();
