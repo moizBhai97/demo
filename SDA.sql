@@ -1,17 +1,7 @@
 DROP DATABASE SDA
 CREATE DATABASE SDA
 USE SDA
-use Db
-
-SELECT 
-    session_id, 
-    login_name, 
-    host_name, 
-    program_name
-FROM 
-    sys.dm_exec_sessions
-WHERE 
-    database_id = DB_ID('SDA');
+use dbLab
 
 ALTER TABLE APPOINTMENT_SLOTS
 DROP CONSTRAINT APPOINTMENT_SLOTS_PK, APPOINTMENT_SLOTS_FK
@@ -253,12 +243,8 @@ Select * from APPOINTMENTS;
 
 SELECT (SELECT COUNT(ID) FROM Appointments WHERE DOCTOR_ID = 101 AND STATUS = 'Completed') as Patients, NAME, SPECIALIZATION, DESCRIPTION, LOCATION, EXPERIENCE, WORKING_HOURS, FEE, AVAILABILITY FROM Doctors WHERE ID = 101;
 
-SELECT (SELECT COUNT(ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients, id, NAME, SPECIALIZATION, DESCRIPTION, LOCATION, EXPERIENCE, WORKING_HOURS, FEE, AVAILABILITY FROM Doctors d where d.name LIKE '%A%'
-
 Select * from REVIEWS;
 
-Select * from APPOINTMENT_SLOTS;
+Select * from DOCTORS;
 
 SElect count(*) from APPOINTMENTS;
-
-SElect * from DOCTORS

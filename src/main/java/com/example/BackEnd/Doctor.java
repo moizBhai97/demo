@@ -10,11 +10,6 @@ import org.json.simple.parser.JSONParser;
 public class Doctor {
     private int id;
     private String name;
-    private String location;
-    private String specialization;
-    private String experience;
-    private double price;
-    private double rating;
 
     private DoctorDetails doctorDetails;
 
@@ -27,11 +22,6 @@ public class Doctor {
     {
         try 
         {
-            if(doctorDetails == null)
-            {
-                String json = DBFactory.getInstance().createHandler("SQL").getDoctorDetails(id);
-                this.doctorDetails = new DoctorDetails(json, id);
-            }
 
             String details = doctorDetails.toString();
 
@@ -49,33 +39,25 @@ public class Doctor {
         }
     }
 
-    public Doctor(String doctorName, String specialization, String location, String experience, Double priceDouble,
-            Double ratingDouble) {
+    public Doctor(int docId, String doctorName) 
+    {
+        this.id = docId;
         this.name = doctorName;
-        this.specialization = specialization;
-        this.location = location;
-        this.experience = experience;
-        this.price = priceDouble;
-        this.rating = ratingDouble;
-
     }
 
 
-    public Doctor(String data) {
+    public Doctor(String data) 
+    {
         System.out.println("Constructing JSON doctor");
 
         JSONObject jsonObject = new JSONObject(data);
         this.id = jsonObject.getInt("id");
         this.name = jsonObject.getString("name");
-        this.location = jsonObject.getString("location");
-        this.specialization = jsonObject.getString("specialization");
-        this.experience = jsonObject.getString("experience");
-        this.price = jsonObject.getDouble("price");
-        this.rating = jsonObject.getDouble("rating");
+        this.doctorDetails = new DoctorDetails(jsonObject.getJSONObject("details").toString(), id);
     }
 
     public Doctor()
-     {
+    {
 
     }
 
@@ -95,44 +77,14 @@ public class Doctor {
         this.name = name;
     }
 
-    public String getLocation() {
-        return location;
+    public float getFee()
+    {
+        return doctorDetails.getFee();
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getSpecialization() {
-        return specialization;
-    }
-
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
-    }
-
-    public String getExperience() {
-        return experience;
-    }
-
-    public void setExperience(String experience) {
-        this.experience = experience;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
+    public float getRating()
+    {
+        return doctorDetails.getRating();
     }
 
     private String get(String key) {
@@ -140,16 +92,6 @@ public class Doctor {
             return String.valueOf(id);
         } else if (key.equals("name")) {
             return name;
-        } else if (key.equals("location")) {
-            return location;
-        } else if (key.equals("specialization")) {
-            return specialization;
-        } else if (key.equals("experience")) {
-            return experience;
-        } else if (key.equals("price")) {
-            return String.valueOf(price);
-        } else if (key.equals("rating")) {
-            return String.valueOf(rating);
         } else
             return null;
     }
@@ -158,18 +100,24 @@ public class Doctor {
     public String toString() {
         try {
             JSONParser parser = new JSONParser();
-            JSONObject obj = new JSONObject(
-                    parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString());
+
+            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString());
+
             Set<String> keyset = obj.keySet();
-            for (String key : keyset) {
+
+            for (String key : keyset) 
+            {
                 if (get(key) != null)
                     obj.put(key, get(key));
             }
-            System.out.println(obj.toString());
+
+            obj.put("details", new JSONObject(getDoctorDetails().toString()));
+
             return obj.toString();
-        } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+
+        } catch (Exception e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
             return null;
         }
     }
@@ -184,8 +132,8 @@ public class Doctor {
         }
         Doctor other = (Doctor) obj;
         return Objects.equals(name, other.name) && Objects.equals(id, other.id)
-                && Objects.equals(specialization, other.specialization)
-                && Objects.equals(location, other.location);
+                && Objects.equals(getDoctorDetails().getSpecialization(), other.getDoctorDetails().getSpecialization())
+                && Objects.equals(getDoctorDetails().getLocation(), other.getDoctorDetails().getLocation());
     }
 
 }

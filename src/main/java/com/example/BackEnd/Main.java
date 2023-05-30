@@ -71,6 +71,7 @@ public class Main {
 
             JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/reschAppointment.json")).toString());
 
+            obj.put("docId", "101");
             obj.put("date", "2021-12-10");
             obj.put("time", "11:00:00");
             obj.put("reason", "Lazy");

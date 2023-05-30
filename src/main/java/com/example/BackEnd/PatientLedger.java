@@ -3,8 +3,6 @@ package com.example.BackEnd;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.json.JSONObject;
-
 public class PatientLedger {
 
     DBFactory dbFactory;

@@ -96,6 +96,20 @@ public class AppointmentLedger {
         return objs.toString();
     }
 
+    public void addPayment(String info, int appId)
+    {
+        try
+        {
+            dbFactory.createHandler("SQL").addPayment(info, appId);
+
+            getAppointment(appId).addPayment(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
     public void setAppointments(int patId)
     {
         try

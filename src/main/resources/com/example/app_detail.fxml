@@ -193,26 +193,6 @@
                         <Label layoutX="37.0" layoutY="72.0" text="Ratings" />
                      </children>
                   </Pane>
-                  <Pane fx:id="inner_big_pane113" layoutX="536.0" layoutY="149.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane21" stylesheets="@app_detail.css">
-                     <children>
-                        <Pane layoutX="30.0" prefHeight="49.0" prefWidth="55.0">
-                           <children>
-                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="12.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2019.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
-                        <Label layoutX="44.0" layoutY="47.0" styleClass="texty" stylesheets="@app_detail.css" text="355" textFill="WHITE">
-                           <font>
-                              <Font name="Serif Regular" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="35.0" layoutY="72.0" text="Reviews" textFill="WHITE" />
-                        <Button fx:id="inner_big_pane21" layoutX="6.0" layoutY="1.0" mnemonicParsing="false" opacity="0.0" prefHeight="94.0" prefWidth="103.0" styleClass="inner_big_pane3" stylesheets="@app_detail.css" text="Button" />
-                     </children>
-                  </Pane>
                   <Pane fx:id="inner_big_pane3" layoutX="23.0" layoutY="176.0" prefHeight="331.0" prefWidth="344.0" styleClass="inner_big_pane3" stylesheets="@app_detail.css">
                      <children>
                         <Label layoutX="48.0" layoutY="32.0" text="Appointment Timing" textFill="#979797">

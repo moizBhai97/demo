@@ -170,7 +170,7 @@
                               </Label>
                            </children>
                         </Pane>
-                        <Button fx:id="button_big111" layoutX="339.0" layoutY="304.0" mnemonicParsing="false" onAction="#confirm" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@book_apt.css" text="Book Appointment" textFill="WHITE">
+                        <Button fx:id="bookBtn" layoutX="339.0" layoutY="304.0" mnemonicParsing="false" onAction="#bookButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@book_apt.css" text="Book Appointment" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
@@ -189,7 +189,8 @@
                               </ImageView>
                               <Label layoutX="54.0" layoutY="5.0" style="-fx-text-fill: white; -fx-font-size: 11;" text="Clinic Session" />
                               <Label layoutX="54.0" layoutY="21.0" style="-fx-text-fill: white; -fx-font-size: 9;" text="Complete Session (Best Option)" />
-                              <Label layoutX="179.0" layoutY="12.0" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" text="1000Rs/Session" />
+                              <Label fx:id="feeLabel" layoutX="151.0" layoutY="5.0" prefHeight="16.0" prefWidth="41.0" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" text="1000" />
+                              <Label layoutX="202.0" layoutY="5.0" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" text="Rs/Session" />
                            </children>
                         </Pane>
                         <DatePicker fx:id="datePicker" editable="false" layoutX="354.0" layoutY="119.0" onAction="#datePickerPressed" prefHeight="25.0" prefWidth="155.0" styleClass="date-picker" stylesheets="@book_apt.css" />

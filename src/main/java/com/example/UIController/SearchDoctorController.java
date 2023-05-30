@@ -1,17 +1,10 @@
 package com.example.UIController;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-//JAVA FX IMPORTS
-import java.io.IOException;
-import java.net.MalformedURLException;
+
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
-import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -19,13 +12,11 @@ import javafx.scene.media.MediaView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -33,7 +24,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -43,12 +33,16 @@ import javafx.scene.layout.StackPane;
 
 import com.example.BackEnd.PatientController;
 
-public class SearchDoctorController implements Initializable {
-    // @FXML
-    // GridPane results_grid;
-
+public class SearchDoctorController implements Initializable 
+{
     PatientController patientController;
     int patId;
+
+    double ratingFilter = -1;
+    String specialty = "All";
+
+    private ImageView blueStarIcon;
+
 
     @FXML
     Label doc_count;
@@ -116,6 +110,7 @@ public class SearchDoctorController implements Initializable {
 
     @FXML
     Pane filter_Pane;
+
     @FXML
     ImageView filter_img;
 
@@ -123,6 +118,7 @@ public class SearchDoctorController implements Initializable {
 
     @FXML
     private Button filterApply;
+
     @FXML
     private Button filterRating1;
 
@@ -160,7 +156,7 @@ public class SearchDoctorController implements Initializable {
     private ImageView filterRatingAllIcon;
 
     @FXML
-    private ComboBox<?> specialtiesList;
+    private ComboBox<String> specialtiesList;
 
     @FXML
     private String specialty_0;
@@ -194,11 +190,6 @@ public class SearchDoctorController implements Initializable {
         }
     }
 
-    double ratingFilter = -1;
-    String specialty = "All";
-
-    private ImageView blueStarIcon;
-
     private void resetFilterColors() {
         filterRating1.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #2854c3;"); // background color
         filterRating1.setGraphic(filterRating1Icon);
@@ -225,13 +216,12 @@ public class SearchDoctorController implements Initializable {
                     ratingFilter, specialty));
         filter_Pane.setVisible(false);
         filter_img.setVisible(false);
-        // results_scrollpane.setContent(results_grid);
-        // doc_count.setText(results_grid.getChildren().size() + " Results");
 
     }
 
     @FXML
     public void ratingButtonPressed(ActionEvent event) {
+
         Button btn = (Button) event.getSource();
         String id = btn.getId();
         if (id.equals("filterRatingAll")) {
@@ -245,9 +235,6 @@ public class SearchDoctorController implements Initializable {
 
         btn.setStyle("-fx-background-color: #2854C3; -fx-text-fill: #ffffff;"); // background color
         btn.setGraphic(whiteStarIcon);
-        // createDoctorCards(patientController.sortDoctors(searhcedName, "Rating",
-        // !ascen_sort_toggle.isSelected()));
-
     }
 
     public void resetSortColors() {
@@ -255,7 +242,15 @@ public class SearchDoctorController implements Initializable {
         review_sort_btn.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #2854c3;"); // background color
         price_sort_btn.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #2854c3;"); // background color
         // text color
+    }
 
+    public void resetFilterPane()
+    {
+        resetFilterColors();
+        ratingFilter = -1;
+        specialtiesList.getSelectionModel().clearSelection();
+        specialtiesList.setValue("All");
+        specialty = "All";
     }
 
     @FXML
@@ -268,51 +263,8 @@ public class SearchDoctorController implements Initializable {
 
             // sortByAlphabetical();
             createDoctorCards(
-                    patientController.sortDoctors(searhcedName, "A-Z", !ascen_sort_toggle.isSelected(), -1, "All"));
-            // results_scrollpane.setContent(results_grid);
-            // doc_count.setText(results_grid.getChildren().size() + " Results");
-
+                    patientController.sortDoctors(searhcedName, "A-Z", !ascen_sort_toggle.isSelected(), ratingFilter, specialty));
         }
-    }
-
-    public void sortByAlphabetical() {
-        // Get the GridPane inside the ScrollPane
-        GridPane gridPane = (GridPane) results_scrollpane.getContent();
-
-        // Sort the GridPane based on the doctor name
-        List<Node> nodes = new ArrayList<>(gridPane.getChildren());
-        nodes.sort((node1, node2) -> {
-            String name1 = "";
-            String name2 = "";
-            for (Node child : ((Pane) node1).getChildren()) {
-                if (child instanceof Label && child.getId().equals("docName")) {
-                    name1 = ((Label) child).getText();
-                    break;
-                }
-            }
-            for (Node child : ((Pane) node2).getChildren()) {
-                if (child instanceof Label && child.getId().equals("docName")) {
-                    name2 = ((Label) child).getText();
-                    break;
-                }
-            }
-            return name1.compareToIgnoreCase(name2);
-        });
-
-        // Clear the GridPane and add the sorted nodes back in
-        gridPane.getChildren().clear();
-        int row = 0;
-        int col = 0;
-        for (Node node : nodes) {
-            gridPane.add(node, col, row);
-            col++;
-            if (col == 2) {
-                col = 0;
-                row++;
-            }
-        }
-        results_scrollpane.setContent(gridPane);
-
     }
 
     @FXML
@@ -326,10 +278,7 @@ public class SearchDoctorController implements Initializable {
         }
 
         createDoctorCards(patientController.sortDoctors(searhcedName, selectedToggle.getText(),
-                !ascen_sort_toggle.isSelected(), -1, "All"));
-        // results_scrollpane.setContent(results_grid);
-        // doc_count.setText(results_grid.getChildren().size() + " Results");
-
+                !ascen_sort_toggle.isSelected(), ratingFilter, specialty));
     }
 
     @FXML
@@ -339,10 +288,7 @@ public class SearchDoctorController implements Initializable {
             price_sort_btn.setStyle("-fx-background-color: #2854C3; -fx-text-fill: #ffffff;");
             selectedToggle = price_sort_btn;
             createDoctorCards(
-                    patientController.sortDoctors(searhcedName, "Price", !ascen_sort_toggle.isSelected(), -1, "All"));
-            // results_scrollpane.setContent(results_grid);
-            // doc_count.setText(results_grid.getChildren().size() + " Results");
-
+                    patientController.sortDoctors(searhcedName, "Price", !ascen_sort_toggle.isSelected(), ratingFilter, specialty));
         }
 
     }
@@ -353,17 +299,15 @@ public class SearchDoctorController implements Initializable {
             resetSortColors();
             review_sort_btn.setStyle("-fx-background-color: #2854C3; -fx-text-fill: #ffffff;");
             createDoctorCards(
-                    patientController.sortDoctors(searhcedName, "Rating", !ascen_sort_toggle.isSelected(), -1, "All"));
+                    patientController.sortDoctors(searhcedName, "Rating", !ascen_sort_toggle.isSelected(), ratingFilter, specialty));
             selectedToggle = review_sort_btn;
-            // results_scrollpane.setContent(results_grid);
-            // doc_count.setText(results_grid.getChildren().size() + " Results");
-
         }
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         results_grid = new GridPane();
 
 
@@ -387,8 +331,7 @@ public class SearchDoctorController implements Initializable {
 
         filterRatingAll.setGraphic(blueStarIcon);
         filter_Pane.setVisible(false);
-        // filter_Pane.getChildren().remove(filterRatingAllIcon);
-        // filter_Pane.getChildren().add(filterRatingAllIcon);
+
         refresh();
         return;
     }
@@ -425,6 +368,7 @@ public class SearchDoctorController implements Initializable {
     }
 
     public void searchDoctor(String value) {
+        resetFilterPane();
         String result = patientController.searchDoctor(value);
         createDoctorCards(result);
 
@@ -454,8 +398,8 @@ public class SearchDoctorController implements Initializable {
                 DoctorCardController controller = loader.getController();
                 controller.setDoctor(doctor.toString()  );
                 controller.setPatientController(patientController);
-                controller.setPatientId(1);
-                // controller.setParentController(this);
+                controller.setPatientId(patId);
+
                 results_grid.add(doctorCard, columnindex, rowindex);
                 columnindex++;
                 if (columnindex == 2) {
@@ -510,8 +454,6 @@ public class SearchDoctorController implements Initializable {
         results_scrollpane.setContent(stackPane);
 
         mediaPlayer.setOnEndOfMedia(() -> {
-            // // Call the searchDoctor method after the animation ends
-            // Platform.runLater(() -> {
 
                 searchDoctor(searhcedName);
         });
@@ -520,83 +462,4 @@ public class SearchDoctorController implements Initializable {
         resetSortColors();
 
     }
-    // public void searchTextKeyPressed(ActionEvent event) {
-    // System.out.println("searched");
-    // searhcedName = searchBar.getText();
-
-    // // Load the MP4 video
-    // Media media = null;
-    // try {
-    // File file = new File("src/Rectangle.mp4");
-    // String path = file.getAbsolutePath();
-    // media = new Media(new File(path).toURI().toString());
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // MediaPlayer mediaPlayer = new MediaPlayer(media);
-    // mediaPlayer.setAutoPlay(true);
-    // MediaView mediaView = new MediaView(mediaPlayer);
-    // mediaView.setFitWidth(200);
-    // mediaView.setFitHeight(200);
-
-    // // Create a StackPane to center the MediaView in the ScrollPane
-    // StackPane stackPane = new StackPane();
-    // stackPane.getChildren().add(mediaView);
-    // stackPane.setPrefWidth(results_scrollpane.getViewportBounds().getWidth());
-    // stackPane.setPrefHeight(results_scrollpane.getViewportBounds().getHeight());
-
-    // // Calculate the size of the MediaView
-    // double mediaWidth = stackPane.getPrefWidth() * 0.7;
-    // double mediaHeight = stackPane.getPrefHeight() * 0.7;
-
-    // // Set the size of the MediaView
-    // mediaView.setFitWidth(mediaWidth);
-    // mediaView.setFitHeight(mediaHeight);
-
-    // // Center the MediaView in the StackPane
-    // StackPane.setAlignment(mediaView, Pos.CENTER);
-
-    // results_scrollpane.setContent(stackPane);
-
-    // // Run the searchDoctor method in a background task
-    // Task<Void> task = new Task<Void>() {
-    // @Override
-    // protected Void call() throws Exception {
-    // searchDoctor(searhcedName);
-    // return null;
-    // }
-
-    // @Override
-    // protected void succeeded() {
-    // // Set the content of the scroll pane to the results grid
-    // mediaPlayer.setOnEndOfMedia(() -> {
-    // // Call the searchDoctor method after the animation ends
-    // Platform.runLater(() -> {
-
-    // results_scrollpane.setContent(results_grid);
-    // doc_count.setText(results_grid.getChildren().size() + " Results");
-
-    // });
-    // });
-    // resetSortColors();
-    // }
-
-    // @Override
-    // protected void failed() {
-    // // Remove the media view when the search fails
-    // mediaPlayer.setOnEndOfMedia(() -> {
-    // // Call the searchDoctor method after the animation ends
-    // Platform.runLater(() -> {
-
-    // results_scrollpane.setContent(results_grid);
-    // doc_count.setText(results_grid.getChildren().size() + " Results");
-
-    // });
-    // });
-    // resetSortColors();
-    // // e.printStackTrace();
-    // }
-    // };
-    // new Thread(task).start();
-    // }
 }
