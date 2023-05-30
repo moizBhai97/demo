@@ -1,0 +1,6 @@
+{
+    "amount": "{{amount}}",
+    "status": "{{status}}",
+    "date": "{{date}}",
+    "time": "{{time}}"
+}

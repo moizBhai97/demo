@@ -61,6 +61,7 @@ public class ReviewLedger {
     {
 
         System.out.println("getAvgRating: ");
+        
         JSONObject obj = new JSONObject(info);
 
         float checkupRating = 0;
@@ -89,8 +90,6 @@ public class ReviewLedger {
         obj.put("rating", experience);
         obj.put("stats", stats*(100/5));
         obj.put("reviews", reviews.size());
-
-        System.out.println(obj.toString());
 
         return obj.toString();
     }

@@ -1,15 +1,16 @@
 package com.example.BackEnd;
 
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.json.simple.parser.JSONParser;
+
+import com.google.gson.JsonObject;
 
 public class DoctorLedger {
 
@@ -25,7 +26,6 @@ public class DoctorLedger {
         System.out.println("Ledger Setting top doctors");
         try {
             String doctors = DBFactory.getInstance().createHandler("SQL").getTopDoctors();
-            // doctors.toString();
 
             JSONArray jsonArray = new JSONArray(doctors);
 
@@ -47,32 +47,14 @@ public class DoctorLedger {
         doctorList.add(doctor);
     }
 
-    // private void removeDuplicates() {
-    // Set<Doctor> doctorSet = new TreeSet<>(new Comparator<Doctor>() {
-    // @Override
-    // public int compare(Doctor d1, Doctor d2) {
-    // if (d1.getName().equals(d2.getName()) && d1.getId() == d2.getId()
-    // && d1.getSpecialization().equals(d2.getSpecialization())
-    // && d1.getLocation().equals(d2.getLocation())) {
-    // return 0;
-    // } else {
-    // return 1;
-    // }
-    // }
-    // });
-    // doctorSet.addAll(doctorList);
-    // doctorList.clear();
-    // doctorList.addAll(doctorSet);
-    // }
-
     private void removeDuplicates() {
         for (int i = 0; i < doctorList.size(); i++) {
             Doctor doctor1 = doctorList.get(i);
             for (int j = i + 1; j < doctorList.size(); j++) {
                 Doctor doctor2 = doctorList.get(j);
                 if (doctor1.getName().equals(doctor2.getName())
-                        && doctor1.getSpecialization().equals(doctor2.getSpecialization())
-                        && doctor1.getLocation().equals(doctor2.getLocation())) {
+                        && doctor1.getDoctorDetails().getSpecialization().equals(doctor2.getDoctorDetails().getSpecialization())
+                        && doctor1.getDoctorDetails().getLocation().equals(doctor2.getDoctorDetails().getLocation())) {
                     doctorList.remove(j);
                     j--;
                 }
@@ -86,13 +68,7 @@ public class DoctorLedger {
 
             String doctorInfo = DBFactory.getInstance().createHandler("SQL").getDoctor(info);
 
-            JSONObject doctorObj = new JSONObject();
-            
-
-            JSONObject detailsObj = new JSONObject();
-
-            Doctor doctor = new Doctor(doctorObj.toString());
-            doctor.setDoctorDetails(detailsObj.toString());
+            Doctor doctor = new Doctor(doctorInfo);
             doctorList.add(doctor);
 
             return doctor;
@@ -108,19 +84,20 @@ public class DoctorLedger {
 
         JSONArray jsonArray = new JSONArray(json);
 
+        JSONArray jsonDoctors = new JSONArray();
+
         List<Doctor> doctors = new ArrayList<>();
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONObject jsonObject = jsonArray.getJSONObject(i);
             Doctor doctor = new Doctor(jsonObject.toString());
+            jsonDoctors.put(new JSONObject(doctor.toString()));
             doctors.add(doctor);
         }
 
         doctorList.addAll(doctors);
         removeDuplicates();
 
-        // System.out.println(doctorList.toString());
-
-        return json.toString();
+        return jsonDoctors.toString();
     }
 
     public String sortByAlphabetical(String name, Boolean reversed, double ratingFilter, String specialtyFilter) {
@@ -129,20 +106,21 @@ public class DoctorLedger {
 
         // Filter the list to only include doctors with the given name
         tempDoctors = tempDoctors.stream()
-                .filter(doctor -> doctor.getName().contains(name))
+                .filter(doctor -> doctor.getName().toLowerCase().contains(name.toLowerCase()))
                 .collect(Collectors.toList());
         // Sort the list alphabetically by name
         // print
+
         if (ratingFilter != -1) {
             // Filter the list to only include doctors with the given rating
             tempDoctors = tempDoctors.stream()
-                    .filter(doctor -> doctor.getRating() >= ratingFilter)
+                    .filter(doctor -> doctor.getDoctorDetails().getRating() >= ratingFilter)
                     .collect(Collectors.toList());
         }
         if (specialtyFilter != null && !specialtyFilter.equals("All")) {
             // Filter the list to only include doctors with the given specialty
             tempDoctors = tempDoctors.stream()
-                    .filter(doctor -> doctor.getSpecialization().equals(specialtyFilter))
+                    .filter(doctor -> doctor.getDoctorDetails().getSpecialization().equals(specialtyFilter))
                     .collect(Collectors.toList());
         }
 
@@ -167,34 +145,33 @@ public class DoctorLedger {
 
         // Filter the list to only include doctors with the given name
         tempDoctors = tempDoctors.stream()
-                .filter(doctor -> doctor.getName().contains(name))
+                .filter(doctor -> doctor.getName().toLowerCase().contains(name.toLowerCase()))
                 .collect(Collectors.toList());
         // Sort the list alphabetically by name
 
         if (ratingFilter != -1) {
             // Filter the list to only include doctors with the given rating
             tempDoctors = tempDoctors.stream()
-                    .filter(doctor -> doctor.getRating() >= ratingFilter)
+                    .filter(doctor -> doctor.getDoctorDetails().getRating() >= ratingFilter)
                     .collect(Collectors.toList());
         }
         if (specialtyFilter != null && !specialtyFilter.equals("All")) {
             // Filter the list to only include doctors with the given specialty
             tempDoctors = tempDoctors.stream()
-                    .filter(doctor -> doctor.getSpecialization().equals(specialtyFilter))
+                    .filter(doctor -> doctor.getDoctorDetails().getSpecialization().equals(specialtyFilter))
                     .collect(Collectors.toList());
         }
 
         if (!reversed) {
-            tempDoctors.sort(Comparator.comparing(Doctor::getPrice));
+            tempDoctors.sort(Comparator.comparing(Doctor::getFee));
         } else if (reversed) {
-            tempDoctors.sort(Comparator.comparing(Doctor::getPrice).reversed());
+            tempDoctors.sort(Comparator.comparing(Doctor::getFee).reversed());
         }
         // convert to json
         JSONArray doctors = new JSONArray();
         for (int i = 0; i < tempDoctors.size(); i++) {
             doctors.put(new JSONObject(tempDoctors.get(i).toString()));
         }
-        // System.out.println(doctors.toString());
 
         // print doctors
 
@@ -219,20 +196,20 @@ public class DoctorLedger {
 
         // Filter the list to only include doctors with the given name
         tempDoctors = tempDoctors.stream()
-                .filter(doctor -> doctor.getName().contains(name))
+                .filter(doctor -> doctor.getName().toLowerCase().contains(name.toLowerCase()))
                 .collect(Collectors.toList());
         // Sort the list alphabetically by name
 
         if (ratingFilter != -1) {
             // Filter the list to only include doctors with the given rating
             tempDoctors = tempDoctors.stream()
-                    .filter(doctor -> doctor.getRating() >= ratingFilter)
+                    .filter(doctor -> doctor.getDoctorDetails().getRating() >= ratingFilter)
                     .collect(Collectors.toList());
         }
         if (specialtyFilter != null && !specialtyFilter.equals("All")) {
             // Filter the list to only include doctors with the given specialty
             tempDoctors = tempDoctors.stream()
-                    .filter(doctor -> doctor.getSpecialization().equals(specialtyFilter))
+                    .filter(doctor -> doctor.getDoctorDetails().getSpecialization().equals(specialtyFilter))
                     .collect(Collectors.toList());
         }
 
@@ -241,6 +218,7 @@ public class DoctorLedger {
         } else if (reversed) {
             tempDoctors.sort(Comparator.comparing(Doctor::getRating).reversed());
         }
+
         // convert to json
         JSONArray doctors = new JSONArray();
         for (int i = 0; i < tempDoctors.size(); i++) {
@@ -252,7 +230,6 @@ public class DoctorLedger {
 
     public String getTopDoctors() {
 
-        // System.out.println("Ledger Getting top doctors");
         JSONArray doctors = new JSONArray();
         for (int i = 0; i < topDoctors.size(); i++) {
             doctors.put(new JSONObject(topDoctors.get(i).toString()));

@@ -3,9 +3,6 @@ package com.example.UIController;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import org.json.JSONObject;
-
-import com.example.BackEnd.Patient;
 import com.example.BackEnd.PatientController;
 
 import javafx.event.ActionEvent;

@@ -75,6 +75,7 @@ public class DoctorDetails {
         try
         {
             reviewLedger = new ReviewLedger(docId);
+            
 
             info = reviewLedger.getAvgRating(info);
 
@@ -100,6 +101,156 @@ public class DoctorDetails {
         {
             System.out.println(e + "\nError in DoctorDetails constructor.");
         }
+    }
+
+    public String getSpecialization()
+    {
+        return specialization;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public String getLocation()
+    {
+        return location;
+    }
+
+    public int getStats()
+    {
+        return stats;
+    }
+
+    public int getPatients()
+    {
+        return patients;
+    }
+
+    public int getExperience()
+    {
+        return experience;
+    }
+
+    public float getRating()
+    {
+        return rating;
+    }
+
+    public String getServices()
+    {
+        return services;
+    }
+
+    public String getWorkingHours()
+    {
+        return workingHours;
+    }
+
+    public float getFee()
+    {
+        return fee;
+    }
+
+    public String getAvailability()
+    {
+        return availability;
+    }
+
+    public float getCheckupRating()
+    {
+        return checkupRating;
+    }
+
+    public float getEnvironmentRating()
+    {
+        return environmentRating;
+    }
+
+    public float getStaffRating()
+    {
+        return staffRating;
+    }
+
+    public int getReviews()
+    {
+        return reviews;
+    }
+
+    public void setSpecialization(String specialization)
+    {
+        this.specialization = specialization;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    public void setLocation(String location)
+    {
+        this.location = location;
+    }
+
+    public void setStats(int stats)
+    {
+        this.stats = stats;
+    }
+
+    public void setPatients(int patients)
+    {
+        this.patients = patients;
+    }
+
+    public void setExperience(int experience)
+    {
+        this.experience = experience;
+    }
+
+    public void setRating(float rating)
+    {
+        this.rating = rating;
+    }
+
+    public void setServices(String services)
+    {
+        this.services = services;
+    }
+
+    public void setWorkingHours(String workingHours)
+    {
+        this.workingHours = workingHours;
+    }
+
+    public void setFee(float fee)
+    {
+        this.fee = fee;
+    }
+
+    public void setAvailability(String availability)
+    {
+        this.availability = availability;
+    }
+
+    public void setCheckupRating(float checkupRating)
+    {
+        this.checkupRating = checkupRating;
+    }
+
+    public void setEnvironmentRating(float environmentRating)
+    {
+        this.environmentRating = environmentRating;
+    }
+
+    public void setStaffRating(float staffRating)
+    {
+        this.staffRating = staffRating;
+    }
+
+    public void setReviews(int reviews)
+    {
+        this.reviews = reviews;
     }
 
     public ReviewLedger getReviewLedger()
