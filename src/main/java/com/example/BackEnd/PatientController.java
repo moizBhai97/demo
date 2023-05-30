@@ -1,5 +1,8 @@
 package com.example.BackEnd;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class PatientController {
 
     private DoctorLedger doctorLedger;
@@ -87,7 +90,28 @@ public class PatientController {
 
     public String getAppointList(int patId, int value) 
     {
-        return patientLedger.getPatient(patId).getAppointList(value);
+        String info = patientLedger.getPatient(patId).getAppointList(value);
+
+        JSONArray arr = new JSONArray(info);
+
+        for(int i=0; i<arr.length(); i++)
+        {
+            arr.getJSONObject(i).put("name", doctorLedger.getDoctor(arr.getJSONObject(i).getInt("docId")).getName());
+            arr.getJSONObject(i).put("rating", doctorLedger.getDoctor(arr.getJSONObject(i).getInt("docId")).getRating());
+        }
+
+        return arr.toString();
+    }
+
+    public String getAppointment(int patId, int appId) 
+    {
+        String info = patientLedger.getPatient(patId).getAppointment(appId);
+
+        JSONObject obj = new JSONObject(info);
+
+        obj.put("doctor", new JSONObject(doctorLedger.getDoctor(obj.getInt("docId")).getDetails()));
+
+        return obj.toString();
     }
 
     public void cancelAppointment(String Reason, int patId, int appId) 

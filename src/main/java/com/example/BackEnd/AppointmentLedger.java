@@ -66,13 +66,29 @@ public class AppointmentLedger {
         {
             if(value == 1)
             {
-                dbFactory.createHandler("SQL").updateAppointment(appId, info, value);
+                JSONObject obj = new JSONObject(info);
+
+                obj.put("docId", getAppointment(appId).get("docId"));
+                obj.put("time", getAppointment(appId).get("time"));
+                obj.put("date", getAppointment(appId).get("date"));
+
+                dbFactory.createHandler("SQL").updateAppointment(appId, obj.toString(), value);
                 
-                getAppointment(appId).setStatus("Cancel");
+                getAppointment(appId).setStatus("Cancelled");
+
+                System.out.println(getAppointment(appId).toString());
             }
 
             if(value == 2)
             {
+                JSONObject obj = new JSONObject();
+
+                obj.put("docId", getAppointment(appId).get("docId"));
+                obj.put("time", getAppointment(appId).get("time"));
+                obj.put("date", getAppointment(appId).get("date"));
+
+                dbFactory.createHandler("SQL").cancelAppointment(obj.toString());
+
                 dbFactory.createHandler("SQL").updateAppointment(appId, info, value);
 
                 getAppointment(appId).update(info);
@@ -110,7 +126,7 @@ public class AppointmentLedger {
                 
                 objs.put(obj);
             }
-            else if(value == 2)
+            else if(value == 2 && !appointments.get(i).getStatus().equals("Booked"))
             {
                 JSONObject obj = new JSONObject(appointments.get(i).toString());
                 
@@ -118,6 +134,8 @@ public class AppointmentLedger {
             }
             
         }
+
+        System.out.println(objs.toString());
 
         return objs.toString();
     }

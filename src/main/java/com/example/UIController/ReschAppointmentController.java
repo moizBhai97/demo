@@ -16,7 +16,10 @@ import com.example.BackEnd.PatientController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -26,6 +29,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
 public class ReschAppointmentController  implements Initializable
 {
@@ -62,6 +66,7 @@ public class ReschAppointmentController  implements Initializable
     int docId = 101;
     int time;
     String date;
+    String selectedTime = null;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
@@ -82,7 +87,7 @@ public class ReschAppointmentController  implements Initializable
 
         //System.out.println(pc.getSchedule(docId, date, time));
 
-        JSONArray objs = new JSONArray("[{\"date\":\"2023-06-01\",\"available\":false,\"time\":\"10:00\"}, {\"date\":\"2023-06-01\",\"available\":true,\"time\":\"11:00\"}, {\"date\":\"2023-06-01\",\"available\":true,\"time\":\"12:00\"}]");
+        JSONArray objs = new JSONArray(pc.getSchedule(docId, date, time));
 
         refreshToggleButtonGroup(objs.toString());
     }
@@ -100,10 +105,11 @@ public class ReschAppointmentController  implements Initializable
         if(time == 2)
         {
             time = 1;
+            selectedTime = null;
             day.setStyle("-fx-background-color: #2854C3; -fx-border-color: #2854C3; -fx-text-fill: white;");
             night.setStyle("-fx-background-color: transparent; -fx-border-color: #8C8FA5; -fx-border-width: 1px 1px 1px 1px; -fx-text-fill: black;");
             System.out.println(pc.getSchedule(docId, date, time));
-            refreshToggleButtonGroup("[{\"date\":\"2023-06-01\",\"available\":false,\"time\":\"10:00\"}, {\"date\":\"2023-06-01\",\"available\":true,\"time\":\"11:00\"}, {\"date\":\"2023-06-01\",\"available\":true,\"time\":\"12:00\"}]");
+            refreshToggleButtonGroup(pc.getSchedule(docId, date, time));
         }
     }
 
@@ -112,15 +118,22 @@ public class ReschAppointmentController  implements Initializable
         if(time == 1)
         {
             time = 2;
+            selectedTime = null;
             night.setStyle("-fx-background-color: #2854C3; -fx-border-color: #2854C3; -fx-text-fill: white;");
             day.setStyle("-fx-background-color: transparent; -fx-border-color: #8C8FA5; -fx-border-width: 1px 1px 1px 1px; -fx-text-fill: black;");
             System.out.println(pc.getSchedule(docId, date, time));
-            refreshToggleButtonGroup("[{\"date\":\"2023-06-01\",\"available\":true,\"time\":\"18:00\"}, {\"date\":\"2023-06-01\",\"available\":false,\"time\":\"19:00\"}]");
+            refreshToggleButtonGroup(pc.getSchedule(docId, date, time));
         }
     }
 
     public void reschButton(ActionEvent event) 
     {
+        if(selectedTime == null)
+        {
+            System.out.println("Please select a time");
+            return;
+        }
+
         RadioButton selectedRadioButton = (RadioButton) radios.getSelectedToggle();
         String data = selectedRadioButton.getText();
 
@@ -130,14 +143,35 @@ public class ReschAppointmentController  implements Initializable
         }
 
         JSONObject obj = new JSONObject();
-        String dateUnformatted = (datePicker.getValue().toString());
-        DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate dateConvert = LocalDate.parse(dateUnformatted, inputFormatter);
-
-        obj.put("date", dateConvert.toString());
+        
+        obj.put("docId", docId);
+        obj.put("date", date);
+        obj.put("time", selectedTime);
         obj.put("reason", data);
 
-        //pc.reschAppointment(obj.toString(), patId, appID);
+        pc.reschAppointment(obj.toString(), patId, appID);
+
+        try
+        {
+            this.reschButton.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/manageAppointment.fxml")));
+            //-------------------------------------------------------------------------------------------------//
+            ManageAppointmentController manageAppointmentController = new ManageAppointmentController();
+            manageAppointmentController.setData(pc, patId);
+            //-------------------------------------------------------------------------------------------------//
+            loader.setController(manageAppointmentController);
+            loader.load();
+
+            Parent root = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     public void datePickerPressed(ActionEvent event) {
@@ -154,6 +188,8 @@ public class ReschAppointmentController  implements Initializable
         String formattedDate = dateConvert.format(outputFormatter);
         System.out.println(formattedDate);
         datePick.setText(formattedDate);
+
+        refreshToggleButtonGroup(pc.getSchedule(docId, date, time));
     }
 
     public void handleToggleButtonAction(ToggleButton selectedButton) 
@@ -175,6 +211,8 @@ public class ReschAppointmentController  implements Initializable
             else 
             {
                 button.setStyle("-fx-background-color: #2854C3; -fx-border-color: #2854C3; -fx-text-fill: white;");
+                selectedTime=selectedButton.getText();
+                System.out.println("Selected ToggleButton text: " + selectedTime);
             }
         }
     }
@@ -189,7 +227,7 @@ public class ReschAppointmentController  implements Initializable
         for (int i = 0; i < objs.length(); i++) 
         {
             JSONObject obj = objs.getJSONObject(i);
-            ToggleButton button = new ToggleButton(obj.getString("time"));
+            ToggleButton button = new ToggleButton(obj.getString("time").substring(0, 5));
             button.setMinWidth(85);
             button.setMinHeight(49);
 

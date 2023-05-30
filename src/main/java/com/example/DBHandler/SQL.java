@@ -78,14 +78,16 @@ public class SQL extends DBHandler {
         {
             if(value == 1)
             {
-                String SQL = "UPDATE Appointments SET STATUS = 'Cancelled' WHERE ID = ?;";
+                JSONObject obj = new JSONObject(info);
+
+                String SQL = "UPDATE Appointments SET STATUS = 'Cancelled', UPDATE_REASON = ? WHERE ID = ?;";
                 PreparedStatement pstmt = con.prepareStatement(SQL);
-                pstmt.setInt(1, appId);
+
+                pstmt.setString(1, obj.getString("reason"));
+                pstmt.setInt(2, appId);
                 pstmt.executeUpdate();
 
                 pstmt.close();
-
-                JSONObject obj = new JSONObject(info);
 
                 SQL = "UPDATE APPOINTMENT_SLOTS SET AVAILABLE = 1 WHERE DOCTOR_ID = ? AND DATE = ? AND TIME = ?;";
                 pstmt = con.prepareStatement(SQL);
