@@ -12,11 +12,12 @@ public class PatientController {
 
     public String login(String info)
     {
+        System.out.println("Pateint controller login");
         try{
 
             Patient patient = patientLedger.getPatient(info);
             patient.setAppointments();
-
+            doctorLedger.setAppointmentDoctors(patient.getpatId());
             doctorLedger.setTopDoctors();
 
             return "" + (patient.getpatId());

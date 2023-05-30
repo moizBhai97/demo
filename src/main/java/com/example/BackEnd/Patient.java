@@ -30,6 +30,7 @@ public class Patient {
     public Patient(String info)
     {
         JSONObject obj = new JSONObject(info);
+        //System.out.println(obj.getString("patId"));
 
         this.patId = obj.getInt("patId");
         this.name = obj.getString("name");
@@ -102,7 +103,7 @@ public class Patient {
         if(appointmentLedger == null)
             appointmentLedger = new AppointmentLedger();
             
-        appointmentLedger.setAppointments(this.patId);
+        appointmentLedger.setPatientAppointments(this.patId);
     }
 
     public void cancelAppointment(String Reason, int appId)

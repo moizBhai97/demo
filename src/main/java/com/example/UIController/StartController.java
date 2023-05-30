@@ -53,7 +53,7 @@ public class StartController implements Initializable{
 
             loginController = new LoginController();
             patientController = new PatientController();
-            loginController.setData(doctorController, patientController, false);    // dc is null;
+            loginController.setData(doctorController, patientController, true);    // dc is null;
 
             loader.setController(loginController);
 
