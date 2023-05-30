@@ -36,6 +36,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -176,6 +177,8 @@ public class SearchDoctorController implements Initializable {
 
     @FXML
     private String specialty_4;
+
+    private FlowPane results_flowpane;
 
     @FXML
     public void filter_toggle(ActionEvent event) {
@@ -365,11 +368,15 @@ public class SearchDoctorController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         results_grid = new GridPane();
-
+        results_flowpane = new FlowPane();
 
         //patientController = new PatientController();
         results_grid.setHgap(10);
         results_grid.setVgap(10);
+
+        results_flowpane.setHgap(10);
+        results_flowpane.setVgap(10);
+
 
         whiteStarIcon = new ImageView(filterRatingAllIcon.getImage());
         whiteStarIcon.setFitWidth(filterRatingAllIcon.getFitWidth());
@@ -409,14 +416,16 @@ public class SearchDoctorController implements Initializable {
 
         patientController = new PatientController();
         
-        results_grid.setHgap(10);
-        results_grid.setVgap(10);
-        results_grid.getChildren().clear();
+        //esults_grid.setHgap(10);
+        //results_grid.setVgap(10);
+        //results_grid.getChildren().clear();
         results_scrollpane.getChildrenUnmodifiable().clear();
         // set padding
-        results_grid.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
+   //     results_grid.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
+        results_flowpane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
         // set transparent background
-        results_grid.setStyle("-fx-background-color: transparent;");
+  //      results_grid.setStyle("-fx-background-color: transparent;");
+        results_flowpane.setStyle("-fx-background-color: transparent;");
 
         createDoctorCards(patientController.getTopDoctors());
         results_scrollpane.setContent(results_grid);
@@ -434,38 +443,27 @@ public class SearchDoctorController implements Initializable {
 
     public void createDoctorCards(String result) {
         try {
-
-            results_grid.getChildren().clear();
+            results_flowpane.getChildren().clear();
             JSONArray doctors = new JSONArray(result);
 
-            int rowindex = 0;
-            int columnindex = 0;
             for (Object obj : doctors) {
                 JSONObject doctor = (JSONObject) obj;
-            
-                // create doctorCard with these values
-            
-                
-                FXMLLoader loader = new FXMLLoader();
 
+                // create doctorCard with these values
+                FXMLLoader loader = new FXMLLoader();
                 loader.setLocation((new URL("file:src/main/resources/com/example/DoctorCard.fxml")));
                 Pane doctorCard = loader.load();
 
                 DoctorCardController controller = loader.getController();
-                controller.setDoctor(doctor.toString()  );
+                controller.setDoctor(doctor.toString());
                 controller.setPatientController(patientController);
                 controller.setPatientId(1);
-                // controller.setParentController(this);
-                results_grid.add(doctorCard, columnindex, rowindex);
-                columnindex++;
-                if (columnindex == 2) {
-                    columnindex = 0;
-                    rowindex++;
-                }
+
+                results_flowpane.getChildren().add(doctorCard);
             }
-            // results_scrollpane.setContent(results_grid);
-            results_scrollpane.setContent(results_grid);
-            doc_count.setText(results_grid.getChildren().size() + " Results");
+
+            results_scrollpane.setContent(results_flowpane);
+            doc_count.setText(results_flowpane.getChildren().size() + " Results");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -493,12 +491,12 @@ public class SearchDoctorController implements Initializable {
         // Create a StackPane to center the MediaView in the ScrollPane
         StackPane stackPane = new StackPane();
         stackPane.getChildren().add(mediaView);
-        stackPane.setPrefWidth(results_scrollpane.getViewportBounds().getWidth());
-        stackPane.setPrefHeight(results_scrollpane.getViewportBounds().getHeight());
+        stackPane.setPrefWidth(results_scrollpane.getViewportBounds().getWidth()-1);
+        stackPane.setPrefHeight(results_scrollpane.getViewportBounds().getHeight()-1);
 
         // Calculate the size of the MediaView
-        double mediaWidth = stackPane.getPrefWidth() * 0.7;
-        double mediaHeight = stackPane.getPrefHeight() * 0.7;
+        double mediaWidth = stackPane.getPrefWidth() * 0.6;
+        double mediaHeight = stackPane.getPrefHeight() * 0.6;
 
         // Set the size of the MediaView
         mediaView.setFitWidth(mediaWidth);

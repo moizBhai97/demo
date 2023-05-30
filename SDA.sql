@@ -248,3 +248,8 @@ Select * from REVIEWS;
 Select * from DOCTORS;
 
 SElect count(*) from APPOINTMENTS;
+
+
+Update Doctors
+set rating=2.5
+where name ='Dr. Asim Malik'

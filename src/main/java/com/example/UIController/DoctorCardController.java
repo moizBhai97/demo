@@ -87,7 +87,7 @@ public class DoctorCardController {
         fee_amount.setText(String.valueOf(price));
             String formattedRating = String.format("%.2f", Double.parseDouble(rating) );
         card1_satisfied_label.setText(formattedRating);
-
+        ;
         double ratingPercentage = Double.parseDouble(rating) / 5.0;
 
         Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage, ratingStar.getBoundsInLocal().getHeight());
@@ -102,7 +102,9 @@ public class DoctorCardController {
         specialization.setText(jsonObject.getString("specialization"));
         fee_amount.setText(jsonObject.getString("price"));
         card1_satisfied_label.setText(jsonObject.getString("rating"));
+        card1_exp_label.setText(jsonObject.getString("experience")+ " years" );
         double ratingPercentage = Double.parseDouble(jsonObject.getString("rating")) / 5.0;
+
 
         Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage, ratingStar.getBoundsInLocal().getHeight());
         ratingStar.setClip(clip);
