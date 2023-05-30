@@ -60,6 +60,8 @@ public class LoginController implements Initializable{
         loginInfo.put("email", this.emailTextField.getText());
         loginInfo.put("password", this.passwordTextField.getText());
 
+        System.out.println(loginInfo.toString());
+
         if(isPatient){
             System.out.println("Patient login");
 

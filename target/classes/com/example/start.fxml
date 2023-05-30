@@ -39,7 +39,7 @@
             <Image url="@../../images/PatientCropped.png" />
          </image>
       </ImageView>
-      <Button fx:id="doctorButton" layoutX="128.0" layoutY="123.0" mnemonicParsing="false" prefHeight="247.0" prefWidth="152.0" style="-fx-background-color: transparent;" />
+      <Button fx:id="doctorButton" layoutX="128.0" layoutY="123.0" mnemonicParsing="false" onAction="#doctorButton" prefHeight="247.0" prefWidth="152.0" style="-fx-background-color: transparent;" />
       <Button fx:id="patientButton" layoutX="418.0" layoutY="123.0" mnemonicParsing="false" onAction="#patientButton" prefHeight="247.0" prefWidth="152.0" style="-fx-background-color: transparent;" />
    </children>
 </Pane>

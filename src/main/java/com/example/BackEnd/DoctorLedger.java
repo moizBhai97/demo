@@ -39,6 +39,24 @@ public class DoctorLedger {
         }
     }
 
+    public void setAppointmentDoctors(int patId) {
+        try {
+            String doctors = DBFactory.getInstance().createHandler("SQL").getAppointmentDoctors(patId);
+
+            JSONArray jsonArray = new JSONArray(doctors);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Doctor doctor = new Doctor(jsonObject.toString());
+                doctorList.add(doctor);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
+            }.getClass().getEnclosingMethod().getName());
+        }
+    }
+
     public void addDoctor(Doctor doctor) {
         doctorList.add(doctor);
     }

@@ -26,6 +26,7 @@ public class DoctorDetails {
     private int reviews;
 
     private ReviewLedger reviewLedger;
+    private AppointmentLedger appointmentLedger;
     private String schedule;
 
     public DoctorDetails()
@@ -266,6 +267,14 @@ public class DoctorDetails {
     public void addReview(String info, int patId, int docId)
     {
         reviewLedger.addReview(info, patId, docId);
+    }
+
+    public void setAppointments(int docId)
+    {
+        if(appointmentLedger == null)
+            appointmentLedger = new AppointmentLedger();
+            
+        appointmentLedger.setPatientAppointments(docId);
     }
 
     private boolean isDayTime(String time) 

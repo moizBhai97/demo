@@ -28,7 +28,7 @@ public class ManageAppointmentController implements Initializable {
 
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
-
+        
         completedAppointmentsGridPane = new GridPane();
         completedAppointmentsScrollPane.setContent(completedAppointmentsGridPane);
         completedAppointmentsGridPane.setVgap(10);

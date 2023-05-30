@@ -69,6 +69,11 @@ public class Doctor {
         
     }
 
+    public void setAppointments()
+    {
+        doctorDetails.setAppointments(this.id);
+    }
+
     public int getId() {
         return id;
     }
