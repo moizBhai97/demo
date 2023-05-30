@@ -100,7 +100,7 @@ public class BookAppointmentController implements Initializable {
         doctorName.setText(docName);
 
         datePicker.getEditor().setDisable(true);
-datePicker.getEditor().setOpacity(1);
+        datePicker.getEditor().setOpacity(1);
         refresh();
         return;
     }
