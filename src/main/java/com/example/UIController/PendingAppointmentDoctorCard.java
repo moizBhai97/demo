@@ -70,7 +70,7 @@ public class PendingAppointmentDoctorCard {
         doctorName.setText(jsonObject.getString("doctorName"));
         docId = jsonObject.getInt("docId");
         date.setText(jsonObject.getString("date"));
-        appointID = jsonObject.getInt("appID");
+        appointID = jsonObject.getInt("appId");
         timing.setText(jsonObject.getString("timing"));
         ratingAmount.setText(jsonObject.getString("rating"));
         double ratingPercentage = Double.parseDouble(jsonObject.getString("rating")) / 5.0;

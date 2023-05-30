@@ -30,39 +30,45 @@ public class SQL extends DBHandler {
     }
 
   
-    public int saveAppointment(String info, int patId)
+    public void bookAppointment(String info)
     {
         try (Connection con = DriverManager.getConnection(connectionUrl)) 
         {
-            String SQL = "INSERT INTO Appointments (DATE, TIME, PROBLEM, DOCTOR_ID, PATIENT_ID, STATUS) VALUES (?, ?, ?, ?, ?, ?);";
-            PreparedStatement pstmt = con.prepareStatement(SQL);
-            
             JSONObject obj = new JSONObject(info);
 
-            pstmt.setString(1, obj.getString("date"));
-            pstmt.setString(2, obj.getString("time"));
-            pstmt.setString(3, obj.getString("problem"));
-            pstmt.setInt(4, obj.getInt("docId"));
-            pstmt.setInt(5, patId);
-            pstmt.setString(6, "Booked");
+            String SQL = "UPDATE APPOINTMENT_SLOTS SET AVAILABLE = 0 WHERE DOCTOR_ID = ? AND DATE = ? AND TIME = ?;";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, obj.getInt("docId"));
+            pstmt.setString(2, obj.getString("date"));
+            pstmt.setString(3, obj.getString("time"));
             pstmt.executeUpdate();
-
-            pstmt.close();
-
-            SQL = "SELECT COUNT(ID) FROM Appointments";
-            pstmt = con.prepareStatement(SQL);
-            ResultSet rs = pstmt.executeQuery();
-            rs.next();
-            int appId = rs.getInt(1);
-
-            return appId;
 
         } 
         catch (SQLException e) 
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
-            return -1;
+        }
+    }
+
+    public void cancelAppointment(String info)
+    {
+        try (Connection con = DriverManager.getConnection(connectionUrl)) 
+        {
+            JSONObject obj = new JSONObject(info);
+
+            String SQL = "UPDATE APPOINTMENT_SLOTS SET AVAILABLE = 1 WHERE DOCTOR_ID = ? AND DATE = ? AND TIME = ?;";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, obj.getInt("docId"));
+            pstmt.setString(2, obj.getString("date"));
+            pstmt.setString(3, obj.getString("time"));
+            pstmt.executeUpdate();
+
+        } 
+        catch (SQLException e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
@@ -75,6 +81,17 @@ public class SQL extends DBHandler {
                 String SQL = "UPDATE Appointments SET STATUS = 'Cancelled' WHERE ID = ?;";
                 PreparedStatement pstmt = con.prepareStatement(SQL);
                 pstmt.setInt(1, appId);
+                pstmt.executeUpdate();
+
+                pstmt.close();
+
+                JSONObject obj = new JSONObject(info);
+
+                SQL = "UPDATE APPOINTMENT_SLOTS SET AVAILABLE = 1 WHERE DOCTOR_ID = ? AND DATE = ? AND TIME = ?;";
+                pstmt = con.prepareStatement(SQL);
+                pstmt.setInt(1, obj.getInt("docId"));
+                pstmt.setString(2, obj.getString("date"));
+                pstmt.setString(3, obj.getString("time"));
                 pstmt.executeUpdate();
             }
 
@@ -144,17 +161,50 @@ public class SQL extends DBHandler {
         } 
     }
 
-    public void addPayment(String info, int appId) 
+    public int saveAppointment(String info, int patId) 
     {
-        try {
+        try(Connection con = DriverManager.getConnection(connectionUrl))
+        {
+            String SQL = "INSERT INTO Appointments (DATE, TIME, PROBLEM, DOCTOR_ID, PATIENT_ID, STATUS) VALUES (?, ?, ?, ?, ?, ?);";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            
             JSONObject obj = new JSONObject(info);
-            System.out.println(
-                    obj.getString("date") + " " + obj.getString("time") + " " + obj.getString("amount") + " " + appId);
+
+            pstmt.setString(1, obj.getString("date"));
+            pstmt.setString(2, obj.getString("time"));
+            pstmt.setString(3, obj.getString("problem"));
+            pstmt.setInt(4, obj.getInt("docId"));
+            pstmt.setInt(5, patId);
+            pstmt.setString(6, "Booked");
+            pstmt.executeUpdate();
+
+            pstmt.close();
+
+            SQL = "SELECT COUNT(ID) FROM Appointments";
+            pstmt = con.prepareStatement(SQL);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            int appId = rs.getInt(1);
+
+            pstmt.close();
+
+            SQL = "INSERT INTO Payments (DATE, TIME, AMOUNT, STATUS, APPOINTMENT_ID) VALUES (?, ?, ?, ?, ?);";
+            pstmt = con.prepareStatement(SQL);
+            pstmt.setString(1, obj.getJSONObject("payment").getString("date"));
+            pstmt.setString(2, obj.getJSONObject("payment").getString("time"));
+            pstmt.setFloat(3, obj.getJSONObject("payment").getFloat("amount"));
+            pstmt.setBoolean(4, false);
+            pstmt.setInt(5, appId);
+            pstmt.executeUpdate();
+
+            return appId;
         } 
         catch (Exception e) 
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
             }.getClass().getEnclosingMethod().getName());
+
+            return -1;
         }
     }
 

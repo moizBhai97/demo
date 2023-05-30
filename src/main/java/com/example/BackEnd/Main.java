@@ -91,7 +91,7 @@ public class Main {
         
         PatientController pc = new PatientController();
 
-        pc.bookAppointment(getInfo(), 1);
+        pc.saveAppointment(getInfo(), 1);
 
         JSONArray objs = new JSONArray(pc.getAppointList(1, 1));
 

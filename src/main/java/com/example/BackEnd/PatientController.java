@@ -47,11 +47,37 @@ public class PatientController {
         }
     }
 
-    public void bookAppointment(String info, int patId)
+    public void bookSlot(String info, int patId)
     {
         try
         {
-            patientLedger.getPatient(patId).bookAppointment(info);
+            patientLedger.getPatient(patId).bookSlot(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+
+        }
+    }
+
+    public void cancelSlot(String info, int patId)
+    {
+        try
+        {
+            patientLedger.getPatient(patId).cancelSlot(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+
+        }
+    }
+
+    public void saveAppointment(String info, int patId)
+    {
+        try
+        {
+            patientLedger.getPatient(patId).saveAppointment(info);
         }
         catch(Exception e)
         {
@@ -59,7 +85,8 @@ public class PatientController {
         }
     }
 
-    public String getAppointList(int patId, int value) {
+    public String getAppointList(int patId, int value) 
+    {
         return patientLedger.getPatient(patId).getAppointList(value);
     }
 
@@ -110,18 +137,6 @@ public class PatientController {
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             return null;
-        }
-    }
-
-    public void makePayment(String info, int patId, int appId)
-    {
-        try
-        {
-            patientLedger.getPatient(patId).makePayment(info, appId);
-        }
-        catch(Exception e)
-        {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
     }
 

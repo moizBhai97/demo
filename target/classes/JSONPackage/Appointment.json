@@ -5,5 +5,12 @@
     "time": "{{time}}",
     "problem": "{{problem}}",
     "status": "{{status}}",
-    "docId": "{{docId}}"
+    "docId": "{{docId}}",
+    "payment": {
+                    "amount": "{{amount}}",
+                    "status": "{{status}}",
+                    "date": "{{date}}",
+                    "time": "{{time}}"
+                }
+
 }

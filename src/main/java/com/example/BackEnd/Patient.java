@@ -56,7 +56,31 @@ public class Patient {
         this.gender = obj.getString("gender");
     }
 
-    public void bookAppointment(String info)
+    public void bookSlot(String info)
+    {
+        try
+        {
+            appointmentLedger.bookAppointment(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
+    public void cancelSlot(String info)
+    {
+        try
+        {
+            appointmentLedger.cancelAppointment(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
+    public void saveAppointment(String info)
     {
         try
         {
@@ -70,7 +94,7 @@ public class Patient {
 
     public String getAppointList(int value)
     {
-        return appointmentLedger.getAppointList(this.patId, value);
+        return appointmentLedger.getAppointList(value);
     }
 
     public void setAppointments()
@@ -98,18 +122,6 @@ public class Patient {
         try
         {
             appointmentLedger.updateAppointment(info, appId, 2);
-        }
-        catch(Exception e)
-        {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-        }
-    }
-
-    public void makePayment(String info, int appId)
-    {
-        try
-        {
-            appointmentLedger.getAppointment(appId).addPayment(info);
         }
         catch(Exception e)
         {

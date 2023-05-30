@@ -9,14 +9,8 @@ import com.example.BackEnd.PatientController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 
 public class ManageAppointmentController implements Initializable {
@@ -34,8 +28,6 @@ public class ManageAppointmentController implements Initializable {
 
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
-
-        patientController = new PatientController();
 
         completedAppointmentsGridPane = new GridPane();
         completedAppointmentsScrollPane.setContent(completedAppointmentsGridPane);

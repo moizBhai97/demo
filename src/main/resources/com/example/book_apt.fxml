@@ -142,13 +142,13 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <ToggleButton layoutX="38.0" layoutY="124.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" selected="true" styleClass="button_big" stylesheets="@book_apt.css" text="9:30 am" textFill="WHITE">
+                              <ToggleButton layoutX="38.0" layoutY="124.0" mnemonicParsing="false" onAction="#timeSelected" prefHeight="36.0" prefWidth="85.0" selected="true" styleClass="button_big" stylesheets="@book_apt.css" text="9:30 am" textFill="WHITE">
                                  <toggleGroup>
                                     <ToggleGroup fx:id="time" />
                                  </toggleGroup>
                               </ToggleButton>
-                              <ToggleButton layoutX="138.0" layoutY="124.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@book_apt.css" text="10:30 am" toggleGroup="$time" />
-                              <ToggleButton layoutX="238.0" layoutY="124.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@book_apt.css" text="11:30 am" toggleGroup="$time" />
+                              <ToggleButton layoutX="138.0" layoutY="124.0" mnemonicParsing="false" onAction="#timeSelected" prefHeight="36.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@book_apt.css" text="10:00" toggleGroup="$time" />
+                              <ToggleButton layoutX="238.0" layoutY="124.0" mnemonicParsing="false" onAction="#timeSelected" prefHeight="36.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@book_apt.css" text="11:30 am" toggleGroup="$time" />
                               <Pane layoutX="43.0" layoutY="16.0" prefHeight="31.0" prefWidth="160.0">
                                  <children>
                                     <Label fx:id="date" accessibleRole="DATE_PICKER" alignment="BASELINE_LEFT" layoutX="33.0" layoutY="6.0" prefHeight="20.0" prefWidth="128.0" text="21 January, Friday" textFill="#8c8fa5" wrapText="true">

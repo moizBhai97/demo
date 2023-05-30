@@ -18,6 +18,32 @@ public class AppointmentLedger {
         appointments = new ArrayList<Appointment>();
     }
 
+    public void bookAppointment(String info)
+    {
+        try
+        {
+            dbFactory.createHandler("SQL").bookAppointment(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+
+        }
+    }
+
+    public void cancelAppointment(String info)
+    {
+        try
+        {
+            dbFactory.createHandler("SQL").cancelAppointment(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+
+        }
+    }
+
     public void createAppointment(String info, int patId)
     {
         try
@@ -72,7 +98,7 @@ public class AppointmentLedger {
         return null;
     }
 
-    public String getAppointList(int patId, int value)
+    public String getAppointList(int value)
     {
         JSONArray objs = new JSONArray();
             
@@ -94,20 +120,6 @@ public class AppointmentLedger {
         }
 
         return objs.toString();
-    }
-
-    public void addPayment(String info, int appId)
-    {
-        try
-        {
-            dbFactory.createHandler("SQL").addPayment(info, appId);
-
-            getAppointment(appId).addPayment(info);
-        }
-        catch(Exception e)
-        {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-        }
     }
 
     public void setAppointments(int patId)
