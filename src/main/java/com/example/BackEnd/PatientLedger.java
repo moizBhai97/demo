@@ -35,6 +35,8 @@ public class PatientLedger {
         try{
 
             String patientInfo = dbFactory.createHandler("SQL").getPatient(info);
+            System.out.println(patientInfo);
+
             
             Patient patient = new Patient(patientInfo);
             patients.add(patient);

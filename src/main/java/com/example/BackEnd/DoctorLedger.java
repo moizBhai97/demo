@@ -1,6 +1,5 @@
 package com.example.BackEnd;
 
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -8,9 +7,6 @@ import java.util.stream.Collectors;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
-
-import com.google.gson.JsonObject;
 
 public class DoctorLedger {
 
@@ -37,6 +33,24 @@ public class DoctorLedger {
             }
 
             topDoctors.toString();
+        } catch (Exception e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
+            }.getClass().getEnclosingMethod().getName());
+        }
+    }
+
+    public void setAppointmentDoctors(int patId) {
+        try {
+            String doctors = DBFactory.getInstance().createHandler("SQL").getAppointmentDoctors(patId);
+
+            JSONArray jsonArray = new JSONArray(doctors);
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Doctor doctor = new Doctor(jsonObject.toString());
+                doctorList.add(doctor);
+            }
+
         } catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
             }.getClass().getEnclosingMethod().getName());
