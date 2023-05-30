@@ -5,6 +5,11 @@ import java.lang.String;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+//import javax.print.Doc;
+
+import com.example.BackEnd.DoctorController;
+import com.example.BackEnd.PatientController;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +24,10 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class StartController implements Initializable{
+
+    LoginController loginController;
+    PatientController patientController;
+    DoctorController doctorController;
 
     @FXML
     private Button doctorButton;
@@ -41,6 +50,13 @@ public class StartController implements Initializable{
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/login.fxml")));
+
+            loginController = new LoginController();
+            patientController = new PatientController();
+            loginController.setData(doctorController, patientController, false);    // dc is null;
+
+            loader.setController(loginController);
+
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -55,10 +71,17 @@ public class StartController implements Initializable{
         System.out.println("Doctor Button pressed");
 
         try {
-            this.patientButton.getScene().getWindow().hide();
+            this.doctorButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/login.fxml")));
+            
+            loginController = new LoginController();
+            doctorController = new DoctorController();
+            loginController.setData(doctorController, patientController, false);    // pc is null;
+
+            loader.setController(loginController);
+
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();

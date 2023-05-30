@@ -1,8 +1,6 @@
 package com.example.DBHandler;
 
 import com.example.BackEnd.DBHandler;
-import com.example.BackEnd.Doctor;
-import com.example.UIController.DoctorTemp;
 import com.microsoft.sqlserver.jdbc.SQLServerDriver;
 
 import java.io.FileReader;
@@ -14,61 +12,63 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 public class SQL extends DBHandler {
     String connectionUrl;
 
     public SQL() {
 
-         connectionUrl = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;" +
+         connectionUrl = "jdbc:sqlserver://MOIZ-KHAN;" +
                         "databaseName=SDA;" +
                         "IntegratedSecurity=true" + ";encrypt=true;trustServerCertificate=true";
     }
 
   
-    public int saveAppointment(String info, int patId)
+    public void bookAppointment(String info)
     {
         try (Connection con = DriverManager.getConnection(connectionUrl)) 
         {
-            String SQL = "INSERT INTO Appointments (DATE, TIME, PROBLEM, DOCTOR_ID, PATIENT_ID, STATUS) VALUES (?, ?, ?, ?, ?, ?);";
-            PreparedStatement pstmt = con.prepareStatement(SQL);
-            
             JSONObject obj = new JSONObject(info);
 
-            pstmt.setString(1, obj.getString("date"));
-            pstmt.setString(2, obj.getString("time"));
-            pstmt.setString(3, obj.getString("problem"));
-            pstmt.setInt(4, obj.getInt("docId"));
-            pstmt.setInt(5, patId);
-            pstmt.setString(6, "Booked");
+            String SQL = "UPDATE APPOINTMENT_SLOTS SET AVAILABLE = 0 WHERE DOCTOR_ID = ? AND DATE = ? AND TIME = ?;";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, obj.getInt("docId"));
+            pstmt.setString(2, obj.getString("date"));
+            pstmt.setString(3, obj.getString("time"));
             pstmt.executeUpdate();
-
-            pstmt.close();
-
-            SQL = "SELECT COUNT(ID) FROM Appointments";
-            pstmt = con.prepareStatement(SQL);
-            ResultSet rs = pstmt.executeQuery();
-            rs.next();
-            int appId = rs.getInt(1);
-
-            return appId;
 
         } 
         catch (SQLException e) 
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
-            return -1;
+        }
+    }
+
+    public void cancelAppointment(String info)
+    {
+        try (Connection con = DriverManager.getConnection(connectionUrl)) 
+        {
+            JSONObject obj = new JSONObject(info);
+
+            String SQL = "UPDATE APPOINTMENT_SLOTS SET AVAILABLE = 1 WHERE DOCTOR_ID = ? AND DATE = ? AND TIME = ?;";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, obj.getInt("docId"));
+            pstmt.setString(2, obj.getString("date"));
+            pstmt.setString(3, obj.getString("time"));
+            pstmt.executeUpdate();
+
+        } 
+        catch (SQLException e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
@@ -78,9 +78,22 @@ public class SQL extends DBHandler {
         {
             if(value == 1)
             {
-                String SQL = "UPDATE Appointments SET STATUS = 'Cancelled' WHERE ID = ?;";
+                JSONObject obj = new JSONObject(info);
+
+                String SQL = "UPDATE Appointments SET STATUS = 'Cancelled', UPDATE_REASON = ? WHERE ID = ?;";
                 PreparedStatement pstmt = con.prepareStatement(SQL);
-                pstmt.setInt(1, appId);
+
+                pstmt.setString(1, obj.getString("reason"));
+                pstmt.setInt(2, appId);
+                pstmt.executeUpdate();
+
+                pstmt.close();
+
+                SQL = "UPDATE APPOINTMENT_SLOTS SET AVAILABLE = 1 WHERE DOCTOR_ID = ? AND DATE = ? AND TIME = ?;";
+                pstmt = con.prepareStatement(SQL);
+                pstmt.setInt(1, obj.getInt("docId"));
+                pstmt.setString(2, obj.getString("date"));
+                pstmt.setString(3, obj.getString("time"));
                 pstmt.executeUpdate();
             }
 
@@ -95,6 +108,15 @@ public class SQL extends DBHandler {
                 pstmt.setString(2, obj.getString("time"));
                 pstmt.setString(3, obj.getString("reason"));
                 pstmt.setInt(4, appId);
+                pstmt.executeUpdate();
+
+                pstmt.close();
+
+                SQL = "UPDATE APPOINTMENT_SLOTS SET AVAILABLE = 0 WHERE DOCTOR_ID = ? AND DATE = ? AND TIME = ?;";
+                pstmt = con.prepareStatement(SQL);
+                pstmt.setInt(1, obj.getInt("docId"));
+                pstmt.setString(2, obj.getString("date"));
+                pstmt.setString(3, obj.getString("time"));
                 pstmt.executeUpdate();
             }
         } 
@@ -131,8 +153,6 @@ public class SQL extends DBHandler {
                 reviews.put(newObj);
             }
 
-            System.out.println(reviews.toString());
-
             return reviews.toString();
         } 
         catch (Exception e) 
@@ -143,14 +163,50 @@ public class SQL extends DBHandler {
         } 
     }
 
-    public void addPayment(String info, int appId) {
-        try {
+    public int saveAppointment(String info, int patId) 
+    {
+        try(Connection con = DriverManager.getConnection(connectionUrl))
+        {
+            String SQL = "INSERT INTO Appointments (DATE, TIME, PROBLEM, DOCTOR_ID, PATIENT_ID, STATUS) VALUES (?, ?, ?, ?, ?, ?);";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            
             JSONObject obj = new JSONObject(info);
-            System.out.println(
-                    obj.getString("date") + " " + obj.getString("time") + " " + obj.getString("amount") + " " + appId);
-        } catch (Exception e) {
+
+            pstmt.setString(1, obj.getString("date"));
+            pstmt.setString(2, obj.getString("time"));
+            pstmt.setString(3, obj.getString("problem"));
+            pstmt.setInt(4, obj.getInt("docId"));
+            pstmt.setInt(5, patId);
+            pstmt.setString(6, "Booked");
+            pstmt.executeUpdate();
+
+            pstmt.close();
+
+            SQL = "SELECT COUNT(ID) FROM Appointments";
+            pstmt = con.prepareStatement(SQL);
+            ResultSet rs = pstmt.executeQuery();
+            rs.next();
+            int appId = rs.getInt(1);
+
+            pstmt.close();
+
+            SQL = "INSERT INTO Payments (DATE, TIME, AMOUNT, STATUS, APPOINTMENT_ID) VALUES (?, ?, ?, ?, ?);";
+            pstmt = con.prepareStatement(SQL);
+            pstmt.setString(1, obj.getJSONObject("payment").getString("date"));
+            pstmt.setString(2, obj.getJSONObject("payment").getString("time"));
+            pstmt.setFloat(3, obj.getJSONObject("payment").getFloat("amount"));
+            pstmt.setBoolean(4, false);
+            pstmt.setInt(5, appId);
+            pstmt.executeUpdate();
+
+            return appId;
+        } 
+        catch (Exception e) 
+        {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
             }.getClass().getEnclosingMethod().getName());
+
+            return -1;
         }
     }
 
@@ -202,9 +258,39 @@ public class SQL extends DBHandler {
             rs.next();
             obj.put("patients", rs.getInt(1));
 
-            System.out.println(obj.toString());
-
             return obj.toString();
+        } 
+        catch (Exception e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();            
+            return null;
+        } 
+    }
+
+    public String getSchedule(int docId, String date)
+    {
+        try (Connection con = DriverManager.getConnection(connectionUrl)) 
+        {
+
+            String SQL = "SELECT * FROM APPOINTMENT_SLOTS WHERE DOCTOR_ID = ?;";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, docId);
+            ResultSet rs = pstmt.executeQuery();
+
+            JSONArray schedule = new JSONArray();
+
+            while(rs.next())
+            {
+                JSONObject newObj = new JSONObject();
+                newObj.put("date", rs.getString("DATE"));
+                newObj.put("time", rs.getString("TIME"));
+                newObj.put("available", rs.getBoolean("AVAILABLE"));
+
+                schedule.put(newObj);
+            }
+
+            return schedule.toString();
         } 
         catch (Exception e) 
         {
@@ -243,60 +329,66 @@ public class SQL extends DBHandler {
 //         //
 //     }
 
-     public String getDoctors(String name) {
+     public String getDoctors(String name) 
+     {
         System.out.println("SQL getDoctors");
-        /*
-         * NAME VARCHAR(50) NOT NULL,
-         * ID INT NOT NULL,
-         * EMAIL VARCHAR(50) NOT NULL,
-         * PASSWORD VARCHAR(50) NOT NULL,
-         * DOB DATE NOT NULL,
-         * PHONE_NUMBER VARCHAR(11) NOT NULL CHECK (PHONE_NUMBER LIKE
-         * '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
-         * GENDER VARCHAR(6) NOT NULL CHECK (GENDER IN ('Male', 'Female')),
-         * RATING DECIMAL(2, 1) NOT NULL CHECK (RATING BETWEEN 0 AND 5),
-         * LOCATION VARCHAR(50) NOT NULL,
-         * EXPERIENCE INT NOT NULL,
-         * FEE INT NOT NULL,
-         * SPECIALIZATION VARCHAR(50) NOT NULL,
-         */
 
-        String connectionUrl = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;" +
-                "databaseName=SDA;" +
-                "IntegratedSecurity=true" + ";encrypt=true;trustServerCertificate=true";
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
-            String SQL = "SELECT id,name,location,specialization,experience,fee,rating FROM Doctors WHERE name LIKE '%"
-                    + name + "%'";
+
+            String SQL = "SELECT (SELECT COUNT(ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients, id, NAME, SPECIALIZATION, DESCRIPTION, LOCATION, EXPERIENCE, WORKING_HOURS, FEE, AVAILABILITY FROM DOCTORS d where d.name LIKE '%" + name + "%';";
 
             ResultSet rs = stmt.executeQuery(SQL);
+
             JSONArray doctors = new JSONArray();
-            JSONParser parser = new JSONParser();
-            while (rs.next()) {
-                JSONObject obj = new JSONObject(
-                        parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString());
+
+            while (rs.next()) 
+            {
+                JSONObject obj = new JSONObject();
 
                 obj.put("id", rs.getInt("id"));
-                obj.put("name", rs.getString("name"));
-                obj.put("specialization", rs.getString("specialization"));
-                obj.put("experience", rs.getString("experience"));
-                obj.put("rating", rs.getString("rating"));
-                obj.put("location", rs.getString("location"));
-                obj.put("price", rs.getString("fee"));
+                obj.put("name", rs.getString("NAME"));
+
+                JSONObject innerObj = new JSONObject();
+                innerObj.put("specialization", rs.getString("SPECIALIZATION"));
+                innerObj.put("description", rs.getString("DESCRIPTION"));
+                innerObj.put("location", rs.getString("LOCATION"));
+                innerObj.put("experience", rs.getInt("EXPERIENCE"));
+                innerObj.put("workingHours", rs.getString("WORKING_HOURS"));
+                innerObj.put("fee", rs.getFloat("FEE"));
+                innerObj.put("availability", rs.getString("AVAILABILITY"));
+                innerObj.put("patients", rs.getInt("Patients"));
+                
+                SQL ="SELECT DESCRIPTION FROM SERVICES WHERE DOCTOR_ID = ?;";
+                PreparedStatement pstmt = con.prepareStatement(SQL);
+                pstmt.setInt(1, obj.getInt("id"));
+                ResultSet rs2 = pstmt.executeQuery();
+
+                String services = "";
+                while(rs2.next())
+                {
+                    services += rs2.getString("DESCRIPTION") + "\n";
+                }
+                innerObj.put("services", services);
+
+                pstmt.close();
+
+                obj.put("details", innerObj);
                 doctors.put(obj);
             }
+
+            stmt.close();
+
             con.close();
             return doctors.toString();
 
-        } catch (SQLException | JSONException | IOException | ParseException e) {
-            // con.close();
-
+        } 
+        catch (SQLException | JSONException e) 
+        {
             e.printStackTrace();
+            return "[]";
         }
-
-        return "[]";
-
-        //
     }
+
     public String getTopDoctors() {
         try {
             System.out.println("SQL getTopDoctors");
@@ -328,39 +420,50 @@ public class SQL extends DBHandler {
         }
     }
 
+    public void updatePatientProfile(int patId, String info)
+    {
+        System.out.println("SQL updatePatientProfile");
+
+        // database mein update karo
+
+    }
+
     public String getPatient(String info) {
 
-        try {
-            System.out.println("SQL getPatient");
-            // query the database and return the patient info if username and password
-            // matches
+        
+        System.out.println("SQL getPatient");
+        // query the database and return the Doctot info if username and password matches
+
+        JSONObject information = new JSONObject(info);
+        
+        try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
+            String SQL = "SELECT id, name, location, specialization, experience, rating, price FROM Patients WHERE email LIKE '%"
+                    + information.getString("email") + "%' AND password LIKE '%" + information.getString("password") + "%'";
+
+            ResultSet rs = stmt.executeQuery(SQL);
 
             JSONParser parser = new JSONParser();
-            JSONObject obj = new JSONObject(
-                    parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());
-            Set<String> keyset = obj.keySet(); // gets all keys from .json
+            JSONObject patient = new JSONObject(
+                parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());                
 
-            // for(String key : keyset)
-            // {
-            // if(!get(key).equals("NULL"))
-            // obj.put(key, get(key)); //put values in json object
-            // }
+            patient.put("id", rs.getInt("id"));
+            patient.put("name", rs.getString("name"));
+            patient.put("specialization", rs.getString("specialization"));
+            patient.put("experience", rs.getString("experience"));
+            patient.put("rating", rs.getString("rating"));
+            patient.put("location", rs.getString("location"));
+            patient.put("price", rs.getString("fee"));
+                
+            con.close();
+            return patient.toString();
 
-            // dummy data
-            obj.put("patId", "1");
-            obj.put("name", "Musa");
-            obj.put("email", "musa@gmail.com");
-            obj.put("DOB", "1/1/2001");
-            obj.put("phoneNumber", "03369420888");
-            obj.put("gender", "Female");
+        } catch ( Exception e) {
+            // con.close();
 
-            System.out.println(obj.toString());
-            return obj.toString();
-        } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
-            return null;
+            e.printStackTrace();
+            return "[]";
         }
+
 
     }
 
@@ -371,38 +474,47 @@ public class SQL extends DBHandler {
             System.out.println("SQL getDoctor");
             // query the database and return the Doctot info if username and password matches
 
+            JSONObject information = new JSONObject(info);
             
-            JSONParser parser = new JSONParser(); 
-            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString());
-            Set<String> keyset = obj.keySet();      //gets all keys from .json
-            
+            try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
+                String SQL = "SELECT NAME, ID, EMAIL, DOB, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, STATS, PATIENTS_TREATED, EXPERIENCE, RATING, WORKING_HOURS, FEE, AVAILABILITY FROM Doctors WHERE email LIKE '%"
+                        + information.getString("email") + "%' AND password LIKE '%" + information.getString("password") + "%'";
+    
+                ResultSet rs = stmt.executeQuery(SQL);
 
-            // for(String key : keyset)
-            // {
-            //     if(!get(key).equals("NULL"))
-            //         obj.put(key, get(key));            //put values in json object
-            // }
+                JSONParser parser = new JSONParser();
+                JSONObject doctorObj = new JSONObject();
+               
+                doctorObj.put("id", rs.getInt("id"));
+                doctorObj.put("name", rs.getString("name"));
 
-            // "id": "{{id}}",
-            // "name": "{{name}}",
-            // "location": "{{location}}",
-            // "specialization": "{{specialization}}",
-            // "experience": "{{experience}}",
-            // "price": "{{price}}",
-            // "rating": "{{rating}}"
+                JSONObject detailsObj = new JSONObject();
+                detailsObj.put("email", rs.getString("email"));
+                detailsObj.put("dob", rs.getString("dob"));
+                detailsObj.put("phoneNumber", rs.getString("phone_number"));
+                detailsObj.put("gender", rs.getString("gender"));
+                detailsObj.put("specialization", rs.getString("specialization"));
+                detailsObj.put("description", rs.getString("description"));
+                detailsObj.put("location", rs.getString("location"));
+                detailsObj.put("stats", rs.getFloat("stats"));
+                detailsObj.put("patients", rs.getInt("patients_treated"));
+                detailsObj.put("experience", rs.getInt("experience"));
+                detailsObj.put("rating", rs.getFloat("rating"));
+                detailsObj.put("workingHours", rs.getString("working_hours"));
+                detailsObj.put("fee", rs.getInt("fee"));
+                detailsObj.put("availability", rs.getString("availability"));
+                
+                doctorObj.put("details", detailsObj);
 
-            // dummy data
-            obj.put("id", "1");
-            obj.put("name", "Musa");
-            obj.put("location", "Lahore");
-            obj.put("specialization", "Heart");
-            obj.put("experience", "5 years");
-            obj.put("price", "500");
-            obj.put("rating", "5");
-            
-
-            System.out.println(obj.toString());
-            return obj.toString();
+                con.close();
+                return doctorObj.toString();
+    
+            } catch (SQLException | JSONException e) {
+                // con.close();
+    
+                e.printStackTrace();
+                return "[]";
+            }
         }
         catch(Exception e)
         {

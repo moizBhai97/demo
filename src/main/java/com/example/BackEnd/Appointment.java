@@ -36,7 +36,7 @@ public class Appointment {
         this.problem = problem;
         this.docId = docId;
         this.status = "Booked";
-        this.payment = null;
+        this.payment = new Payment();
     }
 
     public Appointment(String info, int appId)
@@ -49,7 +49,7 @@ public class Appointment {
         this.problem = obj.getString("problem");
         this.docId = obj.getInt("docId");
         this.status = "Booked";
-        this.payment = null;
+        this.payment = new Payment(obj.getJSONObject("payment").toString());
     }
     public Appointment(String info)
     {
@@ -61,7 +61,7 @@ public class Appointment {
         this.problem = obj.getString("problem");
         this.docId = obj.getInt("docId");
         this.status = obj.getString("status");
-        this.payment = null;
+        this.payment = new Payment(obj.getJSONObject("payment").toString());
     }
 
     public int getAppId()
@@ -102,43 +102,14 @@ public class Appointment {
         return "NULL";
     }
 
-    public void set(String value, String data)
-    {
-        if(value.equals("date"))
-            date = data;
-        
-        else if(value.equals("time"))
-            time = data;
-        
-        else if(value.equals("problem"))
-            problem = data;
-
-        else if(value.equals("status"))
-            status = data;
-        
-        else if(value.equals("docId"))
-            docId = Integer.parseInt(data);
-    }
-
-    public void addPayment(String info)
-    {
-        payment = new Payment(info);
-    }
-
     public void update(String info)
     {
         try
         {
             JSONObject obj = new JSONObject(info);
 
-            Set<String> keyset = obj.keySet();
-            
-            for(String key : keyset)
-            {
-                if(!get(key).equals("NULL"))
-                    set(key, obj.getString(key));
-            }
-            
+            date = obj.getString("date");
+            time = obj.getString("time");
         }
         catch(Exception e)
         {
@@ -162,6 +133,8 @@ public class Appointment {
                 if(!get(key).equals("NULL"))
                     obj.put(key, get(key));
             }
+
+            obj.put("payment", new JSONObject(payment.toString()));
 
             return obj.toString();
         }

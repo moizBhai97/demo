@@ -3,6 +3,7 @@ package com.example.BackEnd;
 import java.io.FileReader;
 import java.util.Set;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -25,6 +26,7 @@ public class DoctorDetails {
     private int reviews;
 
     private ReviewLedger reviewLedger;
+    private String schedule;
 
     public DoctorDetails()
     {
@@ -73,6 +75,7 @@ public class DoctorDetails {
         try
         {
             reviewLedger = new ReviewLedger(docId);
+            
 
             info = reviewLedger.getAvgRating(info);
 
@@ -100,6 +103,156 @@ public class DoctorDetails {
         }
     }
 
+    public String getSpecialization()
+    {
+        return specialization;
+    }
+
+    public String getDescription()
+    {
+        return description;
+    }
+
+    public String getLocation()
+    {
+        return location;
+    }
+
+    public int getStats()
+    {
+        return stats;
+    }
+
+    public int getPatients()
+    {
+        return patients;
+    }
+
+    public int getExperience()
+    {
+        return experience;
+    }
+
+    public float getRating()
+    {
+        return rating;
+    }
+
+    public String getServices()
+    {
+        return services;
+    }
+
+    public String getWorkingHours()
+    {
+        return workingHours;
+    }
+
+    public float getFee()
+    {
+        return fee;
+    }
+
+    public String getAvailability()
+    {
+        return availability;
+    }
+
+    public float getCheckupRating()
+    {
+        return checkupRating;
+    }
+
+    public float getEnvironmentRating()
+    {
+        return environmentRating;
+    }
+
+    public float getStaffRating()
+    {
+        return staffRating;
+    }
+
+    public int getReviews()
+    {
+        return reviews;
+    }
+
+    public void setSpecialization(String specialization)
+    {
+        this.specialization = specialization;
+    }
+
+    public void setDescription(String description)
+    {
+        this.description = description;
+    }
+
+    public void setLocation(String location)
+    {
+        this.location = location;
+    }
+
+    public void setStats(int stats)
+    {
+        this.stats = stats;
+    }
+
+    public void setPatients(int patients)
+    {
+        this.patients = patients;
+    }
+
+    public void setExperience(int experience)
+    {
+        this.experience = experience;
+    }
+
+    public void setRating(float rating)
+    {
+        this.rating = rating;
+    }
+
+    public void setServices(String services)
+    {
+        this.services = services;
+    }
+
+    public void setWorkingHours(String workingHours)
+    {
+        this.workingHours = workingHours;
+    }
+
+    public void setFee(float fee)
+    {
+        this.fee = fee;
+    }
+
+    public void setAvailability(String availability)
+    {
+        this.availability = availability;
+    }
+
+    public void setCheckupRating(float checkupRating)
+    {
+        this.checkupRating = checkupRating;
+    }
+
+    public void setEnvironmentRating(float environmentRating)
+    {
+        this.environmentRating = environmentRating;
+    }
+
+    public void setStaffRating(float staffRating)
+    {
+        this.staffRating = staffRating;
+    }
+
+    public void setReviews(int reviews)
+    {
+        this.reviews = reviews;
+    }
+
     public ReviewLedger getReviewLedger()
     {
         return reviewLedger;
@@ -108,6 +261,56 @@ public class DoctorDetails {
     public String getReviewList(int docId)
     {
         return reviewLedger.getReviewList(docId);
+    }
+
+    public void addReview(String info, int patId, int docId)
+    {
+        reviewLedger.addReview(info, patId, docId);
+    }
+
+    private boolean isDayTime(String time) 
+    {
+        // Assuming day time slots are from 9 AM to 6 PM
+        return time.compareTo("09:00") >= 0 && time.compareTo("18:00") < 0;
+    }
+    
+    private boolean isNightTime(String time) 
+    {
+        //Assuming night time slots are from 6 PM to 10 PM
+        return time.compareTo("18:00") >= 0 && time.compareTo("22:00") < 0;
+    }
+
+    public String getSchedule(int docId, String date, int value)
+    {
+        try 
+        {
+            String json = DBFactory.getInstance().createHandler("SQL").getSchedule(docId, date);
+
+            this.schedule = json;
+
+            JSONArray arr = new JSONArray(json);
+
+            JSONArray filtered = new JSONArray();
+
+            for(int i = 0; i < arr.length(); i++)
+            {
+                JSONObject obj = arr.getJSONObject(i);
+
+                if(isDayTime(obj.getString("time")) && date.equals(obj.getString("date")) && value == 1)
+                    filtered.put(obj);
+
+                else if(isNightTime(obj.getString("time")) && date.equals(obj.getString("date")) && value == 2)
+                    filtered.put(obj);
+            }
+
+            return filtered.toString();
+            
+        } 
+        catch (Exception e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            return null;
+        }
     }
 
     public String get(String value)

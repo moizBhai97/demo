@@ -30,7 +30,7 @@ public class LoginController implements Initializable{
     @FXML
     private TextField passwordTextField;
     @FXML
-    private TextField usernameTextField;
+    private TextField emailTextField;
 
     //DummyController dummyController;
 
@@ -47,11 +47,17 @@ public class LoginController implements Initializable{
         return;
     }
 
+    public void setData(DoctorController dc, PatientController pc, boolean isPatient){
+        this.doctorController = dc;
+        this.patientController = pc;
+        this.isPatient = isPatient;
+    }
+
     public void loginButton(ActionEvent event){
         System.out.println("Login Button pressed");
 
         JSONObject loginInfo = new JSONObject();
-        loginInfo.put("username", this.usernameTextField.getText());
+        loginInfo.put("email", this.emailTextField.getText());
         loginInfo.put("password", this.passwordTextField.getText());
 
         if(isPatient){
@@ -66,8 +72,8 @@ public class LoginController implements Initializable{
             loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
             
             searchDoctorController = new SearchDoctorController();
-            
             searchDoctorController.setData(patientController, patId);
+ 
             loader.setController(searchDoctorController);
             
             Parent root = loader.load();

@@ -1,5 +1,7 @@
 package com.example.UIController;
 
+import java.time.LocalTime;
+
 import org.json.JSONObject;
 
 import javafx.fxml.FXML;
@@ -36,16 +38,20 @@ public class CompletedAppointmentDoctorCard {
     private Label timing;
 
     int appointID;
+    int patId;
+    int docId;
 
-     public void setCard(String reeult){
+    public void setCard(String result){
 
-        JSONObject  jsonObject = new JSONObject(reeult);
-        appointID = jsonObject.getInt("appID");
-        doctorName.setText(jsonObject.getString("doctorName"));
+        JSONObject  jsonObject = new JSONObject(result);
+        appointID = jsonObject.getInt("appId");
+        doctorName.setText(jsonObject.getString("name"));
         date.setText(jsonObject.getString("date"));
-        timing.setText(jsonObject.getString("timing"));
-        ratingAmount.setText(jsonObject.getString("rating"));
-        double ratingPercentage = Double.parseDouble(jsonObject.getString("rating")) / 5.0;
+        LocalTime startTime = LocalTime.parse(jsonObject.getString("time"));
+        LocalTime endTime = startTime.plusHours(1);
+        timing.setText(startTime + " - " + endTime);
+        ratingAmount.setText(jsonObject.getFloat("rating") + "");
+        double ratingPercentage = jsonObject.getFloat("rating") / 5.0;
 
         Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage, ratingStar.getBoundsInLocal().getHeight());
         ratingStar.setClip(clip);

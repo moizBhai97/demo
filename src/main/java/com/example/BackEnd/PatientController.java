@@ -1,5 +1,8 @@
 package com.example.BackEnd;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class PatientController {
 
     private DoctorLedger doctorLedger;
@@ -28,11 +31,56 @@ public class PatientController {
         
     }
 
-    public void bookAppointment(String info, int patId)
+    public void updateProfile(int patId, String info)
+    {
+        patientLedger.updateProfile(patId, info);
+
+    }
+
+    public void submitReview(String info, int docId, int patId)
     {
         try
         {
-            patientLedger.getPatient(patId).bookAppointment(info);
+            doctorLedger.getDoctor(docId).getDoctorDetails().addReview(info, patId, docId);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+
+        }
+    }
+
+    public void bookSlot(String info, int patId)
+    {
+        try
+        {
+            patientLedger.getPatient(patId).bookSlot(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+
+        }
+    }
+
+    public void cancelSlot(String info, int patId)
+    {
+        try
+        {
+            patientLedger.getPatient(patId).cancelSlot(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+
+        }
+    }
+
+    public void saveAppointment(String info, int patId)
+    {
+        try
+        {
+            patientLedger.getPatient(patId).saveAppointment(info);
         }
         catch(Exception e)
         {
@@ -40,12 +88,36 @@ public class PatientController {
         }
     }
 
-    public String getAppointList(int patId, int value) {
-        return patientLedger.getPatient(patId).getAppointList(value);
+    public String getAppointList(int patId, int value) 
+    {
+        String info = patientLedger.getPatient(patId).getAppointList(value);
+
+        JSONArray arr = new JSONArray(info);
+
+        for(int i=0; i<arr.length(); i++)
+        {
+            arr.getJSONObject(i).put("name", doctorLedger.getDoctor(arr.getJSONObject(i).getInt("docId")).getName());
+            arr.getJSONObject(i).put("rating", doctorLedger.getDoctor(arr.getJSONObject(i).getInt("docId")).getRating());
+        }
+
+        return arr.toString();
     }
 
-    public void cancelAppointment(String Reason, int patId, int appId) {
-        try {
+    public String getAppointment(int patId, int appId) 
+    {
+        String info = patientLedger.getPatient(patId).getAppointment(appId);
+
+        JSONObject obj = new JSONObject(info);
+
+        obj.put("doctor", new JSONObject(doctorLedger.getDoctor(obj.getInt("docId")).getDetails()));
+
+        return obj.toString();
+    }
+
+    public void cancelAppointment(String Reason, int patId, int appId) 
+    {
+        try 
+        {
             patientLedger.getPatient(patId).cancelAppointment(Reason, appId);
         }
         catch(Exception e)
@@ -70,7 +142,7 @@ public class PatientController {
     {
         try
         {
-            return doctorLedger.getDetails(docId);
+            return doctorLedger.getDoctor(docId).getDetails();
         }
         catch(Exception e)
         {
@@ -92,15 +164,16 @@ public class PatientController {
         }
     }
 
-    public void makePayment(String info, int patId, int appId)
+    public String getSchedule(int docId, String date, int value)
     {
         try
         {
-            patientLedger.getPatient(patId).makePayment(info, appId);
+            return doctorLedger.getDoctor(docId).getDoctorDetails().getSchedule(docId, date, value);
         }
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return null;
         }
     }
 

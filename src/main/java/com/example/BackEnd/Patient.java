@@ -44,7 +44,43 @@ public class Patient {
         return patId;
     }
 
-    public void bookAppointment(String info)
+    public void updateProfile(String info)
+    {
+        JSONObject obj = new JSONObject(info);
+
+        this.patId = obj.getInt("patId");
+        this.name = obj.getString("name");
+        this.email = obj.getString("email");
+        this.DOB = obj.getString("DOB");
+        this.phoneNumber = obj.getString("phoneNumber");
+        this.gender = obj.getString("gender");
+    }
+
+    public void bookSlot(String info)
+    {
+        try
+        {
+            appointmentLedger.bookAppointment(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
+    public void cancelSlot(String info)
+    {
+        try
+        {
+            appointmentLedger.cancelAppointment(info);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+    }
+
+    public void saveAppointment(String info)
     {
         try
         {
@@ -58,7 +94,7 @@ public class Patient {
 
     public String getAppointList(int value)
     {
-        return appointmentLedger.getAppointList(this.patId, value);
+        return appointmentLedger.getAppointList(value);
     }
 
     public void setAppointments()
@@ -93,16 +129,9 @@ public class Patient {
         }
     }
 
-    public void makePayment(String info, int appId)
+    public String getAppointment(int appId)
     {
-        try
-        {
-            appointmentLedger.addPayment(info, appId);
-        }
-        catch(Exception e)
-        {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-        }
+        return appointmentLedger.getAppointment(appId).toString();
     }
 
     public String get(String value)

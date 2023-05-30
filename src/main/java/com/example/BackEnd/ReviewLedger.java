@@ -61,6 +61,7 @@ public class ReviewLedger {
     {
 
         System.out.println("getAvgRating: ");
+        
         JSONObject obj = new JSONObject(info);
 
         float checkupRating = 0;
@@ -90,9 +91,21 @@ public class ReviewLedger {
         obj.put("stats", stats*(100/5));
         obj.put("reviews", reviews.size());
 
-        System.out.println(obj.toString());
-
         return obj.toString();
+    }
+
+    public void addReview(String info, int patId, int docId)
+    {
+        JSONObject obj = new JSONObject(info);
+        JSONObject reviewObj = new JSONObject();
+
+        //review.put(info, review)
+
+
+        Review review = new Review(obj.toString());
+        reviews.add(review);
+
+        //dbFactory.createHandler("SQL").addReview(info);
     }
     
 }

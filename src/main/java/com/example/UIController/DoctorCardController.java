@@ -5,17 +5,13 @@ import org.json.JSONObject;
 
 import com.example.BackEnd.PatientController;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
@@ -79,8 +75,8 @@ public class DoctorCardController {
 
     public void setDoctor(DoctorTemp doctor) {
         docName.setText(doctor.name);
-      //  card1_speciality_label.setText(doctor.speciality);
     }
+
     public void setDoctor(String name, String specialization, String price, String rating) {
         docName.setText(name);
         this.specialization.setText(specialization);
@@ -98,12 +94,13 @@ public class DoctorCardController {
 
     public void setDoctor(String result){
         JSONObject jsonObject = new JSONObject(result);
+
         docName.setText(jsonObject.getString("name"));
-        specialization.setText(jsonObject.getString("specialization"));
-        fee_amount.setText(jsonObject.getString("price"));
-        card1_satisfied_label.setText(jsonObject.getString("rating"));
-        card1_exp_label.setText(jsonObject.getString("experience")+ " years" );
-        double ratingPercentage = Double.parseDouble(jsonObject.getString("rating")) / 5.0;
+        JSONObject innerObject = jsonObject.getJSONObject("details");
+        specialization.setText(innerObject.getString("specialization"));
+        fee_amount.setText(String.format("%.1f", innerObject.getFloat("fee")));
+        card1_satisfied_label.setText(String.format("%.1f", innerObject.getFloat("rating")));
+        double ratingPercentage = innerObject.getFloat("rating") / 5.0;
 
 
         Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage, ratingStar.getBoundsInLocal().getHeight());
@@ -128,7 +125,6 @@ public class DoctorCardController {
             loader.setController(doctorDetailsController);
             
             Parent root = loader.load();
-            //stage.setUserData(patientInfo);
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);

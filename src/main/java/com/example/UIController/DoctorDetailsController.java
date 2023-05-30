@@ -2,7 +2,6 @@ package com.example.UIController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 import org.json.JSONObject;
 
@@ -125,6 +124,7 @@ public class DoctorDetailsController implements Initializable{
 
     public void setData(PatientController pc, int id, int patId)
     {
+
         this.pc = pc;
         this.patId = patId;
         this.docId = id;
@@ -139,7 +139,7 @@ public class DoctorDetailsController implements Initializable{
             
             //-------------------------------------------------------------------------------------------------//
             BookAppointmentController bookAppointmentController = new BookAppointmentController();
-            //bookAppointmentController.setData(pc, docId, patId);
+            bookAppointmentController.setData(pc, docId, patId, fee.getText(), name.getText());
 
             loader.setController(bookAppointmentController);
             //-------------------------------------------------------------------------------------------------//
