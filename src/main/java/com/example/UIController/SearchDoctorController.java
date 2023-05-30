@@ -381,7 +381,6 @@ public class SearchDoctorController implements Initializable
         String result = patientController.searchDoctor(value);
         createDoctorCards(result);
 
-        // read json and create doctorCard for each doctor
 
     }
 

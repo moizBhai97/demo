@@ -22,19 +22,19 @@
 
 <BorderPane prefHeight="642.0" prefWidth="806.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <AnchorPane prefHeight="78.0" prefWidth="806.0" style="-fx-background-color: #2854c3;" BorderPane.alignment="TOP_RIGHT">
+      <AnchorPane prefHeight="78.0" prefWidth="806.0" styleClass="top_pane" stylesheets="@search_doctors.css" BorderPane.alignment="TOP_RIGHT">
          <children>
             <ImageView fx:id="prof_img" fitHeight="58.0" fitWidth="55.0" layoutX="731.9999999999995" layoutY="7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="19.400000000000432">
                <image>
                   <Image url="@../../images/image%2032.png" />
                </image>
             </ImageView>
-            <Label alignment="CENTER" layoutX="221.0" layoutY="20.0" text="Search" textFill="WHITE" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="221.0" AnchorPane.topAnchor="20.0">
+            <Label alignment="CENTER" layoutX="221.0" layoutY="20.0" style="-fx-font-size: 30; -fx-font-weight: bold;" stylesheets="@search_doctors.css" text="Search" textFill="WHITE" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="221.0" AnchorPane.topAnchor="20.0">
                <font>
-                  <Font name="System Bold" size="25.0" />
+                  <Font name="Segoe UI Bold" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="78.0" layoutY="27.0" text="HEALTHYSENSE" textFill="WHITE" AnchorPane.leftAnchor="78.0">
+            <Label layoutX="78.0" layoutY="27.0" style="-fx-font-size: 20;" text="HEALTHYSENSE" textFill="WHITE" AnchorPane.leftAnchor="78.0">
                <font>
                   <Font name="SansSerif Regular" size="14.0" />
                </font>

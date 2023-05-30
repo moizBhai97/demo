@@ -254,7 +254,7 @@
                               </ImageView>
                            </graphic>
                         </ToggleButton>
-                        <HBox fx:id="timesBox" layoutX="14.0" layoutY="131.0" prefHeight="50.0" prefWidth="286.0">
+                        <HBox fx:id="timesBox" layoutX="14.0" layoutY="131.0" prefHeight="50.0" prefWidth="286.0" spacing="10.0">
                            <children>
                               <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="button_big" stylesheets="@resch.css" text="9:30 am" textFill="WHITE">
                                  <toggleGroup>

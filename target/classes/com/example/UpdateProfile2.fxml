@@ -116,7 +116,7 @@
                   </VBox>
                   <VBox layoutX="341.0" layoutY="46.0" prefHeight="181.0" prefWidth="259.0">
                      <children>
-                        <Label text="Certifictions">
+                        <Label text="Certifications">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

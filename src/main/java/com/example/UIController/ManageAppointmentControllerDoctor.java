@@ -4,7 +4,7 @@ import java.net.URL;
 
 import org.json.JSONArray;
 
-import com.example.BackEnd.PatientController;
+import com.example.BackEnd.DoctorController;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-public class ManageAppointmentController implements Initializable {
+public class ManageAppointmentControllerDoctor implements Initializable {
     @FXML
     ScrollPane completedAppointmentsScrollPane;
 
@@ -23,12 +23,12 @@ public class ManageAppointmentController implements Initializable {
     private GridPane completedAppointmentsGridPane;
     private GridPane pendingAppointmentsGridPane;
 
-    private PatientController patientController;
-    private int patId;
+    private DoctorController doctorController;
+    private int docId;
 
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
-        
+
         completedAppointmentsGridPane = new GridPane();
         completedAppointmentsScrollPane.setContent(completedAppointmentsGridPane);
         completedAppointmentsGridPane.setVgap(10);
@@ -45,10 +45,10 @@ public class ManageAppointmentController implements Initializable {
         fillCompletedAppointments();
     }
 
-    public void setData(PatientController pc, int patId) 
+    public void setData(DoctorController dc, int docId) 
     {
-        this.patientController = pc;
-        this.patId = patId;
+        this.doctorController = dc;
+        this.docId = docId;
     }
 
     public void fillPendingAppointments() {
@@ -63,12 +63,12 @@ public class ManageAppointmentController implements Initializable {
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(
-                        (new URL("file:src/main/resources/com/example/PendingAppointmentDoctorCard.fxml")));
+                        (new URL("file:src/main/resources/com/example/PendingAppointmentPatientCard.fxml")));
                 try {
                     Pane pane = fxmlLoader.load();
-                    PendingAppointmentDoctorCard pendingAppointmentDoctorCard = fxmlLoader.getController();
-                    pendingAppointmentDoctorCard.setCard(jsonArray.getJSONObject(i).toString());
-                    pendingAppointmentDoctorCard.setData(patientController, patId);
+                    PendingAppointmentPatientCard pendingAppointmentPatientCard = fxmlLoader.getController();
+                    pendingAppointmentPatientCard.setCard(jsonArray.getJSONObject(i).toString());
+                    pendingAppointmentPatientCard.setData(doctorController, docId);
                     pendingAppointmentsGridPane.add(pane, columnindex, rowindex);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -88,7 +88,7 @@ public class ManageAppointmentController implements Initializable {
     public String getPendingAppointments() {
         // Dummy Data for JSON array
         System.out.println("Pending Appointments");
-        String result = patientController.getAppointList(patId, 1);
+        String result =""; //= doctorController.getAppointList(docId, 1);
 
         return result;
     }
@@ -96,7 +96,7 @@ public class ManageAppointmentController implements Initializable {
     public String getCompletedAppointments() {
         // Dummy Data for JSON array
         System.out.println("Completed Appointments");
-        String result = patientController.getAppointList(patId, 2);
+        String result =""; //= doctorController.getAppointList(docId, 2);
 
         return result;
     }
@@ -113,12 +113,12 @@ public class ManageAppointmentController implements Initializable {
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(
-                        (new URL("file:src/main/resources/com/example/PendingAppointmentDoctorCard.fxml")));
+                        (new URL("file:src/main/resources/com/example/PendingAppointmentPatientCard.fxml")));
                 try {
                     Pane pane = fxmlLoader.load();
-                    PendingAppointmentDoctorCard pendingAppointmentDoctorCard = fxmlLoader.getController();
-                    pendingAppointmentDoctorCard.setCard(jsonArray.getJSONObject(i).toString());
-                    pendingAppointmentDoctorCard.setData(patientController, patId);
+                    PendingAppointmentPatientCard pendingAppointmentPatientCard = fxmlLoader.getController();
+                    pendingAppointmentPatientCard.setCard(jsonArray.getJSONObject(i).toString());
+                    pendingAppointmentPatientCard.setData(doctorController, docId);
                     completedAppointmentsGridPane.add(pane, columnindex, rowindex);
                 } catch (Exception e) {
                     e.printStackTrace();

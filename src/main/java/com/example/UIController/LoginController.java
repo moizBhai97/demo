@@ -63,6 +63,7 @@ public class LoginController implements Initializable{
         System.out.println(loginInfo.toString());
 
         if(isPatient){
+            System.out.println("Patient login");
 
             int patId = Integer.parseInt(patientController.login(loginInfo.toString()));
             System.out.println(patId);
