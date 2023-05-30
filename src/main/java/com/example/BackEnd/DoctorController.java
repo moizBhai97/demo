@@ -22,6 +22,7 @@ public class DoctorController {
 
             Doctor doctor = doctorLedger.getDoctorInstance(info);
             //doctor.setAppointments();
+            //doctor.setDetails();
 
             return "" + (doctor.getId());
             

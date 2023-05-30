@@ -75,6 +75,7 @@ public class DoctorDetails {
         try
         {
             reviewLedger = new ReviewLedger(docId);
+            
 
             info = reviewLedger.getAvgRating(info);
 

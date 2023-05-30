@@ -430,37 +430,40 @@ public class SQL extends DBHandler {
 
     public String getPatient(String info) {
 
-        try {
-            System.out.println("SQL getPatient");
-            // query the database and return the patient info if username and password
-            // matches
+        
+        System.out.println("SQL getPatient");
+        // query the database and return the Doctot info if username and password matches
+
+        JSONObject information = new JSONObject(info);
+        
+        try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
+            String SQL = "SELECT id, name, location, specialization, experience, rating, price FROM Patients WHERE email LIKE '%"
+                    + information.getString("email") + "%' AND password LIKE '%" + information.getString("password") + "%'";
+
+            ResultSet rs = stmt.executeQuery(SQL);
 
             JSONParser parser = new JSONParser();
-            JSONObject obj = new JSONObject(
-                    parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());
-            Set<String> keyset = obj.keySet(); // gets all keys from .json
+            JSONObject patient = new JSONObject(
+                parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());                
 
-            // for(String key : keyset)
-            // {
-            // if(!get(key).equals("NULL"))
-            // obj.put(key, get(key)); //put values in json object
-            // }
+            patient.put("id", rs.getInt("id"));
+            patient.put("name", rs.getString("name"));
+            patient.put("specialization", rs.getString("specialization"));
+            patient.put("experience", rs.getString("experience"));
+            patient.put("rating", rs.getString("rating"));
+            patient.put("location", rs.getString("location"));
+            patient.put("price", rs.getString("fee"));
+                
+            con.close();
+            return patient.toString();
 
-            // dummy data
-            obj.put("patId", "1");
-            obj.put("name", "Musa");
-            obj.put("email", "musa@gmail.com");
-            obj.put("DOB", "1/1/2001");
-            obj.put("phoneNumber", "03369420888");
-            obj.put("gender", "Female");
+        } catch ( Exception e) {
+            // con.close();
 
-            System.out.println(obj.toString());
-            return obj.toString();
-        } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
-            return null;
+            e.printStackTrace();
+            return "[]";
         }
+
 
     }
 
@@ -471,38 +474,47 @@ public class SQL extends DBHandler {
             System.out.println("SQL getDoctor");
             // query the database and return the Doctot info if username and password matches
 
+            JSONObject information = new JSONObject(info);
             
-            JSONParser parser = new JSONParser(); 
-            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString());
-            Set<String> keyset = obj.keySet();      //gets all keys from .json
-            
+            try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
+                String SQL = "SELECT NAME, ID, EMAIL, DOB, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, STATS, PATIENTS_TREATED, EXPERIENCE, RATING, WORKING_HOURS, FEE, AVAILABILITY FROM Doctors WHERE email LIKE '%"
+                        + information.getString("email") + "%' AND password LIKE '%" + information.getString("password") + "%'";
+    
+                ResultSet rs = stmt.executeQuery(SQL);
 
-            // for(String key : keyset)
-            // {
-            //     if(!get(key).equals("NULL"))
-            //         obj.put(key, get(key));            //put values in json object
-            // }
+                JSONParser parser = new JSONParser();
+                JSONObject doctorObj = new JSONObject();
+               
+                doctorObj.put("id", rs.getInt("id"));
+                doctorObj.put("name", rs.getString("name"));
 
-            // "id": "{{id}}",
-            // "name": "{{name}}",
-            // "location": "{{location}}",
-            // "specialization": "{{specialization}}",
-            // "experience": "{{experience}}",
-            // "price": "{{price}}",
-            // "rating": "{{rating}}"
+                JSONObject detailsObj = new JSONObject();
+                detailsObj.put("email", rs.getString("email"));
+                detailsObj.put("dob", rs.getString("dob"));
+                detailsObj.put("phoneNumber", rs.getString("phone_number"));
+                detailsObj.put("gender", rs.getString("gender"));
+                detailsObj.put("specialization", rs.getString("specialization"));
+                detailsObj.put("description", rs.getString("description"));
+                detailsObj.put("location", rs.getString("location"));
+                detailsObj.put("stats", rs.getFloat("stats"));
+                detailsObj.put("patients", rs.getInt("patients_treated"));
+                detailsObj.put("experience", rs.getInt("experience"));
+                detailsObj.put("rating", rs.getFloat("rating"));
+                detailsObj.put("workingHours", rs.getString("working_hours"));
+                detailsObj.put("fee", rs.getInt("fee"));
+                detailsObj.put("availability", rs.getString("availability"));
+                
+                doctorObj.put("details", detailsObj);
 
-            // dummy data
-            obj.put("id", "1");
-            obj.put("name", "Musa");
-            obj.put("location", "Lahore");
-            obj.put("specialization", "Heart");
-            obj.put("experience", "5 years");
-            obj.put("price", "500");
-            obj.put("rating", "5");
-            
-
-            System.out.println(obj.toString());
-            return obj.toString();
+                con.close();
+                return doctorObj.toString();
+    
+            } catch (SQLException | JSONException e) {
+                // con.close();
+    
+                e.printStackTrace();
+                return "[]";
+            }
         }
         catch(Exception e)
         {

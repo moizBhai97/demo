@@ -61,6 +61,14 @@ public class Doctor {
 
     }
 
+    public void setDoctorDetails(String info)
+    {
+        JSONObject obj = new JSONObject(info);
+
+        this.doctorDetails = new DoctorDetails(obj.toString(), id);
+        
+    }
+
     public int getId() {
         return id;
     }
