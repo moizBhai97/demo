@@ -1,5 +1,10 @@
 {
+    "id": "{{id}}",
     "name": "{{name}}",
+    "email": "{{email}}",
+    "dob": "{{dob}}",
+    "phoneNumber": "{{phoneNumber}}",
+    "gender": "{{gender}}",
     "specialization": "{{specialization}}",
     "description": "{{description}}",
     "location": "{{location}}",
@@ -7,12 +12,7 @@
     "patients": "{{patients}}",
     "experience": "{{experience}}",
     "rating": "{{rating}}",
-    "services": "{{services}}",
     "workingHours": "{{workingHours}}",
     "fee": "{{fee}}",
-    "checkupRating": "{{checkupRating}}",
-    "environmentRating": "{{environmentRating}}",
-    "staffRating": "{{staffRating}}",
-    "reviews": "{{reviews}}",
     "availability": "{{availability}}"
 }

@@ -371,37 +371,39 @@ public class SQL extends DBHandler {
 
     public String getPatient(String info) {
 
-        try {
-            System.out.println("SQL getPatient");
-            // query the database and return the patient info if username and password
-            // matches
+        System.out.println("SQL getPatient");
+            // query the database and return the Doctot info if username and password matches
 
-            JSONParser parser = new JSONParser();
-            JSONObject obj = new JSONObject(
-                    parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());
-            Set<String> keyset = obj.keySet(); // gets all keys from .json
+            JSONObject information = new JSONObject(info);
+            
+            try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
+                String SQL = "SELECT id, name, location, specialization, experience, rating, price FROM Patients WHERE email LIKE '%"
+                        + information.getString("email") + "%' AND password LIKE '%" + information.getString("password") + "%'";
+    
+                ResultSet rs = stmt.executeQuery(SQL);
 
-            // for(String key : keyset)
-            // {
-            // if(!get(key).equals("NULL"))
-            // obj.put(key, get(key)); //put values in json object
-            // }
+                JSONParser parser = new JSONParser();
+                JSONObject patient = new JSONObject(
+                    parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());                
 
-            // dummy data
-            obj.put("patId", "1");
-            obj.put("name", "Musa");
-            obj.put("email", "musa@gmail.com");
-            obj.put("DOB", "1/1/2001");
-            obj.put("phoneNumber", "03369420888");
-            obj.put("gender", "Female");
+                patient.put("id", rs.getInt("id"));
+                patient.put("name", rs.getString("name"));
+                patient.put("specialization", rs.getString("specialization"));
+                patient.put("experience", rs.getString("experience"));
+                patient.put("rating", rs.getString("rating"));
+                patient.put("location", rs.getString("location"));
+                patient.put("price", rs.getString("fee"));
+                    
+                con.close();
+                return patient.toString();
+    
+            } catch (SQLException | JSONException | IOException | ParseException e) {
+                // con.close();
+    
+                e.printStackTrace();
+            }
 
-            System.out.println(obj.toString());
-            return obj.toString();
-        } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
-            return null;
-        }
+        return "[]";
 
     }
 
@@ -412,44 +414,88 @@ public class SQL extends DBHandler {
             System.out.println("SQL getDoctor");
             // query the database and return the Doctot info if username and password matches
 
+            JSONObject information = new JSONObject(info);
             
-            JSONParser parser = new JSONParser(); 
-            JSONObject obj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString());
-            Set<String> keyset = obj.keySet();      //gets all keys from .json
-            
+            try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
+                String SQL = "SELECT NAME, ID, EMAIL, DOB, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, STATS, PATIENTS_TREATED, EXPERIENCE, RATING, WORKING_HOURS, FEE, AVAILABILITY FROM Doctors WHERE email LIKE '%"
+                        + information.getString("email") + "%' AND password LIKE '%" + information.getString("password") + "%'";
+    
+                ResultSet rs = stmt.executeQuery(SQL);
 
-            // for(String key : keyset)
-            // {
-            //     if(!get(key).equals("NULL"))
-            //         obj.put(key, get(key));            //put values in json object
-            // }
+                JSONParser parser = new JSONParser();
+                JSONObject doctor = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/DoctorFull.json")).toString());
+                /*
+                    "id": "{{id}}",
+                    "name": "{{name}}",
+                    "email": "{{email}}",
+                    "dob": "{{dob}}",
+                    "phoneNumber": "{{phoneNumber}}",
+                    "gender": "{{gender}}",
+                    "specialization": "{{specialization}}",
+                    "description": "{{description}}",
+                    "location": "{{location}}",
+                    "stats": "{{stats}}",
+                    "patients": "{{patients}}",
+                    "experience": "{{experience}}",
+                    "rating": "{{rating}}",
+                    "workingHours": "{{workingHours}}",
+                    "fee": "{{fee}}",
+                    "availability": "{{availability}}"
 
-            // "id": "{{id}}",
-            // "name": "{{name}}",
-            // "location": "{{location}}",
-            // "specialization": "{{specialization}}",
-            // "experience": "{{experience}}",
-            // "price": "{{price}}",
-            // "rating": "{{rating}}"
+                    NAME VARCHAR(50) NOT NULL,
+                    ID INT NOT NULL,
+                    EMAIL VARCHAR(50) NOT NULL,
+                    PASSWORD VARCHAR(50) NOT NULL,
+                    DOB DATE NOT NULL, 
+                    PHONE_NUMBER VARCHAR(11) NOT NULL CHECK (PHONE_NUMBER LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+                    GENDER VARCHAR(6) NOT NULL CHECK (GENDER IN ('Male', 'Female')),
+                    
+                    -- DOCTOR DETAILS --
+                    SPECIALIZATION VARCHAR(50) NOT NULL,
+                    DESCRIPTION VARCHAR(255) NOT NULL,
+                    LOCATION VARCHAR(50) NOT NULL,
+                    STATS DECIMAL(5, 2) NOT NULL CHECK (STATS BETWEEN 0 AND 100),
+                    PATIENTS_TREATED INT NOT NULL,
+                    EXPERIENCE INT NOT NULL,
+                    RATING DECIMAL(2, 1) NOT NULL CHECK (RATING BETWEEN 0 AND 5),
+                    WORKING_HOURS VARCHAR(50) NOT NULL,
+                    FEE INT NOT NULL,
+                    AVAILABILITY VARCHAR(50),
+                */
 
-            // dummy data
-            obj.put("id", "1");
-            obj.put("name", "Musa");
-            obj.put("location", "Lahore");
-            obj.put("specialization", "Heart");
-            obj.put("experience", "5 years");
-            obj.put("price", "500");
-            obj.put("rating", "5");
-            
-
-            System.out.println(obj.toString());
-            return obj.toString();
+                doctor.put("id", rs.getInt("id"));
+                doctor.put("name", rs.getString("name"));
+                doctor.put("email", rs.getString("email"));
+                doctor.put("dob", rs.getString("dob"));
+                doctor.put("phoneNumber", rs.getString("phone_number"));
+                doctor.put("gender", rs.getString("gender"));
+                doctor.put("specialization", rs.getString("specialization"));
+                doctor.put("description", rs.getString("description"));
+                doctor.put("location", rs.getString("location"));
+                doctor.put("stats", rs.getFloat("stats"));
+                doctor.put("patients", rs.getInt("patients_treated"));
+                doctor.put("experience", rs.getInt("experience"));
+                doctor.put("rating", rs.getFloat("rating"));
+                doctor.put("workingHours", rs.getString("working_hours"));
+                doctor.put("fee", rs.getInt("fee"));
+                doctor.put("availability", rs.getString("availability"));
+                
+                
+                con.close();
+                return doctor.toString();
+    
+            } catch (SQLException | JSONException | IOException | ParseException e) {
+                // con.close();
+    
+                e.printStackTrace();
+            }
         }
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             return null;
         }
+        return "[]";
 
     }
 

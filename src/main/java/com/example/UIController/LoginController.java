@@ -30,7 +30,7 @@ public class LoginController implements Initializable{
     @FXML
     private TextField passwordTextField;
     @FXML
-    private TextField usernameTextField;
+    private TextField emailTextField;
 
     //DummyController dummyController;
 
@@ -51,7 +51,7 @@ public class LoginController implements Initializable{
         System.out.println("Login Button pressed");
 
         JSONObject loginInfo = new JSONObject();
-        loginInfo.put("username", this.usernameTextField.getText());
+        loginInfo.put("email", this.emailTextField.getText());
         loginInfo.put("password", this.passwordTextField.getText());
 
         if(isPatient){

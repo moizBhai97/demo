@@ -86,7 +86,13 @@ public class DoctorLedger {
 
             String doctorInfo = DBFactory.getInstance().createHandler("SQL").getDoctor(info);
 
-            Doctor doctor = new Doctor(doctorInfo);
+            JSONObject doctorObj = new JSONObject();
+            
+
+            JSONObject detailsObj = new JSONObject();
+
+            Doctor doctor = new Doctor(doctorObj.toString());
+            doctor.setDoctorDetails(detailsObj.toString());
             doctorList.add(doctor);
 
             return doctor;

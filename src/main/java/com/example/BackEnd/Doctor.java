@@ -60,7 +60,6 @@ public class Doctor {
 
     }
 
-
     public Doctor(String data) {
         System.out.println("Constructing JSON doctor");
 
@@ -75,8 +74,16 @@ public class Doctor {
     }
 
     public Doctor()
-     {
+    {
 
+    }
+
+    public void setDoctorDetails(String info)
+    {
+        JSONObject obj = new JSONObject(info);
+
+        this.doctorDetails = new DoctorDetails(obj.toString(), id);
+        
     }
 
     public int getId() {
