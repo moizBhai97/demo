@@ -10,12 +10,17 @@ import org.json.JSONObject;
 
 public class DoctorLedger {
 
-    private ArrayList<Doctor> doctorList;
     private ArrayList<Doctor> topDoctors;
+    private ArrayList<Doctor> doctorList;
 
     public DoctorLedger() {
-        doctorList = new ArrayList<Doctor>();
         topDoctors = new ArrayList<Doctor>();
+        doctorList = new ArrayList<Doctor>();
+
+        // Doctor temp = new Doctor();
+        // temp.setId(101);
+
+        // doctorList.add(temp);
     }
 
     public void setTopDoctors() {

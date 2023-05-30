@@ -96,14 +96,20 @@ public class ReviewLedger {
 
     public void addReview(String info, int patId, int docId)
     {
-        JSONObject obj = new JSONObject(info);
-        JSONObject reviewObj = new JSONObject();
 
-        //review.put(info, review)
+        Review review = new Review();
 
+        try
+        {
+            DBFactory.getInstance().createHandler("SQL").addReview(info, patId, docId);
+            reviews.add(review);
 
-        Review review = new Review(obj.toString());
-        reviews.add(review);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+
 
         //dbFactory.createHandler("SQL").addReview(info);
     }
