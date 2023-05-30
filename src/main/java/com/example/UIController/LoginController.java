@@ -61,6 +61,7 @@ public class LoginController implements Initializable{
         loginInfo.put("password", this.passwordTextField.getText());
 
         if(isPatient){
+            System.out.println("Patient login");
 
             int patId = Integer.parseInt(patientController.login(loginInfo.toString()));
             System.out.println(patId);

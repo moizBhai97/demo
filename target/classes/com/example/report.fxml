@@ -18,7 +18,7 @@
    <children>
       <Pane prefHeight="640.0" prefWidth="924.0">
          <children>
-            <Pane fx:id="top_pane" prefHeight="94.0" prefWidth="800.0" styleClass="top_pane" stylesheets="@cancel.css">
+            <Pane fx:id="top_pane" prefHeight="94.0" prefWidth="800.0" styleClass="top_pane" stylesheets="@report.css">
                <children>
                   <Pane layoutX="14.0" layoutY="7.0" prefHeight="70.0" prefWidth="62.0">
                      <children>
@@ -52,9 +52,9 @@
             </Pane>
             <VBox layoutX="-13.0" layoutY="94.0" prefHeight="546.0" prefWidth="149.0">
                <children>
-                  <AnchorPane fx:id="side_anchor" prefHeight="556.0" prefWidth="150.0" styleClass="side_anchor" stylesheets="@cancel.css">
+                  <AnchorPane fx:id="side_anchor" prefHeight="556.0" prefWidth="150.0" styleClass="side_anchor" stylesheets="@report.css">
                      <children>
-                        <Pane fx:id="iner_pane1" layoutX="17.0" layoutY="25.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@cancel.css">
+                        <Pane fx:id="iner_pane1" layoutX="17.0" layoutY="25.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@report.css">
                            <children>
                               <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -62,10 +62,10 @@
                                  </image>
                               </ImageView>
                               <Label layoutX="48.0" layoutY="57.0" text="Home" textFill="#979797" />
-                              <Button layoutX="41.0" layoutY="9.0" mnemonicParsing="false" opacity="0.0" prefHeight="70.0" prefWidth="43.0" styleClass="Butt_inner_pane" stylesheets="@cancel.css" textFill="#2854c3" />
+                              <Button layoutX="41.0" layoutY="9.0" mnemonicParsing="false" opacity="0.0" prefHeight="70.0" prefWidth="43.0" styleClass="Butt_inner_pane" stylesheets="@report.css" textFill="#2854c3" />
                            </children>
                         </Pane>
-                        <Pane fx:id="iner_pane11" layoutX="17.0" layoutY="109.0" prefHeight="70.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@cancel.css">
+                        <Pane fx:id="iner_pane11" layoutX="17.0" layoutY="109.0" prefHeight="70.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@report.css">
                            <children>
                               <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -73,10 +73,10 @@
                                  </image>
                               </ImageView>
                               <Label layoutX="47.0" layoutY="48.0" text="Search" textFill="#979797" />
-                              <Button layoutX="44.0" layoutY="6.0" mnemonicParsing="false" opacity="0.0" prefHeight="63.0" prefWidth="43.0" styleClass="Butt_inner_pane" stylesheets="@cancel.css" textFill="#2854c3" />
+                              <Button layoutX="44.0" layoutY="6.0" mnemonicParsing="false" opacity="0.0" prefHeight="63.0" prefWidth="43.0" styleClass="Butt_inner_pane" stylesheets="@report.css" textFill="#2854c3" />
                            </children>
                         </Pane>
-                        <Pane fx:id="iner_pane111" layoutX="17.0" layoutY="190.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@cancel.css">
+                        <Pane fx:id="iner_pane111" layoutX="17.0" layoutY="190.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@report.css">
                            <children>
                               <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -84,10 +84,10 @@
                                  </image>
                               </ImageView>
                               <Label layoutX="26.0" layoutY="57.0" text="Appointments" textFill="#2854c3" />
-                              <Button layoutX="19.0" mnemonicParsing="false" opacity="0.0" prefHeight="79.0" prefWidth="85.0" styleClass="Butt_inner_pane" stylesheets="@cancel.css" textFill="#2854c3" />
+                              <Button layoutX="19.0" mnemonicParsing="false" opacity="0.0" prefHeight="79.0" prefWidth="85.0" styleClass="Butt_inner_pane" stylesheets="@report.css" textFill="#2854c3" />
                            </children>
                         </Pane>
-                        <Pane fx:id="iner_pane1111" layoutX="17.0" layoutY="279.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@cancel.css">
+                        <Pane fx:id="iner_pane1111" layoutX="17.0" layoutY="279.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@report.css">
                            <children>
                               <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -95,10 +95,10 @@
                                  </image>
                               </ImageView>
                               <Label layoutX="42.0" layoutY="57.0" text="Settings" textFill="#979797" />
-                              <Button layoutX="40.0" layoutY="9.0" mnemonicParsing="false" opacity="0.0" prefHeight="70.0" prefWidth="54.0" styleClass="Butt_inner_pane" stylesheets="@cancel.css" textFill="#2854c3" />
+                              <Button layoutX="40.0" layoutY="9.0" mnemonicParsing="false" opacity="0.0" prefHeight="70.0" prefWidth="54.0" styleClass="Butt_inner_pane" stylesheets="@report.css" textFill="#2854c3" />
                            </children>
                         </Pane>
-                        <Pane fx:id="iner_pane1112" layoutX="17.0" layoutY="366.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@cancel.css">
+                        <Pane fx:id="iner_pane1112" layoutX="17.0" layoutY="366.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@report.css">
                            <children>
                               <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -106,21 +106,21 @@
                                  </image>
                               </ImageView>
                               <Label layoutX="46.0" layoutY="50.0" text="Logout" textFill="#979797" />
-                              <Button layoutX="38.0" layoutY="9.0" mnemonicParsing="false" opacity="0.0" prefHeight="70.0" prefWidth="57.0" styleClass="Butt_inner_pane" stylesheets="@cancel.css" textFill="#2854c3" />
+                              <Button layoutX="38.0" layoutY="9.0" mnemonicParsing="false" opacity="0.0" prefHeight="70.0" prefWidth="57.0" styleClass="Butt_inner_pane" stylesheets="@report.css" textFill="#2854c3" />
                            </children>
                         </Pane>
                      </children>
                   </AnchorPane>
                </children>
             </VBox>
-            <Pane fx:id="big_pane" layoutX="136.0" layoutY="94.0" prefHeight="546.0" prefWidth="664.0" styleClass="big_pane" stylesheets="@cancel.css">
+            <Pane fx:id="big_pane" layoutX="136.0" layoutY="94.0" prefHeight="546.0" prefWidth="664.0" styleClass="big_pane" stylesheets="@report.css">
                <children>
                   <Button layoutX="20.0" layoutY="2.0" mnemonicParsing="false" styleClass="Butt_inner_pane" text="&lt;  Back" textFill="#2854c3">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Pane fx:id="inner_big_pane1" layoutX="53.0" layoutY="42.0" prefHeight="94.0" prefWidth="264.0" styleClass="inner_big_pane1" stylesheets="@cancel.css">
+                  <Pane fx:id="inner_big_pane1" layoutX="53.0" layoutY="42.0" prefHeight="94.0" prefWidth="264.0" styleClass="inner_big_pane1" stylesheets="@report.css">
                      <children>
                         <Pane layoutY="7.0" prefHeight="79.0" prefWidth="103.0">
                            <children>
@@ -138,28 +138,28 @@
                         </Label>
                         <Label fx:id="patGender" layoutX="85.0" layoutY="38.0" text="Male" textFill="#979797" />
                      </children></Pane>
-                  <Button fx:id="cancelButton" layoutX="396.0" layoutY="464.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@cancel.css" text="Report Patient" textFill="WHITE">
+                  <Button fx:id="reportBtn" layoutX="396.0" layoutY="464.0" mnemonicParsing="false" onAction="#reportButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@report.css" text="Report Patient" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Pane fx:id="big_pane1" layoutX="14.0" layoutY="137.0" prefHeight="394.0" prefWidth="368.0" styleClass="big_pane" stylesheets="@cancel.css">
+                  <Pane fx:id="big_pane1" layoutX="14.0" layoutY="137.0" prefHeight="394.0" prefWidth="368.0" styleClass="big_pane" stylesheets="@report.css">
                      <children>
                         <Label layoutX="46.0" layoutY="16.0" text="Reason" textFill="#2854c3">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>
                         </Label>
-                        <RadioButton fx:id="radio1" layoutX="58.0" layoutY="52.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@cancel.css" text="Abusive Language" textFill="#8c8f85">
+                        <RadioButton fx:id="radio1" layoutX="58.0" layoutY="52.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@report.css" text="Abusive Language" textFill="#8c8f85">
                            <toggleGroup>
                               <ToggleGroup fx:id="radios" />
                            </toggleGroup>
                         </RadioButton>
-                        <RadioButton fx:id="radio11" layoutX="58.0" layoutY="84.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@cancel.css" text="Inappropriate Behaviour" textFill="#8c8f85" toggleGroup="$radios" />
-                        <RadioButton fx:id="radio111" layoutX="58.0" layoutY="115.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@cancel.css" text="Spam" textFill="#8c8f85" toggleGroup="$radios" />
-                        <RadioButton fx:id="radio121" layoutX="58.0" layoutY="145.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@cancel.css" text="I donot like him" textFill="#8c8f85" toggleGroup="$radios" />
-                        <RadioButton fx:id="radio1211" layoutX="58.0" layoutY="175.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@cancel.css" text="I donot want to tell" textFill="#8c8f85" toggleGroup="$radios" />
-                        <RadioButton fx:id="radio12111" layoutX="58.0" layoutY="205.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@cancel.css" text="Other" textFill="#8c8f85" toggleGroup="$radios" />
+                        <RadioButton fx:id="radio11" layoutX="58.0" layoutY="84.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@report.css" text="Inappropriate Behaviour" textFill="#8c8f85" toggleGroup="$radios" />
+                        <RadioButton fx:id="radio111" layoutX="58.0" layoutY="115.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@report.css" text="Spam" textFill="#8c8f85" toggleGroup="$radios" />
+                        <RadioButton fx:id="radio121" layoutX="58.0" layoutY="145.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@report.css" text="I donot like him" textFill="#8c8f85" toggleGroup="$radios" />
+                        <RadioButton fx:id="radio1211" layoutX="58.0" layoutY="175.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@report.css" text="I donot want to tell" textFill="#8c8f85" toggleGroup="$radios" />
+                        <RadioButton fx:id="radio12111" layoutX="58.0" layoutY="205.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@report.css" text="Other" textFill="#8c8f85" toggleGroup="$radios" />
                         <TextArea fx:id="reason" layoutX="64.0" layoutY="239.0" prefHeight="134.0" prefWidth="254.0" promptText="Enter Reason" />
                      </children>
                   </Pane>
