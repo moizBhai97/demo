@@ -1,11 +1,8 @@
 package com.example.UIController;
 
 import java.net.URL;
-import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -143,7 +140,7 @@ public class ReschAppointmentController  implements Initializable
         }
 
         JSONObject obj = new JSONObject();
-        
+
         obj.put("docId", docId);
         obj.put("date", date);
         obj.put("time", selectedTime);
@@ -248,10 +245,6 @@ public class ReschAppointmentController  implements Initializable
         }
 
         timesBox.setSpacing(15);
-
-        // times.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
-        //     handleToggleButtonAction((ToggleButton) newValue);
-        // });
     }
 
 }
