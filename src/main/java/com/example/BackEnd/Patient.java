@@ -1,8 +1,11 @@
 package com.example.BackEnd;
 
 import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -15,6 +18,7 @@ public class Patient {
     private String phoneNumber; 
     private String gender; 
     private AppointmentLedger appointmentLedger;
+    private List<PatientHistory> patientHistoryList;
 
     public Patient()
     {
@@ -38,6 +42,8 @@ public class Patient {
         this.DOB = obj.getString("DOB");
         this.phoneNumber = obj.getString("phoneNumber");
         this.gender = obj.getString("gender");
+
+        appointmentLedger = new AppointmentLedger();
     }
 
     public int getpatId()
@@ -55,6 +61,55 @@ public class Patient {
         this.DOB = obj.getString("DOB");
         this.phoneNumber = obj.getString("phoneNumber");
         this.gender = obj.getString("gender");
+    }
+
+    public void setHistory()
+    {
+        try{
+            if(patientHistoryList == null)
+            {
+                JSONArray jsonArray = new JSONArray(DBFactory.getInstance().createHandler("SQL").getPatientHistory(patId));
+                
+                patientHistoryList = new ArrayList<>();
+
+                for(int i = 0; i < jsonArray.length(); i++)
+                {
+                    JSONObject obj = jsonArray.getJSONObject(i);
+
+                    PatientHistory history = new PatientHistory(obj.toString());
+
+                    patientHistoryList.add(history);
+                }
+            }            
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public String getHistory()
+    {
+        try{
+
+            setHistory();
+            
+            JSONArray jsonArray = new JSONArray();
+            
+            for(int i = 0; i < patientHistoryList.size(); i++)
+            {
+                JSONObject obj = new JSONObject(patientHistoryList.get(i).toString());
+                
+                jsonArray.put(obj);
+            }
+            
+            return jsonArray.toString();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            return "[]";
+        }
     }
 
     public void bookSlot(String info)

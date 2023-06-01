@@ -31,8 +31,6 @@ public class PatientLedger {
                 patientList.add(patient);
             }
 
-            System.out.println(patientList.toString());
-
         } catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
             }.getClass().getEnclosingMethod().getName());

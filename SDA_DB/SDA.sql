@@ -110,8 +110,7 @@ CREATE TABLE CERTIFICATIONS
 (
 	ID INT IDENTITY(1, 1),
 	DOCTOR_ID INT NOT NULL,
-	TYPE VARCHAR(50) NOT NULL,
-	DESCRIPTION VARCHAR(50) NOT NULL,
+	NAME VARCHAR(50) NOT NULL,
 	APPROVED_STATUS VARCHAR(8) NOT NULL CHECK (APPROVED_STATUS IN ('Approved', 'Pending', 'Rejected')),
 	ISSUE_DATE DATE NOT NULL,
 	EXPIRY_DATE DATE NOT NULL,
@@ -222,12 +221,12 @@ VALUES (101, 'Heart checkup'),
        (105, 'Dental cleaning');
 
 -- Insert data into CERTIFICATIONS table
-INSERT INTO CERTIFICATIONS (DOCTOR_ID, TYPE, DESCRIPTION, APPROVED_STATUS, ISSUE_DATE, EXPIRY_DATE)
-VALUES (101, 'MBBS', 'Bachelor of Medicine, Bachelor of Surgery', 'Approved', '2000-01-01', '2030-01-01'),
-       (102, 'MBBS', 'Bachelor of Medicine, Bachelor of Surgery', 'Approved', '2002-01-01', '2032-01-01'),
-       (103, 'MBBS', 'Bachelor of Medicine, Bachelor of Surgery', 'Approved', '1998-01-01', '2028-01-01'),
-       (104, 'MBBS', 'Bachelor of Medicine, Bachelor of Surgery', 'Approved', '2005-01-01', '2035-01-01'),
-       (105, 'MBBS', 'Bachelor of Medicine, Bachelor of Surgery', 'Approved', '2003-01-01', '2033-01-01');
+INSERT INTO CERTIFICATIONS (DOCTOR_ID, NAME, APPROVED_STATUS, ISSUE_DATE, EXPIRY_DATE)
+VALUES (101, 'Bachelor of Medicine', 'Approved', '2000-01-01', '2030-01-01'),
+       (102, 'Bachelor of Medicine', 'Approved', '2002-01-01', '2032-01-01'),
+       (103, 'Bachelor of Medicine', 'Approved', '1998-01-01', '2028-01-01'),
+       (104, 'Bachelor of Medicine', 'Approved', '2005-01-01', '2035-01-01'),
+       (105, 'Bachelor of Medicine', 'Approved', '2003-01-01', '2033-01-01');
 
 -- Insert data into COMPLAINTS table
 INSERT INTO COMPLAINTS (DOCTOR_ID, PATIENT_ID, REASON, DESCRIPTION)

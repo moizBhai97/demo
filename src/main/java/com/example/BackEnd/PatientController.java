@@ -38,6 +38,13 @@ public class PatientController {
 
     }
 
+    public String getPatientHistory(int patId)
+    {
+        Patient patient = patientLedger.getPatient(patId);
+
+        return patient.getHistory();
+    }
+
     public void submitReview(String info, int docId, int patId)
     {
         try

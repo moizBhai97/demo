@@ -100,7 +100,7 @@ public class UpdatePatientProfileController implements Initializable{
             username = tf_username.getText();
             isChanged = true;
         } 
-        else if(isChanged)
+        else if(!isChanged)
         {
             System.out.println("No changes made");
             return;
