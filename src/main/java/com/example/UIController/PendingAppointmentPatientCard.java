@@ -23,9 +23,6 @@ public class PendingAppointmentPatientCard {
     private Button viewBtn;
 
     @FXML
-    private Button reportBtn;
-
-    @FXML
     private Pane card1;
 
     @FXML
@@ -77,11 +74,13 @@ public class PendingAppointmentPatientCard {
             this.viewBtn.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/report.fxml")));
-            CompletedAppointmentController completedAppointmentController = new CompletedAppointmentController();
+            loader.setLocation((new URL("file:src/main/resources/com/example/app_detailsDoctor.fxml")));
+            
+            AppointmentControllerDoctor appointmentControllerDoctor = new AppointmentControllerDoctor();
 
-            //completedAppointmentController.setData(dc, patId, appointID, docId);
-            loader.setController(completedAppointmentController);
+            appointmentControllerDoctor.setData(dc, patId, appointID, docId);
+            
+            loader.setController(appointmentControllerDoctor);
             
             //-------------------------------------------------------------------------------------------------//
             //-------------------------------------------------------------------------------------------------//
@@ -96,31 +95,5 @@ public class PendingAppointmentPatientCard {
             e.printStackTrace();
         }
 
-    }
-
-    public void reportButton(ActionEvent event)
-    {
-        try
-        {
-            this.reportBtn.getScene().getWindow().hide();
-
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/report.fxml")));
-
-
-            ReportController reportController = new ReportController();
-            reportController.setData(dc, patId, docId);
-            loader.setController(reportController);
-
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
-        }
     }
 }
