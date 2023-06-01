@@ -169,3 +169,97 @@
         -fx-background-radius: 10px;
         -fx-border-style: solid;
 }
+
+/**/
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent transparent #bebebe transparent;
+    -fx-padding:  10px 10px 10px 10px;
+}
+
+.table-view .column-header-background .filler {
+    -fx-allignment: LEFT;
+    -fx-background-color: transparent;
+}
+
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background{
+    -fx-allignment: LEFT;
+    -fx-background-color: transparent;
+    -fx-background-radius: 0px 0px 0px 0px;
+    -fx-background-insets: 0 0 0 0;
+    -fx-padding: 0 0 5px 0;
+}
+
+.table-view .column-header {
+    -fx-allignment: LEFT;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #bebebe transparent;
+
+}
+
+.table-view .column-header .label{
+
+    -fx-allignment: LEFT;
+    -fx-text-fill: #000000;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.table-view .table-cell{
+    -fx-padding: 2 0 2 10px;
+}
+
+.tabble-view .table-cell:selected {
+    -fx-border-color: transparent transparent #bebebe transparent;
+    -fx-background-color: transparent;
+    -fx-text-background-color: black;
+}
+
+.tabble-view .table-cell:checked {
+    -fx-border-color: transparent transparent #bebebe transparent;
+    -fx-background-color: transparent;
+    -fx-text-background-color: black;
+}
+
+.table-row-cell:filled {
+    -fx-border-color: transparent transparent #bebebe transparent; /* Set transparent borders except for the bottom border for rows with text */
+}
+
+.tabble-view .table-column{
+    -fx-padding: 2 0 2 10px;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: transparent;
+    -fx-text-background-color: black;
+}
+
+.table-row-cell:selected .table-cell {
+    -fx-border-color: transparent transparent transparent transparent;
+    -fx-background-color: transparent;
+    -fx-text-background-color: black;
+}
+
+.table-column .label{
+    -fx-border-color: transparent transparent #bebebe transparent;
+    -fx-text-fill: #000000;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+
+.table-row-cell:even{
+    -fx-background-color: transparent;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}

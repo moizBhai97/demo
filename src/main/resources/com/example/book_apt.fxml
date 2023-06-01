@@ -121,7 +121,7 @@
                         <Pane fx:id="big_pane1" prefHeight="311.0" prefWidth="335.0" styleClass="big_pane" stylesheets="@book_apt.css">
                            <children>
                               <TextArea fx:id="problem_text" layoutX="42.0" layoutY="200.0" prefHeight="104.0" prefWidth="254.0" promptText="Describe Problem" style="-fx-background-radius: 8px; -fx-border-radius: 8px;" />
-                              <ToggleButton alignment="BASELINE_LEFT" layoutX="38.0" layoutY="55.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="134.0" selected="true" styleClass="button_big" stylesheets="@book_apt.css" text="Morning" textFill="WHITE">
+                              <ToggleButton fx:id="day" alignment="BASELINE_LEFT" layoutX="38.0" layoutY="55.0" mnemonicParsing="false" onAction="#morningButton" prefHeight="40.0" prefWidth="134.0" selected="true" styleClass="button_big" stylesheets="@book_apt.css" text="Morning" textFill="WHITE">
                                  <graphic>
                                     <ImageView fitHeight="24.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -133,7 +133,7 @@
                                     <ToggleGroup fx:id="period" />
                                  </toggleGroup>
                               </ToggleButton>
-                              <ToggleButton alignment="BASELINE_LEFT" layoutX="189.0" layoutY="55.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="134.0" styleClass="button_night" stylesheets="@book_apt.css" text="Evening" toggleGroup="$period">
+                              <ToggleButton fx:id="night" alignment="BASELINE_LEFT" layoutX="189.0" layoutY="55.0" mnemonicParsing="false" onAction="#nightButton" prefHeight="40.0" prefWidth="134.0" styleClass="button_night" stylesheets="@book_apt.css" text="Evening" toggleGroup="$period">
                                  <graphic>
                                     <ImageView fitHeight="24.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -142,33 +142,37 @@
                                     </ImageView>
                                  </graphic>
                               </ToggleButton>
-                              <ToggleButton layoutX="38.0" layoutY="124.0" mnemonicParsing="false" onAction="#timeSelected" prefHeight="36.0" prefWidth="85.0" selected="true" styleClass="button_big" stylesheets="@book_apt.css" text="9:30 am" textFill="WHITE">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="time" />
-                                 </toggleGroup>
-                              </ToggleButton>
-                              <ToggleButton layoutX="138.0" layoutY="124.0" mnemonicParsing="false" onAction="#timeSelected" prefHeight="36.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@book_apt.css" text="10:00" toggleGroup="$time" />
-                              <ToggleButton layoutX="238.0" layoutY="124.0" mnemonicParsing="false" onAction="#timeSelected" prefHeight="36.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@book_apt.css" text="11:30 am" toggleGroup="$time" />
-                              <Pane layoutX="43.0" layoutY="16.0" prefHeight="31.0" prefWidth="160.0">
-                                 <children>
-                                    <Label fx:id="date" accessibleRole="DATE_PICKER" alignment="BASELINE_LEFT" layoutX="33.0" layoutY="6.0" text="21 January, Friday" textFill="#8c8fa5" wrapText="true">
-                                       <font>
-                                          <Font name="System Bold" size="12.0" />
-                                       </font>
-                                    </Label>
-                                    <ImageView accessibleRole="DATE_PICKER" fitHeight="25.0" fitWidth="28.0" layoutX="1.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
-                                       <image>
-                                          <Image url="@../../images/Calendar.png" />
-                                       </image>
-                                    </ImageView>
-                                    <DatePicker fx:id="datePicker" editable="false" layoutX="-3.0" layoutY="-2.0" onAction="#datePickerPressed" prefHeight="33.0" prefWidth="50.0" styleClass="date-picker" stylesheets="@book_apt.css" />
-                                 </children>
-                              </Pane>
                               <Label alignment="BASELINE_LEFT" layoutX="41.0" layoutY="175.0" prefHeight="31.0" prefWidth="134.0" text="Describe your problem" textFill="#8c8fa5" wrapText="true">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
+                              <Pane layoutX="38.0" layoutY="14.0" prefHeight="31.0" prefWidth="160.0">
+                                 <children>
+                                    <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="134.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/Calendar.png" />
+                                       </image>
+                                    </ImageView>
+                                    <DatePicker fx:id="datePicker" editable="false" layoutX="-1.0" layoutY="3.0" onAction="#datePickerPressed" prefHeight="18.0" prefWidth="160.0" styleClass="date-picker" stylesheets="@resch.css" />
+                                    <Label fx:id="datePick" alignment="BASELINE_LEFT" prefHeight="31.0" prefWidth="134.0" text="21 January, Friday" textFill="#8c8fa5" wrapText="true">
+                                       <font>
+                                          <Font name="System Bold" size="14.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <HBox fx:id="timesBox" layoutX="38.0" layoutY="113.0" prefHeight="50.0" prefWidth="286.0" spacing="10.0">
+                                 <children>
+                                    <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="button_big" stylesheets="@resch.css" text="9:30 am" textFill="WHITE">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="times" />
+                                       </toggleGroup>
+                                    </ToggleButton>
+                                    <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@resch.css" text="10:30 am" toggleGroup="$times" />
+                                    <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@resch.css" text="11:30 am" toggleGroup="$times" />
+                                 </children>
+                              </HBox>
                            </children>
                         </Pane>
                         <Button fx:id="bookBtn" layoutX="339.0" layoutY="304.0" mnemonicParsing="false" onAction="#bookButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@book_apt.css" text="Book Appointment" textFill="WHITE">

@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -120,12 +121,12 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </Button>
-                  <Button fx:id="paymentBtn" layoutX="360.0" layoutY="450.0" mnemonicParsing="false" onAction="#paymentButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@resch.css" text="Make Payment" textFill="WHITE">
+                  <Button fx:id="paymentBtn" layoutX="376.0" layoutY="450.0" mnemonicParsing="false" onAction="#paymentButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@resch.css" text="Make Payment" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <ToggleButton fx:id="Cash" alignment="BASELINE_LEFT" layoutX="37.0" layoutY="89.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="210.0" selected="true" styleClass="button_big" stylesheets="@resch.css" text="Cash" textFill="WHITE">
+                  <ToggleButton fx:id="Cash" alignment="BASELINE_LEFT" layoutX="37.0" layoutY="89.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="236.0" selected="true" styleClass="button_big" stylesheets="@resch.css" text="Cash" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -138,32 +139,34 @@
                      </toggleGroup>
                   </ToggleButton>
                   <Label layoutX="37.0" layoutY="52.0" text="Payment Type" textFill="#979797" />
-                  <Pane fx:id="inner_big_pane11" layoutX="283.0" layoutY="138.0" prefHeight="143.0" prefWidth="299.0" styleClass="big_pane" stylesheets="@resch.css">
+                  <Pane fx:id="inner_big_pane11" layoutX="302.0" layoutY="138.0" prefHeight="143.0" prefWidth="299.0" style="-fx-background-radius: 10; -fx-border-radius: 10;" styleClass="big_pane" stylesheets="@resch.css">
                      <children>
                         <Label fx:id="dateTime" layoutX="138.0" layoutY="19.0" prefHeight="17.0" prefWidth="168.0" styleClass="texty" stylesheets="@resch.css" text="21 January, Friday | 10:00">
                            <font>
                               <Font name="Serif Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="19.0" text="Current Date &amp; Hour" />
+                        <Label layoutX="14.0" layoutY="19.0" text="Payment Time" />
                         <Label layoutX="14.0" layoutY="107.0" text="Session Duration" />
                         <Label fx:id="texty1" layoutX="138.0" layoutY="107.0" styleClass="texty" stylesheets="@resch.css" text="1 Hour">
                            <font>
                               <Font name="Serif Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="63.0" text="Booking for Doctor" />
+                        <Label layoutX="14.0" layoutY="63.0" text="Booked Doctor" />
                         <Label fx:id="name" layoutX="138.0" layoutY="63.0" styleClass="texty" stylesheets="@resch.css" text="Dr. Amna">
                            <font>
                               <Font name="Serif Bold" size="12.0" />
                            </font>
                         </Label>
+                        <Line endX="135.39996337890625" layoutX="113.0" layoutY="50.0" startX="-100.0" stroke="DIMGRAY" />
+                        <Line endX="135.39996337890625" layoutX="112.0" layoutY="95.0" startX="-100.0" stroke="DIMGRAY" />
                      </children>
                      <effect>
-                        <InnerShadow />
+                        <DropShadow height="10.0" radius="7.0" width="20.0" />
                      </effect>
                   </Pane>
-                  <Pane fx:id="inner_big_pane111" layoutX="283.0" layoutY="311.0" prefHeight="104.0" prefWidth="299.0" styleClass="big_pane" stylesheets="@resch.css">
+                  <Pane fx:id="inner_big_pane111" layoutX="302.0" layoutY="311.0" prefHeight="104.0" prefWidth="299.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" styleClass="big_pane" stylesheets="@resch.css">
                      <children>
                         <Label fx:id="amount" layoutX="162.0" layoutY="19.0" prefHeight="17.0" prefWidth="43.0" styleClass="texty" stylesheets="@resch.css" text="2000">
                            <font>
@@ -195,10 +198,10 @@
                         </Label>
                      </children>
                      <effect>
-                        <InnerShadow />
+                        <DropShadow height="10.0" radius="7.0" width="20.0" />
                      </effect>
                   </Pane>
-                  <Button fx:id="cancelBtn" layoutX="112.0" layoutY="450.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@resch.css" text="Cancel" textFill="WHITE">
+                  <Button fx:id="cancelBtn" layoutX="128.0" layoutY="450.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@resch.css" text="Cancel" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
