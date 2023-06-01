@@ -15,7 +15,28 @@ public class PatientLedger {
     {
         dbFactory = DBFactory.getInstance();
         patientList = new ArrayList<Patient>();
-        patientList.add(new Patient(1)); // for testing
+
+        // testing
+        Patient patient = new Patient(1);
+        patient.setName("Musa");
+        patient.setEmail("musa@gmail.com");
+        patient.setDOB("12/12/1999");
+        patient.setCountry("Pakistan");
+        patient.setPhoneNumber("123456789");
+        patient.setGender("Male");
+
+        patientList.add(patient); 
+
+    }
+
+    public void add()
+    {
+
+    }
+
+    public void remove()
+    {
+        
     }
 
     public void setAppointmentPatients(int docId)
@@ -66,6 +87,17 @@ public class PatientLedger {
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             return null;
+        }
+    }
+
+    public String getPatientDetails(int patId)
+    {
+        try{
+            return getPatient(patId).getDetails();
+        } catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return "";
         }
     }
     

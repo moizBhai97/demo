@@ -3,6 +3,9 @@ package com.example.UIController;
 import java.io.IOException;
 import java.lang.String;
 import java.net.URL;
+import java.util.ResourceBundle;
+
+import org.json.JSONObject;
 
 import com.example.BackEnd.DoctorController;
 import com.example.BackEnd.PatientController;
@@ -10,6 +13,7 @@ import com.example.BackEnd.PatientController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,7 +24,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class UpdateDoctorProfileController {
+public class UpdateDoctorProfileController implements Initializable{
 
     @FXML
     private Button btn_add1;
@@ -52,9 +56,25 @@ public class UpdateDoctorProfileController {
     @FXML
     private TextField tf_username;
 
+    @FXML
+    private TextField tf_gender;
+
     UpdateDoctorProfile2Controller updateDoctorProfile2Controller = new UpdateDoctorProfile2Controller();
     DoctorController doctorController = new DoctorController();
-    int docId /* = 101 */;
+    int docId = 101 ;
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        // TODO Auto-generated method stub
+        JSONObject data = new JSONObject(doctorController.getDoctorData(docId));
+
+        tf_username.setText(data.getString("name"));
+        tf_email.setText(data.getString("email"));
+        tf_dob.setText(data.getString("DOB"));
+        tf_country.setText(data.getString("country"));
+        tf_number.setText(data.getString("phoneNumber"));
+        tf_gender.setText(data.getString("gender"));
+    }
 
     void setData(int docId) {
 

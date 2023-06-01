@@ -342,7 +342,7 @@ public class SQL extends DBHandler {
 
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
 
-            String SQL = "SELECT (SELECT COUNT(ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients, id, NAME, SPECIALIZATION, DESCRIPTION, LOCATION, EXPERIENCE, WORKING_HOURS, FEE, AVAILABILITY FROM DOCTORS d where d.name LIKE '%" + name + "%';";
+            String SQL = "SELECT (SELECT COUNT(ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients, id, NAME, EMAIL, DOB, COUNTRY, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, STATS, PATIENTS_TREATED, EXPERIENCE, RATING, WORKING_HOURS, FEE, AVAILABILITY FROM DOCTORS d where d.name LIKE '%" + name + "%';";
 
             ResultSet rs = stmt.executeQuery(SQL);
 
@@ -354,16 +354,23 @@ public class SQL extends DBHandler {
 
                 obj.put("id", rs.getInt("id"));
                 obj.put("name", rs.getString("NAME"));
+                obj.put("email", rs.getString("EMAIL"));
+                obj.put("DOB", rs.getString("DOB"));
+                obj.put("country", rs.getString("COUNTRY"));
+                obj.put("phoneNumber", rs.getString("PHONE_NUMBER"));
+                obj.put("gender", rs.getString("GENDER"));
 
                 JSONObject innerObj = new JSONObject();
-                innerObj.put("specialization", rs.getString("SPECIALIZATION"));
-                innerObj.put("description", rs.getString("DESCRIPTION"));
-                innerObj.put("location", rs.getString("LOCATION"));
-                innerObj.put("experience", rs.getInt("EXPERIENCE"));
-                innerObj.put("workingHours", rs.getString("WORKING_HOURS"));
-                innerObj.put("fee", rs.getFloat("FEE"));
-                innerObj.put("availability", rs.getString("AVAILABILITY"));
-                innerObj.put("patients", rs.getInt("Patients"));
+                innerObj.put("specialization", rs.getString("specialization"));
+                innerObj.put("description", rs.getString("description"));
+                innerObj.put("location", rs.getString("location"));
+                innerObj.put("stats", rs.getFloat("stats"));
+                innerObj.put("patients", rs.getInt("patients_treated"));
+                innerObj.put("experience", rs.getInt("experience"));
+                innerObj.put("rating", rs.getFloat("rating"));
+                innerObj.put("workingHours", rs.getString("working_hours"));
+                innerObj.put("fee", rs.getInt("fee"));
+                innerObj.put("availability", rs.getString("availability"));
                 
                 SQL ="SELECT DESCRIPTION FROM SERVICES WHERE DOCTOR_ID = ?;";
                 PreparedStatement pstmt = con.prepareStatement(SQL);
@@ -412,12 +419,13 @@ public class SQL extends DBHandler {
                
                 doctorObj.put("id", rs.getInt("id"));
                 doctorObj.put("name", rs.getString("name"));
+                doctorObj.put("email", rs.getString("EMAIL"));
+                doctorObj.put("DOB", rs.getString("DOB"));
+                doctorObj.put("country", rs.getString("COUNTRY"));
+                doctorObj.put("phoneNumber", rs.getString("PHONE_NUMBER"));
+                doctorObj.put("gender", rs.getString("GENDER"));
 
                 JSONObject detailsObj = new JSONObject();
-                detailsObj.put("email", rs.getString("email"));
-                //detailsObj.put("DOB", rs.getString("DOB"));
-                detailsObj.put("phoneNumber", rs.getString("phone_number"));
-                detailsObj.put("gender", rs.getString("gender"));
                 detailsObj.put("specialization", rs.getString("specialization"));
                 detailsObj.put("description", rs.getString("description"));
                 detailsObj.put("location", rs.getString("location"));
@@ -489,7 +497,7 @@ public class SQL extends DBHandler {
         JSONObject information = new JSONObject(info);
         
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
-            String SQL = "SELECT NAME, ID, EMAIL, DOB, PHONE_NUMBER, GENDER FROM Patients WHERE email = ?  AND password = ?";
+            String SQL = "SELECT NAME, ID, EMAIL, DOB, COUNTRY, PHONE_NUMBER, GENDER FROM Patients WHERE email = ?  AND password = ?";
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setString(1, information.getString("email"));
             pstmt.setString(2, information.getString("password"));
@@ -504,6 +512,7 @@ public class SQL extends DBHandler {
             patient.put("name", rs.getString("name"));
             patient.put("email", rs.getString("email"));
             patient.put("DOB", rs.getString("dob"));
+            patient.put("country", rs.getString("country"));
             patient.put("phoneNumber", rs.getString("phone_number"));
             patient.put("gender", rs.getString("gender"));
 
@@ -533,7 +542,7 @@ public class SQL extends DBHandler {
             JSONObject information = new JSONObject(info); 
             
             try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
-                String SQL = "SELECT NAME, ID, EMAIL, DOB, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, STATS, PATIENTS_TREATED, EXPERIENCE, RATING, WORKING_HOURS, FEE, AVAILABILITY FROM Doctors WHERE email = ? AND password = ?";
+                String SQL = "SELECT NAME, ID, EMAIL, DOB, COUNTRY, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, STATS, PATIENTS_TREATED, EXPERIENCE, RATING, WORKING_HOURS, FEE, AVAILABILITY FROM Doctors WHERE email = ? AND password = ?";
                 PreparedStatement pstmt = con.prepareStatement(SQL);
                 pstmt.setString(1, information.getString("email"));
                 pstmt.setString(2, information.getString("password"));
@@ -545,12 +554,13 @@ public class SQL extends DBHandler {
                
                 doctorObj.put("id", rs.getInt("id"));
                 doctorObj.put("name", rs.getString("name"));
+                doctorObj.put("email", rs.getString("EMAIL"));
+                doctorObj.put("DOB", rs.getString("DOB"));
+                doctorObj.put("country", rs.getString("COUNTRY"));
+                doctorObj.put("phoneNumber", rs.getString("PHONE_NUMBER"));
+                doctorObj.put("gender", rs.getString("GENDER"));
 
                 JSONObject detailsObj = new JSONObject();
-                detailsObj.put("email", rs.getString("email"));
-                //detailsObj.put("DOB", rs.getString("DOB"));
-                detailsObj.put("phoneNumber", rs.getString("phone_number"));
-                detailsObj.put("gender", rs.getString("gender"));
                 detailsObj.put("specialization", rs.getString("specialization"));
                 detailsObj.put("description", rs.getString("description"));
                 detailsObj.put("location", rs.getString("location"));
@@ -785,11 +795,13 @@ public class SQL extends DBHandler {
                
                 doctorObj.put("id", rs.getInt("id"));
                 doctorObj.put("name", rs.getString("name"));
+                doctorObj.put("email", rs.getString("EMAIL"));
+                doctorObj.put("DOB", rs.getString("DOB"));
+                doctorObj.put("country", rs.getString("COUNTRY"));
+                doctorObj.put("phoneNumber", rs.getString("PHONE_NUMBER"));
+                doctorObj.put("gender", rs.getString("GENDER"));
 
                 JSONObject detailsObj = new JSONObject();
-                detailsObj.put("email", rs.getString("email"));
-                detailsObj.put("phoneNumber", rs.getString("phone_number"));
-                detailsObj.put("gender", rs.getString("gender"));
                 detailsObj.put("specialization", rs.getString("specialization"));
                 detailsObj.put("description", rs.getString("description"));
                 detailsObj.put("location", rs.getString("location"));
@@ -849,6 +861,7 @@ public class SQL extends DBHandler {
                 patientObj.put("name", rs.getString("name"));
                 patientObj.put("email", rs.getString("email"));
                 patientObj.put("DOB", rs.getString("dob"));
+                patientObj.put("country", rs.getString("country"));
                 patientObj.put("phoneNumber", rs.getString("phone_number"));
                 patientObj.put("gender", rs.getString("gender"));
 
