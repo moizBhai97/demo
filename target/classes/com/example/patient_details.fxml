@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -16,43 +18,11 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.HyperlinkLabel?>
 
-<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" >
+<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.StartController">
    <children>
       <Pane prefHeight="640.0" prefWidth="924.0">
          <children>
-            <Pane fx:id="top_pane" prefHeight="94.0" prefWidth="800.0" styleClass="top_pane" stylesheets="@patient_details.css">
-               <children>
-                  <Pane layoutX="14.0" layoutY="7.0" prefHeight="70.0" prefWidth="62.0">
-                     <children>
-                        <ImageView fitHeight="70.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/image%2023.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="690.0" layoutY="6.0" prefHeight="79.0" prefWidth="103.0">
-                     <children>
-                        <ImageView fitHeight="58.0" fitWidth="55.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/photo.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <Label layoutX="70.0" layoutY="38.0" text="HEALTHYSENSE" textFill="WHITE">
-                     <font>
-                        <Font name="SansSerif Regular" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="328.0" layoutY="39.0" text="Patient Details" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="21.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutX="136.0" layoutY="81.0" prefHeight="545.0" prefWidth="664.0">
+            <Pane layoutX="136.0" layoutY="95.0" prefHeight="545.0" prefWidth="664.0" styleClass="big_pane" stylesheets="@patient_details.css">
                <children>
                   <Button fx:id="button_back" alignment="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="81.0" style="-fx-background-color: transparent;" styleClass="button_back" text="&lt;  Back" textAlignment="CENTER" textFill="#2854c3" wrapText="true">
                      <font>
@@ -78,13 +48,13 @@
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font></Label>
-                        <TextField fx:id="name" prefHeight="35.0" prefWidth="259.0" promptText="Musa Haroon" style="-fx-background-color: e2e2e2; -fx-border-radius: 4;" styleClass="textField_username" stylesheets="@patient_details.css">
+                        <TextField fx:id="name" accessibleRole="TEXT" editable="false" prefHeight="35.0" prefWidth="259.0" promptText="Musa Haroon" style="-fx-background-color: e2e2e2; -fx-border-radius: 4;" styleClass="textField_username" stylesheets="@patient_details.css">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
                         <Label text="Phone Number" />
-                        <TextField fx:id="number" prefHeight="35.0" prefWidth="259.0" promptText="0336-9420888" style="-fx-background-color: #e2e2e2; -fx-border-radius: 4;" styleClass="textField_username" stylesheets="@patient_details.css">
+                        <TextField fx:id="number" accessibleRole="TEXT" editable="false" prefHeight="35.0" prefWidth="259.0" promptText="0336-9420888" style="-fx-background-color: #e2e2e2; -fx-border-radius: 4;" styleClass="textField_username" stylesheets="@patient_details.css">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -93,72 +63,16 @@
                   </VBox>
                   <Pane layoutX="28.0" layoutY="282.0" prefHeight="232.0" prefWidth="271.0" style="-fx-border-radius: 5;">
                      <children>
-                        <ScrollPane layoutY="23.0" prefHeight="209.0" prefWidth="273.0" style="-fx-background-color: transparent;">
-                           <content>
-                              <VBox fx:id="history" prefHeight="207.0" prefWidth="257.0" style="-fx-border-color: bebebe; -fx-border-radius: 4;">
-                                 <children>
-                                    <HBox prefHeight="38.0" prefWidth="259.0" spacing="130.0">
-                                       <children>
-                                          <Label prefHeight="17.0" prefWidth="67.0" text="Description">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                          <Label text="Type">
-                                             <font>
-                                                <Font name="System Bold" size="12.0" />
-                                             </font>
-                                          </Label>
-                                       </children>
-                                       <padding>
-                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                       </padding>
-                                    </HBox>
-                                    <Line endX="133.5" startX="-100.0" stroke="#bebebe">
-                                       <VBox.margin>
-                                          <Insets left="10.0" right="10.0" />
-                                       </VBox.margin>
-                                    </Line>
-                                    <HBox prefHeight="26.0" prefWidth="259.0" spacing="70.0">
-                                       <padding>
-                                          <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                                       </padding>
-                                       <children>
-                                          <HBox prefHeight="25.0" prefWidth="123.0">
-                                             <children>
-                                                <Label prefHeight="25.0" prefWidth="59.0" text="1. Sinusitis" />
-                                             </children>
-                                          </HBox>
-                                          <Label prefHeight="25.0" prefWidth="41.0" text="Allergy" />
-                                       </children>
-                                    </HBox>
-                                    <Line endX="133.5" startX="-100.0" stroke="#bebebe">
-                                       <VBox.margin>
-                                          <Insets left="10.0" right="10.0" />
-                                       </VBox.margin>
-                                    </Line>
-                                    <HBox prefHeight="26.0" prefWidth="259.0" spacing="65.0">
-                                       <padding>
-                                          <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
-                                       </padding>
-                                       <children>
-                                          <HBox prefHeight="25.0" prefWidth="128.0">
-                                             <children>
-                                                <Label prefHeight="25.0" prefWidth="61.0" text="2. Torn ACL" />
-                                             </children>
-                                          </HBox>
-                                          <Label prefHeight="25.0" prefWidth="41.0" text="Injury" />
-                                       </children>
-                                    </HBox>
-                                    <Line endX="133.5" startX="-100.0" stroke="#bebebe">
-                                       <VBox.margin>
-                                          <Insets left="10.0" right="10.0" />
-                                       </VBox.margin>
-                                    </Line>
-                                 </children>
-                              </VBox>
-                           </content>
-                        </ScrollPane>
+                        <VBox fx:id="history" layoutY="23.0" prefHeight="209.0" prefWidth="271.0" style="-fx-border-color: bebebe; -fx-border-radius: 4;" stylesheets="@patient_details.css">
+                           <children>
+                              <TableView fx:id="table" prefHeight="217.0" prefWidth="270.0" stylesheets="@patient_details.css">
+                                <columns>
+                                  <TableColumn prefWidth="75.0" text="Description" />
+                                  <TableColumn prefWidth="75.0" text="Type" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </VBox>
                         <Label layoutX="7.0" text="Medical History">
                            <font>
                               <Font name="System Bold" size="14.0" />
@@ -169,19 +83,19 @@
                   <Pane layoutX="332.0" layoutY="32.0" prefHeight="232.0" prefWidth="271.0" style="-fx-border-radius: 5;">
                      <children>
                         <Label layoutY="14.0" text="Gender" />
-                        <TextField fx:id="gender" layoutY="39.0" prefHeight="35.0" prefWidth="259.0" promptText="Female" style="-fx-background-color: #e2e2e2; -fx-border-radius: 4;" styleClass="textField_username" stylesheets="@patient_details.css">
+                        <TextField fx:id="gender" accessibleRole="TEXT" editable="false" layoutY="39.0" prefHeight="35.0" prefWidth="259.0" promptText="Female" style="-fx-background-color: #e2e2e2; -fx-border-radius: 4;" styleClass="textField_username" stylesheets="@patient_details.css">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
                         <Label layoutY="84.0" text="DOB" />
-                        <TextField fx:id="dob" layoutY="110.0" prefHeight="35.0" prefWidth="259.0" promptText="30/10/2003" style="-fx-background-color: #e2e2e2; -fx-border-radius: 4;" styleClass="textField_username" stylesheets="@patient_details.css">
+                        <TextField fx:id="dob" accessibleRole="TEXT" editable="false" layoutY="110.0" prefHeight="35.0" prefWidth="259.0" promptText="30/10/2003" style="-fx-background-color: #e2e2e2; -fx-border-radius: 4;" styleClass="textField_username" stylesheets="@patient_details.css">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </TextField>
                         <Label layoutY="158.0" text="Country" />
-                        <TextField fx:id="country" layoutY="183.0" prefHeight="35.0" prefWidth="259.0" promptText="Pakistan" style="-fx-background-color: #e2e2e2; -fx-border-radius: 4;" styleClass="textField_username" stylesheets="@patient_details.css">
+                        <TextField fx:id="country" accessibleRole="TEXT" editable="false" layoutY="183.0" prefHeight="35.0" prefWidth="259.0" promptText="Pakistan" style="-fx-background-color: #e2e2e2; -fx-border-radius: 4;" styleClass="textField_username" stylesheets="@patient_details.css">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -223,7 +137,7 @@
                                        <children>
                                           <HBox prefHeight="25.0" prefWidth="123.0">
                                              <children>
-                                                <Label prefHeight="25.0" prefWidth="59.0" text="1. Sinusitis" textFill="#2854c3" />
+                                                <Label prefHeight="18.0" prefWidth="124.0" text="1. Dr. Anum" textFill="#2854c3" />
                                                 <HyperlinkLabel />
                                              </children>
                                           </HBox>
@@ -242,7 +156,7 @@
                                        <children>
                                           <HBox prefHeight="25.0" prefWidth="128.0">
                                              <children>
-                                                <Label prefHeight="25.0" prefWidth="61.0" text="2. Torn ACL" textFill="#2854c3" />
+                                                <Label prefHeight="18.0" prefWidth="133.0" text="2. Dr. Moiz" textFill="#2854c3" />
                                              </children>
                                           </HBox>
                                           <Label prefHeight="18.0" prefWidth="88.0" text="20/01/2019" />
@@ -332,6 +246,38 @@
                   </AnchorPane>
                </children>
             </VBox>
+            <Pane fx:id="top_pane" prefHeight="94.0" prefWidth="800.0" styleClass="top_pane" stylesheets="@patient_details.css">
+               <children>
+                  <Pane layoutX="14.0" layoutY="7.0" prefHeight="70.0" prefWidth="62.0">
+                     <children>
+                        <ImageView fitHeight="70.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/image%2023.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="690.0" layoutY="6.0" prefHeight="79.0" prefWidth="103.0">
+                     <children>
+                        <ImageView fitHeight="58.0" fitWidth="55.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/photo.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Label layoutX="70.0" layoutY="38.0" text="HEALTHYSENSE" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Regular" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="328.0" layoutY="39.0" text="Patient Details" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
          </children>
       </Pane>
    </children>
