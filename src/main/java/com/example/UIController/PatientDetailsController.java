@@ -56,6 +56,7 @@ public class PatientDetailsController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) 
     {
+        
         String jsonString = "{\"country\":\"United States\",\"dob\":\"1990-01-01\",\"gender\":\"Male\",\"number\":\"1234567890\",\"name\":\"John Doe\",\"history\":[{\"description\":\"Cancer\",\"type\":\"flu\"},{\"description\":\"Death\",\"type\":\"Heat\"}]}";
             
         JSONObject obj = new JSONObject(jsonString);
@@ -74,110 +75,43 @@ public class PatientDetailsController implements Initializable{
     {
         try
         {
-            // history.getChildren().clear();
-
-            // history.setSpacing(15);
-
-            // history.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
-
-            // HBox historyHead = new HBox();
-
-            // historyHead.setSpacing(130);
-
-            // Label historyDesc = new Label("Description");
-            // historyDesc.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
-            // historyHead.getChildren().add(historyDesc);
-
-            // Label historyType = new Label("Type");
-            // historyType.setStyle("-fx-font-size: 12px; -fx-font-weight: bold;");
-            // historyHead.getChildren().add(historyType);
-
-            // history.getChildren().add(historyHead);
-
-            // Separator separator = new Separator();
-
-            // history.getChildren().add(separator);
-
-            // JSONArray arr = new JSONArray(jsonString);
-
-            // for(int i = 0; i < arr.length(); i++)
-            // {
-            //     HBox temp = new HBox();
-            //     temp.setSpacing(130);
-
-            //     JSONObject tempObj = arr.getJSONObject(i);
-            //     Label label = new Label(tempObj.getString("description"));
-            //     Text text = new Text(label.getText());
-            //     text.setFont(label.getFont());
-            //     double width = text.getBoundsInLocal().getWidth();
-            //     label.setPrefWidth(width);
-
-            //     //temp.getChildren().add(new Label(tempObj.getString("description")));
-            //     //temp.getChildren().add(new Label(tempObj.getString("type")));
-
-            //     // label = new Label(tempObj.getString("type"));
-            //     // text = new Text(label.getText());
-            //     // text.setFont(label.getFont());
-            //     // width = text.getBoundsInLocal().getWidth();
-            //     // label.setPrefWidth(width);
-
-            //     history.getChildren().add(temp);
-
-            //     Separator tempSeparator = new Separator();
-            //     history.getChildren().add(tempSeparator);
-            //}
-
             // Create a TableView
             history.getChildren().clear();
             table.getColumns().clear();
-            //TableView<JSONObject> tableView = new TableView<>();
-            // Create columns for description and type
+
             TableColumn<JSONObject, String> descriptionColumn = new TableColumn<>("Description");
             descriptionColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getString("description")));
 
             descriptionColumn.setPrefWidth(124);
-
-            //descriptionColumn.setStyle("-fx-alignment: RIGHT;");
 
             TableColumn<JSONObject, String> typeColumn = new TableColumn<>("Type");
             typeColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getString("type")));
 
             typeColumn.setPrefWidth(124);
 
-            // Add columns to the TableView
             table.getColumns().addAll(descriptionColumn, typeColumn);
 
-            // Initialize history with all the previous medical history of the patient
             JSONArray arr = new JSONArray(jsonString);
 
-            // Create an ObservableList to hold the JSONObjects
             ObservableList<JSONObject> historyList = FXCollections.observableArrayList();
 
-            // Iterate over the array and add JSONObjects to the list
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject temp = arr.getJSONObject(i);
                 historyList.add(temp);
             }
 
-            // Set the items in the TableView
             table.setItems(historyList);
-            // Add line separator between rows
+
             table.setRowFactory(tv -> {
                 TableRow<JSONObject> row = new TableRow<>();
                 Separator separator = new Separator();
-                separator.setStyle("-fx-padding: 0 0 10 0"); // Add padding to bottom of separator
-                // Add line separator between rows
+                separator.setStyle("-fx-padding: 0 0 10 0");
+
                 row.setGraphic(separator);
                 return row;
             });
 
             history.getChildren().add(table);
-
-            // Add the TableView to the parent container or scene
-            // parentContainer.getChildren().add(tableView);
-            // or
-            // Scene scene = new Scene(tableView);
-
         }
         catch(Exception e)
         {
