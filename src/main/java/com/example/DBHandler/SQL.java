@@ -391,26 +391,50 @@ public class SQL extends DBHandler {
     }
 
     public String getTopDoctors() {
-        try {
+        try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()){
             System.out.println("SQL getTopDoctors");
+
             // query the database and return the top doctors
+            String SQL = "SELECT TOP 4 * FROM DOCTORS ORDER BY ((RATING/5)*60 + STATS*.4) DESC";
+            ResultSet rs = stmt.executeQuery(SQL);
 
             JSONArray doctors = new JSONArray();
-            JSONParser parser = new JSONParser();
 
-            for (int i = 0; i < 4; i++) {
-                JSONObject obj = new JSONObject(
-                        parser.parse(new FileReader("src/main/resources/JSONPackage/Doctor.json")).toString());
+            while(rs.next()) {
+                JSONObject doctorObj = new JSONObject();
+               
+                doctorObj.put("id", rs.getInt("id"));
+                doctorObj.put("name", rs.getString("name"));
 
-                obj.put("id", i + 1);
-                obj.put("name", "Musa" + (i + 1));
-                obj.put("specialization", "Heart");
-                obj.put("experience", i + 5 + " years");
-                obj.put("rating", "5");
-                obj.put("location", "Lahore");
-                obj.put("price", "500");
+                JSONObject detailsObj = new JSONObject();
+                detailsObj.put("email", rs.getString("email"));
+                //detailsObj.put("DOB", rs.getString("DOB"));
+                detailsObj.put("phoneNumber", rs.getString("phone_number"));
+                detailsObj.put("gender", rs.getString("gender"));
+                detailsObj.put("specialization", rs.getString("specialization"));
+                detailsObj.put("description", rs.getString("description"));
+                detailsObj.put("location", rs.getString("location"));
+                detailsObj.put("stats", rs.getFloat("stats"));
+                detailsObj.put("patients", rs.getInt("patients_treated"));
+                detailsObj.put("experience", rs.getInt("experience"));
+                detailsObj.put("rating", rs.getFloat("rating"));
+                detailsObj.put("workingHours", rs.getString("working_hours"));
+                detailsObj.put("fee", rs.getInt("fee"));
+                detailsObj.put("availability", rs.getString("availability"));
 
-                doctors.put(obj);
+                SQL ="SELECT DESCRIPTION FROM SERVICES WHERE DOCTOR_ID = ?;";
+                PreparedStatement pstmt2 = con.prepareStatement(SQL);
+                pstmt2.setInt(1, doctorObj.getInt("id"));
+                ResultSet rs2 = pstmt2.executeQuery();
+
+                String services = "";
+                while(rs2.next())
+                {
+                    services += rs2.getString("DESCRIPTION") + "\n";
+                }
+                detailsObj.put("services", services);
+                
+                doctorObj.put("details", detailsObj);
             }
 
             return doctors.toString();
@@ -425,8 +449,27 @@ public class SQL extends DBHandler {
     {
         System.out.println("SQL updatePatientProfile");
 
-        // database mein update karo
+        JSONObject obj = new JSONObject(info);
 
+        try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement())
+        {
+
+            String SQL = "UPDATE PATIENTS SET NAME = ?, EMAIL = ?, DOB = ?, COUNTRY = ?, PHONE_NUMBER = ?, GENDER = ? WHERE ID = ?";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setString(1, obj.getString("name"));
+            pstmt.setString(2, obj.getString("email"));
+            pstmt.setString(3, obj.getString("DOB"));
+            pstmt.setString(4, obj.getString("country"));
+            pstmt.setString(5, obj.getString("phoneNumber"));
+            pstmt.setString(6, obj.getString("gender"));
+            pstmt.setInt(7, patId);
+            
+            pstmt.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+        }
     }
 
     public String getPatient(String info) {
@@ -487,24 +530,6 @@ public class SQL extends DBHandler {
                 pstmt.setString(2, information.getString("password"));
 
                 ResultSet rs = pstmt.executeQuery();
-                
-                /*
-                   "specialization": "{{specialization}}",
-                    "description": "{{description}}",
-                    "location": "{{location}}",
-                    "stats": "{{stats}}",
-                    "patients": "{{patients}}",
-                    "experience": "{{experience}}",
-                    "rating": "{{rating}}",
-                    "services": "{{services}}",
-                    "workingHours": "{{workingHours}}",
-                    "fee": "{{fee}}",
-                    "checkupRating": "{{checkupRating}}",
-                    "environmentRating": "{{environmentRating}}",
-                    "staffRating": "{{staffRating}}",
-                    "reviews": "{{reviews}}",
-                    "availability": "{{availability}}"
-                 */
 
                 rs.next();
                 JSONObject doctorObj = new JSONObject();
@@ -583,6 +608,8 @@ public class SQL extends DBHandler {
                 appointments.put(obj);
             }
 
+            //System.out.println(appointments.toString());
+
             return appointments.toString();
         } catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
@@ -644,7 +671,6 @@ public class SQL extends DBHandler {
 
                 JSONObject detailsObj = new JSONObject();
                 detailsObj.put("email", rs.getString("email"));
-                detailsObj.put("dob", rs.getString("dob"));
                 detailsObj.put("phoneNumber", rs.getString("phone_number"));
                 detailsObj.put("gender", rs.getString("gender"));
                 detailsObj.put("specialization", rs.getString("specialization"));
@@ -657,6 +683,18 @@ public class SQL extends DBHandler {
                 detailsObj.put("workingHours", rs.getString("working_hours"));
                 detailsObj.put("fee", rs.getInt("fee"));
                 detailsObj.put("availability", rs.getString("availability"));
+
+                SQL ="SELECT DESCRIPTION FROM SERVICES WHERE DOCTOR_ID = ?;";
+                PreparedStatement pstmt2 = con.prepareStatement(SQL);
+                pstmt2.setInt(1, doctorObj.getInt("id"));
+                ResultSet rs2 = pstmt2.executeQuery();
+
+                String services = "";
+                while(rs2.next())
+                {
+                    services += rs2.getString("DESCRIPTION") + "\n";
+                }
+                detailsObj.put("services", services);
                 
                 doctorObj.put("details", detailsObj);
 
@@ -664,6 +702,43 @@ public class SQL extends DBHandler {
             }
 
             return doctors.toString();
+        } 
+        catch (Exception e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();            
+            return null;
+        } 
+    }
+
+    public String getAppointmentPatients(int docId)
+    {
+        try (Connection con = DriverManager.getConnection(connectionUrl)) 
+        {
+            System.out.println("SQL getAppointmentPatients");
+
+            String SQL = "SELECT * FROM Doctors WHERE ID IN (SELECT DOCTOR_ID FROM Appointments WHERE PATIENT_ID = ? AND STATUS = 'Booked');";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, docId);
+            ResultSet rs = pstmt.executeQuery();
+
+            JSONArray patients = new JSONArray();
+
+            while(rs.next())
+            {
+                JSONParser parser = new JSONParser();
+                JSONObject patientObj = new JSONObject(parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());                
+                patientObj.put("patId", rs.getInt("id"));
+                patientObj.put("name", rs.getString("name"));
+                patientObj.put("email", rs.getString("email"));
+                patientObj.put("DOB", rs.getString("dob"));
+                patientObj.put("phoneNumber", rs.getString("phone_number"));
+                patientObj.put("gender", rs.getString("gender"));
+
+                patients.put(patientObj);
+            }
+
+            return patients.toString();
         } 
         catch (Exception e) 
         {
@@ -705,6 +780,41 @@ public class SQL extends DBHandler {
             con.close();
 
         } catch (SQLException | JSONException e) {
+            // con.close();
+
+            e.printStackTrace();
+        }
+    }
+
+    public void addReview(String info, int patId, int docId)
+    {
+        try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement() )
+        {
+            JSONObject obj = new JSONObject(info);
+
+            String SQL = "INSERT INTO Reviews (PATIENT_ID, DOCTOR_ID, COMMENT, EXPERIENCE, RECOMMEND, CHECKUPRATING, ENVIRONMENTRATING, STAFFRATING) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, patId);
+            pstmt.setInt(2, docId);
+            pstmt.setString(3, obj.getString("comment"));
+            pstmt.setFloat(4, obj.getFloat("experience"));
+            if(obj.getString("recommend").equals("Yes"))
+            {
+                pstmt.setInt(5, 1);
+            }
+            else
+            {
+                pstmt.setInt(5, 0);
+            }
+            pstmt.setFloat(6, obj.getFloat("checkupRating"));
+            pstmt.setFloat(7, obj.getFloat("environmentRating"));
+            pstmt.setFloat(8, obj.getFloat("staffRating"));
+            pstmt.executeUpdate();
+
+            pstmt.close();         
+
+        }
+        catch (SQLException | JSONException e) {
             // con.close();
 
             e.printStackTrace();
