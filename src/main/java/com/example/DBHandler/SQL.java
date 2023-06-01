@@ -24,7 +24,7 @@ public class SQL extends DBHandler {
 
     public SQL() {
 
-        connectionUrl = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;" +
+        connectionUrl = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;" +
          //connectionUrl = "jdbc:sqlserver://MOIZ-KHAN;" +
                         "databaseName=SDA;" +
                         "IntegratedSecurity=true" + ";encrypt=true;trustServerCertificate=true";

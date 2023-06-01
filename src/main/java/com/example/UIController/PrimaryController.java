@@ -12,7 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-
 public class PrimaryController {
 
     @FXML
