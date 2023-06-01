@@ -58,7 +58,7 @@ public class Doctor {
 
     public Doctor()
     {
-
+        doctorDetails = new DoctorDetails();
     }
 
     public void setDoctorDetails(String info)

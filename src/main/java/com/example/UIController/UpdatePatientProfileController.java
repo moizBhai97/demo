@@ -106,15 +106,15 @@ public class UpdatePatientProfileController implements Initializable{
             return;
         }
 
-        JSONObject details = new JSONObject();
-        details.put("username", this.tf_username.getText());
-        details.put("email", this.tf_email.getText());
-        details.put("DOB", this.tf_dob.getText());
-        details.put("country", this.tf_country.getText());
-        details.put("phoneNumber", this.tf_number.getText());
-        details.put("gender", this.tf_gender.getText());
+        JSONObject profile = new JSONObject();
+        profile.put("username", this.tf_username.getText());
+        profile.put("email", this.tf_email.getText());
+        profile.put("DOB", this.tf_dob.getText());
+        profile.put("country", this.tf_country.getText());
+        profile.put("phoneNumber", this.tf_number.getText());
+        profile.put("gender", this.tf_gender.getText());
 
-        patientController.updateProfile(patId, details.toString());
+        patientController.updateProfile(patId, profile.toString());
 
     }
 
