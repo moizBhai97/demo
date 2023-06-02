@@ -1,6 +1,11 @@
 {
     "id": "{{id}}",
     "name": "{{name}}",
+    "email": "{{email}}",
+    "DOB": "{{DOB}}",
+    "country": "{{country}}",
+    "phoneNumber": "{{phoneNumber}}",
+    "gender": "{{gender}}",
     "details:":  {
                     "specialization": "{{specialization}}",
                     "description": "{{description}}",

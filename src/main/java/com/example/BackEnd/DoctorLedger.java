@@ -17,10 +17,16 @@ public class DoctorLedger {
         topDoctors = new ArrayList<Doctor>();
         doctorList = new ArrayList<Doctor>();
 
-        // Doctor temp = new Doctor();
-        // temp.setId(101);
+        Doctor temp = new Doctor();
+        temp.setId(101);
+        temp.setName("musa");
+        temp.setEmail("musa@gmail.com");
+        temp.setDOB("12/12/1999");
+        temp.setCountry("Pakistan");
+        temp.setPhoneNumber("123456789");
+        temp.setGender("Male");
 
-        // doctorList.add(temp);
+        doctorList.add(temp);
     }
 
     public void setTopDoctors() {

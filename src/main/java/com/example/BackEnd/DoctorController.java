@@ -1,5 +1,7 @@
 package com.example.BackEnd;
 
+import org.json.JSONObject;
+
 public class DoctorController {
     private ComplaintCatalog complaintCatalog;
     private DoctorLedger doctorLedger;
@@ -29,6 +31,31 @@ public class DoctorController {
 
             return "" + (doctor.getId());
             
+        }catch (Exception e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return "";
+        }
+        
+    }
+
+    public void addCertification(String info, int docId)
+    {
+        try{
+            JSONObject json = new JSONObject(info);
+            doctorLedger.getDoctor(docId).getDoctorDetails().addCertification(info, docId);
+
+
+        }catch (Exception e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
+        
+
+    }
+
+    public String getDoctorData(int docId)
+    {
+        try{
+            return doctorLedger.getDoctor(docId).getDetails();
         }catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             return "";

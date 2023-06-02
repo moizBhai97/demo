@@ -11,11 +11,14 @@ abstract public class DBHandler {
   public abstract String getAppointmentDoctors(int patId);
   public abstract String getAppointmentPatients(int docId);
   public abstract String getPatient(String info);
+  public abstract String getPatientHistory(int patId);
   public abstract String getDoctor(String info);
   public abstract String getReviewList(int docId);
+  public abstract String getCertificates(int docId);
   public abstract String getPatientAppointments(int patId);
   public abstract String getDoctorAppointments(int docId);
   public abstract String getDoctorDetails(int docID);
+  public abstract void addCertification(String info, int docId);
   public abstract void addComplaint(int patID, String details, int docID);
   public abstract void addReview(String info, int patId, int docId);
   public abstract void updatePatientProfile(int patId, String info);

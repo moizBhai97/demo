@@ -13,6 +13,11 @@ FROM
 WHERE 
     database_id = DB_ID('SDA');
 
+
+ALTER TABLE PAYMENTS
+DROP CONSTRAINT PAYMENT_PK, PAYMENT_FK
+DROP TABLE PAYMENTS
+
 ALTER TABLE APPOINTMENT_SLOTS
 DROP CONSTRAINT APPOINTMENT_SLOTS_PK, APPOINTMENT_SLOTS_FK
 DROP TABLE APPOINTMENT_SLOTS
@@ -56,6 +61,7 @@ CREATE TABLE PATIENTS
 	EMAIL VARCHAR(50) NOT NULL,
 	PASSWORD VARCHAR(50) NOT NULL,
 	DOB DATE NOT NULL, 
+	COUNTRY VARCHAR(50) NOT NULL,
 	PHONE_NUMBER VARCHAR(11) NOT NULL CHECK (PHONE_NUMBER LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
 	GENDER VARCHAR(6) NOT NULL CHECK (GENDER IN ('Male', 'Female')),
 
@@ -110,8 +116,7 @@ CREATE TABLE CERTIFICATIONS
 (
 	ID INT IDENTITY(1, 1),
 	DOCTOR_ID INT NOT NULL,
-	TYPE VARCHAR(50) NOT NULL,
-	DESCRIPTION VARCHAR(50) NOT NULL,
+	NAME VARCHAR(50) NOT NULL,
 	APPROVED_STATUS VARCHAR(8) NOT NULL CHECK (APPROVED_STATUS IN ('Approved', 'Pending', 'Rejected')),
 	ISSUE_DATE DATE NOT NULL,
 	EXPIRY_DATE DATE NOT NULL,
@@ -190,12 +195,12 @@ CREATE TABLE PAYMENTS
 )
 
 -- Insert data into PATIENTS table
-INSERT INTO PATIENTS (NAME, ID, EMAIL, PASSWORD, DOB, PHONE_NUMBER, GENDER)
-VALUES ('Ali Ahmed', 1, 'ali.ahmed@example.com', 'password123', '1990-01-01', '03001234567', 'Male'),
-       ('Fatima Khan', 2, 'fatima.khan@example.com', 'password456', '1992-02-02', '03007654321', 'Female'),
-       ('Zainab Raza', 3, 'zainab.raza@example.com', 'password789', '1994-03-03', '03009876543', 'Female'),
-       ('Usman Ali', 4, 'usman.ali@example.com', 'password321', '1996-04-04', '03005678901', 'Male'),
-       ('Ayesha Tariq', 5, 'ayesha.tariq@example.com', 'password654', '1998-05-05', '03003456789', 'Female');
+INSERT INTO PATIENTS (NAME, ID, EMAIL, PASSWORD, DOB, COUNTRY, PHONE_NUMBER, GENDER)
+VALUES ('Ali Ahmed', 1, 'ali.ahmed@example.com', 'password123', '1990-01-01', 'Pakistan', '03001234567', 'Male'),
+       ('Fatima Khan', 2, 'fatima.khan@example.com', 'password456', '1992-02-02', 'Pakistan', '03007654321', 'Female'),
+       ('Zainab Raza', 3, 'zainab.raza@example.com', 'password789', '1994-03-03', 'Pakistan', '03009876543', 'Female'),
+       ('Usman Ali', 4, 'usman.ali@example.com', 'password321', '1996-04-04', 'Pakistan', '03005678901', 'Male'),
+       ('Ayesha Tariq', 5, 'ayesha.tariq@example.com', 'password654', '1998-05-05', 'Pakistan', '03003456789', 'Female');
 
 -- Insert data into PATIENT_HISTORY table
 INSERT INTO PATIENT_HISTORY (ID, TYPE, DESCRIPTION)
@@ -222,12 +227,12 @@ VALUES (101, 'Heart checkup'),
        (105, 'Dental cleaning');
 
 -- Insert data into CERTIFICATIONS table
-INSERT INTO CERTIFICATIONS (DOCTOR_ID, TYPE, DESCRIPTION, APPROVED_STATUS, ISSUE_DATE, EXPIRY_DATE)
-VALUES (101, 'MBBS', 'Bachelor of Medicine, Bachelor of Surgery', 'Approved', '2000-01-01', '2030-01-01'),
-       (102, 'MBBS', 'Bachelor of Medicine, Bachelor of Surgery', 'Approved', '2002-01-01', '2032-01-01'),
-       (103, 'MBBS', 'Bachelor of Medicine, Bachelor of Surgery', 'Approved', '1998-01-01', '2028-01-01'),
-       (104, 'MBBS', 'Bachelor of Medicine, Bachelor of Surgery', 'Approved', '2005-01-01', '2035-01-01'),
-       (105, 'MBBS', 'Bachelor of Medicine, Bachelor of Surgery', 'Approved', '2003-01-01', '2033-01-01');
+INSERT INTO CERTIFICATIONS (DOCTOR_ID, NAME, APPROVED_STATUS, ISSUE_DATE, EXPIRY_DATE)
+VALUES (101, 'Bachelor of Medicine', 'Approved', '2000-01-01', '2030-01-01'),
+       (102, 'Bachelor of Medicine', 'Approved', '2002-01-01', '2032-01-01'),
+       (103, 'Bachelor of Medicine', 'Approved', '1998-01-01', '2028-01-01'),
+       (104, 'Bachelor of Medicine', 'Approved', '2005-01-01', '2035-01-01'),
+       (105, 'Bachelor of Medicine', 'Approved', '2003-01-01', '2033-01-01');
 
 -- Insert data into COMPLAINTS table
 INSERT INTO COMPLAINTS (DOCTOR_ID, PATIENT_ID, REASON, DESCRIPTION)

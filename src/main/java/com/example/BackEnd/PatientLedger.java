@@ -15,6 +15,31 @@ public class PatientLedger {
     {
         dbFactory = DBFactory.getInstance();
         patientList = new ArrayList<Patient>();
+<<<<<<< HEAD
+=======
+
+        // testing
+        Patient patient = new Patient(1);
+        patient.setName("Musa");
+        patient.setEmail("musa@gmail.com");
+        patient.setDOB("12/12/1999");
+        patient.setCountry("Pakistan");
+        patient.setPhoneNumber("123456789");
+        patient.setGender("Male");
+
+        patientList.add(patient); 
+
+    }
+
+    public void add()
+    {
+
+    }
+
+    public void remove()
+    {
+        
+>>>>>>> 948621daec2b1ee6ca79b729184c712657a223c7
     }
 
     public void setAppointmentPatients(int docId)
@@ -29,8 +54,6 @@ public class PatientLedger {
                 Patient patient = new Patient(jsonObject.toString());
                 patientList.add(patient);
             }
-
-            System.out.println(patientList.toString());
 
         } catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
@@ -67,6 +90,17 @@ public class PatientLedger {
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             return null;
+        }
+    }
+
+    public String getPatientDetails(int patId)
+    {
+        try{
+            return getPatient(patId).getDetails();
+        } catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return "";
         }
     }
     

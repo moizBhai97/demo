@@ -36,10 +36,29 @@ public class PatientController {
         
     }
 
+    public String getPatientData(int patId)
+    {
+        try{
+
+            return patientLedger.getPatient(patId).getDetails();
+        }catch (Exception e) {
+
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return "";
+        }
+    }
+
     public void updateProfile(int patId, String info)
     {
         patientLedger.updateProfile(patId, info);
 
+    }
+
+    public String getPatientHistory(int patId)
+    {
+        Patient patient = patientLedger.getPatient(patId);
+
+        return patient.getHistory();
     }
 
     public void submitReview(String info, int docId, int patId)
