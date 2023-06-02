@@ -58,7 +58,7 @@ public class DummyController implements Initializable{
             DoctorDetailsController dc = new DoctorDetailsController();
             
             int dummydocId = 101;
-            dc.setData(pc, dummydocId, 1);
+         //   dc.setData(pc, dummydocId, 1);
             loader.setController(dc);
             //-------------------------------------------------------------------------------------------------//
             

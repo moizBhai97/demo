@@ -4,6 +4,10 @@
     "recommend": "{{recommend}}",
     "checkupRating": "{{checkupRating}}",
     "environmentRating": "{{environmentRating}}",
+<<<<<<< HEAD
+    "staffRating": "{{staffRating}}"
+=======
     "staffRating": "{{staffRating}}",
     "patId": "{{patId}}"
+>>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
 }
