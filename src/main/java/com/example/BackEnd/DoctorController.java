@@ -68,7 +68,7 @@ public class DoctorController {
     public String getDoctorData(int docId)
     {
         try{
-            return doctorLedger.getDoctor(docId).getDetails();
+            return doctorLedger.getDoctor(docId).getMainDetails();
         }catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             return "";

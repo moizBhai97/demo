@@ -68,6 +68,8 @@ public class UpdateDoctorProfileController implements Initializable{
         // TODO Auto-generated method stub
         JSONObject data = new JSONObject(doctorController.getDoctorData(docId));
 
+        System.out.println(data.toString());
+
         tf_username.setText(data.getString("name"));
         tf_email.setText(data.getString("email"));
         tf_dob.setText(data.getString("DOB"));

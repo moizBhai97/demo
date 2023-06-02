@@ -51,7 +51,7 @@ public class DoctorDetails {
         reviewLedger = new ReviewLedger();
         certificateLedger = new CertificateLedger();
     }
-
+    
     public DoctorDetails(String specialization, String description, String location, int stats, int patients, int experience, float rating, String services, String workingHours, float fee, String avail, float checkupRating, float environmentRating, float staffRating, int reviews, int docId)
     {
         this.specialization = specialization;
@@ -106,6 +106,12 @@ public class DoctorDetails {
         {
             System.out.println(e + "\nError in DoctorDetails constructor.");
         }
+    }
+
+    // temp
+    public CertificateLedger getCertiLedger()
+    {
+        return certificateLedger;
     }
 
     public void addCertification(String info, int docId)
@@ -382,6 +388,7 @@ public class DoctorDetails {
     @Override
     public String toString()
     {
+        System.out.println("DoctorDetails toString");
         try
         {
             JSONParser parser = new JSONParser(); 
@@ -396,6 +403,7 @@ public class DoctorDetails {
                     obj.put(key, get(key));
             }
 
+            System.out.println(obj.toString());
             return obj.toString();
         }
         catch(Exception e)
