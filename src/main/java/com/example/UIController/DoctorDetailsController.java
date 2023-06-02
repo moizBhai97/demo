@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.stage.Stage;
@@ -86,6 +87,9 @@ public class DoctorDetailsController implements Initializable{
 
     @FXML
     private Button reviewsBtn;
+
+    @FXML
+    private Hyperlink certificateBtn;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
@@ -181,6 +185,33 @@ public class DoctorDetailsController implements Initializable{
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.show();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void certificateButton()
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/certificate.fxml")));
+            
+            //-------------------------------------------------------------------------------------------------//
+            CertificateController certificateController = new CertificateController();
+
+            certificateController.setData(pc, null, docId);
+
+            loader.setController(certificateController);
+            //-------------------------------------------------------------------------------------------------//
+            
+            Parent root = loader.load();
+            //stage.setUserData(patientInfo);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setMaximized(false);
             stage.show();
             
         } catch (Exception e) {

@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -256,10 +257,14 @@ public class App extends Application {
             @Override
             public void handle(ActionEvent event) {
                 try {
-                    Parent root = FXMLLoader.load(getClass().getResource("resch.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("certificate.fxml"));
                     Scene scene = new Scene(root);
                     Stage stage = new Stage();
                     stage.setScene(scene);
+                    //turn maximize off
+                    stage.setResizable(false);
+                    stage.initModality(Modality.APPLICATION_MODAL); // Set the stage as modal
+                    
                     stage.show();
                 } catch (IOException e) {
                     e.printStackTrace();
