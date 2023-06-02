@@ -29,16 +29,6 @@ public class PatientLedger {
 
     }
 
-    public void add()
-    {
-
-    }
-
-    public void remove()
-    {
-        
-    }
-
     public void setAppointmentPatients(int docId)
     {
         try {

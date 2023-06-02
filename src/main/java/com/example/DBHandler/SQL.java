@@ -612,7 +612,7 @@ public class SQL extends DBHandler {
 
             System.out.println("SQL getPatientHistory");
             
-            String SQL = "SELECT * FROM PATIENT_HISTORY WHERE PATIENT_ID = ?;";
+            String SQL = "SELECT * FROM PATIENT_HISTORY WHERE ID = ?;";
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, patId);
             ResultSet rs = pstmt.executeQuery();
@@ -629,6 +629,7 @@ public class SQL extends DBHandler {
                 history.put(newObj);
             }
 
+            System.out.println(history.toString());
             return history.toString();
 
         }

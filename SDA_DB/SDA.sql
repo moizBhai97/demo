@@ -85,6 +85,7 @@ CREATE TABLE DOCTORS
 	EMAIL VARCHAR(50) NOT NULL,
 	PASSWORD VARCHAR(50) NOT NULL,
 	DOB DATE NOT NULL, 
+	COUNTRY VARCHAR(50) NOT NULL,
 	PHONE_NUMBER VARCHAR(11) NOT NULL CHECK (PHONE_NUMBER LIKE '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
 	GENDER VARCHAR(6) NOT NULL CHECK (GENDER IN ('Male', 'Female')),
 	
@@ -211,12 +212,12 @@ VALUES (1, 'Allergy', 'Peanut allergy'),
        (5, 'Anemia', 'Iron deficiency anemia');
 
 -- Insert data into DOCTORS table
-INSERT INTO DOCTORS (NAME, ID, EMAIL, PASSWORD, DOB, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, STATS, PATIENTS_TREATED, EXPERIENCE, RATING, WORKING_HOURS, FEE, AVAILABILITY)
-VALUES ('Dr. Asim Malik', 101, 'dr.asim@example.com', 'drpassword123', '1980-06-06', '03001231234', 'Male', 'Cardiologist', 'Expert in treating heart diseases', 'Karachi', 98.5, 1200, 15, 4.5, '9:00-17:00', 2000, 'Available'),
-       ('Dr. Saima Iqbal', 102, 'dr.saima@example.com', 'drpassword456', '1982-07-07', '03002342345', 'Female', 'Dermatologist', 'Skin care specialist', 'Lahore', 95.0, 1500, 10, 4.7, '10:00-18:00', 1500, 'Available'),
-       ('Dr. Tariq Mahmood', 103, 'dr.tariq@example.com', 'drpassword789', '1978-08-08', '03003453456', 'Male', 'Orthopedic Surgeon', 'Expert in bone and joint surgeries', 'Islamabad', 99.0, 2000, 20, 4.9, '8:00-16:00', 2500, 'Available'),
-       ('Dr. Amina Zafar', 104, 'dr.amina@example.com', 'drpassword321', '1985-09-09', '03004564567', 'Female', 'Pediatrician', 'Child health specialist', 'Karachi', 97.0, 1000, 8, 4.6, '11:00-19:00', 1200, 'Available'),
-       ('Dr. Kamran Ahmed', 105, 'dr.kamran@example.com', 'drpassword654', '1983-10-10', '03005675678', 'Male', 'Dentist', 'Expert in dental care', 'Lahore', 96.5, 800, 12, 4.8, '9:00-17:00', 1000, 'Available');
+INSERT INTO DOCTORS (NAME, ID, EMAIL, PASSWORD, DOB, COUNTRY, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, STATS, PATIENTS_TREATED, EXPERIENCE, RATING, WORKING_HOURS, FEE, AVAILABILITY)
+VALUES ('Dr. Asim Malik', 101, 'dr.asim@example.com', 'drpassword123', '1980-06-06', 'Pakistan', '03001231234', 'Male', 'Cardiologist', 'Expert in treating heart diseases', 'Karachi', 98.5, 1200, 15, 4.5, '9:00-17:00', 2000, 'Available'),
+       ('Dr. Saima Iqbal', 102, 'dr.saima@example.com', 'drpassword456', '1982-07-07', 'Pakistan', '03002342345', 'Female', 'Dermatologist', 'Skin care specialist', 'Lahore', 95.0, 1500, 10, 4.7, '10:00-18:00', 1500, 'Available'),
+       ('Dr. Tariq Mahmood', 103, 'dr.tariq@example.com', 'drpassword789', '1978-08-08', 'Pakistan', '03003453456', 'Male', 'Orthopedic Surgeon', 'Expert in bone and joint surgeries', 'Islamabad', 99.0, 2000, 20, 4.9, '8:00-16:00', 2500, 'Available'),
+       ('Dr. Amina Zafar', 104, 'dr.amina@example.com', 'drpassword321', '1985-09-09', 'Pakistan', '03004564567', 'Female', 'Pediatrician', 'Child health specialist', 'Karachi', 97.0, 1000, 8, 4.6, '11:00-19:00', 1200, 'Available'),
+       ('Dr. Kamran Ahmed', 105, 'dr.kamran@example.com', 'drpassword654', '1983-10-10', 'Pakistan', '03005675678', 'Male', 'Dentist', 'Expert in dental care', 'Lahore', 96.5, 800, 12, 4.8, '9:00-17:00', 1000, 'Available');
 
 -- Insert data into SERVICES table
 INSERT INTO SERVICES (DOCTOR_ID, DESCRIPTION)
