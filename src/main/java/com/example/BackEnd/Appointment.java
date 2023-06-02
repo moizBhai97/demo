@@ -25,22 +25,24 @@ public class Appointment {
         this.time = "";
         this.problem = "";
         this.docId = 0;
+        this.patId = 0;
         this.status = "Booked";
         this.payment = null;
     }
 
-    public Appointment(int appId, String date, String time, String problem, int docId)
+    public Appointment(int appId, String date, String time, String problem, int docId, int patId)
     {
         this.appId = appId;
         this.date = date;
         this.time = time;
         this.problem = problem;
         this.docId = docId;
+        this.patId = patId;
         this.status = "Booked";
         this.payment = new Payment();
     }
 
-    public Appointment(String info, int appId)
+    public Appointment(String info, int patId, int appId)
     {
         JSONObject obj = new JSONObject(info);
         
@@ -49,10 +51,11 @@ public class Appointment {
         this.time = obj.getString("time");
         this.problem = obj.getString("problem");
         this.docId = obj.getInt("docId");
-        this.patId = obj.getInt("patId");
+        this.patId = patId;
         this.status = "Booked";
         this.payment = new Payment(obj.getJSONObject("payment").toString());
     }
+
     public Appointment(String info)
     {
         JSONObject obj = new JSONObject(info);

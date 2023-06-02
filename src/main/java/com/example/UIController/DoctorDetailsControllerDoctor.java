@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class DoctorDetailsControllerDoctor implements Initializable{
@@ -81,6 +82,9 @@ public class DoctorDetailsControllerDoctor implements Initializable{
     @FXML
     private ProgressBar staffProgress;
 
+    @FXML
+    private Button certificateBtn;
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
     {
@@ -119,5 +123,33 @@ public class DoctorDetailsControllerDoctor implements Initializable{
         this.dc = dc;
         this.patId = patId;
         this.docId = id;
+    }
+
+    public void certificateButton()
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/certificate.fxml")));
+            
+            //-------------------------------------------------------------------------------------------------//
+            CertificateController certificateController = new CertificateController();
+
+            certificateController.setData(null, dc, docId);
+
+            loader.setController(certificateController);
+            //-------------------------------------------------------------------------------------------------//
+            
+            Parent root = loader.load();
+            //stage.setUserData(patientInfo);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL); 
+            stage.show();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
