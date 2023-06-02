@@ -11,11 +11,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class DoctorDetailsController implements Initializable{
@@ -84,6 +86,11 @@ public class DoctorDetailsController implements Initializable{
     @FXML
     private Button bookButton;
 
+    private AnchorPane rootPane;
+
+    @FXML
+    private AnchorPane parentPane;
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
     {
@@ -122,12 +129,13 @@ public class DoctorDetailsController implements Initializable{
         
     }
 
-    public void setData(PatientController pc, int id, int patId)
+    public void setData(PatientController pc, int id, int patId, AnchorPane rootPane)
     {
 
         this.pc = pc;
         this.patId = patId;
         this.docId = id;
+        this.rootPane = rootPane;
     }
 
     public void bookButton(ActionEvent event){
@@ -154,5 +162,20 @@ public class DoctorDetailsController implements Initializable{
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void backBtnPressed(ActionEvent event){
+        rootPane.setVisible(true);
+    AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
+    //remove last 
+    mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+
+       // mainParentPane.getChildren().add(rootPane);
+        //   Node node = (Node)event.getSource();
+        //     while (node != null && !(node instanceof AnchorPane)) {
+        //         node = node.getParent();
+        //     }
+        //     ((AnchorPane)node.getParent()).getChildren().removeAll();
+        //     ((AnchorPane)node.getParent()).getChildren().setAll(rootPane);
     }
 }

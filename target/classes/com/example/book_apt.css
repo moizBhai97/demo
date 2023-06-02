@@ -1,0 +1,238 @@
+
+.side_anchor{
+
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-style: solid;
+
+}
+
+.inner_pane{
+
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-border-style: solid;
+
+}
+
+.Butt_inner_pane{
+
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-border-style: solid;
+}
+
+.top_pane{
+
+    -fx-background-color: linear-gradient(to bottom, #0045F3 0%, #454545 126.02%);
+    -fx-border-width: 0px 0px 0px 0px;
+    -fx-border-style: solid;
+
+}
+
+.big_pane{
+
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-style: solid;
+
+}
+
+.inner_big_pane1{
+
+    -fx-background-color: #f1f1f1;
+    -fx-border-color: #f1f1f1;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+
+}
+
+.inner_big_pane2{
+
+    -fx-background-color: #2854c3;
+    -fx-border-color: #2854C3;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+    -fx-text-fill:white;
+
+}
+
+.inner_big_pane21{
+
+    -fx-background-color: #2854C3;
+    -fx-border-color: #2854C3;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+
+}
+
+.inner_big_pane3{
+
+    -fx-background-color: #eff6fc;
+    -fx-border-color: #eff6fc;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-style: solid;
+
+}
+
+.inner_big_pane31{
+
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-style: solid;
+
+}
+
+.button_big{
+
+    -fx-background-color: #2854C3;
+    -fx-border-color: #2854C3;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-style: solid;
+}
+
+
+.button_night{
+
+    -fx-background-color: transparent;
+    -fx-border-color: #8C8FA5;
+    -fx-border-width: 1px 1px 1px 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-border-style: solid;
+    -fx-margin-left: 100px;
+}
+
+.circle_pane{
+
+    -fx-background-color: #000000;
+    -fx-border-color: #000000;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 100px;
+    -fx-background-radius: 100px;
+    -fx-border-style: solid;
+
+}
+
+.progress{
+
+    -fx-accent: #000000;
+    -fx-border-width: 1px 1px 1px 1px;
+    -fx-pref-height: 10px;
+    -fx-border-radius: 100px;
+    -fx-background-radius: 100px;
+}
+
+.texty{
+    -fx-font-family: "Raleway";
+}
+
+.radio_butt .radio{
+
+    -fx-border-width: 1px;
+    -fx-border-color: #2854C3;
+    -fx-background-color: white;
+    -fx-border-radius: 15px;
+}
+
+
+.radio_butt:selected .dot{
+
+    -fx-background-color: #2854C3;
+    -fx-background-insets: 0;
+}
+
+.date-picker {
+
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-insets: 0;
+    -fx-border-width: 0px;
+    -fx-border-radius: 0px;
+}
+
+.date-picker-popup .spinner .button .left-arrow,
+.date-picker-popup .spinner .button .right-arrow {
+
+  -fx-background-color: #ffffff;
+
+}
+
+.date-picker-popup .spinner .button:focused {
+
+    -fx-background-color: linear-gradient(to bottom, #0045F3 0%, #454545 126.02%);
+
+}
+
+.date-picker-popup .spinner .button:hover {
+    
+    -fx-background-color: linear-gradient(to bottom, #0045F3 0%, #454545 126.02%);
+
+}
+
+.date-picker-popup .month-year-pane {
+    -fx-background-color: derive(-fx-box-border,30%), linear-gradient(to bottom, #0045F3 0%, #454545 126.02%);
+    -fx-background-insets: 0 0 0 0, 0 0 1 0;
+}
+
+.date-picker .spinner-label {
+    -fx-text-fill: white;
+ }
+
+ .date-cell:focused {
+    
+    -fx-text-fill: white;
+    -fx-background-color: #2854C3;
+
+  }
+
+  .date-cell:hover {
+    
+    -fx-text-fill: white;
+    -fx-background-color: #2854C3;
+    
+  }
+
+  .date-picker .arrow-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+  }
+   
+  .date-picker .arrow-button:hover {
+    -fx-background-color: transparent;
+  }
+   
+  .date-picker .arrow-button .arrow {
+    
+    -fx-background-color: transparent;
+  }
+
+  .date-picker .text-field {
+
+    -fx-background-color: transparent;
+    -fx-text-fill: transparent;
+  }
+

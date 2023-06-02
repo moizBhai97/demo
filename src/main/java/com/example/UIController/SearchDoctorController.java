@@ -8,15 +8,20 @@ import java.util.ResourceBundle;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -24,6 +29,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
@@ -34,8 +41,7 @@ import javafx.scene.layout.StackPane;
 
 import com.example.BackEnd.PatientController;
 
-public class SearchDoctorController implements Initializable 
-{
+public class SearchDoctorController implements Initializable {
     PatientController patientController;
     int patId;
 
@@ -43,7 +49,6 @@ public class SearchDoctorController implements Initializable
     String specialty = "All";
 
     private ImageView blueStarIcon;
-
 
     @FXML
     Label doc_count;
@@ -177,6 +182,24 @@ public class SearchDoctorController implements Initializable
     private FlowPane results_flowpane;
 
     @FXML
+    private AnchorPane rootPane;
+
+    @FXML
+    private AnchorPane childAnchorPane;
+
+    @FXML
+    private Button searchBtn;
+
+    @FXML
+    private Button appointmentsBtn;
+
+    @FXML
+    private Button settingsBtn;
+
+    @FXML
+    private Button logoutBtn;
+
+    @FXML
     public void filter_toggle(ActionEvent event) {
         try {
             if (filter_Pane.isVisible()) {
@@ -247,8 +270,7 @@ public class SearchDoctorController implements Initializable
         // text color
     }
 
-    public void resetFilterPane()
-    {
+    public void resetFilterPane() {
         resetFilterColors();
         ratingFilter = -1;
         specialtiesList.getSelectionModel().clearSelection();
@@ -266,7 +288,8 @@ public class SearchDoctorController implements Initializable
 
             // sortByAlphabetical();
             createDoctorCards(
-                    patientController.sortDoctors(searhcedName, "A-Z", !ascen_sort_toggle.isSelected(), ratingFilter, specialty));
+                    patientController.sortDoctors(searhcedName, "A-Z", !ascen_sort_toggle.isSelected(), ratingFilter,
+                            specialty));
         }
     }
 
@@ -279,9 +302,12 @@ public class SearchDoctorController implements Initializable
             ascen_sort_toggle.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #2854c3;");
 
         }
-
-        createDoctorCards(patientController.sortDoctors(searhcedName, selectedToggle.getText(),
-                !ascen_sort_toggle.isSelected(), ratingFilter, specialty));
+        if (selectedToggle != null)
+            createDoctorCards(patientController.sortDoctors(searhcedName, selectedToggle.getText(),
+                    !ascen_sort_toggle.isSelected(), ratingFilter, specialty));
+        else
+            createDoctorCards(patientController.sortDoctors(searhcedName, "A-Z",
+                    !ascen_sort_toggle.isSelected(), ratingFilter, specialty));
     }
 
     @FXML
@@ -291,7 +317,8 @@ public class SearchDoctorController implements Initializable
             price_sort_btn.setStyle("-fx-background-color: #2854C3; -fx-text-fill: #ffffff;");
             selectedToggle = price_sort_btn;
             createDoctorCards(
-                    patientController.sortDoctors(searhcedName, "Price", !ascen_sort_toggle.isSelected(), ratingFilter, specialty));
+                    patientController.sortDoctors(searhcedName, "Price", !ascen_sort_toggle.isSelected(), ratingFilter,
+                            specialty));
         }
 
     }
@@ -302,7 +329,8 @@ public class SearchDoctorController implements Initializable
             resetSortColors();
             review_sort_btn.setStyle("-fx-background-color: #2854C3; -fx-text-fill: #ffffff;");
             createDoctorCards(
-                    patientController.sortDoctors(searhcedName, "Rating", !ascen_sort_toggle.isSelected(), ratingFilter, specialty));
+                    patientController.sortDoctors(searhcedName, "Rating", !ascen_sort_toggle.isSelected(), ratingFilter,
+                            specialty));
             selectedToggle = review_sort_btn;
         }
 
@@ -310,17 +338,20 @@ public class SearchDoctorController implements Initializable
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        patId=1;
+        ImageView imageView = (ImageView) searchBtn.getGraphic();
+        imageView.setEffect(new InnerShadow(100, Color.web("#2854c3")));
+        searchBtn.setStyle("-fx-text-fill: #2854c3;");
 
         results_grid = new GridPane();
         results_flowpane = new FlowPane();
 
-        //patientController = new PatientController();
+        // patientController = new PatientController();
         results_grid.setHgap(10);
         results_grid.setVgap(10);
 
         results_flowpane.setHgap(10);
         results_flowpane.setVgap(10);
-
 
         whiteStarIcon = new ImageView(filterRatingAllIcon.getImage());
         whiteStarIcon.setFitWidth(filterRatingAllIcon.getFitWidth());
@@ -358,16 +389,16 @@ public class SearchDoctorController implements Initializable
     public void refresh() {
 
         patientController = new PatientController();
-        
-        //esults_grid.setHgap(10);
-        //results_grid.setVgap(10);
-        //results_grid.getChildren().clear();
+
+        // esults_grid.setHgap(10);
+        // results_grid.setVgap(10);
+        // results_grid.getChildren().clear();
         results_scrollpane.getChildrenUnmodifiable().clear();
         // set padding
-   //     results_grid.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
+        // results_grid.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
         results_flowpane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
         // set transparent background
-  //      results_grid.setStyle("-fx-background-color: transparent;");
+        // results_grid.setStyle("-fx-background-color: transparent;");
         results_flowpane.setStyle("-fx-background-color: transparent;");
 
         createDoctorCards(patientController.getTopDoctors());
@@ -380,7 +411,6 @@ public class SearchDoctorController implements Initializable
         resetFilterPane();
         String result = patientController.searchDoctor(value);
         createDoctorCards(result);
-
 
     }
 
@@ -399,12 +429,12 @@ public class SearchDoctorController implements Initializable
 
                 DoctorCardController controller = loader.getController();
                 controller.setDoctor(doctor.toString());
+                controller.setPrevPane(childAnchorPane);
                 controller.setPatientController(patientController);
 
                 controller.setPatientId(patId);
                 results_flowpane.getChildren().add(doctorCard);
 
-                
             }
 
             results_scrollpane.setContent(results_flowpane);
@@ -415,9 +445,11 @@ public class SearchDoctorController implements Initializable
         }
     }
 
+    MediaPlayer mediaPlayer;
+
     public void searchTextKeyPressed(ActionEvent event) {
+
         System.out.println("searched");
-        searhcedName = searchBar.getText();
 
         Media media = null;
         try {
@@ -427,7 +459,12 @@ public class SearchDoctorController implements Initializable
         } catch (Exception e) {
             e.printStackTrace();
         }
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer = new MediaPlayer(media);
+        if (mediaPlayer.getStatus() != MediaPlayer.Status.STOPPED) {
+            mediaPlayer.stop();
+            System.out.println("stopped");
+        }
+        searhcedName = searchBar.getText();
         mediaPlayer.setAutoPlay(true);
         MediaView mediaView = new MediaView(mediaPlayer);
         mediaView.setFitWidth(200);
@@ -436,8 +473,8 @@ public class SearchDoctorController implements Initializable
         // Create a StackPane to center the MediaView in the ScrollPane
         StackPane stackPane = new StackPane();
         stackPane.getChildren().add(mediaView);
-        stackPane.setPrefWidth(results_scrollpane.getViewportBounds().getWidth()-1);
-        stackPane.setPrefHeight(results_scrollpane.getViewportBounds().getHeight()-1);
+        stackPane.setPrefWidth(results_scrollpane.getViewportBounds().getWidth() - 1);
+        stackPane.setPrefHeight(results_scrollpane.getViewportBounds().getHeight() - 1);
 
         // Calculate the size of the MediaView
         double mediaWidth = stackPane.getPrefWidth() * 0.6;
@@ -454,11 +491,33 @@ public class SearchDoctorController implements Initializable
 
         mediaPlayer.setOnEndOfMedia(() -> {
 
-                searchDoctor(searhcedName);
+            searchDoctor(searhcedName);
         });
         selectedToggle = null;
 
         resetSortColors();
 
     }
+
+    @FXML
+    Button backBtn;
+
+
+    public void appointmentBtnPressed(ActionEvent event){
+        //open manage appointments
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/ManageAppointment.fxml")));
+            ManageAppointmentController controller =new ManageAppointmentController();
+            controller.setData(patientController, 1);
+            loader.setController(controller);
+            AnchorPane root = loader.load();
+           rootPane.getChildren().clear();
+              rootPane.getChildren().add(root);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

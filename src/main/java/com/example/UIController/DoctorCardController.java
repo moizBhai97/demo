@@ -1,4 +1,5 @@
 package com.example.UIController;
+
 import java.net.URL;
 
 import org.json.JSONObject;
@@ -8,11 +9,15 @@ import com.example.BackEnd.PatientController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -24,7 +29,9 @@ public class DoctorCardController {
 
     int doctorId;
     int patientId;
-    
+
+    private AnchorPane prevPane;
+
     @FXML
     private Pane card1;
 
@@ -67,7 +74,7 @@ public class DoctorCardController {
 
     public void setPatientController(PatientController patientController) {
         this.patientController = patientController;
-    }   
+    }
 
     public void setPatientId(int patientId) {
         this.patientId = patientId;
@@ -77,22 +84,26 @@ public class DoctorCardController {
         docName.setText(doctor.name);
     }
 
+    public void setPrevPane(AnchorPane prevPane) {
+        this.prevPane = prevPane;
+    }
+
     public void setDoctor(String name, String specialization, String price, String rating) {
         docName.setText(name);
         this.specialization.setText(specialization);
         fee_amount.setText(String.valueOf(price));
-            String formattedRating = String.format("%.2f", Double.parseDouble(rating) );
+        String formattedRating = String.format("%.2f", Double.parseDouble(rating));
         card1_satisfied_label.setText(formattedRating);
         ;
         double ratingPercentage = Double.parseDouble(rating) / 5.0;
 
-        Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage, ratingStar.getBoundsInLocal().getHeight());
+        Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage,
+                ratingStar.getBoundsInLocal().getHeight());
         ratingStar.setClip(clip);
-
 
     }
 
-    public void setDoctor(String result){
+    public void setDoctor(String result) {
         JSONObject jsonObject = new JSONObject(result);
 
         docName.setText(jsonObject.getString("name"));
@@ -102,37 +113,53 @@ public class DoctorCardController {
         card1_satisfied_label.setText(String.format("%.1f", innerObject.getFloat("rating")));
         double ratingPercentage = innerObject.getFloat("rating") / 5.0;
 
-
-        Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage, ratingStar.getBoundsInLocal().getHeight());
+        Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage,
+                ratingStar.getBoundsInLocal().getHeight());
         ratingStar.setClip(clip);
 
         doctorId = jsonObject.getInt("id");
     }
 
-
-    //button action
+    // button action
     public void viewProfileBtn(ActionEvent event) {
         System.out.println("book button clicked");
         try {
-            this.card1_book_apt_btn.getScene().getWindow().hide();
+            // this.card1_book_apt_btn.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/doctor_details.fxml")));
-            
-            DoctorDetailsController doctorDetailsController= new DoctorDetailsController();
-            
-            doctorDetailsController.setData(patientController,doctorId, patientId);
+
+            DoctorDetailsController doctorDetailsController = new DoctorDetailsController();
+
+            doctorDetailsController.setData(patientController, doctorId, patientId, prevPane);
             loader.setController(doctorDetailsController);
-            
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-            
+            Node node = (Node) event.getSource();
+
+            AnchorPane anchorPane = (AnchorPane) prevPane.getParent();
+            prevPane.setVisible(false);
+            // anchorPane.getChildren().get(0).setVisible(false);;
+            AnchorPane childPane = loader.load();
+            childPane.setTopAnchor(childPane, 0.0);
+            childPane.setBottomAnchor(childPane, 0.0);
+            childPane.setLeftAnchor(childPane, 0.0);
+            childPane.setRightAnchor(childPane, 0.0);
+            anchorPane.getChildren().add(childPane);
+            // center
+            AnchorPane.setTopAnchor(childPane, 0.0);
+            AnchorPane.setBottomAnchor(childPane, 0.0);
+            AnchorPane.setLeftAnchor(childPane, 0.0);
+            AnchorPane.setRightAnchor(childPane, 0.0);
+
+
+            // Parent root = loader.load();
+            // Scene scene = new Scene(root);
+            // Stage stage = new Stage();
+            // stage.setScene(scene);
+            // stage.show();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
+
 }

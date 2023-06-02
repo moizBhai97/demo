@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="640.0" prefWidth="924.0">
+         <children>
+            <Pane fx:id="top_pane" prefHeight="94.0" prefWidth="800.0" styleClass="top_pane" stylesheets="@resch.css">
+               <children>
+                  <Pane layoutX="14.0" layoutY="7.0" prefHeight="70.0" prefWidth="62.0">
+                     <children>
+                        <ImageView fitHeight="70.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/image%2023.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane layoutX="690.0" layoutY="6.0" prefHeight="79.0" prefWidth="103.0">
+                     <children>
+                        <ImageView fitHeight="58.0" fitWidth="55.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/image%2020.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Label layoutX="70.0" layoutY="38.0" text="HEALTHYSENSE" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Regular" size="14.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="285.0" layoutY="36.0" text="Payment Confirmation" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <VBox layoutX="-13.0" layoutY="94.0" prefHeight="546.0" prefWidth="149.0">
+               <children>
+                  <AnchorPane fx:id="side_anchor" prefHeight="556.0" prefWidth="150.0" styleClass="side_anchor" stylesheets="@resch.css">
+                     <children>
+                        <Pane fx:id="iner_pane1" layoutX="17.0" layoutY="25.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@resch.css">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2001.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="48.0" layoutY="57.0" text="Home" textFill="#2854c3" />
+                              <Button layoutX="41.0" layoutY="9.0" mnemonicParsing="false" opacity="0.0" prefHeight="70.0" prefWidth="43.0" styleClass="Butt_inner_pane" stylesheets="@resch.css" textFill="#2854c3" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="iner_pane11" layoutX="17.0" layoutY="109.0" prefHeight="70.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@resch.css">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2002.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="47.0" layoutY="48.0" text="Search" textFill="#979797" />
+                              <Button layoutX="34.0" layoutY="6.0" mnemonicParsing="false" opacity="0.0" prefHeight="63.0" prefWidth="62.0" styleClass="Butt_inner_pane" stylesheets="@resch.css" textFill="#2854c3" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="iner_pane111" layoutX="17.0" layoutY="190.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@resch.css">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/appointments.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="26.0" layoutY="57.0" text="Appointments" textFill="#979797" />
+                              <Button fx:id="appoints" layoutX="19.0" mnemonicParsing="false" onAction="#getAppoint" opacity="0.0" prefHeight="79.0" prefWidth="85.0" styleClass="Butt_inner_pane" stylesheets="@resch.css" textFill="#2854c3" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="iner_pane1111" layoutX="17.0" layoutY="279.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@resch.css">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2015.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="42.0" layoutY="57.0" text="Settings" textFill="#979797" />
+                              <Button layoutX="33.0" layoutY="9.0" mnemonicParsing="false" opacity="0.0" prefHeight="70.0" prefWidth="57.0" styleClass="Butt_inner_pane" stylesheets="@resch.css" textFill="#2854c3" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="iner_pane1112" layoutX="17.0" layoutY="366.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@resch.css">
+                           <children>
+                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2012%20(2).png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="46.0" layoutY="50.0" text="Logout" textFill="#979797" />
+                              <Button layoutX="36.0" layoutY="9.0" mnemonicParsing="false" opacity="0.0" prefHeight="70.0" prefWidth="54.0" styleClass="Butt_inner_pane" stylesheets="@resch.css" textFill="#2854c3" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </VBox>
+            <Pane fx:id="big_pane" layoutX="136.0" layoutY="94.0" prefHeight="546.0" prefWidth="664.0" styleClass="big_pane" stylesheets="@resch.css">
+               <children>
+                  <Button layoutX="20.0" layoutY="2.0" mnemonicParsing="false" styleClass="Butt_inner_pane" text="&lt;  Back" textFill="#2854c3">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="paymentBtn" layoutX="376.0" layoutY="450.0" mnemonicParsing="false" onAction="#paymentButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@resch.css" text="Make Payment" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <ToggleButton fx:id="Cash" alignment="BASELINE_LEFT" layoutX="37.0" layoutY="89.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="236.0" selected="true" styleClass="button_big" stylesheets="@resch.css" text="Cash" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="24.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/Group%20537.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="period" />
+                     </toggleGroup>
+                  </ToggleButton>
+                  <Label layoutX="37.0" layoutY="52.0" text="Payment Type" textFill="#979797" />
+                  <Pane fx:id="inner_big_pane11" layoutX="302.0" layoutY="138.0" prefHeight="143.0" prefWidth="299.0" style="-fx-background-radius: 10; -fx-border-radius: 10;" styleClass="big_pane" stylesheets="@resch.css">
+                     <children>
+                        <Label fx:id="dateTime" layoutX="138.0" layoutY="19.0" prefHeight="17.0" prefWidth="168.0" styleClass="texty" stylesheets="@resch.css" text="21 January, Friday | 10:00">
+                           <font>
+                              <Font name="Serif Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="19.0" text="Payment Time" />
+                        <Label layoutX="14.0" layoutY="107.0" text="Session Duration" />
+                        <Label fx:id="texty1" layoutX="138.0" layoutY="107.0" styleClass="texty" stylesheets="@resch.css" text="1 Hour">
+                           <font>
+                              <Font name="Serif Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="63.0" text="Booked Doctor" />
+                        <Label fx:id="name" layoutX="138.0" layoutY="63.0" styleClass="texty" stylesheets="@resch.css" text="Dr. Amna">
+                           <font>
+                              <Font name="Serif Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Line endX="135.39996337890625" layoutX="113.0" layoutY="50.0" startX="-100.0" stroke="DIMGRAY" />
+                        <Line endX="135.39996337890625" layoutX="112.0" layoutY="95.0" startX="-100.0" stroke="DIMGRAY" />
+                     </children>
+                     <effect>
+                        <DropShadow height="10.0" radius="7.0" width="20.0" />
+                     </effect>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane111" layoutX="302.0" layoutY="311.0" prefHeight="104.0" prefWidth="299.0" style="-fx-border-radius: 10; -fx-background-radius: 10;" styleClass="big_pane" stylesheets="@resch.css">
+                     <children>
+                        <Label fx:id="amount" layoutX="162.0" layoutY="19.0" prefHeight="17.0" prefWidth="43.0" styleClass="texty" stylesheets="@resch.css" text="2000">
+                           <font>
+                              <Font name="Serif Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="14.0" layoutY="19.0" text="Amount" />
+                        <Label layoutX="14.0" layoutY="64.0" text="Total" />
+                        <Label fx:id="totalAmount" layoutX="162.0" layoutY="64.0" prefHeight="17.0" prefWidth="62.0" styleClass="texty" stylesheets="@resch.css" text="2000">
+                           <font>
+                              <Font name="Serif Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Line endX="135.39996337890625" layoutX="115.0" layoutY="52.0" startX="-100.0" stroke="DIMGRAY" />
+                        <Label fx:id="texty12" layoutX="140.0" layoutY="19.0" prefHeight="17.0" prefWidth="20.0" styleClass="texty" stylesheets="@resch.css" text="RS.">
+                           <font>
+                              <Font name="Serif Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="texty121" layoutX="205.0" layoutY="19.0" prefHeight="17.0" prefWidth="20.0" styleClass="texty" stylesheets="@resch.css" text="x 1">
+                           <font>
+                              <Font name="Serif Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="texty122" layoutX="139.0" layoutY="64.0" prefHeight="17.0" prefWidth="20.0" styleClass="texty" stylesheets="@resch.css" text="RS.">
+                           <font>
+                              <Font name="Serif Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <effect>
+                        <DropShadow height="10.0" radius="7.0" width="20.0" />
+                     </effect>
+                  </Pane>
+                  <Button fx:id="cancelBtn" layoutX="128.0" layoutY="450.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@resch.css" text="Cancel" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+               </children>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Pane>
+         </children>
+      </Pane>
+   </children>
+</HBox>

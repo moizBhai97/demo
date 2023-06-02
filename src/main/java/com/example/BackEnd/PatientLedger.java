@@ -15,7 +15,10 @@ public class PatientLedger {
     {
         dbFactory = DBFactory.getInstance();
         patientList = new ArrayList<Patient>();
-        patientList.add(new Patient(1)); // for testing
+        //pass dummy email and pass as json 
+        patientList.add(getPatient("{'email':'ali.ahmed@example.com','password':'password123'}") );
+        patientList.get(0).setAppointments();
+        
     }
 
     public void setAppointmentPatients(int docId)

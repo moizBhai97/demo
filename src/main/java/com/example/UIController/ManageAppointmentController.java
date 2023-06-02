@@ -1,6 +1,7 @@
 package com.example.UIController;
 
 import java.net.URL;
+import java.util.ResourceBundle;
 
 import org.json.JSONArray;
 
@@ -27,7 +28,7 @@ public class ManageAppointmentController implements Initializable {
     private int patId;
 
     @Override
-    public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
+    public void initialize(URL arg0, ResourceBundle arg1) {
         
         completedAppointmentsGridPane = new GridPane();
         completedAppointmentsScrollPane.setContent(completedAppointmentsGridPane);
