@@ -30,17 +30,10 @@ public class SQL extends DBHandler {
         musa = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;";
         abdullah = "";
 
-<<<<<<< HEAD
-        //connectionUrl = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;" +
-        connectionUrl = "jdbc:sqlserver://MOIZ-KHAN;" +
-                        "databaseName=SDA;" +
-                        "IntegratedSecurity=true" + ";encrypt=true;trustServerCertificate=true";
-=======
-        connectionUrl = musa + 
+        connectionUrl = moiz + 
                         "databaseName=SDA;" + 
                         "IntegratedSecurity=true;" + 
                         "encrypt=true;trustServerCertificate=true";
->>>>>>> 948621daec2b1ee6ca79b729184c712657a223c7
     }
 
   
