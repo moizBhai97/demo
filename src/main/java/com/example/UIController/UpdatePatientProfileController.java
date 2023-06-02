@@ -72,6 +72,9 @@ public class UpdatePatientProfileController implements Initializable{
         country = tf_country.getText();
         number = tf_number.getText();
         gender = tf_gender.getText();
+
+        // patientController.getPatientHistory(patId);
+
     }
 
     @FXML

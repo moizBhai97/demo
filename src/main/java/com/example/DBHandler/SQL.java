@@ -611,9 +611,9 @@ public class SQL extends DBHandler {
 
         try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()){
 
-            System.out.println("SQL getPatientHistory");
+            //System.out.println("SQL getPatientHistory");
             
-            String SQL = "SELECT * FROM PATIENT_HISTORY WHERE PATIENT_ID = ?;";
+            String SQL = "SELECT * FROM PATIENT_HISTORY WHERE ID = ?;";
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, patId);
             ResultSet rs = pstmt.executeQuery();
@@ -630,6 +630,7 @@ public class SQL extends DBHandler {
                 history.put(newObj);
             }
 
+            //System.out.println(history.toString());
             return history.toString();
 
         }
