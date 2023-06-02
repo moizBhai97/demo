@@ -338,23 +338,16 @@ public class SearchDoctorController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        patId=1;
         ImageView imageView = (ImageView) searchBtn.getGraphic();
         imageView.setEffect(new InnerShadow(100, Color.web("#2854c3")));
         searchBtn.setStyle("-fx-text-fill: #2854c3;");
 
-<<<<<<< HEAD
-        results_flowpane = new FlowPane();
-
-=======
-        //results_grid = new GridPane();
         results_flowpane = new FlowPane();
 
         // patientController = new PatientController();
         //results_grid.setHgap(10);
         //results_grid.setVgap(10);
 
->>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
         results_flowpane.setHgap(10);
         results_flowpane.setVgap(10);
 
@@ -385,21 +378,14 @@ public class SearchDoctorController implements Initializable {
         System.out.println(patId);
     }
 
-<<<<<<< HEAD
-=======
     //GridPane results_grid;
 
->>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
     public void setPatientController(PatientController patientController) {
         this.patientController = patientController;
     }
 
     public void refresh() {
 
-        patientController = new PatientController();
-
-<<<<<<< HEAD
-=======
         // esults_grid.setHgap(10);
         // results_grid.setVgap(10);
         // results_grid.getChildren().clear();
@@ -408,7 +394,6 @@ public class SearchDoctorController implements Initializable {
         //esults_grid.setHgap(10);
         //results_grid.setVgap(10);
         //results_grid.getChildren().clear();
->>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
         results_scrollpane.getChildrenUnmodifiable().clear();
         // set padding
         results_flowpane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));

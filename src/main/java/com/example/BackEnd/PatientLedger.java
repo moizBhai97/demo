@@ -15,14 +15,19 @@ public class PatientLedger {
     {
         dbFactory = DBFactory.getInstance();
         patientList = new ArrayList<Patient>();
-<<<<<<< HEAD
-
-=======
-        //pass dummy email and pass as json 
-        patientList.add(getPatient("{'email':'ali.ahmed@example.com','password':'password123'}") );
-        patientList.get(0).setAppointments();
         
->>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
+    }
+
+    public void setPatient(int patId)
+    {
+        try{
+            Patient patient = new Patient(patId);
+            patientList.add(patient);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
     }
 
     public void setAppointmentPatients(int docId)

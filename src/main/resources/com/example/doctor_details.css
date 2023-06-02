@@ -149,3 +149,22 @@
     -fx-background-color: #2854C3;
     -fx-background-insets: 0;
 }
+
+.hyperlink {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-underline: false;
+}
+
+.hyperlink:hover {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-underline: false;
+}
+
+.hyperlink:pressed {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-underline: false;
+}
+

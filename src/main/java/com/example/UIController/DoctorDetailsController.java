@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import com.example.BackEnd.PatientController;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -18,9 +19,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class DoctorDetailsController implements Initializable{
     
@@ -92,10 +97,7 @@ public class DoctorDetailsController implements Initializable{
 
     @FXML
     private AnchorPane parentPane;
-<<<<<<< HEAD
     
-=======
->>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
     @FXML
     private Button reviewsBtn;
 
@@ -175,18 +177,12 @@ public class DoctorDetailsController implements Initializable{
         }
     }
 
-<<<<<<< HEAD
-    public void backBtnPressed(ActionEvent event)
-    {
-=======
     public void backBtnPressed(ActionEvent event){
->>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
         rootPane.setVisible(true);
         AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
         //remove last 
         mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
 
-<<<<<<< HEAD
         // mainParentPane.getChildren().add(rootPane);
             //   Node node = (Node)event.getSource();
             //     while (node != null && !(node instanceof AnchorPane)) {
@@ -195,17 +191,7 @@ public class DoctorDetailsController implements Initializable{
             //     ((AnchorPane)node.getParent()).getChildren().removeAll();
             //     ((AnchorPane)node.getParent()).getChildren().setAll(rootPane);
     }
-=======
-       // mainParentPane.getChildren().add(rootPane);
-        //   Node node = (Node)event.getSource();
-        //     while (node != null && !(node instanceof AnchorPane)) {
-        //         node = node.getParent();
-        //     }
-        //     ((AnchorPane)node.getParent()).getChildren().removeAll();
-        //     ((AnchorPane)node.getParent()).getChildren().setAll(rootPane);
-    }
     
->>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
     public void reviewsButton(ActionEvent event)
     {
         try {
@@ -250,12 +236,33 @@ public class DoctorDetailsController implements Initializable{
             //-------------------------------------------------------------------------------------------------//
             
             Parent root = loader.load();
-            //stage.setUserData(patientInfo);
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setResizable(false);
-            stage.initModality(Modality.APPLICATION_MODAL); 
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            BoxBlur blur = new BoxBlur();
+            blur.setWidth(10);
+            blur.setHeight(10);
+            blur.setIterations(3);
+            
+
+        // Apply the blur effect to the scene
+            parentPane.setEffect(blur);
+            
+            stage.setOnHidden(event -> {
+                parentPane.setEffect(null); // Remove the blur effect
+            });
+
+            parentPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                EventTarget target = event.getTarget();
+                if (!root.getBoundsInParent().contains(event.getX(), event.getY())) {
+                    stage.close(); // Close the child screen
+                }
+            });
+
             stage.show();
             
         } catch (Exception e) {

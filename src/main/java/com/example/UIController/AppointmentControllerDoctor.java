@@ -1,6 +1,7 @@
 package com.example.UIController;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
@@ -22,7 +23,7 @@ import javafx.stage.Stage;
 public class AppointmentControllerDoctor  implements Initializable
 {
     @FXML
-    private Label name;
+    private Label docName;
     
     @FXML
     private Label date;
@@ -55,15 +56,16 @@ public class AppointmentControllerDoctor  implements Initializable
     int patId;
     int appID;
     int docId;
+    String patGender;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
     {
-        String info = "";//dc.getAppointment(patId, appID);
+        String info = dc.getAppointment(docId, appID);
 
         JSONObject obj = new JSONObject(info);
 
-        name.setText(obj.getJSONObject("doctor").getString("name"));
+        docName.setText(obj.getString("doctor"));
 
         LocalTime startTime = LocalTime.parse(obj.getString("time"));
         LocalTime endTime = startTime.plusHours(1);
@@ -81,13 +83,24 @@ public class AppointmentControllerDoctor  implements Initializable
 
         amount.setText(obj.getJSONObject("payment").getFloat("amount") + "");
 
+        patId = obj.getInt("patId");
+        patName.setText(obj.getJSONObject("patient").getString("name"));
+
+        String dobString = obj.getJSONObject("patient").getString("DOB");
+
+        LocalDate dob = LocalDate.parse(dobString);
+        int age = LocalDate.now().getYear() - dob.getYear();
+
+        patAge.setText(age + "");
+        patNum.setText(obj.getJSONObject("patient").getString("phoneNumber"));
+        patGender = obj.getJSONObject("patient").getString("gender");
+
     }
     
-    public void setData(DoctorController dc, int patId, int appID, int docId)
+    public void setData(DoctorController dc, int appID, int docId)
     {
         this.docId = docId;
         this.dc = dc;
-        this.patId = patId;
         this.appID = appID;
     }
 
@@ -99,11 +112,12 @@ public class AppointmentControllerDoctor  implements Initializable
             this.viewBtn.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/report.fxml")));
-            CompletedAppointmentController completedAppointmentController = new CompletedAppointmentController();
+            loader.setLocation((new URL("file:src/main/resources/com/example/patient_details.fxml")));
+            
+            PatientDetailsController patientDetailsController = new PatientDetailsController();
 
-            //completedAppointmentController.setData(dc, patId, appointID, docId);
-            loader.setController(completedAppointmentController);
+            patientDetailsController.setData(dc, docId, patId);
+            loader.setController(patientDetailsController);
             
             //-------------------------------------------------------------------------------------------------//
             //-------------------------------------------------------------------------------------------------//
@@ -131,7 +145,7 @@ public class AppointmentControllerDoctor  implements Initializable
 
 
             ReportController reportController = new ReportController();
-            reportController.setData(dc, patId, docId);
+            reportController.setData(dc, patId, docId, patName.getText(), patGender);
             loader.setController(reportController);
 
             Parent root = loader.load();

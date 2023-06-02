@@ -36,9 +36,9 @@ import javafx.stage.Window;
 
 public class PatientDetailsController implements Initializable{
 
-    int patId = 1;
+    int patId;
     int docId;
-    DoctorController dc;;
+    DoctorController dc;
 
     @FXML
     private TextField country;
@@ -73,18 +73,20 @@ public class PatientDetailsController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) 
     {
         
-        String jsonString = "{\"country\":\"United States\",\"dob\":\"1990-01-01\",\"gender\":\"Male\",\"number\":\"1234567890\",\"name\":\"John Doe\",\"history\":[{\"description\":\"Cancer\",\"type\":\"flu\"},{\"description\":\"Death\",\"type\":\"Heat\"}],\"appointment\":[{\"appId\":\"1\",\"docName\":\"Dr. Smith\",\"date\":\"2023-06-15\"},{\"appId\":\"2\",\"docName\":\"Dr. Johnson\",\"date\":\"2023-06-20\"}]}";
+        String jsonString = dc.getPatientDetails(patId);
+
+        System.out.println(jsonString);
 
         JSONObject obj = new JSONObject(jsonString);
 
         country.setText(obj.getString("country"));
-        dob.setText(obj.getString("dob"));
+        dob.setText(obj.getString("DOB"));
         gender.setText(obj.getString("gender"));
-        number.setText(obj.getString("number"));
+        number.setText(obj.getString("phoneNumber"));
         name.setText(obj.getString("name"));
 
-        setHistory(obj.getJSONArray("history").toString());
-        setAppointments(obj.getJSONArray("appointment").toString());
+        setHistory(obj.getString("history"));
+        setAppointments(obj.getString("appointments"));
 
     }
 
@@ -149,7 +151,7 @@ public class PatientDetailsController implements Initializable{
             JSONArray arr = new JSONArray(jsonString);
 
             TableColumn<JSONObject, String> doctorColumn = new TableColumn<>("Doctor");
-            doctorColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getString("docName")));
+            doctorColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getString("name")));
 
             doctorColumn.setPrefWidth(124);
             
@@ -176,6 +178,7 @@ public class PatientDetailsController implements Initializable{
                         setOnMousePressed(event -> {
                             if (event.isPrimaryButtonDown() && !isEmpty()) {
                                 JSONObject obj = getTableRow().getItem();
+                                System.out.println("Appointment Id: "+obj.toString());
                                 getAppointment(obj.getInt("appId"), getScene().getWindow());
                             }
                         });
@@ -233,22 +236,26 @@ public class PatientDetailsController implements Initializable{
     {
         try
         {
-
             win.hide();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/start.fxml")));
+            loader.setLocation((new URL("file:src/main/resources/com/example/patient_appoint.fxml")));
             //-------------------------------------------------------------------------------------------------//
+            
+            PatientAppointmentDetailsController patientAppointmentDetailsController = new PatientAppointmentDetailsController();
 
-            loader.load();
+            patientAppointmentDetailsController.setData(dc, appId, docId, patId);
+            loader.setController(patientAppointmentDetailsController);
 
-            Parent root = loader.getRoot();
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            stage.setScene(scene);
             stage.show();
         }
         catch(Exception e)
         {
             System.out.println(e);
+            e.printStackTrace();
         }
         
     }

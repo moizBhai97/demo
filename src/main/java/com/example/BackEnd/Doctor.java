@@ -15,8 +15,7 @@ public class Doctor {
     private String country;
     private String phoneNumber;
     private String gender;
-
-    
+    private AppointmentLedger appointmentLedger;
     private DoctorDetails doctorDetails;
 
     public DoctorDetails getDoctorDetails() 
@@ -49,10 +48,10 @@ public class Doctor {
         }
     }
 
-    public Doctor(int docId, String doctorName) 
+    public Doctor(int docId) 
     {
         this.id = docId;
-        this.name = doctorName;
+        this.name = DBFactory.getInstance().createHandler("SQL").getDoctorName(docId);
     }
 
     
@@ -79,9 +78,17 @@ public class Doctor {
         
     }
     
-    public void setAppointments()
+    public void setAppointments(int docId)
     {
-        doctorDetails.setAppointments(this.id);
+        if(appointmentLedger == null)
+            appointmentLedger = new AppointmentLedger();
+            
+        appointmentLedger.setDoctorAppointments(docId);
+    }
+
+    public String getAppointList(int value)
+    {
+        return appointmentLedger.getAppointList(value);
     }
     
     public int getId() {
@@ -148,6 +155,13 @@ public class Doctor {
     public float getRating()
     {
         return doctorDetails.getRating();
+    }
+
+    public String getAppointment(int appId)
+    {
+        System.out.println("Getting appointment");
+        System.out.println(appointmentLedger.getAppointment(appId).toString());
+        return appointmentLedger.getAppointment(appId).toString();
     }
 
     public String getMainDetails()
