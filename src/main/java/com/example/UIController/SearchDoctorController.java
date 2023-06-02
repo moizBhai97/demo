@@ -373,8 +373,11 @@ public class SearchDoctorController implements Initializable {
         System.out.println(patId);
     }
 
-    // GridPane results_grid;
+<<<<<<< HEAD
+=======
+    //GridPane results_grid;
 
+>>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
     public void setPatientController(PatientController patientController) {
         this.patientController = patientController;
     }
@@ -386,15 +389,15 @@ public class SearchDoctorController implements Initializable {
         // results_grid.getChildren().clear();
         // patientController = new PatientController();
 
+<<<<<<< HEAD
+=======
         // esults_grid.setHgap(10);
         // results_grid.setVgap(10);
         // results_grid.getChildren().clear();
         results_scrollpane.getChildrenUnmodifiable().clear();
         // set padding
-        // results_grid.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
         results_flowpane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
-        // set transparent background
-        // results_grid.setStyle("-fx-background-color: transparent;");
+        
         results_flowpane.setStyle("-fx-background-color: transparent;");
 
         createDoctorCards(patientController.getTopDoctors());

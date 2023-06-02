@@ -92,6 +92,10 @@ public class DoctorDetailsController implements Initializable{
 
     @FXML
     private AnchorPane parentPane;
+<<<<<<< HEAD
+    
+=======
+>>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
     @FXML
     private Button reviewsBtn;
 
@@ -176,12 +180,27 @@ public class DoctorDetailsController implements Initializable{
         }
     }
 
+<<<<<<< HEAD
+    public void backBtnPressed(ActionEvent event)
+    {
+=======
     public void backBtnPressed(ActionEvent event){
+>>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
         rootPane.setVisible(true);
-    AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
-    //remove last 
-    mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+        AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
+        //remove last 
+        mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
 
+<<<<<<< HEAD
+        // mainParentPane.getChildren().add(rootPane);
+            //   Node node = (Node)event.getSource();
+            //     while (node != null && !(node instanceof AnchorPane)) {
+            //         node = node.getParent();
+            //     }
+            //     ((AnchorPane)node.getParent()).getChildren().removeAll();
+            //     ((AnchorPane)node.getParent()).getChildren().setAll(rootPane);
+    }
+=======
        // mainParentPane.getChildren().add(rootPane);
         //   Node node = (Node)event.getSource();
         //     while (node != null && !(node instanceof AnchorPane)) {
@@ -191,6 +210,7 @@ public class DoctorDetailsController implements Initializable{
         //     ((AnchorPane)node.getParent()).getChildren().setAll(rootPane);
     }
     
+>>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
     public void reviewsButton(ActionEvent event)
     {
         try {

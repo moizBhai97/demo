@@ -15,10 +15,14 @@ public class PatientLedger {
     {
         dbFactory = DBFactory.getInstance();
         patientList = new ArrayList<Patient>();
+<<<<<<< HEAD
+
+=======
         //pass dummy email and pass as json 
         //patientList.add(getPatient("{'email':'ali.ahmed@example.com','password':'password123'}") );
       //  patientList.get(0).setAppointments();
         
+>>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
     }
 
     public void setAppointmentPatients(int docId)
@@ -42,6 +46,7 @@ public class PatientLedger {
 
     public Patient getPatient(int patId)
     {
+
         for(int i = 0; i < patientList.size(); i++)
         {
             if(patientList.get(i).getpatId() == patId)
