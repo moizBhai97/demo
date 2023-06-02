@@ -182,12 +182,8 @@ public class DoctorDetailsController implements Initializable{
         }
     }
 
-<<<<<<< HEAD
-    public void backBtnPressed(ActionEvent event){
-=======
     public void backBtnPressed(ActionEvent event)
     {
->>>>>>> 376907a92e74ebe204b154fb4db66a29b49d04fb
         rootPane.setVisible(true);
         AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
         //remove last 
@@ -201,10 +197,6 @@ public class DoctorDetailsController implements Initializable{
             //     ((AnchorPane)node.getParent()).getChildren().removeAll();
             //     ((AnchorPane)node.getParent()).getChildren().setAll(rootPane);
     }
-<<<<<<< HEAD
-    
-=======
->>>>>>> 376907a92e74ebe204b154fb4db66a29b49d04fb
     public void reviewsButton(ActionEvent event)
     {
         try {
