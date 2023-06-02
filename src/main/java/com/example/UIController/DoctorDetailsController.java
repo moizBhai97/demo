@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.stage.Modality;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -233,7 +234,8 @@ public class DoctorDetailsController implements Initializable{
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.setMaximized(false);
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL); 
             stage.show();
             
         } catch (Exception e) {

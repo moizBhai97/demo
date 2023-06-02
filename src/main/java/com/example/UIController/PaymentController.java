@@ -104,8 +104,8 @@ public class PaymentController  implements Initializable
             JSONObject payment = new JSONObject();
             payment.put("amount", fee);
             payment.put("status", false);
-            payment.put("date", LocalDate.now().toString());
-            payment.put("time", java.time.LocalTime.now().toString());
+            payment.put("date", date);
+            payment.put("time", time);
 
             obj.put("payment", payment);
 

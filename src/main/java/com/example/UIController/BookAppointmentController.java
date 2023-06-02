@@ -50,9 +50,6 @@ public class BookAppointmentController implements Initializable {
     private ToggleGroup radios;
 
     @FXML
-    private TextArea reason;
-
-    @FXML
     private Button reschButton;
 
     @FXML
@@ -121,7 +118,6 @@ public class BookAppointmentController implements Initializable {
         doctorName.setText(docName);
 
         time = 1;
-        reason.setWrapText(true);
 
         String dateUnformatted = LocalDate.now().toString();
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
