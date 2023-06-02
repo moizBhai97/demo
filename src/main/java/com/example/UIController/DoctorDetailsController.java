@@ -98,15 +98,17 @@ public class DoctorDetailsController implements Initializable{
     @FXML
     private Hyperlink certificateBtn;
 
+    String screenInfo;
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
     {
          
         System.out.println(docId);
 
-        String info = pc.getDocDetails(docId);
+        screenInfo = pc.getDocDetails(docId);
 
-        JSONObject obj = new JSONObject(info);
+        JSONObject obj = new JSONObject(screenInfo);
 
         name.setText(obj.getString("name"));
         specialization.setText(obj.getString("specialization"));
@@ -147,24 +149,27 @@ public class DoctorDetailsController implements Initializable{
 
     public void bookButton(ActionEvent event){
         try {
-            this.bookButton.getScene().getWindow().hide();
+      //      this.bookButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/book_apt.fxml")));
             
             //-------------------------------------------------------------------------------------------------//
             BookAppointmentController bookAppointmentController = new BookAppointmentController();
-            bookAppointmentController.setData(pc, docId, patId, fee.getText(), name.getText());
+            bookAppointmentController.setData(pc, docId, patId,screenInfo,rootPane);
 
             loader.setController(bookAppointmentController);
             //-------------------------------------------------------------------------------------------------//
             
-            Parent root = loader.load();
-            //stage.setUserData(patientInfo);
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
+            AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+            // rootPane.setVisible(false);
+           // ((AnchorPane) rootPane.getParent()).getChildren().clear();
+           AnchorPane parent= ((AnchorPane) rootPane.getParent());
+            parent.getChildren().add(pane);
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -189,7 +194,7 @@ public class DoctorDetailsController implements Initializable{
     public void reviewsButton(ActionEvent event)
     {
         try {
-            this.reviewsBtn.getScene().getWindow().hide();
+        //    this.reviewsBtn.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/manageReview.fxml")));
@@ -198,18 +203,19 @@ public class DoctorDetailsController implements Initializable{
             ManageReviewController reviewsController = new ManageReviewController();
 
             System.out.println("DocId: " + docId);
-            reviewsController.setData(pc, patId, docId);
+            reviewsController.setData(pc, patId, docId, rootPane);
 
             loader.setController(reviewsController);
             //-------------------------------------------------------------------------------------------------//
             
-            Parent root = loader.load();
-            //stage.setUserData(patientInfo);
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-            
+             AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+            // rootPane.setVisible(false);
+AnchorPane parent= ((AnchorPane) rootPane.getParent());
+            parent.getChildren().add(pane);            
         } catch (Exception e) {
             e.printStackTrace();
         }

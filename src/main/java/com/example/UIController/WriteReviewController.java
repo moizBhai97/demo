@@ -41,9 +41,11 @@ public class WriteReviewController{
     @FXML
     private Button submitButton;
 
-    PatientController patientController = new PatientController();
-    int docId = 101;
-    int patId = 1;              // testing
+    private AnchorPane prevPane;
+
+    PatientController patientController;
+    int docId ;
+    int patId ;
 
     @FXML
     void submitButton(ActionEvent event) {
@@ -68,10 +70,19 @@ public class WriteReviewController{
         
     }
     
-    public void setDate(PatientController patientController, int docId, int patId){
+    public void setData(PatientController patientController, int docId, int patId,AnchorPane prevPane) {
         this.patientController = patientController;
         this.docId = docId;
         this.patId = patId;
+        this.prevPane = prevPane;
+    }
+
+    
+    public void backBtnPressed(ActionEvent event){
+        prevPane.setVisible(true);
+    AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
+    //remove last 
+    mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
     }
 
 }

@@ -11,6 +11,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -21,8 +23,11 @@ public class ManageAppointmentController implements Initializable {
     @FXML
     ScrollPane pendingAppointmentsScrollPane;
 
-    private GridPane completedAppointmentsGridPane;
-    private GridPane pendingAppointmentsGridPane;
+    @FXML
+    AnchorPane rootPane;
+
+    private FlowPane completedAppointmentsFlowPane;
+    private FlowPane pendingAppointmentsFlowPane;
 
     private PatientController patientController;
     private int patId;
@@ -30,17 +35,26 @@ public class ManageAppointmentController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         
-        completedAppointmentsGridPane = new GridPane();
-        completedAppointmentsScrollPane.setContent(completedAppointmentsGridPane);
-        completedAppointmentsGridPane.setVgap(10);
-        completedAppointmentsGridPane.setHgap(10);
-        completedAppointmentsGridPane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
+        completedAppointmentsFlowPane = new FlowPane();
+        completedAppointmentsScrollPane.setContent(completedAppointmentsFlowPane);
+        completedAppointmentsFlowPane.setVgap(10);
+        completedAppointmentsFlowPane.setHgap(10);
+        completedAppointmentsFlowPane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
 
-        pendingAppointmentsGridPane = new GridPane();
-        pendingAppointmentsScrollPane.setContent(pendingAppointmentsGridPane);
-        pendingAppointmentsGridPane.setVgap(10);
-        pendingAppointmentsGridPane.setHgap(10);
-        pendingAppointmentsGridPane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
+        pendingAppointmentsFlowPane = new FlowPane();
+         pendingAppointmentsFlowPane.setVgap(10);
+        pendingAppointmentsFlowPane.setHgap(10);
+        pendingAppointmentsFlowPane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
+        //pendingAppointmentsFlowPane.autosize();
+        pendingAppointmentsScrollPane.getChildrenUnmodifiable().clear();
+        pendingAppointmentsScrollPane.setContent(pendingAppointmentsFlowPane);
+
+    //        pendingAppointmentsFlowPane.setPrefWrapLength(0);
+    // pendingAppointmentsFlowPane.widthProperty().addListener((obs, oldVal, newVal) -> {
+    //     if (newVal.doubleValue() > oldVal.doubleValue()) {
+    //         pendingAppointmentsFlowPane.setPrefWrapLength(newVal.doubleValue());
+    //     }
+    // });
 
         fillPendingAppointments();
         fillCompletedAppointments();
@@ -56,9 +70,8 @@ public class ManageAppointmentController implements Initializable {
         try {
             String result = getPendingAppointments();
             JSONArray jsonArray = new JSONArray(result);
-            pendingAppointmentsGridPane.getChildren().clear();
-            int rowindex = 0;
-            int columnindex = 0;
+            pendingAppointmentsFlowPane.getChildren().clear();
+           
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -69,17 +82,14 @@ public class ManageAppointmentController implements Initializable {
                     Pane pane = fxmlLoader.load();
                     PendingAppointmentDoctorCard pendingAppointmentDoctorCard = fxmlLoader.getController();
                     pendingAppointmentDoctorCard.setCard(jsonArray.getJSONObject(i).toString());
-                    pendingAppointmentDoctorCard.setData(patientController, patId);
-                    pendingAppointmentsGridPane.add(pane, columnindex, rowindex);
+                    pendingAppointmentDoctorCard.setData(patientController, patId,rootPane);
+                    pendingAppointmentsFlowPane.getChildren().add(pane);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                columnindex++;
-                if (columnindex == 2) {
-                    columnindex = 0;
-                    rowindex++;
-                }
+              
             }
+            pendingAppointmentsScrollPane.setContent(pendingAppointmentsFlowPane);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -106,9 +116,8 @@ public class ManageAppointmentController implements Initializable {
         try {
             String result = getCompletedAppointments();
             JSONArray jsonArray = new JSONArray(result);
-            completedAppointmentsGridPane.getChildren().clear();
-            int rowindex = 0;
-            int columnindex = 0;
+            completedAppointmentsFlowPane.getChildren().clear();
+            
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -119,17 +128,14 @@ public class ManageAppointmentController implements Initializable {
                     Pane pane = fxmlLoader.load();
                     PendingAppointmentDoctorCard pendingAppointmentDoctorCard = fxmlLoader.getController();
                     pendingAppointmentDoctorCard.setCard(jsonArray.getJSONObject(i).toString());
-                    pendingAppointmentDoctorCard.setData(patientController, patId);
-                    completedAppointmentsGridPane.add(pane, columnindex, rowindex);
+                    pendingAppointmentDoctorCard.setData(patientController, patId,rootPane);
+                    completedAppointmentsFlowPane.getChildren().add(pane);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                columnindex++;
-                if (columnindex == 2) {
-                    columnindex = 0;
-                    rowindex++;
-                }
+                
             }
+            completedAppointmentsScrollPane.setContent(completedAppointmentsFlowPane);
         } catch (Exception e) {
             e.printStackTrace();
 

@@ -206,7 +206,7 @@
                   <URL value="@search_doctors.css" />
                </stylesheets>
             </Button>
-            <Button fx:id="searchBtn" contentDisplay="TOP" mnemonicParsing="false" styleClass="dashboardBtn" stylesheets="@search_doctors.css" text="Search" textFill="#2854c3">
+            <Button fx:id="searchBtn" contentDisplay="TOP" mnemonicParsing="false" onAction="#searchBtnPressed" styleClass="dashboardBtn" stylesheets="@search_doctors.css" text="Search" textFill="#2854c3">
                <graphic>
                   <ImageView fitHeight="36.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>
