@@ -115,6 +115,11 @@ public class DoctorDetails {
 
     }
 
+    public String getCertificates()
+    {
+        return certificateLedger.getCertificates();
+    }
+
     public String getSpecialization()
     {
         return specialization;

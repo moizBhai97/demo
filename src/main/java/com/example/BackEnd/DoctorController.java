@@ -1,5 +1,6 @@
 package com.example.BackEnd;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class DoctorController {
@@ -50,6 +51,18 @@ public class DoctorController {
         }
         
 
+    }
+
+    public String getCertificates(int docId)
+    {
+        try{
+            JSONArray certificates = new JSONArray(doctorLedger.getDoctor(docId).getDoctorDetails().getCertificates());
+            return certificates.toString();
+
+        }catch (Exception e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return "";
+        }
     }
 
     public String getDoctorData(int docId)

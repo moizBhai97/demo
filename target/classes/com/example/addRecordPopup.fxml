@@ -7,6 +7,7 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
@@ -16,12 +17,17 @@
    <children>
       <VBox layoutY="45.0" prefHeight="111.0" prefWidth="203.0" spacing="6.0" style="-fx-background-color: ededed; -fx-border-radius: 5;">
          <children>
-            <Label prefHeight="17.0" prefWidth="32.0" text="Type">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <ComboBox fx:id="typeComboBox" editable="true" prefHeight="25.0" prefWidth="185.0" promptText="Allergy">
+            <HBox prefHeight="17.0" prefWidth="142.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="67.0" text="Type">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="typeError" prefHeight="17.0" prefWidth="190.0" text="(error)" textFill="RED" visible="false" />
+               </children>
+            </HBox>
+            <ComboBox fx:id="typeComboBox" prefHeight="25.0" prefWidth="185.0" visibleRowCount="3">
                <items>
                   <FXCollections fx:factory="observableArrayList">
                      <String fx:id="type_1" fx:value="Allergy" />
@@ -32,12 +38,17 @@
                   </FXCollections>
                </items>
             </ComboBox>
-            <Label prefHeight="17.0" prefWidth="67.0" text="Description">
-               <font>
-                  <Font name="System Bold" size="12.0" />
-               </font>
-            </Label>
-            <TextField fx:id="descriptionTextBox" promptText="Milk" />
+            <HBox prefHeight="17.0" prefWidth="142.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="67.0" text="Description">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="descriptionError" prefHeight="17.0" prefWidth="116.0" text="(error)" textFill="RED" visible="false" />
+               </children>
+            </HBox>
+            <TextField fx:id="descriptionTextBox" prefColumnCount="10" promptText="Milk" />
          </children>
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
@@ -49,6 +60,7 @@
          </font>
       </Label>
       <Line endX="103.0" layoutX="87.0" layoutY="45.0" startX="-72.0" stroke="#bebebe" />
-      <Button fx:id="addButton" layoutX="83.0" layoutY="167.0" mnemonicParsing="false" style="-fx-background-color: #2854C3;" text="Add" textFill="WHITE" />
+      <Label layoutX="121.0" layoutY="-35.0" text="Label" />
+      <Button fx:id="addButton" layoutX="83.0" layoutY="167.0" mnemonicParsing="false" onAction="#addRecord" style="-fx-background-color: #2854C3;" text="Add" textFill="WHITE" />
    </children>
 </Pane>

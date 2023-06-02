@@ -19,7 +19,7 @@ public class PatientController {
         try{
 
             Patient patient = patientLedger.getPatient(info);
-            patient.setAppointments();
+            patient.populateAppointments();
             doctorLedger.setAppointmentDoctors(patient.getpatId());
             doctorLedger.setTopDoctors();
 
@@ -52,6 +52,11 @@ public class PatientController {
     {
         patientLedger.updateProfile(patId, info);
 
+    }
+
+    public void addIllness(int patId, String info)
+    {
+        patientLedger.getPatient(patId).addIllness(patId, info);
     }
 
     public String getPatientHistory(int patId)
