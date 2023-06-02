@@ -13,6 +13,7 @@ public class Appointment {
     private String time;
     private String problem;
     private int docId;
+    private int patId;
     private String status;
 
     private Payment payment;
@@ -48,6 +49,7 @@ public class Appointment {
         this.time = obj.getString("time");
         this.problem = obj.getString("problem");
         this.docId = obj.getInt("docId");
+        this.patId = obj.getInt("patId");
         this.status = "Booked";
         this.payment = new Payment(obj.getJSONObject("payment").toString());
     }
@@ -60,6 +62,7 @@ public class Appointment {
         this.time = obj.getString("time");
         this.problem = obj.getString("problem");
         this.docId = obj.getInt("docId");
+        this.patId = obj.getInt("patId");
         this.status = obj.getString("status");
         this.payment = new Payment(obj.getJSONObject("payment").toString());
     }
@@ -98,6 +101,9 @@ public class Appointment {
         
         else if(value.equals("docId"))
             return docId + "";
+
+        else if(value.equals("patId"))
+            return patId + "";
 
         return "NULL";
     }

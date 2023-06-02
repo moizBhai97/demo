@@ -23,6 +23,10 @@ public class PatientController {
             doctorLedger.setAppointmentDoctors(patient.getpatId());
             doctorLedger.setTopDoctors();
 
+            System.out.println("Patient controller login success");
+
+            System.out.println("Login: " + patient.toString());
+
             return "" + (patient.getpatId());
             
         }catch (Exception e) {
@@ -32,10 +36,29 @@ public class PatientController {
         
     }
 
+    public String getPatientData(int patId)
+    {
+        try{
+
+            return patientLedger.getPatient(patId).getDetails();
+        }catch (Exception e) {
+
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return "";
+        }
+    }
+
     public void updateProfile(int patId, String info)
     {
         patientLedger.updateProfile(patId, info);
 
+    }
+
+    public String getPatientHistory(int patId)
+    {
+        Patient patient = patientLedger.getPatient(patId);
+
+        return patient.getHistory();
     }
 
     public void submitReview(String info, int docId, int patId)
@@ -156,7 +179,14 @@ public class PatientController {
     {
         try
         {
-            return doctorLedger.getDoctor(docId).getDoctorDetails().getReviewList(docId);
+            JSONArray obj = new JSONArray(doctorLedger.getDoctor(docId).getDoctorDetails().getReviewList(docId));
+            
+            for(int i=0; i<obj.length(); i++)
+            {
+                obj.getJSONObject(i).put("name", patientLedger.getPatient(obj.getJSONObject(i).getInt("patId")).getName());
+            }
+
+            return obj.toString();
         }
         catch(Exception e)
         {

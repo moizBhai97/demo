@@ -167,7 +167,7 @@ public class AppointmentLedger {
     {
         try
         {
-            String appointmentsInfo = dbFactory.createHandler("SQL").getPatientAppointments(docId);
+            String appointmentsInfo = dbFactory.createHandler("SQL").getDoctorAppointments(docId);
 
             JSONArray objs = new JSONArray(appointmentsInfo);
 

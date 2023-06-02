@@ -388,11 +388,19 @@ public class SearchDoctorController implements Initializable {
 
     public void refresh() {
 
+<<<<<<< HEAD
         patientController = new PatientController();
 
         // esults_grid.setHgap(10);
         // results_grid.setVgap(10);
         // results_grid.getChildren().clear();
+=======
+        //patientController = new PatientController();
+        
+        //esults_grid.setHgap(10);
+        //results_grid.setVgap(10);
+        //results_grid.getChildren().clear();
+>>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
         results_scrollpane.getChildrenUnmodifiable().clear();
         // set padding
         // results_grid.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));

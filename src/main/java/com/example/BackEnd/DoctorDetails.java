@@ -1,6 +1,7 @@
 package com.example.BackEnd;
 
 import java.io.FileReader;
+import java.security.cert.Certificate;
 import java.util.Set;
 
 import org.json.JSONArray;
@@ -27,6 +28,7 @@ public class DoctorDetails {
 
     private ReviewLedger reviewLedger;
     private AppointmentLedger appointmentLedger;
+    private CertificateLedger certificateLedger;
     private String schedule;
 
     public DoctorDetails()
@@ -48,6 +50,7 @@ public class DoctorDetails {
         this.reviews = 0;
 
         reviewLedger = new ReviewLedger();
+        certificateLedger = new CertificateLedger();
     }
 
     public DoctorDetails(String specialization, String description, String location, int stats, int patients, int experience, float rating, String services, String workingHours, float fee, String avail, float checkupRating, float environmentRating, float staffRating, int reviews, int docId)
@@ -69,6 +72,7 @@ public class DoctorDetails {
         this.reviews = reviews;
 
         reviewLedger = new ReviewLedger(docId);
+        certificateLedger = new CertificateLedger(docId);
     }
 
     public DoctorDetails(String info, int docId)
@@ -76,6 +80,7 @@ public class DoctorDetails {
         try
         {
             reviewLedger = new ReviewLedger(docId);
+            certificateLedger = new CertificateLedger(docId);
             
 
             info = reviewLedger.getAvgRating(info);
@@ -102,6 +107,12 @@ public class DoctorDetails {
         {
             System.out.println(e + "\nError in DoctorDetails constructor.");
         }
+    }
+
+    public void addCertification(String info, int docId)
+    {
+        certificateLedger.addCertification(info, docId);
+
     }
 
     public String getSpecialization()
@@ -274,7 +285,7 @@ public class DoctorDetails {
         if(appointmentLedger == null)
             appointmentLedger = new AppointmentLedger();
             
-        appointmentLedger.setPatientAppointments(docId);
+        appointmentLedger.setDoctorAppointments(docId);
     }
 
     private boolean isDayTime(String time) 

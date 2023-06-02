@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.effect.InnerShadow?>
@@ -148,7 +149,7 @@
                            </font>
                         </Label>
                         <Label layoutX="35.0" layoutY="72.0" text="Reviews" />
-                        <Button fx:id="reviewButton" layoutX="5.0" layoutY="8.0" mnemonicParsing="false" opacity="0.0" prefHeight="79.0" prefWidth="103.0" styleClass="inner_big_pane3" stylesheets="@doctor_details.css" text="Button" />
+                        <Button fx:id="reviewsBtn" layoutX="5.0" layoutY="8.0" mnemonicParsing="false" onAction="#reviewsButton" opacity="0.0" prefHeight="79.0" prefWidth="103.0" styleClass="inner_big_pane3" stylesheets="@doctor_details.css" text="Button" />
                      </children>
                   </Pane>
                   <Pane layoutX="22.0" layoutY="227.0" styleClass="inner_big_pane3" stylesheets="@doctor_details.css">
@@ -213,6 +214,11 @@
                         </Pane>
                      </children>
                   </Pane>
+                  <Hyperlink fx:id="certificateBtn" layoutX="63.0" layoutY="223.0" onAction="#certificateButton" text="View Certificates" textFill="#2854c3">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Hyperlink>
                </children>
             </Pane>
          </children>

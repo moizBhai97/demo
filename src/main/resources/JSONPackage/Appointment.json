@@ -5,6 +5,7 @@
     "problem": "{{problem}}",
     "status": "{{status}}",
     "docId": "{{docId}}",
+    "patId": "{{patId}}",
     "payment": {
                     "amount": "{{amount}}",
                     "status": "{{status}}",

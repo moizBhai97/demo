@@ -15,6 +15,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
@@ -86,10 +87,18 @@ public class DoctorDetailsController implements Initializable{
     @FXML
     private Button bookButton;
 
+<<<<<<< HEAD
     private AnchorPane rootPane;
 
     @FXML
     private AnchorPane parentPane;
+=======
+    @FXML
+    private Button reviewsBtn;
+
+    @FXML
+    private Hyperlink certificateBtn;
+>>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
@@ -164,6 +173,7 @@ public class DoctorDetailsController implements Initializable{
         }
     }
 
+<<<<<<< HEAD
     public void backBtnPressed(ActionEvent event){
         rootPane.setVisible(true);
     AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
@@ -177,5 +187,61 @@ public class DoctorDetailsController implements Initializable{
         //     }
         //     ((AnchorPane)node.getParent()).getChildren().removeAll();
         //     ((AnchorPane)node.getParent()).getChildren().setAll(rootPane);
+=======
+    public void reviewsButton(ActionEvent event)
+    {
+        try {
+            this.reviewsBtn.getScene().getWindow().hide();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/manageReview.fxml")));
+            
+            //-------------------------------------------------------------------------------------------------//
+            ManageReviewController reviewsController = new ManageReviewController();
+
+            System.out.println("DocId: " + docId);
+            reviewsController.setData(pc, patId, docId);
+
+            loader.setController(reviewsController);
+            //-------------------------------------------------------------------------------------------------//
+            
+            Parent root = loader.load();
+            //stage.setUserData(patientInfo);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void certificateButton()
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/certificate.fxml")));
+            
+            //-------------------------------------------------------------------------------------------------//
+            CertificateController certificateController = new CertificateController();
+
+            certificateController.setData(pc, null, docId);
+
+            loader.setController(certificateController);
+            //-------------------------------------------------------------------------------------------------//
+            
+            Parent root = loader.load();
+            //stage.setUserData(patientInfo);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setMaximized(false);
+            stage.show();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+>>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
     }
 }
