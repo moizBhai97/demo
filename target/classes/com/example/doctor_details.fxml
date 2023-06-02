@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<<<<<<< HEAD
-=======
 <?import javafx.scene.control.Hyperlink?>
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.effect.InnerShadow?>
@@ -13,15 +10,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<<<<<<< HEAD
-=======
-<?import javafx.scene.layout.VBox?>
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<<<<<<< HEAD
 <AnchorPane fx:id="parentPane" prefHeight="539.0" prefWidth="699.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" layoutX="19.0" layoutY="29.0" prefHeight="510.0" prefWidth="637.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="43.0" AnchorPane.topAnchor="29.0">
@@ -29,110 +21,6 @@
             <Pane prefHeight="510.0" prefWidth="662.0" style="-fx-background-color: white;">
                <children>
                   <Pane fx:id="inner_big_pane1" layoutX="23.0" prefHeight="94.0" prefWidth="245.0" styleClass="inner_big_pane1" stylesheets="@doctor_details.css">
-=======
-<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Pane prefHeight="640.0" prefWidth="924.0">
-         <children>
-            <Pane fx:id="top_pane" prefHeight="94.0" prefWidth="800.0" styleClass="top_pane" stylesheets="@doctor_details.css">
-               <children>
-                  <Pane layoutX="14.0" layoutY="7.0" prefHeight="70.0" prefWidth="62.0">
-                     <children>
-                        <ImageView fitHeight="70.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/image%2023.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="690.0" layoutY="6.0" prefHeight="79.0" prefWidth="103.0">
-                     <children>
-                        <ImageView fitHeight="58.0" fitWidth="55.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/image%2032.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <Label layoutX="70.0" layoutY="38.0" text="HEALTHYSENSE" textFill="WHITE">
-                     <font>
-                        <Font name="SansSerif Regular" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="329.0" layoutY="31.0" text="Doctor Details" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="25.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <VBox layoutX="-13.0" layoutY="94.0" prefHeight="546.0" prefWidth="149.0">
-               <children>
-                  <AnchorPane fx:id="side_anchor" prefHeight="556.0" prefWidth="150.0" styleClass="side_anchor" stylesheets="@doctor_details.css">
-                     <children>
-                        <Pane fx:id="iner_pane1" layoutX="17.0" layoutY="25.0" prefHeight="79.0" prefWidth="114.0" styleClass="inner_pane" stylesheets="@doctor_details.css">
-                           <children>
-                              <Button fx:id="home_btn" layoutX="7.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="103.0" styleClass="Butt_inner_pane" stylesheets="@doctor_details.css" textFill="#2854c3" />
-                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2001.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="48.0" layoutY="57.0" text="Home" textFill="#4638c2" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="iner_pane11" layoutX="17.0" layoutY="109.0" prefHeight="70.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@doctor_details.css">
-                           <children>
-                              <Button fx:id="search_btn" layoutX="5.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="114.0" styleClass="Butt_inner_pane" stylesheets="@doctor_details.css" textFill="#2854c3" />
-                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2002.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="47.0" layoutY="48.0" text="Search" textFill="#979797" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="iner_pane111" layoutX="17.0" layoutY="190.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@doctor_details.css">
-                           <children>
-                              <Button fx:id="appointment_btn" layoutX="3.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="127.0" styleClass="Butt_inner_pane" stylesheets="@doctor_details.css" textFill="#2854c3" />
-                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2014.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="26.0" layoutY="57.0" text="Appointments" textFill="#979797" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="iner_pane1111" layoutX="17.0" layoutY="279.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@doctor_details.css">
-                           <children>
-                              <Button fx:id="setting_btn" layoutX="-2.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="127.0" styleClass="Butt_inner_pane" stylesheets="@doctor_details.css" textFill="#2854c3" />
-                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2015.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="42.0" layoutY="57.0" text="Settings" textFill="#979797" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="iner_pane1112" layoutX="17.0" layoutY="366.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@doctor_details.css">
-                           <children>
-                              <Button fx:id="logout_btn" layoutX="3.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="127.0" styleClass="Butt_inner_pane" stylesheets="@doctor_details.css" textFill="#2854c3" />
-                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2012%20(2).png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="46.0" layoutY="50.0" text="Logout" textFill="#979797" />
-                           </children>
-                        </Pane>
-                     </children>
-                  </AnchorPane>
-               </children>
-            </VBox>
-            <Pane fx:id="big_pane" layoutX="136.0" layoutY="94.0" prefHeight="546.0" prefWidth="664.0" styleClass="big_pane" stylesheets="@doctor_details.css">
-               <children>
-                  <Pane fx:id="inner_big_pane1" layoutX="23.0" layoutY="22.0" prefHeight="94.0" prefWidth="245.0" styleClass="inner_big_pane1" stylesheets="@doctor_details.css">
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
                      <children>
                         <Pane layoutY="7.0" prefHeight="79.0" prefWidth="103.0">
                            <children>
@@ -149,14 +37,9 @@
                            </font>
                         </Label>
                         <Label fx:id="specialization" layoutX="85.0" layoutY="38.0" text="Dermatologist" textFill="#979797" />
-<<<<<<< HEAD
                      </children>
                   </Pane>
                   <Pane layoutY="94.0" prefHeight="119.0" prefWidth="525.0" styleClass="big_pane" stylesheets="@doctor_details.css">
-=======
-                     </children></Pane>
-                  <Pane layoutY="116.0" prefHeight="119.0" prefWidth="525.0" styleClass="big_pane" stylesheets="@doctor_details.css">
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
                      <children>
                         <Pane fx:id="circle_pane" layoutX="35.0" layoutY="25.0" prefHeight="49.0" prefWidth="48.0" styleClass="circle_pane" stylesheets="@doctor_details.css">
                            <children>
@@ -187,11 +70,7 @@
                         </Pane>
                      </children>
                   </Pane>
-<<<<<<< HEAD
                   <Pane fx:id="inner_big_pane11" layoutX="282.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
-=======
-                  <Pane fx:id="inner_big_pane11" layoutX="282.0" layoutY="22.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
                      <children>
                         <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
                            <children>
@@ -210,11 +89,7 @@
                         <Label layoutX="35.0" layoutY="72.0" text="Patients" />
                      </children>
                   </Pane>
-<<<<<<< HEAD
                   <Pane fx:id="inner_big_pane111" layoutX="410.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
-=======
-                  <Pane fx:id="inner_big_pane111" layoutX="410.0" layoutY="22.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
                      <children>
                         <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
                            <children>
@@ -238,11 +113,7 @@
                         </Label>
                      </children>
                   </Pane>
-<<<<<<< HEAD
                   <Pane fx:id="inner_big_pane112" layoutX="536.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
-=======
-                  <Pane fx:id="inner_big_pane112" layoutX="536.0" layoutY="22.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
                      <children>
                         <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
                            <children>
@@ -261,11 +132,7 @@
                         <Label layoutX="37.0" layoutY="72.0" text="Ratings" />
                      </children>
                   </Pane>
-<<<<<<< HEAD
                   <Pane fx:id="inner_big_pane113" layoutX="536.0" layoutY="107.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane21" stylesheets="@doctor_details.css">
-=======
-                  <Pane fx:id="inner_big_pane113" layoutX="536.0" layoutY="129.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane21" stylesheets="@doctor_details.css">
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
                      <children>
                         <Pane layoutX="30.0" prefHeight="49.0" prefWidth="55.0">
                            <children>
@@ -282,17 +149,10 @@
                            </font>
                         </Label>
                         <Label layoutX="35.0" layoutY="72.0" text="Reviews" />
-<<<<<<< HEAD
-                        <Button fx:id="reviewButton" layoutX="5.0" layoutY="8.0" mnemonicParsing="false" opacity="0.0" prefHeight="79.0" prefWidth="103.0" styleClass="inner_big_pane3" stylesheets="@doctor_details.css" text="Button" />
-                     </children>
-                  </Pane>
-                  <Pane layoutX="22.0" layoutY="227.0" styleClass="inner_big_pane3" stylesheets="@doctor_details.css">
-=======
                         <Button fx:id="reviewsBtn" layoutX="5.0" layoutY="8.0" mnemonicParsing="false" onAction="#reviewsButton" opacity="0.0" prefHeight="79.0" prefWidth="103.0" styleClass="inner_big_pane3" stylesheets="@doctor_details.css" text="Button" />
                      </children>
                   </Pane>
-                  <Pane fx:id="inner_big_pane3" layoutX="24.0" layoutY="257.0" prefHeight="279.0" prefWidth="624.0" styleClass="inner_big_pane3" stylesheets="@doctor_details.css">
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
+                  <Pane layoutX="22.0" layoutY="227.0" styleClass="inner_big_pane3" stylesheets="@doctor_details.css">
                      <children>
                         <Label layoutX="48.0" layoutY="95.0" text="Services" textFill="#979797">
                            <font>
@@ -317,11 +177,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Button>
-<<<<<<< HEAD
                         <Pane layoutX="387.0" layoutY="124.4000015258789" prefHeight="145.0" prefWidth="226.0" styleClass="inner_big_pane31" stylesheets="@doctor_details.css">
-=======
-                        <Pane layoutX="387.0" layoutY="125.0" prefHeight="145.0" prefWidth="226.0" styleClass="inner_big_pane31" stylesheets="@doctor_details.css">
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
                            <children>
                               <Button layoutX="62.0" layoutY="64.0" mnemonicParsing="false" prefHeight="19.0" prefWidth="22.0" styleClass="big_pane" stylesheets="@doctor_details.css">
                                  <graphic>
@@ -358,7 +214,11 @@
                         </Pane>
                      </children>
                   </Pane>
-<<<<<<< HEAD
+                  <Hyperlink fx:id="certificateBtn" layoutX="63.0" layoutY="223.0" onAction="#certificateButton" text="View Certificates" textFill="#2854c3">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Hyperlink>
                </children>
             </Pane>
          </children>
@@ -369,19 +229,3 @@
       <InnerShadow />
    </effect>
 </AnchorPane>
-=======
-                  <Hyperlink fx:id="certificateBtn" layoutX="63.0" layoutY="223.0" onAction="#certificateButton" text="View Certificates" textFill="#2854c3">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Hyperlink>
-               </children>
-               <effect>
-                  <InnerShadow />
-               </effect>
-            </Pane>
-         </children>
-      </Pane>
-   </children>
-</HBox>
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4

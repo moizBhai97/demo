@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -25,6 +26,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import com.example.BackEnd.PatientController;
 
@@ -117,6 +119,8 @@ public class BookAppointmentController implements Initializable {
         feeLabel.setText(fee);
         doctorName.setText(docName);
 
+        datePicker.setDayCellFactory(getDisablePastDatesCellFactory());
+
         time = 1;
 
         String dateUnformatted = LocalDate.now().toString();
@@ -187,6 +191,24 @@ public class BookAppointmentController implements Initializable {
         datePick.setText(formattedDate);
 
         refreshToggleButtonGroup(pc.getSchedule(docId, date, time));
+    }
+
+    private Callback<DatePicker, DateCell> getDisablePastDatesCellFactory() {
+        return new Callback<>() {
+            @Override
+            public DateCell call(final DatePicker datePicker) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item.isBefore(LocalDate.now())) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;"); // Optional: Set a different background color for disabled dates
+                        }
+                    }
+                };
+            }
+        };
     }
 
     public void handleToggleButtonAction(ToggleButton selectedButton) 

@@ -18,11 +18,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-<<<<<<< HEAD
 import javafx.stage.Modality;
-=======
 import javafx.scene.layout.AnchorPane;
->>>>>>> 3c5deb937f8ad823527526bf9ce22c9527106fee
 import javafx.stage.Stage;
 
 public class DoctorDetailsController implements Initializable{
@@ -91,18 +88,16 @@ public class DoctorDetailsController implements Initializable{
     @FXML
     private Button bookButton;
 
-<<<<<<< HEAD
     private AnchorPane rootPane;
 
     @FXML
     private AnchorPane parentPane;
-=======
+    
     @FXML
     private Button reviewsBtn;
 
     @FXML
     private Hyperlink certificateBtn;
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
@@ -177,21 +172,21 @@ public class DoctorDetailsController implements Initializable{
         }
     }
 
-<<<<<<< HEAD
-    public void backBtnPressed(ActionEvent event){
+    public void backBtnPressed(ActionEvent event)
+    {
         rootPane.setVisible(true);
-    AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
-    //remove last 
-    mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+        AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
+        //remove last 
+        mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
 
-       // mainParentPane.getChildren().add(rootPane);
-        //   Node node = (Node)event.getSource();
-        //     while (node != null && !(node instanceof AnchorPane)) {
-        //         node = node.getParent();
-        //     }
-        //     ((AnchorPane)node.getParent()).getChildren().removeAll();
-        //     ((AnchorPane)node.getParent()).getChildren().setAll(rootPane);
-=======
+        // mainParentPane.getChildren().add(rootPane);
+            //   Node node = (Node)event.getSource();
+            //     while (node != null && !(node instanceof AnchorPane)) {
+            //         node = node.getParent();
+            //     }
+            //     ((AnchorPane)node.getParent()).getChildren().removeAll();
+            //     ((AnchorPane)node.getParent()).getChildren().setAll(rootPane);
+    }
     public void reviewsButton(ActionEvent event)
     {
         try {
@@ -247,6 +242,5 @@ public class DoctorDetailsController implements Initializable{
         } catch (Exception e) {
             e.printStackTrace();
         }
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
     }
 }

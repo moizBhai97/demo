@@ -59,7 +59,6 @@
     -fx-text-fill: #2854C3;
 }
 
-<<<<<<< HEAD
 .sort_btn:hover{
     -fx-background-color: #2854C3;
       -fx-text-fill: #ffffff;
@@ -75,8 +74,6 @@
     
 }
 
-=======
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
 .sort_btn_selected{
     -fx-background-color: #2854C3;
     -fx-border-color: #2854C3;
@@ -167,7 +164,6 @@
     -fx-background-radius: 4px;
     -fx-border-style: solid;
 
-<<<<<<< HEAD
 
 }
 
@@ -193,6 +189,4 @@
 }
 .dashboardBtn:hover .text {
   -fx-text-fill: #2854C3;
-=======
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
 }
