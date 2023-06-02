@@ -58,7 +58,6 @@ public class PatientController {
     {
         Patient patient = patientLedger.getPatient(patId);
 
-        System.out.println(patient.getHistory());
         return patient.getHistory();
     }
 

@@ -73,7 +73,7 @@ public class UpdatePatientProfileController implements Initializable{
         number = tf_number.getText();
         gender = tf_gender.getText();
 
-        patientController.getPatientHistory(patId);
+        // patientController.getPatientHistory(patId);
 
     }
 

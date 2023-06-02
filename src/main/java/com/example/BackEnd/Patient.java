@@ -145,7 +145,7 @@ public class Patient {
     {
         try{
 
-            System.out.println("Patient getHistory");
+            //System.out.println("Patient getHistory");
             setHistory();
             
             JSONArray jsonArray = new JSONArray();
@@ -157,7 +157,7 @@ public class Patient {
                 jsonArray.put(obj);
             }
             
-
+            //System.out.println(jsonArray.toString());
             return jsonArray.toString();
         }
         catch(Exception e)

@@ -22,4 +22,15 @@ public class PatientHistory {
         this.type = obj.getString("type");
         this.description = obj.getString("description");
     }
+
+    @Override
+    public String toString()
+    {
+        JSONObject obj = new JSONObject();
+
+        obj.put("type", type);
+        obj.put("description", description);
+
+        return obj.toString();
+    }
 }
