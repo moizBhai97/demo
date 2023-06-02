@@ -17,15 +17,15 @@ public class PatientLedger {
         patientList = new ArrayList<Patient>();
 
         // testing
-        Patient patient = new Patient(1);
-        patient.setName("Musa");
-        patient.setEmail("musa@gmail.com");
-        patient.setDOB("12/12/1999");
-        patient.setCountry("Pakistan");
-        patient.setPhoneNumber("123456789");
-        patient.setGender("Male");
+        // Patient patient = new Patient(1);
+        // patient.setName("Musa");
+        // patient.setEmail("musa@gmail.com");
+        // patient.setDOB("12/12/1999");
+        // patient.setCountry("Pakistan");
+        // patient.setPhoneNumber("123456789");
+        // patient.setGender("Male");
 
-        patientList.add(patient); 
+        // patientList.add(patient); 
 
     }
 

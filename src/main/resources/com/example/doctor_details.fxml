@@ -243,7 +243,7 @@
                            </font>
                         </Label>
                         <Label layoutX="35.0" layoutY="72.0" text="Reviews" />
-                        <Button fx:id="reviewButton" layoutX="5.0" layoutY="8.0" mnemonicParsing="false" opacity="0.0" prefHeight="79.0" prefWidth="103.0" styleClass="inner_big_pane3" stylesheets="@doctor_details.css" text="Button" />
+                        <Button fx:id="reviewsBtn" layoutX="5.0" layoutY="8.0" mnemonicParsing="false" onAction="#reviewsButton" opacity="0.0" prefHeight="79.0" prefWidth="103.0" styleClass="inner_big_pane3" stylesheets="@doctor_details.css" text="Button" />
                      </children>
                   </Pane>
                   <Pane fx:id="inner_big_pane3" layoutX="24.0" layoutY="257.0" prefHeight="279.0" prefWidth="624.0" styleClass="inner_big_pane3" stylesheets="@doctor_details.css">

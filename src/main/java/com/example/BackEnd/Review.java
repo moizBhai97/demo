@@ -14,6 +14,7 @@ public class Review {
     private float checkupRating;
     private float environmentRating;
     private float staffRating;
+    private int patId;
 
     public Review()
     {
@@ -23,9 +24,10 @@ public class Review {
         checkupRating = 0;
         environmentRating = 0;
         staffRating = 0;
+        patId = 0;
     }
 
-    public Review(float experience, String comment, Boolean recommend, float checkupRating, float environmentRating, float clinicRating)
+    public Review(float experience, String comment, Boolean recommend, float checkupRating, float environmentRating, float clinicRating, int patId)
     {
         this.experience = experience;
         this.comment = comment;
@@ -33,6 +35,7 @@ public class Review {
         this.checkupRating = checkupRating;
         this.environmentRating = environmentRating;
         this.staffRating = clinicRating;
+        this.patId = patId;
     }
 
     public Review(String info)
@@ -44,6 +47,7 @@ public class Review {
         checkupRating = obj.getFloat("checkupRating");
         environmentRating = obj.getFloat("environmentRating");
         staffRating = obj.getFloat("staffRating");
+        patId = obj.getInt("patId");
     }
 
     public float getExperience() {
@@ -76,6 +80,8 @@ public class Review {
             return String.valueOf(environmentRating);
         else if(value.equals("staffRating"))
             return String.valueOf(staffRating);
+        else if(value.equals("patId"))
+            return String.valueOf(patId);
         else
             return "NULL";
     }

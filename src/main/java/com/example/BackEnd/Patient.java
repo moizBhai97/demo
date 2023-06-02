@@ -17,11 +17,7 @@ public class Patient {
     private String DOB; 
     private String country; 
     private String phoneNumber; 
-    private String gender; 
-    public String getName() {
-        return name;
-    }
-
+    private String gender;
     
     private AppointmentLedger appointmentLedger;
     private List<PatientHistory> patientHistoryList;
@@ -35,6 +31,12 @@ public class Patient {
     {
         this.patId = patId;
         appointmentLedger = new AppointmentLedger();
+    }
+
+    public String getName()
+    {
+        System.out.println("Patient name: " + name);
+        return name;
     }
 
     public Patient(String info)
