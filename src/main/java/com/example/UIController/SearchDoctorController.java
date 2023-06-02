@@ -343,12 +343,12 @@ public class SearchDoctorController implements Initializable {
         imageView.setEffect(new InnerShadow(100, Color.web("#2854c3")));
         searchBtn.setStyle("-fx-text-fill: #2854c3;");
 
-        results_grid = new GridPane();
+        //results_grid = new GridPane();
         results_flowpane = new FlowPane();
 
         // patientController = new PatientController();
-        results_grid.setHgap(10);
-        results_grid.setVgap(10);
+        //results_grid.setHgap(10);
+        //results_grid.setVgap(10);
 
         results_flowpane.setHgap(10);
         results_flowpane.setVgap(10);
@@ -380,7 +380,7 @@ public class SearchDoctorController implements Initializable {
         System.out.println(patId);
     }
 
-    GridPane results_grid;
+    //GridPane results_grid;
 
     public void setPatientController(PatientController patientController) {
         this.patientController = patientController;
@@ -388,19 +388,16 @@ public class SearchDoctorController implements Initializable {
 
     public void refresh() {
 
-<<<<<<< HEAD
         patientController = new PatientController();
 
         // esults_grid.setHgap(10);
         // results_grid.setVgap(10);
         // results_grid.getChildren().clear();
-=======
         //patientController = new PatientController();
         
         //esults_grid.setHgap(10);
         //results_grid.setVgap(10);
         //results_grid.getChildren().clear();
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
         results_scrollpane.getChildrenUnmodifiable().clear();
         // set padding
         // results_grid.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
@@ -410,7 +407,7 @@ public class SearchDoctorController implements Initializable {
         results_flowpane.setStyle("-fx-background-color: transparent;");
 
         createDoctorCards(patientController.getTopDoctors());
-        results_scrollpane.setContent(results_grid);
+        results_scrollpane.setContent(results_flowpane);
         doc_count.setText("Top Doctors");
 
     }

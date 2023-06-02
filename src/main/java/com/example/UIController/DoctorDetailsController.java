@@ -87,18 +87,15 @@ public class DoctorDetailsController implements Initializable{
     @FXML
     private Button bookButton;
 
-<<<<<<< HEAD
     private AnchorPane rootPane;
 
     @FXML
     private AnchorPane parentPane;
-=======
     @FXML
     private Button reviewsBtn;
 
     @FXML
     private Hyperlink certificateBtn;
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
@@ -173,7 +170,6 @@ public class DoctorDetailsController implements Initializable{
         }
     }
 
-<<<<<<< HEAD
     public void backBtnPressed(ActionEvent event){
         rootPane.setVisible(true);
     AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
@@ -187,7 +183,8 @@ public class DoctorDetailsController implements Initializable{
         //     }
         //     ((AnchorPane)node.getParent()).getChildren().removeAll();
         //     ((AnchorPane)node.getParent()).getChildren().setAll(rootPane);
-=======
+    }
+    
     public void reviewsButton(ActionEvent event)
     {
         try {
@@ -242,6 +239,5 @@ public class DoctorDetailsController implements Initializable{
         } catch (Exception e) {
             e.printStackTrace();
         }
->>>>>>> 6b7e8930bd684355c86943773e8b9282a62df2d4
     }
 }
