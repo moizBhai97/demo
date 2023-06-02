@@ -54,6 +54,11 @@ public class PatientController {
 
     }
 
+    public void addIllness(int patId, String info)
+    {
+        patientLedger.getPatient(patId).addIllness(patId, info);
+    }
+
     public String getPatientHistory(int patId)
     {
         Patient patient = patientLedger.getPatient(patId);

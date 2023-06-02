@@ -46,9 +46,9 @@ public class Patient {
         this.name = obj.getString("name");
         this.email = obj.getString("email");
         this.DOB = obj.getString("DOB");
+        this.country = obj.getString("country");
         this.phoneNumber = obj.getString("phoneNumber");
         this.gender = obj.getString("gender");
-        this.country = obj.getString("country");
     }
 
     public int getpatId()
@@ -257,6 +257,11 @@ public class Patient {
         return obj.toString();
     }
 
+    public void addIllness(int patId, String info)
+    {
+        DBFactory.getInstance().createHandler("SQL").addPatientIllness(patId, info);
+    }
+
     public String get(String value)
     {
         if(value.equals("patId"))
@@ -270,6 +275,9 @@ public class Patient {
         
         else if(value.equals("DOB"))
             return DOB;
+
+        else if(value.equals("country"))
+            return country;
 
         else if(value.equals("phoneNumber"))
             return phoneNumber;

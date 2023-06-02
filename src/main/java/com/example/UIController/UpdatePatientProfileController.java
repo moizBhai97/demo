@@ -3,6 +3,7 @@ package com.example.UIController;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.example.BackEnd.Patient;
@@ -10,17 +11,27 @@ import com.example.BackEnd.PatientController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class UpdatePatientProfileController implements Initializable{
 
     @FXML
-    private Button btn_add1;
+    private Button add;
+    @FXML
+    private AnchorPane addPane;
+    @FXML
+    private Label addIndex;
     @FXML
     private Button btn_remove1;
     @FXML
@@ -29,7 +40,8 @@ public class UpdatePatientProfileController implements Initializable{
     private Button btn_updateProfile;
     @FXML
     private Button button_back;
-
+    @FXML
+    private FlowPane flowPane;
     @FXML
     private TextField tf_country;
     @FXML
@@ -50,8 +62,11 @@ public class UpdatePatientProfileController implements Initializable{
     private String number;
     private String username;
     
+    JSONArray history;
+
     int patId = 1;
     PatientController patientController = new PatientController();
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -73,12 +88,82 @@ public class UpdatePatientProfileController implements Initializable{
         number = tf_number.getText();
         gender = tf_gender.getText();
 
-        // patientController.getPatientHistory(patId);
+        history = new JSONArray(patientController.getPatientHistory(patId));
+        
+        refresh();
+    }
 
+    public void refresh()
+    {
+        flowPane.getChildren().clear();
+        for(int i = 0; i < history.length(); i++)
+        {
+            //add in table
+            JSONObject obj = history.getJSONObject(i);
+            try{
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation((new URL("file:src/main/resources/com/example/patientRecordCard.fxml")));
+                PatientRecordCardController patientRecordCardController = new PatientRecordCardController();
+                patientRecordCardController.setData(patId, i+1, obj.toString(), history);
+                loader.setController(patientRecordCardController);
+                AnchorPane aPane = loader.load();
+                flowPane.getChildren().add(aPane);
+                addIndex.setText(i+2 + ". ");
+            }
+            catch(Exception e)
+            {
+                System.out.println(e);
+            }
+        }
+        flowPane.getChildren().add(addPane);
     }
 
     @FXML
-    void updateProfile(ActionEvent event) {
+    public void addIllness(ActionEvent event)
+    {
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/addRecordPopup.fxml")));
+
+            UpdatePatientProfile2Controller updatePatientProfile2Controller = new UpdatePatientProfile2Controller();
+            updatePatientProfile2Controller.setData(patId, history);
+
+            loader.setController(updatePatientProfile2Controller);
+
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+
+            stage.setOnHidden(e-> {
+
+                try{
+                    refresh();
+                    //flowPane.getChildren().remove(flowPane.getChildren().size() - 1);
+                    // FXMLLoader loader2 = new FXMLLoader();
+                    // loader2.setLocation((new URL("file:src/main/resources/com/example/patientRecordCard.fxml")));
+                    // PatientRecordCardController patientRecordCardController = new PatientRecordCardController();
+                    // patientRecordCardController.setData(flowPane.getChildren().size(), history.get(history.length() - 1).toString());
+                    // loader2.setController(patientRecordCardController);
+                    // AnchorPane aPane = loader2.load();
+                    // flowPane.getChildren().set(flowPane.getChildren().size() - 1, aPane);
+                }catch(Exception e2)
+                {
+                    System.out.println(e2);
+                }
+
+            });
+            stage.setScene(scene);
+            stage.show();
+
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    @FXML
+    public void updateProfile(ActionEvent event) {
 
         try{
 

@@ -660,7 +660,7 @@ public class SQL extends DBHandler {
 
             //System.out.println("SQL getPatientHistory");
             
-            String SQL = "SELECT * FROM PATIENT_HISTORY WHERE ID = ?;";
+            String SQL = "SELECT SID, TYPE, DESCRIPTION FROM PATIENT_HISTORY WHERE ID = ?;";
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, patId);
             ResultSet rs = pstmt.executeQuery();
@@ -670,6 +670,7 @@ public class SQL extends DBHandler {
             while(rs.next())
             {
                 JSONObject newObj = new JSONObject();
+                newObj.put("sid", rs.getInt("SID"));
                 newObj.put("type", rs.getString("TYPE"));
                 newObj.put("description", rs.getString("DESCRIPTION"));
 
@@ -984,6 +985,42 @@ public class SQL extends DBHandler {
         catch (SQLException | JSONException e) {
             // con.close();
 
+            e.printStackTrace();
+        }
+    }
+
+    public void addPatientIllness(int patId, String info)
+    {
+        try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement() ){
+            JSONObject obj = new JSONObject(info);
+            String SQL = "INSERT INTO PATIENT_HISTORY (ID, TYPE, DESCRIPTION) VALUES (?, ?, ?);";
+
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, patId);
+            pstmt.setString(2, obj.getString("type"));
+            pstmt.setString(3, obj.getString("description"));
+
+            pstmt.executeUpdate();
+        }
+        catch(SQLException | JSONException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void deletePatientIllness(int patId, int sid)
+    {
+        try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement())
+        {
+            String SQL = "DELETE FROM PATIENT_HISTORY WHERE ID = ? AND SID = ?;";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, patId);
+            pstmt.setInt(2, sid);
+
+            pstmt.executeUpdate();
+        }
+        catch(SQLException e)
+        {
             e.printStackTrace();
         }
     }
