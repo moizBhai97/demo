@@ -45,6 +45,9 @@ public class CertificateController implements Initializable{
     private VBox certificate;
 
     @FXML
+    private Button closeBtn;
+
+    @FXML
     private TableView<JSONObject> table;
 
     public void setData(PatientController pc, DoctorController dc, int docId)
@@ -119,5 +122,11 @@ public class CertificateController implements Initializable{
             System.out.println(e);
             e.printStackTrace();
         }
+    }
+
+    public void closeButton(ActionEvent event)
+    {
+        Stage stage = (Stage) closeBtn.getScene().getWindow();
+        stage.close();
     }
 }

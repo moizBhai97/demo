@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
@@ -30,21 +31,33 @@ public class ReportController  implements Initializable
     @FXML
     private Button reportBtn;
 
+    @FXML
+    private Label patName;
+
+    @FXML
+    private Label patGender;
+
     DoctorController dc;
     int patId;
     int docId;
+    String gender;
+    String name;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
     {
+        patName.setText(name);
+        patGender.setText(gender);
         reason.setWrapText(true);
     }
     
-    public void setData(DoctorController dc, int patId, int docId)
+    public void setData(DoctorController dc, int patId, int docId, String patName, String patGender)
     {
         this.dc = dc;
         this.patId = patId;
         this.docId = docId;
+        this.gender = patGender;
+        this.name = patName;
     }
 
     public void reportButton(ActionEvent event) 

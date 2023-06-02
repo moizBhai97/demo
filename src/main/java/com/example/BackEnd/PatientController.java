@@ -140,6 +140,8 @@ public class PatientController {
 
         obj.put("doctor", new JSONObject(doctorLedger.getDoctor(obj.getInt("docId")).getDetails()));
 
+        obj.put("patient", new JSONObject(patientLedger.getPatient(patId).getDetails()));
+
         return obj.toString();
     }
 
@@ -184,14 +186,23 @@ public class PatientController {
     {
         try
         {
-            JSONArray obj = new JSONArray(doctorLedger.getDoctor(docId).getDoctorDetails().getReviewList(docId));
-            
-            for(int i=0; i<obj.length(); i++)
+            JSONArray arr= new JSONArray(doctorLedger.getDoctor(docId).getDoctorDetails().getReviewList(docId));
+
+            for(int i=0; i<arr.length(); i++)
             {
-                obj.getJSONObject(i).put("name", patientLedger.getPatient(obj.getJSONObject(i).getInt("patId")).getName());
+                int patId = arr.getJSONObject(i).getInt("patId");
+                if(patientLedger.getPatient(patId) == null)
+                {
+                    patientLedger.setPatient(patId);
+                    arr.getJSONObject(i).put("name", patientLedger.getPatient(patId).getName());
+                    continue;
+                }
+
+                arr.getJSONObject(i).put("name", patientLedger.getPatient(patId).getName());
+
             }
 
-            return obj.toString();
+            return arr.toString();
         }
         catch(Exception e)
         {

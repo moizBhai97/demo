@@ -29,14 +29,58 @@ public class SQL extends DBHandler {
         musa = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;";
         abdullah = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;";
 
-<<<<<<< HEAD
-        connectionUrl = musa + 
-=======
-        connectionUrl = abdullah + 
->>>>>>> 111ccf957a8557031934701f31c688de5f97c967
+        connectionUrl = moiz + 
                         "databaseName=SDA;" + 
                         "IntegratedSecurity=true;" + 
                         "encrypt=true;trustServerCertificate=true";
+    }
+
+    public String getDoctorName(int docId)
+    {
+        try (Connection con = DriverManager.getConnection(connectionUrl)) 
+        {
+            String SQL = "SELECT NAME FROM Doctors WHERE ID = ?;";
+
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+
+            pstmt.setInt(1, docId);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            rs.next();
+
+            return rs.getString("NAME");
+        } 
+        catch (Exception e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String getPatientName(int patId)
+    {
+        try (Connection con = DriverManager.getConnection(connectionUrl)) 
+        {
+            String SQL = "SELECT NAME FROM Patients WHERE ID = ?;";
+
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+
+            pstmt.setInt(1, patId);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            rs.next();
+
+            return rs.getString("NAME");
+        } 
+        catch (Exception e) 
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
+            return null;
+        }
     }
 
   

@@ -25,4 +25,6 @@ abstract public class DBHandler {
   public abstract void deletePatientIllness(int patId, int sid);
   public abstract void updatePatientProfile(int patId, String info);
   public abstract String getSchedule(int docId, String date);
+  public abstract String getDoctorName(int docId);
+  public abstract String getPatientName(int patId);
 }

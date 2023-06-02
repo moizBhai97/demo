@@ -39,7 +39,6 @@ public class PendingAppointmentPatientCard {
 
     int appointID;
     DoctorController dc;
-    int patId;
     int docId;
 
     public void setDoctor(String name, String date, String timing) {
@@ -51,7 +50,6 @@ public class PendingAppointmentPatientCard {
     public void setCard(String result){
         JSONObject  jsonObject = new JSONObject(result);
         patName.setText(jsonObject.getString("name"));
-        docId = jsonObject.getInt("docId");
         date.setText(jsonObject.getString("date"));
         appointID = jsonObject.getInt("appId");
         LocalTime startTime = LocalTime.parse(jsonObject.getString("time"));
@@ -78,7 +76,7 @@ public class PendingAppointmentPatientCard {
             
             AppointmentControllerDoctor appointmentControllerDoctor = new AppointmentControllerDoctor();
 
-            appointmentControllerDoctor.setData(dc, patId, appointID, docId);
+            appointmentControllerDoctor.setData(dc, appointID, docId);
             
             loader.setController(appointmentControllerDoctor);
             

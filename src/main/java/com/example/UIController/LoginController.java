@@ -39,13 +39,20 @@ public class LoginController implements Initializable{
     SearchDoctorController searchDoctorController;
 
     DoctorController doctorController = new DoctorController();
-    DoctorDetailsController doctorDetailsController;
+
+    DoctorDetailsControllerDoctor doctorDetailsController;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // TODO Auto-generated method stub
+        if(isPatient){
         emailTextField.setText("ali.ahmed@example.com");
         passwordTextField.setText("password123");
+        }
+        else if(!isPatient){
+            emailTextField.setText("dr.asim@example.com");
+            passwordTextField.setText("drpassword123");
+        }
         // /loginButton.fire();
         return;
     }
@@ -101,11 +108,11 @@ public class LoginController implements Initializable{
             this.loginButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/doctor_details.fxml")));
+            loader.setLocation((new URL("file:src/main/resources/com/example/doctor_detailsDoctor.fxml")));
             
-            doctorDetailsController = new DoctorDetailsController();
+            doctorDetailsController = new DoctorDetailsControllerDoctor();
             
-            //doctorDetailsController.setData(doctorController, docId);
+            doctorDetailsController.setData(doctorController, docId);
             loader.setController(doctorDetailsController);
             
             Parent root = loader.load();
@@ -116,42 +123,11 @@ public class LoginController implements Initializable{
             
             } catch (IOException e) {
                 System.err.println(String.format("Error: %s", e.getMessage()));
+                e.printStackTrace();
             }
 
         }
         
-
-
-
-
-
-
-        /*              pass data between screens
-        try {
-            this.loginButton.getScene().getWindow().hide();
-
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/dummyScreen.fxml")));
-            
-            //-------------------------------------------------------------------------------------------------//
-            dummyController = new DummyController();
-            
-            int dummyPatId = 1;
-            dummyController.setData(patientController, dummyPatId);
-            loader.setController(dummyController);
-            //-------------------------------------------------------------------------------------------------//
-            
-            Parent root = loader.load();
-            //stage.setUserData(patientInfo);
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-            
-        } catch (IOException e) {
-            System.err.println(String.format("Error: %s", e.getMessage()));
-        }
-        */
     }
 
     public void signupHyperlink(ActionEvent event){
