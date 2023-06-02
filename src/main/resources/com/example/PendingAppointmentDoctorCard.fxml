@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.Color?>
 
-<Pane fx:id="card1" prefHeight="103.0" prefWidth="260.0" styleClass="doc_pane" stylesheets="@manageAppointment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.PendingAppointmentDoctorCard">
+<Pane fx:id="card1" styleClass="doc_pane" stylesheets="@manageAppointment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.PendingAppointmentDoctorCard">
    <children>
       <Label fx:id="doctorName" layoutX="89.0" layoutY="15.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Dr. Faiza M" />
       <Label fx:id="timing" layoutX="89.0" layoutY="45.0" style="-fx-font-size: 10; -fx-text-fill: #8C8FA5;" text="09:30 am - 10:30 pm" />
@@ -40,6 +40,6 @@
          </effect>
       </ImageView>
       <Label fx:id="date" layoutX="89.0" layoutY="30.0" style="-fx-font-size: 10; -fx-text-fill: #8C8FA5;" text="Mon 25, April" />
-      <Label fx:id="Status" layoutX="116.0" layoutY="83.0" style="-fx-font-size: 10; -fx-text-fill: #8C8FA5;" text="Booked" />
+      <Label fx:id="Status" layoutX="112.0" layoutY="80.0" style="-fx-font-size: 10; -fx-text-fill: #8C8FA5;" text="Completed" />
    </children>
 </Pane>

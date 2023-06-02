@@ -66,12 +66,6 @@ public class SearchDoctorController implements Initializable {
     private Button filter_btn;
 
     @FXML
-    private Button home_btn;
-
-    @FXML
-    private Button logout_btn;
-
-    @FXML
     private Button price_sort_btn;
 
     @FXML
@@ -91,12 +85,6 @@ public class SearchDoctorController implements Initializable {
 
     @FXML
     private Pane searchPane;
-
-    @FXML
-    private Button search_btn;
-
-    @FXML
-    private Button settings_btn;
 
     @FXML
     private AnchorPane side_anchor;
@@ -191,13 +179,15 @@ public class SearchDoctorController implements Initializable {
     private Button searchBtn;
 
     @FXML
-    private Button appointmentsBtn;
+    private Button appointmentBtn;
 
     @FXML
     private Button settingsBtn;
 
     @FXML
     private Button logoutBtn;
+
+    private Button selectedDashbordBtn;
 
     @FXML
     public void filter_toggle(ActionEvent event) {
@@ -338,15 +328,27 @@ public class SearchDoctorController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+<<<<<<< HEAD
         ImageView imageView = (ImageView) searchBtn.getGraphic();
         imageView.setEffect(new InnerShadow(100, Color.web("#2854c3")));
         searchBtn.setStyle("-fx-text-fill: #2854c3;");
 
+=======
+        ImageView imageView = null;
+        if (searchBtn != null) {
+            imageView = (ImageView) searchBtn.getGraphic();
+            imageView.setEffect(new InnerShadow(100, Color.web("#2854c3")));
+            searchBtn.setStyle("-fx-text-fill: #2854c3;");
+        }
+        // results_grid = new GridPane();
+
+        selectedDashbordBtn = searchBtn;
+>>>>>>> 376907a92e74ebe204b154fb4db66a29b49d04fb
         results_flowpane = new FlowPane();
 
         // patientController = new PatientController();
-        //results_grid.setHgap(10);
-        //results_grid.setVgap(10);
+        // results_grid.setHgap(10);
+        // results_grid.setVgap(10);
 
         results_flowpane.setHgap(10);
         results_flowpane.setVgap(10);
@@ -378,8 +380,11 @@ public class SearchDoctorController implements Initializable {
         System.out.println(patId);
     }
 
+<<<<<<< HEAD
     //GridPane results_grid;
 
+=======
+>>>>>>> 376907a92e74ebe204b154fb4db66a29b49d04fb
     public void setPatientController(PatientController patientController) {
         this.patientController = patientController;
     }
@@ -389,11 +394,19 @@ public class SearchDoctorController implements Initializable {
         // esults_grid.setHgap(10);
         // results_grid.setVgap(10);
         // results_grid.getChildren().clear();
+<<<<<<< HEAD
         //patientController = new PatientController();
         
         //esults_grid.setHgap(10);
         //results_grid.setVgap(10);
         //results_grid.getChildren().clear();
+=======
+        // patientController = new PatientController();
+
+        // esults_grid.setHgap(10);
+        // results_grid.setVgap(10);
+        // results_grid.getChildren().clear();
+>>>>>>> 376907a92e74ebe204b154fb4db66a29b49d04fb
         results_scrollpane.getChildrenUnmodifiable().clear();
         // set padding
         results_flowpane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
@@ -501,18 +514,73 @@ public class SearchDoctorController implements Initializable {
     @FXML
     Button backBtn;
 
+    public void resetDashboardButtons() {
+        searchBtn.setStyle("-fx-text-fill: #979797");
+        searchBtn.getGraphic().setEffect(null);
+        appointmentBtn.setStyle("-fx-text-fill: #979797");
+        appointmentBtn.getGraphic().setEffect(null);
+        logoutBtn.setStyle("-fx-text-fill: #979797");
+        logoutBtn.getGraphic().setEffect(null);
+        settingsBtn.setStyle("-fx-text-fill: #979797");
+        settingsBtn.getGraphic().setEffect(null);
 
-    public void appointmentBtnPressed(ActionEvent event){
-        //open manage appointments
+        // homeBtn.setStyle("-fx-text-fill: #979797");
+        // profileBtn.setStyle("-fx-text-fill: #979797");
+
+    }
+
+    public void searchBtnPressed(ActionEvent event) {
+        // open search
         try {
+            if (selectedDashbordBtn == searchBtn) {
+                return;
+            }
+
+            selectedDashbordBtn = searchBtn;
+            resetDashboardButtons();
+            ImageView imageView = (ImageView) searchBtn.getGraphic();
+            imageView.setEffect(new InnerShadow(100, Color.web("#2854c3")));
+            searchBtn.setStyle("-fx-text-fill: #2854c3;");
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/ManageAppointment.fxml")));
-            ManageAppointmentController controller =new ManageAppointmentController();
-            controller.setData(patientController, 1);
+            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
+            SearchDoctorController controller = new SearchDoctorController();
+            controller.setData(patientController, patId);
             loader.setController(controller);
             AnchorPane root = loader.load();
-           rootPane.getChildren().clear();
-              rootPane.getChildren().add(root);
+            AnchorPane.setTopAnchor(root, 0.0);
+            AnchorPane.setBottomAnchor(root, 0.0);
+            AnchorPane.setLeftAnchor(root, 0.0);
+            AnchorPane.setRightAnchor(root, 0.0);
+            rootPane.getChildren().setAll(root);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void appointmentBtnPressed(ActionEvent event) {
+        // open manage appointments
+        try {
+            if (selectedDashbordBtn == appointmentBtn) {
+                return;
+            }
+
+            selectedDashbordBtn = appointmentBtn;
+            resetDashboardButtons();
+            ImageView imageView = (ImageView) appointmentBtn.getGraphic();
+            imageView.setEffect(new InnerShadow(100, Color.web("#2854c3")));
+            appointmentBtn.setStyle("-fx-text-fill: #2854c3;");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/ManageAppointment.fxml")));
+            ManageAppointmentController controller = new ManageAppointmentController();
+            controller.setData(patientController, patId);
+            loader.setController(controller);
+            AnchorPane root = loader.load();
+            AnchorPane.setTopAnchor(root, 0.0);
+            AnchorPane.setBottomAnchor(root, 0.0);
+            AnchorPane.setLeftAnchor(root, 0.0);
+            AnchorPane.setRightAnchor(root, 0.0);
+            rootPane.getChildren().clear();
+            rootPane.getChildren().add(root);
 
         } catch (Exception e) {
             e.printStackTrace();

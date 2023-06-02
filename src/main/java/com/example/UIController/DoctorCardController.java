@@ -133,29 +133,20 @@ public class DoctorCardController {
 
             doctorDetailsController.setData(patientController, doctorId, patientId, prevPane);
             loader.setController(doctorDetailsController);
-            Node node = (Node) event.getSource();
 
             AnchorPane anchorPane = (AnchorPane) prevPane.getParent();
             prevPane.setVisible(false);
-            // anchorPane.getChildren().get(0).setVisible(false);;
             AnchorPane childPane = loader.load();
-            childPane.setTopAnchor(childPane, 0.0);
-            childPane.setBottomAnchor(childPane, 0.0);
-            childPane.setLeftAnchor(childPane, 0.0);
-            childPane.setRightAnchor(childPane, 0.0);
+            // childPane.setTopAnchor(childPane, 0.0);
+            // childPane.setBottomAnchor(childPane, 0.0);
+            // childPane.setLeftAnchor(childPane, 0.0);
+            // childPane.setRightAnchor(childPane, 0.0);
             anchorPane.getChildren().add(childPane);
-            // center
             AnchorPane.setTopAnchor(childPane, 0.0);
             AnchorPane.setBottomAnchor(childPane, 0.0);
             AnchorPane.setLeftAnchor(childPane, 0.0);
             AnchorPane.setRightAnchor(childPane, 0.0);
 
-
-            // Parent root = loader.load();
-            // Scene scene = new Scene(root);
-            // Stage stage = new Stage();
-            // stage.setScene(scene);
-            // stage.show();
 
         } catch (Exception e) {
             e.printStackTrace();

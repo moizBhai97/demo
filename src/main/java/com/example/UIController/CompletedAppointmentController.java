@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class CompletedAppointmentController  implements Initializable
@@ -56,6 +57,8 @@ public class CompletedAppointmentController  implements Initializable
     @FXML
     private Label timing;
 
+    private AnchorPane prevPane;
+
     PatientController pc;
     int patId;
     int appID;
@@ -91,25 +94,49 @@ public class CompletedAppointmentController  implements Initializable
 
     }
     
-    public void setData(PatientController pc, int patId, int appID, int docId)
+    public void setData(PatientController pc, int patId, int appID, int docId, AnchorPane prevPane)
     {
         this.docId = docId;
         this.pc = pc;
         this.patId = patId;
         this.appID = appID;
+        this.prevPane = prevPane;
     }
+    
+    public void backBtnPressed(ActionEvent event){
+        prevPane.setVisible(true);
+    AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
+    //remove last 
+    mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
 
+       // mainParentPane.getChildren().add(rootPane);
+        //   Node node = (Node)event.getSource();
+        //     while (node != null && !(node instanceof AnchorPane)) {
+        //         node = node.getParent();
+        //     }
+        //     ((AnchorPane)node.getParent()).getChildren().removeAll();
+        //     ((AnchorPane)node.getParent()).getChildren().setAll(rootPane);
+    }
     public void writeButton(ActionEvent event)
     {
         try
         {
-            // FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/UI/writeReview.fxml"));
-            // Parent root = loader.load();
-            // WriteReviewController wrc = loader.getController();
-            // wrc.setData(pc, patId, docId);
-            // Stage stage = new Stage();
-            // stage.setScene(new Scene(root));
-            // stage.show();
+            
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(
+                        (new URL("file:src/main/resources/com/example/PendingAppointmentDoctorCard.fxml")));
+
+            WriteReviewController controller = new WriteReviewController();
+            controller.setData(pc, patId, docId, prevPane);
+            fxmlLoader.setController(controller);
+             AnchorPane pane = fxmlLoader.load();
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+            // rootPane.setVisible(false);
+            ((AnchorPane) prevPane.getParent()).getChildren().clear();
+            ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
         }
         catch(Exception e)
         {
