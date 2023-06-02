@@ -23,6 +23,10 @@ public class PatientController {
             doctorLedger.setAppointmentDoctors(patient.getpatId());
             doctorLedger.setTopDoctors();
 
+            System.out.println("Patient controller login success");
+
+            System.out.println("Login: " + patient.toString());
+
             return "" + (patient.getpatId());
             
         }catch (Exception e) {
@@ -156,7 +160,14 @@ public class PatientController {
     {
         try
         {
-            return doctorLedger.getDoctor(docId).getDoctorDetails().getReviewList(docId);
+            JSONArray obj = new JSONArray(doctorLedger.getDoctor(docId).getDoctorDetails().getReviewList(docId));
+            
+            for(int i=0; i<obj.length(); i++)
+            {
+                obj.getJSONObject(i).put("name", patientLedger.getPatient(obj.getJSONObject(i).getInt("patId")).getName());
+            }
+
+            return obj.toString();
         }
         catch(Exception e)
         {

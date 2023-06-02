@@ -24,8 +24,8 @@ public class SQL extends DBHandler {
 
     public SQL() {
 
-        connectionUrl = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;" +
-         //connectionUrl = "jdbc:sqlserver://MOIZ-KHAN;" +
+        //connectionUrl = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;" +
+        connectionUrl = "jdbc:sqlserver://MOIZ-KHAN;" +
                         "databaseName=SDA;" +
                         "IntegratedSecurity=true" + ";encrypt=true;trustServerCertificate=true";
     }
@@ -150,6 +150,7 @@ public class SQL extends DBHandler {
                 newObj.put("checkupRating", rs.getFloat("CHECKUPRATING"));
                 newObj.put("environmentRating", rs.getFloat("ENVIRONMENTRATING"));
                 newObj.put("staffRating", rs.getFloat("STAFFRATING"));
+                newObj.put("patId", rs.getInt("PATIENT_ID"));
 
                 reviews.put(newObj);
             }

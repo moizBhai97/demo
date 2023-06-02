@@ -91,6 +91,8 @@ public class ReviewLedger {
         obj.put("stats", stats*(100/5));
         obj.put("reviews", reviews.size());
 
+        System.out.println(obj.toString());
+
         return obj.toString();
     }
 

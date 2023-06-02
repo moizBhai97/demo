@@ -84,6 +84,9 @@ public class DoctorDetailsController implements Initializable{
     @FXML
     private Button bookButton;
 
+    @FXML
+    private Button reviewsBtn;
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
     {
@@ -142,6 +145,35 @@ public class DoctorDetailsController implements Initializable{
             bookAppointmentController.setData(pc, docId, patId, fee.getText(), name.getText());
 
             loader.setController(bookAppointmentController);
+            //-------------------------------------------------------------------------------------------------//
+            
+            Parent root = loader.load();
+            //stage.setUserData(patientInfo);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void reviewsButton(ActionEvent event)
+    {
+        try {
+            this.reviewsBtn.getScene().getWindow().hide();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/manageReview.fxml")));
+            
+            //-------------------------------------------------------------------------------------------------//
+            ManageReviewController reviewsController = new ManageReviewController();
+
+            System.out.println("DocId: " + docId);
+            reviewsController.setData(pc, patId, docId);
+
+            loader.setController(reviewsController);
             //-------------------------------------------------------------------------------------------------//
             
             Parent root = loader.load();

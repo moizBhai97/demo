@@ -357,7 +357,7 @@ public class SearchDoctorController implements Initializable
 
     public void refresh() {
 
-        patientController = new PatientController();
+        //patientController = new PatientController();
         
         //esults_grid.setHgap(10);
         //results_grid.setVgap(10);

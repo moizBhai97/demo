@@ -15,7 +15,6 @@ public class PatientLedger {
     {
         dbFactory = DBFactory.getInstance();
         patientList = new ArrayList<Patient>();
-        patientList.add(new Patient(1)); // for testing
     }
 
     public void setAppointmentPatients(int docId)

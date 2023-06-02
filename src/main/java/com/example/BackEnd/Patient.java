@@ -27,6 +27,12 @@ public class Patient {
         appointmentLedger = new AppointmentLedger();
     }
 
+    public String getName()
+    {
+        System.out.println("Patient name: " + name);
+        return name;
+    }
+
     public Patient(String info)
     {
         JSONObject obj = new JSONObject(info);
