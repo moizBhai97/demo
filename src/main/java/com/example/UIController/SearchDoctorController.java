@@ -328,6 +328,7 @@ public class SearchDoctorController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
         ImageView imageView = null;
         if (searchBtn != null) {
             imageView = (ImageView) searchBtn.getGraphic();
@@ -373,6 +374,8 @@ public class SearchDoctorController implements Initializable {
         System.out.println(patId);
     }
 
+    //GridPane results_grid;
+
     public void setPatientController(PatientController patientController) {
         this.patientController = patientController;
     }
@@ -382,6 +385,11 @@ public class SearchDoctorController implements Initializable {
         // esults_grid.setHgap(10);
         // results_grid.setVgap(10);
         // results_grid.getChildren().clear();
+        //patientController = new PatientController();
+        
+        //esults_grid.setHgap(10);
+        //results_grid.setVgap(10);
+        //results_grid.getChildren().clear();
         // patientController = new PatientController();
 
         // esults_grid.setHgap(10);

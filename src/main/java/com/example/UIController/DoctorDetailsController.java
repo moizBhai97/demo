@@ -197,6 +197,7 @@ public class DoctorDetailsController implements Initializable{
             //     ((AnchorPane)node.getParent()).getChildren().removeAll();
             //     ((AnchorPane)node.getParent()).getChildren().setAll(rootPane);
     }
+    
     public void reviewsButton(ActionEvent event)
     {
         try {
