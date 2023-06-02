@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -48,6 +49,8 @@ public class PendingAppointmentDoctorCard {
     @FXML
     private Label Status;
 
+    @FXML
+    private AnchorPane rootPane;
     int appointID;
     PatientController pc;
     int patId;
@@ -84,18 +87,19 @@ public class PendingAppointmentDoctorCard {
 
     }
 
-    public void setData(PatientController pc, int patId) 
-    {
+    public void setData(PatientController pc, int patId,AnchorPane rootPane) {
         this.pc = pc;
         this.patId = patId;
+        this.rootPane = rootPane;
     }
+ 
 
     public void viewButton(ActionEvent event) 
     {
         System.out.println("View Button Clicked");
 
         try {
-            this.viewBtn.getScene().getWindow().hide();
+            //this.viewBtn.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             if(!status.equals("Booked"))
@@ -103,7 +107,7 @@ public class PendingAppointmentDoctorCard {
                 loader.setLocation((new URL("file:src/main/resources/com/example/app_detail 2.fxml")));
                 CompletedAppointmentController completedAppointmentController = new CompletedAppointmentController();
 
-                completedAppointmentController.setData(pc, patId, appointID, docId);
+                completedAppointmentController.setData(pc, patId, appointID, docId,rootPane);
                 loader.setController(completedAppointmentController);
             }
             else if(status.equals("Booked"))
@@ -111,19 +115,20 @@ public class PendingAppointmentDoctorCard {
                 loader.setLocation((new URL("file:src/main/resources/com/example/app_detail.fxml")));
                 PendingAppointmentController pendingAppointmentController = new PendingAppointmentController();
 
-                pendingAppointmentController.setData(pc, patId, appointID, docId);
+                pendingAppointmentController.setData(pc, patId, appointID, docId,rootPane);
                 loader.setController(pendingAppointmentController);
             }
             
             //-------------------------------------------------------------------------------------------------//
             //-------------------------------------------------------------------------------------------------//
-            
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-            
+          
+            AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+           // rootPane.setVisible(false);
+           ((AnchorPane)rootPane.getParent()).getChildren().add(pane);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -44,6 +44,9 @@ public class LoginController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // TODO Auto-generated method stub
+        emailTextField.setText("ali.ahmed@example.com");
+        passwordTextField.setText("password123");
+        // /loginButton.fire();
         return;
     }
 
@@ -72,7 +75,7 @@ public class LoginController implements Initializable{
             this.loginButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
+            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors - Copy.fxml")));
             
             searchDoctorController = new SearchDoctorController();
             searchDoctorController.setData(patientController, patId);

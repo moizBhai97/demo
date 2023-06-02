@@ -6,10 +6,12 @@ import org.json.JSONArray;
 
 import com.example.BackEnd.PatientController;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -25,7 +27,7 @@ public class ManageReviewController implements Initializable {
     private PatientController patientController;
     private int patId;
     private int docId;
-
+    private AnchorPane prevPane;
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
 
@@ -36,12 +38,13 @@ public class ManageReviewController implements Initializable {
         fillReviews();
     }
 
-    public void setData(PatientController pc, int patId, int docId) 
+    public void setData(PatientController pc, int patId, int docId, AnchorPane prevPane)
     {
         System.out.println("Rev: " + docId);
         this.docId = docId;
         this.patientController = pc;
         this.patId = patId;
+        this.prevPane = prevPane;
     }
 
     public void fillReviews() {
@@ -79,6 +82,16 @@ public class ManageReviewController implements Initializable {
         String result = patientController.getReviews(docId);
 
         return result;
+    }
+
+    
+    public void backBtnPressed(ActionEvent event){
+      //  prevPane.setVisible(true);
+    AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
+    //remove last 
+    mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+
+   
     }
 
 }

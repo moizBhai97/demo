@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,9 +27,13 @@ public class SQL extends DBHandler {
     public SQL() {
         moiz = "jdbc:sqlserver://MOIZ-KHAN;";
         musa = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;";
-        abdullah = "";
+        abdullah = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;";
 
+<<<<<<< HEAD
         connectionUrl = musa + 
+=======
+        connectionUrl = abdullah + 
+>>>>>>> 111ccf957a8557031934701f31c688de5f97c967
                         "databaseName=SDA;" + 
                         "IntegratedSecurity=true;" + 
                         "encrypt=true;trustServerCertificate=true";

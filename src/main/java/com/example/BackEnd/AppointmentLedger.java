@@ -50,7 +50,7 @@ public class AppointmentLedger {
         {
             int appId = dbFactory.createHandler("SQL").saveAppointment(info, patId);
 
-            Appointment appointment = new Appointment(info, appId);
+            Appointment appointment = new Appointment(info, patId, appId);
 
             appointments.add(appointment);
         }

@@ -11,11 +11,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.stage.Modality;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class DoctorDetailsController implements Initializable{
@@ -84,8 +88,21 @@ public class DoctorDetailsController implements Initializable{
     @FXML
     private Button bookButton;
 
+    private AnchorPane rootPane;
+
+    @FXML
+    private AnchorPane parentPane;
+<<<<<<< HEAD
+    
+=======
+>>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
     @FXML
     private Button reviewsBtn;
+
+    @FXML
+    private Hyperlink certificateBtn;
+
+    String screenInfo;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
@@ -93,9 +110,9 @@ public class DoctorDetailsController implements Initializable{
          
         System.out.println(docId);
 
-        String info = pc.getDocDetails(docId);
+        screenInfo = pc.getDocDetails(docId);
 
-        JSONObject obj = new JSONObject(info);
+        JSONObject obj = new JSONObject(screenInfo);
 
         name.setText(obj.getString("name"));
         specialization.setText(obj.getString("specialization"));
@@ -125,44 +142,79 @@ public class DoctorDetailsController implements Initializable{
         
     }
 
-    public void setData(PatientController pc, int id, int patId)
+    public void setData(PatientController pc, int id, int patId, AnchorPane rootPane)
     {
 
         this.pc = pc;
         this.patId = patId;
         this.docId = id;
+        this.rootPane = rootPane;
     }
 
     public void bookButton(ActionEvent event){
         try {
-            this.bookButton.getScene().getWindow().hide();
+      //      this.bookButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/book_apt.fxml")));
             
             //-------------------------------------------------------------------------------------------------//
             BookAppointmentController bookAppointmentController = new BookAppointmentController();
-            bookAppointmentController.setData(pc, docId, patId, fee.getText(), name.getText());
+            bookAppointmentController.setData(pc, docId, patId,screenInfo,rootPane);
 
             loader.setController(bookAppointmentController);
             //-------------------------------------------------------------------------------------------------//
             
-            Parent root = loader.load();
-            //stage.setUserData(patientInfo);
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
+            AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+            // rootPane.setVisible(false);
+           // ((AnchorPane) rootPane.getParent()).getChildren().clear();
+           AnchorPane parent= ((AnchorPane) rootPane.getParent());
+            parent.getChildren().add(pane);
             
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+<<<<<<< HEAD
+    public void backBtnPressed(ActionEvent event)
+    {
+=======
+    public void backBtnPressed(ActionEvent event){
+>>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
+        rootPane.setVisible(true);
+        AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
+        //remove last 
+        mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+
+<<<<<<< HEAD
+        // mainParentPane.getChildren().add(rootPane);
+            //   Node node = (Node)event.getSource();
+            //     while (node != null && !(node instanceof AnchorPane)) {
+            //         node = node.getParent();
+            //     }
+            //     ((AnchorPane)node.getParent()).getChildren().removeAll();
+            //     ((AnchorPane)node.getParent()).getChildren().setAll(rootPane);
+    }
+=======
+       // mainParentPane.getChildren().add(rootPane);
+        //   Node node = (Node)event.getSource();
+        //     while (node != null && !(node instanceof AnchorPane)) {
+        //         node = node.getParent();
+        //     }
+        //     ((AnchorPane)node.getParent()).getChildren().removeAll();
+        //     ((AnchorPane)node.getParent()).getChildren().setAll(rootPane);
+    }
+    
+>>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
     public void reviewsButton(ActionEvent event)
     {
         try {
-            this.reviewsBtn.getScene().getWindow().hide();
+        //    this.reviewsBtn.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/manageReview.fxml")));
@@ -171,9 +223,36 @@ public class DoctorDetailsController implements Initializable{
             ManageReviewController reviewsController = new ManageReviewController();
 
             System.out.println("DocId: " + docId);
-            reviewsController.setData(pc, patId, docId);
+            reviewsController.setData(pc, patId, docId, rootPane);
 
             loader.setController(reviewsController);
+            //-------------------------------------------------------------------------------------------------//
+            
+             AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+            // rootPane.setVisible(false);
+AnchorPane parent= ((AnchorPane) rootPane.getParent());
+            parent.getChildren().add(pane);            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void certificateButton()
+    {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/certificate.fxml")));
+            
+            //-------------------------------------------------------------------------------------------------//
+            CertificateController certificateController = new CertificateController();
+
+            certificateController.setData(pc, null, docId);
+
+            loader.setController(certificateController);
             //-------------------------------------------------------------------------------------------------//
             
             Parent root = loader.load();
@@ -181,6 +260,8 @@ public class DoctorDetailsController implements Initializable{
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL); 
             stage.show();
             
         } catch (Exception e) {

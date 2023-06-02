@@ -16,22 +16,24 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 import com.example.BackEnd.PatientController;
 
 public class BookAppointmentController implements Initializable {
 
-    String fee;
-    String docName;
+    
     PatientController pc;
     int patId;
     int appID;
@@ -40,26 +42,80 @@ public class BookAppointmentController implements Initializable {
     String date;
     String selectedTime = null;
 
+       @FXML
+    private Button backBtn;
+
     @FXML
-    private DatePicker datePicker;
+    private Pane big_pane1;
+
+    @FXML
+    private Pane bookAppointmentPane;
+
+    @FXML
+    private Button bookBtn;
+
+    @FXML
+    private Pane cancel_pane;
+
+    @FXML
+    private Pane confirm_pane;
 
     @FXML
     private Label datePick;
-    
-    @FXML
-    private ToggleGroup radios;
 
     @FXML
-    private TextArea reason;
-
-    @FXML
-    private Button reschButton;
+    private DatePicker datePicker;
 
     @FXML
     private ToggleButton day;
 
     @FXML
+    private Label experience;
+
+    @FXML
+    private Label experience1;
+
+    @FXML
+    private Label feeLabel;
+
+    @FXML
+    private Pane inner_big_pane1;
+
+    @FXML
+    private Pane inner_big_pane11;
+
+    @FXML
+    private Pane inner_big_pane111;
+
+    @FXML
+    private Pane inner_big_pane112;
+
+    @FXML
+    private Label name;
+
+    @FXML
     private ToggleButton night;
+
+    @FXML
+    private Button no_btn_cancel;
+
+    @FXML
+    private Button no_btn_confirm;
+
+    @FXML
+    private Label patients;
+
+    @FXML
+    private ToggleGroup period;
+
+    @FXML
+    private TextArea problem_text;
+
+    @FXML
+    private Label rating;
+
+    @FXML
+    private Label specialization;
 
     @FXML
     private ToggleGroup times;
@@ -68,24 +124,15 @@ public class BookAppointmentController implements Initializable {
     private HBox timesBox;
 
     @FXML
-    Pane confirm_pane;
-
-    String dateUnformatted;
+    private Button yes_btn_cancel;
 
     @FXML
-    Pane cancel_pane;
+    private Button yes_btn_confirm;
 
-    @FXML
-    Button bookBtn;
 
-    @FXML
-    Label feeLabel;
+    private AnchorPane prevPane;
 
-    @FXML
-    Label doctorName;
-
-    @FXML
-    TextArea problem_text;
+    private String screenInfo;
 
     @FXML
     void cancel(ActionEvent event) {
@@ -117,11 +164,10 @@ public class BookAppointmentController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        feeLabel.setText(fee);
-        doctorName.setText(docName);
+
+        datePicker.setDayCellFactory(getDisablePastDatesCellFactory());
 
         time = 1;
-        reason.setWrapText(true);
 
         String dateUnformatted = LocalDate.now().toString();
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -139,14 +185,26 @@ public class BookAppointmentController implements Initializable {
         JSONArray objs = new JSONArray(pc.getSchedule(docId, date, time));
 
         refreshToggleButtonGroup(objs.toString());
+
+        
+        JSONObject obj = new JSONObject(screenInfo);
+
+        name.setText(obj.getString("name"));
+        specialization.setText(obj.getString("specialization"));
+        patients.setText(obj.getInt("patients") + "");
+        experience.setText(obj.getInt("experience") + "");
+        rating.setText(String.format("%.1f", obj.getFloat("rating")));
+        feeLabel.setText(String.format("%.1f", obj.getFloat("fee")));
+
+
     }
 
-    public void setData(PatientController patientController, int Id, int patId, String fee, String docName) {
-        this.fee = fee;
-        this.docName = docName;
+    public void setData(PatientController patientController, int Id, int patId,String screenInfo, AnchorPane prevPane){
+        this.screenInfo = screenInfo;
         this.pc = patientController;
         this.docId = Id;
         this.patId = patId;
+        this.prevPane = prevPane;
     }
 
     public void morningButton(ActionEvent event) 
@@ -191,6 +249,24 @@ public class BookAppointmentController implements Initializable {
         datePick.setText(formattedDate);
 
         refreshToggleButtonGroup(pc.getSchedule(docId, date, time));
+    }
+
+    private Callback<DatePicker, DateCell> getDisablePastDatesCellFactory() {
+        return new Callback<>() {
+            @Override
+            public DateCell call(final DatePicker datePicker) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item.isBefore(LocalDate.now())) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;"); // Optional: Set a different background color for disabled dates
+                        }
+                    }
+                };
+            }
+        };
     }
 
     public void handleToggleButtonAction(ToggleButton selectedButton) 
@@ -274,7 +350,7 @@ public class BookAppointmentController implements Initializable {
             loader.setLocation((new URL("file:src/main/resources/com/example/payment.fxml")));
             //-------------------------------------------------------------------------------------------------//
             PaymentController paymentController = new PaymentController();
-            paymentController.setData(pc, patId, fee, docName, obj.toString());
+            paymentController.setData(pc, patId,feeLabel.getText() , name.getText(), obj.toString());
             //-------------------------------------------------------------------------------------------------//
             loader.setController(paymentController);
             loader.load();
@@ -288,6 +364,13 @@ public class BookAppointmentController implements Initializable {
         {
             System.out.println(e);
         }
+    }
+
+    
+    public void backBtnPressed(ActionEvent event){
+        prevPane.setVisible(true);
+    AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
+    mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
     }
 
 }

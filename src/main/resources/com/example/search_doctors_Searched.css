@@ -176,3 +176,8 @@
     -fx-text-fill: #2854C3;
     -fx-padding: 0px;
 }
+
+.button:hover {
+    -fx-background-color: #2854C3;
+    -fx-text-fill: #ffffff;
+}

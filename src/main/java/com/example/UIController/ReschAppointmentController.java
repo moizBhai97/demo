@@ -25,6 +25,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -56,6 +57,8 @@ public class ReschAppointmentController  implements Initializable
 
     @FXML
     private HBox timesBox;
+
+    private AnchorPane prevPane;
 
     PatientController pc = new PatientController();
     int patId = 1;
@@ -89,12 +92,13 @@ public class ReschAppointmentController  implements Initializable
         refreshToggleButtonGroup(objs.toString());
     }
     
-    public void setData(PatientController pc, int patId, int appID, int docId)
+    public void setData(PatientController pc, int patId, int appID, int docId, AnchorPane prevPane)
     {
         this.pc = pc;
         this.patId = patId;
         this.appID = appID;
         this.docId = docId;
+        this.prevPane = prevPane;
     }
 
     public void morningButton(ActionEvent event) 
@@ -150,7 +154,7 @@ public class ReschAppointmentController  implements Initializable
 
         try
         {
-            this.reschButton.getScene().getWindow().hide();
+         //   this.reschButton.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/manageAppointment.fxml")));
             //-------------------------------------------------------------------------------------------------//
@@ -158,12 +162,15 @@ public class ReschAppointmentController  implements Initializable
             manageAppointmentController.setData(pc, patId);
             //-------------------------------------------------------------------------------------------------//
             loader.setController(manageAppointmentController);
-            loader.load();
 
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+            // rootPane.setVisible(false);
+            ((AnchorPane) prevPane.getParent()).getChildren().clear();
+            ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
         }
         catch(Exception e)
         {
@@ -247,4 +254,12 @@ public class ReschAppointmentController  implements Initializable
         timesBox.setSpacing(15);
     }
 
+    
+    public void backBtnPressed(ActionEvent event){
+        prevPane.setVisible(true);
+    AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
+    //remove last 
+    mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+
+    }
 }
