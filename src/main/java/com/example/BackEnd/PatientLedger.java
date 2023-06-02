@@ -16,6 +16,7 @@ public class PatientLedger {
         dbFactory = DBFactory.getInstance();
         patientList = new ArrayList<Patient>();
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         // testing
         Patient patient = new Patient(1);
@@ -38,6 +39,8 @@ public class PatientLedger {
         
 >>>>>>> 9e307e4084a1af7c934d91a35ea4f3997f39b9aa
 >>>>>>> 111ccf957a8557031934701f31c688de5f97c967
+=======
+>>>>>>> 376907a92e74ebe204b154fb4db66a29b49d04fb
     }
 
     public void setAppointmentPatients(int docId)
