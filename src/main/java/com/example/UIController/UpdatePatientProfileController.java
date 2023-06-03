@@ -134,23 +134,8 @@ public class UpdatePatientProfileController implements Initializable{
             Scene scene = new Scene(root);
             Stage stage = new Stage();
 
-            stage.setOnHidden(e-> {
-
-                try{
-                    refresh();
-                    //flowPane.getChildren().remove(flowPane.getChildren().size() - 1);
-                    // FXMLLoader loader2 = new FXMLLoader();
-                    // loader2.setLocation((new URL("file:src/main/resources/com/example/patientRecordCard.fxml")));
-                    // PatientRecordCardController patientRecordCardController = new PatientRecordCardController();
-                    // patientRecordCardController.setData(flowPane.getChildren().size(), history.get(history.length() - 1).toString());
-                    // loader2.setController(patientRecordCardController);
-                    // AnchorPane aPane = loader2.load();
-                    // flowPane.getChildren().set(flowPane.getChildren().size() - 1, aPane);
-                }catch(Exception e2)
-                {
-                    System.out.println(e2);
-                }
-
+            stage.setOnHidden(e-> {    
+               refresh();
             });
             stage.setScene(scene);
             stage.show();

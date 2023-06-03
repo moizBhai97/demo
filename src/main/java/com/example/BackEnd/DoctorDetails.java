@@ -100,7 +100,7 @@ public class DoctorDetails {
             this.environmentRating = Rating.getFloat("environmentRating");
             this.staffRating = Rating.getFloat("staffRating");
             this.reviews = Rating.getInt("reviews");
-            
+
         }
         catch(Exception e)
         {
@@ -287,7 +287,22 @@ public class DoctorDetails {
 
     public void addReview(String info, int patId, int docId)
     {
-        reviewLedger.addReview(info, patId, docId);
+        try{
+            reviewLedger.addReview(info, patId, docId);
+
+            String rating = reviewLedger.getAvgRating();
+            
+            JSONObject obj = new JSONObject(rating);
+            this.rating = obj.getFloat("rating");
+            this.checkupRating = obj.getFloat("checkupRating");
+            this.environmentRating = obj.getFloat("environmentRating");
+            this.staffRating = obj.getFloat("staffRating");
+            this.stats = obj.getInt("stats");
+            this.reviews = obj.getInt("reviews");    
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     private boolean isDayTime(String time) 

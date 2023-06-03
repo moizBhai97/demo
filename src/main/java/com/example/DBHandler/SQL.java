@@ -29,7 +29,7 @@ public class SQL extends DBHandler {
         musa = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;";
         abdullah = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;";
 
-        connectionUrl = moiz + 
+        connectionUrl = abdullah + 
                         "databaseName=SDA;" + 
                         "IntegratedSecurity=true;" + 
                         "encrypt=true;trustServerCertificate=true";
@@ -423,8 +423,8 @@ public class SQL extends DBHandler {
     public String getTopDoctors() {
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()){
             System.out.println("SQL getTopDoctors");
-
-            String SQL = "SELECT TOP 4 *, (SELECT COUNT(Distinct PATIENT_ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients FROM DOCTORS d ORDER BY ((RATING/5)*60 + STATS*.4) DESC;";
+            
+            String SQL = "SELECT TOP 4 *, (SELECT COUNT(Distinct PATIENT_ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients FROM DOCTORS d ORDER BY (((SELECT AVG(EXPERIENCE) FROM REVIEWS WHERE DOCTOR_ID = DOCTORS.ID)/5)*60 + (SELECT (AVG(checkupRating)+ AVG(environmentRating)+ AVG(staffRating))/3.0 FROM REVIEWS)*40) DESC";
 
             ResultSet rs = stmt.executeQuery(SQL);
             System.out.println(rs.toString());
@@ -988,20 +988,19 @@ public class SQL extends DBHandler {
             pstmt.setString(3, obj.getString("comment"));
             pstmt.setFloat(4, obj.getFloat("experience"));
             if(obj.getString("recommend").equals("Yes"))
-            {
-                pstmt.setInt(5, 1);
-            }
-            else
-            {
-                pstmt.setInt(5, 0);
-            }
+                {pstmt.setInt(5, 1);}
+            else{pstmt.setInt(5, 0);}
             pstmt.setFloat(6, obj.getFloat("checkupRating"));
             pstmt.setFloat(7, obj.getFloat("environmentRating"));
             pstmt.setFloat(8, obj.getFloat("staffRating"));
             pstmt.executeUpdate();
 
-            pstmt.close();         
-
+            String SQL2 = "UPDATE Doctors SET RATING = (SELECT AVG(EXPERIENCE) FROM Reviews WHERE DOCTOR_ID = ?) WHERE ID = ?;";
+            PreparedStatement pstmt2 = con.prepareStatement(SQL2);
+            pstmt2.setInt(1, docId);
+            pstmt2.setInt(2, docId);
+            
+            pstmt2.executeUpdate();
         }
         catch (SQLException | JSONException e) {
             // con.close();
