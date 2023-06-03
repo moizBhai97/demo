@@ -12,7 +12,6 @@ import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,10 +19,10 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.Effect;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -155,27 +154,21 @@ public class DoctorDetailsController implements Initializable{
 
     public void bookButton(ActionEvent event){
         try {
-      //      this.bookButton.getScene().getWindow().hide();
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/book_apt.fxml")));
             
-            //-------------------------------------------------------------------------------------------------//
             BookAppointmentController bookAppointmentController = new BookAppointmentController();
             bookAppointmentController.setData(pc, docId, patId,screenInfo,rootPane);
-
             loader.setController(bookAppointmentController);
-            //-------------------------------------------------------------------------------------------------//
             
             AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, 0.0);
-            AnchorPane.setBottomAnchor(pane, 0.0);
-            AnchorPane.setLeftAnchor(pane, 0.0);
-            AnchorPane.setRightAnchor(pane, 0.0);
-            // rootPane.setVisible(false);
-           // ((AnchorPane) rootPane.getParent()).getChildren().clear();
-           AnchorPane parent= ((AnchorPane) rootPane.getParent());
-            parent.getChildren().add(pane);
+            AnchorPane.setTopAnchor(pane, -1.0);
+            AnchorPane.setBottomAnchor(pane, -2.0);
+            AnchorPane.setLeftAnchor(pane, -2.0);
+            AnchorPane.setRightAnchor(pane, -2.0);
+            
+            //((AnchorPane) rootPane.getParent()).getChildren().clear();
+            ((AnchorPane) rootPane.getParent()).getChildren().add(pane);
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -188,41 +181,26 @@ public class DoctorDetailsController implements Initializable{
         AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
         //remove last 
         mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
-
-        // mainParentPane.getChildren().add(rootPane);
-            //   Node node = (Node)event.getSource();
-            //     while (node != null && !(node instanceof AnchorPane)) {
-            //         node = node.getParent();
-            //     }
-            //     ((AnchorPane)node.getParent()).getChildren().removeAll();
-            //     ((AnchorPane)node.getParent()).getChildren().setAll(rootPane);
     }
     
     public void reviewsButton(ActionEvent event)
     {
         try {
-        //    this.reviewsBtn.getScene().getWindow().hide();
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/manageReview.fxml")));
             
-            //-------------------------------------------------------------------------------------------------//
             ManageReviewController reviewsController = new ManageReviewController();
-
-            System.out.println("DocId: " + docId);
             reviewsController.setData(pc, patId, docId, rootPane);
-
             loader.setController(reviewsController);
-            //-------------------------------------------------------------------------------------------------//
             
-             AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, -1.0);
             AnchorPane.setBottomAnchor(pane, 0.0);
             AnchorPane.setLeftAnchor(pane, 0.0);
             AnchorPane.setRightAnchor(pane, 0.0);
-            // rootPane.setVisible(false);
-AnchorPane parent= ((AnchorPane) rootPane.getParent());
-            parent.getChildren().add(pane);            
+            
+            //((AnchorPane) rootPane.getParent()).getChildren().clear();
+            ((AnchorPane) rootPane.getParent()).getChildren().add(pane);           
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -234,13 +212,9 @@ AnchorPane parent= ((AnchorPane) rootPane.getParent());
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/certificate.fxml")));
             
-            //-------------------------------------------------------------------------------------------------//
             CertificateController certificateController = new CertificateController();
-
             certificateController.setData(pc, null, docId);
-
             loader.setController(certificateController);
-            //-------------------------------------------------------------------------------------------------//
             
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -254,21 +228,22 @@ AnchorPane parent= ((AnchorPane) rootPane.getParent());
             blur.setWidth(10);
             blur.setHeight(10);
             blur.setIterations(3);
-            
 
-        // Apply the blur effect to the scene
+            Effect otherEffects = parentPane.getEffect();
+
             parentPane.setEffect(blur);
             
             stage.setOnHidden(event -> {
-                parentPane.setEffect(null); // Remove the blur effect
+                parentPane.setEffect(null);
+                parentPane.setEffect(otherEffects);
             });
 
-            parentPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-                EventTarget target = event.getTarget();
-                if (!root.getBoundsInParent().contains(event.getX(), event.getY())) {
-                    stage.close(); // Close the child screen
-                }
-            });
+            // parentPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            //     EventTarget target = event.getTarget();
+            //     if (!root.getBoundsInParent().contains(event.getX(), event.getY())) {
+            //         stage.close();
+            //     }
+            // });
 
             stage.show();
             

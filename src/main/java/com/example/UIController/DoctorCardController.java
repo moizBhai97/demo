@@ -9,18 +9,12 @@ import com.example.BackEnd.PatientController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 
 public class DoctorCardController {
 
@@ -94,7 +88,6 @@ public class DoctorCardController {
         fee_amount.setText(String.valueOf(price));
         String formattedRating = String.format("%.2f", Double.parseDouble(rating));
         card1_satisfied_label.setText(formattedRating);
-        ;
         double ratingPercentage = Double.parseDouble(rating) / 5.0;
 
         Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage,
@@ -135,18 +128,13 @@ public class DoctorCardController {
             loader.setController(doctorDetailsController);
 
             AnchorPane anchorPane = (AnchorPane) prevPane.getParent();
-            prevPane.setVisible(false);
-            AnchorPane childPane = loader.load();
-            // childPane.setTopAnchor(childPane, 0.0);
-            // childPane.setBottomAnchor(childPane, 0.0);
-            // childPane.setLeftAnchor(childPane, 0.0);
-            // childPane.setRightAnchor(childPane, 0.0);
-            anchorPane.getChildren().add(childPane);
-            AnchorPane.setTopAnchor(childPane, 0.0);
-            AnchorPane.setBottomAnchor(childPane, 0.0);
-            AnchorPane.setLeftAnchor(childPane, 0.0);
-            AnchorPane.setRightAnchor(childPane, 0.0);
 
+            AnchorPane childPane = loader.load();
+            anchorPane.getChildren().add(childPane);
+            AnchorPane.setTopAnchor(childPane, -1.0);
+            AnchorPane.setBottomAnchor(childPane, -2.0);
+            AnchorPane.setLeftAnchor(childPane, -2.0);
+            AnchorPane.setRightAnchor(childPane, -2.0);
 
         } catch (Exception e) {
             e.printStackTrace();

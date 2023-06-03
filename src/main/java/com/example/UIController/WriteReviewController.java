@@ -2,23 +2,27 @@ package com.example.UIController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import org.controlsfx.control.Rating;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 import com.example.BackEnd.PatientController;
 
-public class WriteReviewController{
+public class WriteReviewController implements Initializable{
 
     @FXML
     private Rating checkupRating;
@@ -47,17 +51,14 @@ public class WriteReviewController{
     int docId ;
     int patId ;
 
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        commentBox.setWrapText(true);
+    }
+
     @FXML
     void submitButton(ActionEvent event) {
         
-        /*
-        "comment": "{{comment}}",
-        "experience": "{{experience}}",
-        "recommend": "{{recommend}}",
-        "checkupRating": "{{checkupRating}}",
-        "environmentRating": "{{environmentRating}}",
-        "staffRating": "{{staffRating}}" 
-         */
         JSONObject review = new JSONObject();
         review.put("comment", commentBox.getText());
         review.put("experience", overallRating.getRating());
@@ -67,7 +68,26 @@ public class WriteReviewController{
         review.put("staffRating", staffRating.getRating());
 
         patientController.submitReview(review.toString(), docId, patId);
-        
+
+        try
+        {
+            this.submitButton.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors - Copy.fxml")));
+
+            SearchDoctorController controller = new SearchDoctorController();
+            controller.setData(patientController, patId);
+            loader.setController(controller);
+
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     public void setData(PatientController patientController, int docId, int patId,AnchorPane prevPane) {
@@ -80,9 +100,9 @@ public class WriteReviewController{
     
     public void backBtnPressed(ActionEvent event){
         prevPane.setVisible(true);
-    AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
-    //remove last 
-    mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+        AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
+        //remove last 
+        mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
     }
 
 }

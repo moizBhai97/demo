@@ -12,10 +12,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Priority;
 
 public class ManageReviewController implements Initializable {
     @FXML
@@ -28,6 +26,7 @@ public class ManageReviewController implements Initializable {
     private int patId;
     private int docId;
     private AnchorPane prevPane;
+
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
 
@@ -62,8 +61,8 @@ public class ManageReviewController implements Initializable {
                     Pane pane = fxmlLoader.load();
                     SingleReviewController singleReviewController = fxmlLoader.getController();
                     singleReviewController .setCard(jsonArray.getJSONObject(i).toString());
-                    System.out.println("Rev: " + docId);
                     singleReviewController .setData(patientController, patId, docId);
+
                     reviewsGridPane.add(pane, 0, rowindex);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -86,12 +85,10 @@ public class ManageReviewController implements Initializable {
 
     
     public void backBtnPressed(ActionEvent event){
-      //  prevPane.setVisible(true);
-    AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
-    //remove last 
-    mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
-
-   
+        //  prevPane.setVisible(true);
+        AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
+        //remove last 
+        mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
     }
 
 }

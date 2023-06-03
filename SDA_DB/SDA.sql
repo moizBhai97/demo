@@ -284,16 +284,20 @@ VALUES (101, '2023-06-01', '10:00:00', 0),
 
 INSERT INTO APPOINTMENTS (DOCTOR_ID, PATIENT_ID, DATE, TIME, STATUS, PROBLEM)
 VALUES 
-  (111, 1, '2023-06-06', '10:00:00', 'Completed', 'My skin is dry.'),
-  (112, 1, '2023-06-07', '11:00:00', 'Completed', 'My skin is dry.'),
-  (113, 1, '2023-06-08', '12:00:00', 'Completed', 'My skin is dry.'),
-  (114, 1, '2023-06-09', '13:00:00', 'Completed', 'My skin is dry.'),
-  (115, 1, '2023-06-10', '14:00:00', 'Completed', 'My skin is dry.'),
-  (106, 1, '2023-06-11', '10:00:00', 'Booked', 'My skin is dry.'),
-  (107, 1, '2023-06-12', '11:00:00', 'Booked', 'My skin is dry.'),
-  (108, 1, '2023-06-13', '12:00:00', 'Booked', 'My skin is dry.'),
-  (109, 1, '2023-06-14', '13:00:00', 'Booked', 'My skin is dry.'),
-  (110, 1, '2023-06-15', '14:00:00', 'Booked', 'My skin is dry.');
+  (101, 1, '2023-06-06', '10:00:00', 'Completed', 'My skin is dry.'),
+  (102, 1, '2023-06-07', '11:00:00', 'Completed', 'My skin is dry.'),
+  (103, 1, '2023-06-08', '12:00:00', 'Completed', 'My skin is dry.'),
+  (104, 1, '2023-06-09', '13:00:00', 'Completed', 'My skin is dry.'),
+  (105, 1, '2023-06-10', '14:00:00', 'Completed', 'My skin is dry.');
+
+INSERT INTO PAYMENTS (APPOINTMENT_ID, DATE, TIME, STATUS, AMOUNT)
+VALUES 
+  (6, '2023-06-06', '10:00:00', 1, 1200),
+  (7, '2023-06-07', '11:00:00', 1, 1500),
+  (8, '2023-06-08', '12:00:00', 1, 2000),
+  (9, '2023-06-09', '13:00:00', 1, 1000),
+  (10, '2023-06-10', '14:00:00', 1, 800);
+
 Select * from APPOINTMENTS;
 
 Select * from PAYMENTS

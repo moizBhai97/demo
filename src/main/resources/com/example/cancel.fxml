@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
@@ -12,19 +13,21 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane styleClass="big_pane" stylesheets="@app_detail.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="564.0" prefWidth="656.8" styleClass="big_pane" stylesheets="@app_detail.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backBtnPressed" styleClass="Butt_inner_pane" text="&lt;  Back" textFill="#2854c3">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <HBox alignment="CENTER" layoutX="14.0" layoutY="29.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="29.0">
+      <HBox alignment="CENTER" layoutY="38.0" prefHeight="490.0" prefWidth="641.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="59.0" AnchorPane.topAnchor="38.0">
          <children>
             <Pane fx:id="big_pane" prefHeight="498.0" prefWidth="642.0">
                <children>
-                  <Pane fx:id="inner_big_pane1" layoutX="23.0" layoutY="6.0" prefHeight="94.0" prefWidth="245.0" styleClass="inner_big_pane1" stylesheets="@cancel.css">
+                  <Pane fx:id="inner_big_pane1" layoutX="13.0" layoutY="6.0" prefHeight="94.0" prefWidth="245.0" styleClass="inner_big_pane1" stylesheets="@cancel.css">
                      <children>
                         <Pane layoutY="7.0" prefHeight="79.0" prefWidth="103.0">
                            <children>
@@ -41,10 +44,9 @@
                            </font>
                         </Label>
                         <Label layoutX="85.0" layoutY="38.0" text="Dermatologist" textFill="#979797" />
-                        <Label layoutX="85.0" layoutY="57.0" text="NUCES FAST Isb" textFill="#979797" />
                      </children>
                   </Pane>
-                  <Pane fx:id="inner_big_pane11" layoutX="282.0" layoutY="6.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@cancel.css">
+                  <Pane fx:id="inner_big_pane11" layoutX="272.0" layoutY="6.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@cancel.css">
                      <children>
                         <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
                            <children>
@@ -63,7 +65,7 @@
                         <Label layoutX="35.0" layoutY="72.0" text="Patients" />
                      </children>
                   </Pane>
-                  <Pane fx:id="inner_big_pane111" layoutX="410.0" layoutY="6.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@cancel.css">
+                  <Pane fx:id="inner_big_pane111" layoutX="400.0" layoutY="6.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@cancel.css">
                      <children>
                         <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
                            <children>
@@ -82,7 +84,7 @@
                         <Label layoutX="28.0" layoutY="72.0" text="Experience" />
                      </children>
                   </Pane>
-                  <Pane fx:id="inner_big_pane112" layoutX="536.0" layoutY="6.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@cancel.css">
+                  <Pane fx:id="inner_big_pane112" layoutX="526.0" layoutY="6.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@cancel.css">
                      <children>
                         <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
                            <children>
@@ -101,10 +103,13 @@
                         <Label layoutX="37.0" layoutY="72.0" text="Ratings" />
                      </children>
                   </Pane>
-                  <Button fx:id="cancelButton" layoutX="396.0" layoutY="428.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@cancel.css" text="Cancel Appointment" textFill="WHITE">
+                  <Button fx:id="cancelButton" layoutX="411.0" layoutY="420.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@cancel.css" text="Cancel Appointment" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Pane fx:id="big_pane1" layoutX="14.0" layoutY="101.0" prefHeight="394.0" prefWidth="368.0" stylesheets="@cancel.css">
                      <children>
@@ -123,12 +128,10 @@
                         <RadioButton fx:id="radio121" layoutX="58.0" layoutY="145.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@cancel.css" text="I have recovered from the disease" textFill="#8c8f85" toggleGroup="$radios" />
                         <RadioButton fx:id="radio1211" layoutX="58.0" layoutY="175.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@cancel.css" text="I donot want to tell" textFill="#8c8f85" toggleGroup="$radios" />
                         <RadioButton fx:id="radio12111" layoutX="58.0" layoutY="205.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@cancel.css" text="Other" textFill="#8c8f85" toggleGroup="$radios" />
-                        <TextArea fx:id="reason" layoutX="64.0" layoutY="239.0" prefHeight="134.0" prefWidth="254.0" promptText="Enter Reason" />
-                        <Label layoutX="64.0" layoutY="379.0" text="Note: Only 50% of the funds will be returned to you" textFill="#979797">
-                           <font>
-                              <Font size="10.0" />
-                           </font>
-                        </Label>
+                        <TextArea fx:id="reason" layoutX="64.0" layoutY="239.0" prefHeight="134.0" prefWidth="254.0" promptText="Enter Reason">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextArea>
                      </children>
                   </Pane>
                </children>

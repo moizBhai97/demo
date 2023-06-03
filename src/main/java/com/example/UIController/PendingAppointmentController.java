@@ -12,15 +12,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
 public class PendingAppointmentController implements Initializable {
     @FXML
@@ -115,19 +109,16 @@ public class PendingAppointmentController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/cancel.fxml")));
 
-            // -------------------------------------------------------------------------------------------------//
             CancelAppointmentController cancelAppointmentController = new CancelAppointmentController();
-
             cancelAppointmentController.setData(pc, patId, appID, prevPane);
             loader.setController(cancelAppointmentController);
-            // -------------------------------------------------------------------------------------------------//
 
             AnchorPane pane = loader.load();
             AnchorPane.setTopAnchor(pane, 0.0);
             AnchorPane.setBottomAnchor(pane, 0.0);
             AnchorPane.setLeftAnchor(pane, 0.0);
             AnchorPane.setRightAnchor(pane, 0.0);
-            // rootPane.setVisible(false);
+
             ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
 
         } catch (Exception e) {
@@ -147,26 +138,19 @@ public class PendingAppointmentController implements Initializable {
         System.out.println("Resch Button Clicked");
 
         try {
-           // this.rschBtn.getScene().getWindow().hide();
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/resch.fxml")));
 
-            // -------------------------------------------------------------------------------------------------//
             ReschAppointmentController reschAppointmentController = new ReschAppointmentController();
-
-            System.out.println(docId);
-
             reschAppointmentController.setData(pc, patId, appID, docId, prevPane);
             loader.setController(reschAppointmentController);
-            // -------------------------------------------------------------------------------------------------//
 
-           AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, 0.0);
-            AnchorPane.setBottomAnchor(pane, 0.0);
-            AnchorPane.setLeftAnchor(pane, 0.0);
-            AnchorPane.setRightAnchor(pane, 0.0);
-            // rootPane.setVisible(false);
+            AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, -2.0);
+            AnchorPane.setBottomAnchor(pane, -2.0);
+            AnchorPane.setLeftAnchor(pane, -2.0);
+            AnchorPane.setRightAnchor(pane, -2.0);
+
             ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
 
         } catch (Exception e) {

@@ -702,21 +702,6 @@ public class SQL extends DBHandler {
 
             JSONArray appointments = new JSONArray();
 
-            /*
-            "appId": "{{appId}}",
-            "date": "{{date}}",
-            "time": "{{time}}",
-            "problem": "{{problem}}",
-            "status": "{{status}}",
-            "docId": "{{docId}}",
-            "payment": {
-                            "amount": "{{amount}}",
-                            "status": "{{status}}",
-                            "date": "{{date}}",
-                            "time": "{{time}}"
-                        }
-             */
-
             while(rs.next())
             {
                 JSONObject obj = new JSONObject();
