@@ -43,6 +43,20 @@ public class CertificateLedger {
         System.out.println(certificates.toString());
     }
 
+    public String getCertificates()
+    {
+        JSONArray objs = new JSONArray();
+
+        for(int i = 0; i < certificates.size(); i++)
+        {
+            JSONObject obj = new JSONObject(certificates.get(i).toString());
+
+            objs.put(obj);
+        }
+
+        return objs.toString();
+    }
+
     public void addCertification(String info, int docId)
     {
         try

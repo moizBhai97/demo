@@ -116,6 +116,7 @@ public class AppointmentLedger {
 
     public String getAppointList(int value)
     {
+        System.out.println("Patient Appoints:" + appointments.size());
         JSONArray objs = new JSONArray();
             
         for(int i = 0; i < appointments.size(); i++ )
@@ -126,13 +127,18 @@ public class AppointmentLedger {
                 
                 objs.put(obj);
             }
-            else if(value == 2 && !appointments.get(i).getStatus().equals("Booked"))
+            else if(value == 2 && (appointments.get(i).getStatus().equals("Completed") || appointments.get(i).getStatus().equals("Cancelled")))
             {
                 JSONObject obj = new JSONObject(appointments.get(i).toString());
                 
                 objs.put(obj);
             }
-            
+            else if(value == 3 && appointments.get(i).getStatus().equals("Completed"))
+            {
+                JSONObject obj = new JSONObject(appointments.get(i).toString());
+                
+                objs.put(obj);
+            } 
         }
 
         System.out.println(objs.toString());

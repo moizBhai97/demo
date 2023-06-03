@@ -17,16 +17,16 @@ public class DoctorLedger {
         topDoctors = new ArrayList<Doctor>();
         doctorList = new ArrayList<Doctor>();
 
-        // Doctor temp = new Doctor();
-        // temp.setId(101);
-        // temp.setName("musa");
-        // temp.setEmail("musa@gmail.com");
-        // temp.setDOB("12/12/1999");
-        // temp.setCountry("Pakistan");
-        // temp.setPhoneNumber("123456789");
-        // temp.setGender("Male");
 
-        // doctorList.add(temp);
+        //temp
+        // JSONObject info = new JSONObject();
+        // info.put("email", "dr.asim@example.com");
+        // info.put("password", "drpassword123");
+
+        // Doctor doctor = getDoctorInstance(info.toString());
+        // System.out.println(doctor.toString());
+        // doctorList.add(doctor);
+      
     }
 
     public void setTopDoctors() {
@@ -42,6 +42,9 @@ public class DoctorLedger {
                 topDoctors.add(doctor);
                 doctor.toString();
             }
+
+            doctorList.addAll(topDoctors);
+            removeDuplicates();
 
             topDoctors.toString();
             doctorList.addAll( topDoctors);
@@ -218,6 +221,17 @@ public class DoctorLedger {
         }
 
         return null;
+    }
+
+    public void setDoctor(int docId) {
+        try {
+
+            Doctor doctor = new Doctor(docId);
+            doctorList.add(doctor);
+
+        } catch (Exception e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+        }
     }
 
     public String sortByRating(String name, Boolean reversed, double ratingFilter, String specialtyFilter) {

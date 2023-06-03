@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
@@ -15,19 +16,21 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="518.0" prefWidth="657.0" styleClass="big_pane" stylesheets="@resch.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="564.0" prefWidth="656.8" styleClass="big_pane" stylesheets="@resch.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="backBtn" layoutX="20.0" layoutY="14.0" mnemonicParsing="false" onAction="#backBtnPressed" style="-fx-background-color: transparent;" styleClass="Butt_inner_pane" text="&lt;  Back" textFill="#2854c3" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="14.0">
+      <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backBtnPressed" prefHeight="25.0" prefWidth="82.0" style="-fx-background-color: transparent;" styleClass="Butt_inner_pane" text="&lt;  Back" textFill="#2854c3" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <HBox alignment="CENTER" layoutX="14.0" layoutY="54.0" AnchorPane.bottomAnchor="9.600000000000023" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0">
+      <HBox alignment="CENTER" layoutX="11.0" layoutY="49.0" AnchorPane.bottomAnchor="22.600000000000023" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="49.0">
          <children>
             <Pane>
                <children>
-                  <Pane fx:id="inner_big_pane1" layoutX="9.0" prefHeight="94.0" prefWidth="245.0" styleClass="inner_big_pane1" stylesheets="@resch.css">
+                  <Pane fx:id="inner_big_pane1" prefHeight="94.0" prefWidth="245.0" styleClass="inner_big_pane1" stylesheets="@resch.css">
                      <children>
                         <Pane layoutY="7.0" prefHeight="79.0" prefWidth="103.0">
                            <children>
@@ -47,7 +50,7 @@
                         <Label layoutX="85.0" layoutY="57.0" text="NUCES FAST Isb" textFill="#979797" />
                      </children>
                   </Pane>
-                  <Pane fx:id="inner_big_pane11" layoutX="268.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane1" stylesheets="@resch.css">
+                  <Pane fx:id="inner_big_pane11" layoutX="259.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane1" stylesheets="@resch.css">
                      <children>
                         <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
                            <children>
@@ -66,7 +69,7 @@
                         <Label layoutX="35.0" layoutY="72.0" text="Patients" />
                      </children>
                   </Pane>
-                  <Pane fx:id="inner_big_pane111" layoutX="396.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane1" stylesheets="@resch.css">
+                  <Pane fx:id="inner_big_pane111" layoutX="387.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane1" stylesheets="@resch.css">
                      <children>
                         <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
                            <children>
@@ -85,7 +88,7 @@
                         <Label layoutX="28.0" layoutY="72.0" text="Experience" />
                      </children>
                   </Pane>
-                  <Pane fx:id="inner_big_pane112" layoutX="522.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane1" stylesheets="@resch.css">
+                  <Pane fx:id="inner_big_pane112" layoutX="513.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane1" stylesheets="@resch.css">
                      <children>
                         <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
                            <children>
@@ -119,24 +122,32 @@
                         <RadioButton fx:id="radio11" layoutX="58.0" layoutY="84.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@resch.css" text="I’m having a schedule clash" textFill="#8c8f85" toggleGroup="$radios" />
                         <RadioButton fx:id="radio1211" layoutX="58.0" layoutY="115.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@resch.css" text="I donot want to tell" textFill="#8c8f85" toggleGroup="$radios" />
                         <RadioButton fx:id="radio12111" layoutX="58.0" layoutY="145.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@resch.css" text="Other" textFill="#8c8f85" toggleGroup="$radios" />
-                        <TextArea fx:id="reason" layoutX="54.0" layoutY="179.0" prefHeight="104.0" prefWidth="254.0" promptText="Enter Reason" />
+                        <TextArea fx:id="reason" layoutX="54.0" layoutY="179.0" prefHeight="104.0" prefWidth="254.0" promptText="Enter Reason">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextArea>
                      </children>
                   </Pane>
                   <Pane fx:id="big_pane11" layoutX="319.0" layoutY="109.0" prefHeight="262.0" prefWidth="299.0" styleClass="big_pane" stylesheets="@resch.css">
                      <children>
-                        <Pane layoutX="14.0" layoutY="16.0" prefHeight="31.0" prefWidth="160.0">
+                        <Label fx:id="datePick" alignment="BASELINE_LEFT" layoutX="46.0" layoutY="16.0" prefHeight="31.0" prefWidth="254.0" text="21 January, Friday" textFill="#8c8fa5" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Pane layoutX="-121.0" layoutY="16.0" prefHeight="31.0" prefWidth="160.0">
                            <children>
                               <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="134.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../images/Calendar.png" />
                                  </image>
                               </ImageView>
-                              <DatePicker fx:id="datePicker" editable="false" layoutX="-1.0" layoutY="3.0" onAction="#datePickerPressed" prefHeight="18.0" prefWidth="160.0" styleClass="date-picker" stylesheets="@resch.css" />
-                              <Label fx:id="datePick" alignment="BASELINE_LEFT" prefHeight="31.0" prefWidth="134.0" text="21 January, Friday" textFill="#8c8fa5" wrapText="true">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
+                              <DatePicker fx:id="datePicker" editable="false" layoutX="-1.0" layoutY="3.0" onAction="#datePickerPressed" prefHeight="18.0" prefWidth="160.0" styleClass="date-picker" stylesheets="@resch.css">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </DatePicker>
+                              <Pane layoutX="-2.0" prefHeight="31.0" prefWidth="137.0" />
                            </children>
                         </Pane>
                         <ToggleButton fx:id="day" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="64.0" mnemonicParsing="false" onAction="#morningButton" prefHeight="49.0" prefWidth="134.0" selected="true" styleClass="button_big" stylesheets="@resch.css" text="Day" textFill="WHITE">
@@ -150,6 +161,9 @@
                            <toggleGroup>
                               <ToggleGroup fx:id="period" />
                            </toggleGroup>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ToggleButton>
                         <ToggleButton fx:id="night" alignment="BASELINE_LEFT" layoutX="165.0" layoutY="64.0" mnemonicParsing="false" onAction="#nightButton" prefHeight="49.0" prefWidth="134.0" styleClass="button_night" stylesheets="@resch.css" text="Night" toggleGroup="$period">
                            <graphic>
@@ -159,6 +173,9 @@
                                  </image>
                               </ImageView>
                            </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ToggleButton>
                         <HBox fx:id="timesBox" layoutX="14.0" layoutY="131.0" prefHeight="50.0" prefWidth="286.0" spacing="10.0">
                            <children>
@@ -173,10 +190,13 @@
                         </HBox>
                      </children>
                   </Pane>
-                  <Button fx:id="reschButton" layoutX="346.0" layoutY="404.0" mnemonicParsing="false" onAction="#reschButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@resch.css" text="Reschedule Appointment" textFill="WHITE">
+                  <Button fx:id="reschButton" layoutX="388.0" layoutY="378.0" mnemonicParsing="false" onAction="#reschButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@resch.css" text="Reschedule Appointment" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
             </Pane>

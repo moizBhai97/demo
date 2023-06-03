@@ -15,8 +15,7 @@ public class Doctor {
     private String country;
     private String phoneNumber;
     private String gender;
-
-    
+    private AppointmentLedger appointmentLedger;
     private DoctorDetails doctorDetails;
 
     public DoctorDetails getDoctorDetails() 
@@ -26,6 +25,7 @@ public class Doctor {
 
     public String getDetails() 
     {
+        System.out.println("Doctor getDetails");
         try 
         {
             String details = doctorDetails.toString();
@@ -39,6 +39,7 @@ public class Doctor {
             obj.put("phoneNumber", phoneNumber);
             obj.put("gender", gender);
 
+            System.out.println("--------------------------------"+obj.toString());
             return obj.toString();
             
         } 
@@ -49,10 +50,10 @@ public class Doctor {
         }
     }
 
-    public Doctor(int docId, String doctorName) 
+    public Doctor(int docId) 
     {
         this.id = docId;
-        this.name = doctorName;
+        this.name = DBFactory.getInstance().createHandler("SQL").getDoctorName(docId);
     }
 
     
@@ -63,6 +64,11 @@ public class Doctor {
         JSONObject jsonObject = new JSONObject(data);
         this.id = jsonObject.getInt("id");
         this.name = jsonObject.getString("name");
+        this.email = jsonObject.getString("email");
+        this.DOB = jsonObject.getString("DOB");
+        this.country = jsonObject.getString("country");
+        this.phoneNumber = jsonObject.getString("phoneNumber");
+        this.gender = jsonObject.getString("gender");
         this.doctorDetails = new DoctorDetails(jsonObject.getJSONObject("details").toString(), id);
     }
     
@@ -79,9 +85,17 @@ public class Doctor {
         
     }
     
-    public void setAppointments()
+    public void setAppointments(int docId)
     {
-        doctorDetails.setAppointments(this.id);
+        if(appointmentLedger == null)
+            appointmentLedger = new AppointmentLedger();
+            
+        appointmentLedger.setDoctorAppointments(docId);
+    }
+
+    public String getAppointList(int value)
+    {
+        return appointmentLedger.getAppointList(value);
     }
     
     public int getId() {
@@ -150,6 +164,13 @@ public class Doctor {
         return doctorDetails.getRating();
     }
 
+    public String getAppointment(int appId)
+    {
+        System.out.println("Getting appointment");
+        System.out.println(appointmentLedger.getAppointment(appId).toString());
+        return appointmentLedger.getAppointment(appId).toString();
+    }
+
     public String getMainDetails()
     {
         JSONObject obj = new JSONObject();
@@ -160,6 +181,7 @@ public class Doctor {
         obj.put("country", country);
         obj.put("phoneNumber", phoneNumber);
         obj.put("gender", gender);
+        
 
         return obj.toString();
     }

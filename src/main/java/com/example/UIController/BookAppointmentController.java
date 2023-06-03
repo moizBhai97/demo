@@ -13,8 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -26,6 +24,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -42,7 +41,7 @@ public class BookAppointmentController implements Initializable {
     String date;
     String selectedTime = null;
 
-       @FXML
+    @FXML
     private Button backBtn;
 
     @FXML
@@ -307,6 +306,7 @@ public class BookAppointmentController implements Initializable {
             ToggleButton button = new ToggleButton(obj.getString("time").substring(0, 5));
             button.setMinWidth(85);
             button.setMinHeight(49);
+            button.setCursor(javafx.scene.Cursor.HAND);
 
             button.setUserData(obj.getBoolean("available"));
 
@@ -345,20 +345,21 @@ public class BookAppointmentController implements Initializable {
 
             pc.bookSlot(obj.toString(), patId);
 
-            this.bookBtn.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/payment.fxml")));
-            //-------------------------------------------------------------------------------------------------//
-            PaymentController paymentController = new PaymentController();
-            paymentController.setData(pc, patId,feeLabel.getText() , name.getText(), obj.toString());
-            //-------------------------------------------------------------------------------------------------//
-            loader.setController(paymentController);
-            loader.load();
 
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            PaymentController paymentController = new PaymentController();
+            paymentController.setData(pc, patId,feeLabel.getText() , name.getText(), obj.toString(), prevPane);
+            loader.setController(paymentController);
+
+            AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, -1.0);
+            AnchorPane.setBottomAnchor(pane, -2.0);
+            AnchorPane.setLeftAnchor(pane, -2.0);
+            AnchorPane.setRightAnchor(pane, -2.0);
+
+            //((AnchorPane) prevPane.getParent()).getChildren().clear();
+            ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
         }
         catch(Exception e)
         {
@@ -369,8 +370,8 @@ public class BookAppointmentController implements Initializable {
     
     public void backBtnPressed(ActionEvent event){
         prevPane.setVisible(true);
-    AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
-    mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+        AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
+        mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
     }
 
 }

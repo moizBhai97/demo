@@ -15,6 +15,29 @@ public class PatientLedger {
     {
         dbFactory = DBFactory.getInstance();
         patientList = new ArrayList<Patient>();
+
+        // Patient patient = new Patient(1);
+        // patient.setName("Musa");
+        // patient.setEmail("musa@gmail.com");
+        // patient.setDOB("12/12/1999");
+        // patient.setCountry("Pakistan");
+        // patient.setPhoneNumber("123456789");
+        // patient.setGender("Male");
+
+        // patientList.add(patient);
+        
+    }
+
+    public void setPatient(int patId)
+    {
+        try{
+            Patient patient = new Patient(patId);
+            patientList.add(patient);
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+        }
     }
 
     public void setAppointmentPatients(int docId)

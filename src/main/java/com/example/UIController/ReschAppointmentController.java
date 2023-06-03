@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -28,15 +29,15 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
-public class ReschAppointmentController  implements Initializable
-{
+public class ReschAppointmentController implements Initializable {
     @FXML
     private DatePicker datePicker;
 
     @FXML
     private Label datePick;
-    
+
     @FXML
     private ToggleGroup radios;
 
@@ -71,6 +72,8 @@ public class ReschAppointmentController  implements Initializable
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
     {
+        datePicker.setDayCellFactory(getDisablePastDatesCellFactory());
+
         time = 1;
         reason.setWrapText(true);
 
@@ -85,15 +88,14 @@ public class ReschAppointmentController  implements Initializable
         System.out.println(formattedDate);
         datePick.setText(formattedDate);
 
-        //System.out.println(pc.getSchedule(docId, date, time));
+        // System.out.println(pc.getSchedule(docId, date, time));
 
         JSONArray objs = new JSONArray(pc.getSchedule(docId, date, time));
 
         refreshToggleButtonGroup(objs.toString());
     }
-    
-    public void setData(PatientController pc, int patId, int appID, int docId, AnchorPane prevPane)
-    {
+
+    public void setData(PatientController pc, int patId, int appID, int docId, AnchorPane prevPane) {
         this.pc = pc;
         this.patId = patId;
         this.appID = appID;
@@ -101,36 +103,32 @@ public class ReschAppointmentController  implements Initializable
         this.prevPane = prevPane;
     }
 
-    public void morningButton(ActionEvent event) 
-    {
-        if(time == 2)
-        {
+    public void morningButton(ActionEvent event) {
+        if (time == 2) {
             time = 1;
             selectedTime = null;
             day.setStyle("-fx-background-color: #2854C3; -fx-border-color: #2854C3; -fx-text-fill: white;");
-            night.setStyle("-fx-background-color: transparent; -fx-border-color: #8C8FA5; -fx-border-width: 1px 1px 1px 1px; -fx-text-fill: black;");
+            night.setStyle(
+                    "-fx-background-color: transparent; -fx-border-color: #8C8FA5; -fx-border-width: 1px 1px 1px 1px; -fx-text-fill: black;");
             System.out.println(pc.getSchedule(docId, date, time));
             refreshToggleButtonGroup(pc.getSchedule(docId, date, time));
         }
     }
 
-    public void nightButton(ActionEvent event) 
-    {
-        if(time == 1)
-        {
+    public void nightButton(ActionEvent event) {
+        if (time == 1) {
             time = 2;
             selectedTime = null;
             night.setStyle("-fx-background-color: #2854C3; -fx-border-color: #2854C3; -fx-text-fill: white;");
-            day.setStyle("-fx-background-color: transparent; -fx-border-color: #8C8FA5; -fx-border-width: 1px 1px 1px 1px; -fx-text-fill: black;");
+            day.setStyle(
+                    "-fx-background-color: transparent; -fx-border-color: #8C8FA5; -fx-border-width: 1px 1px 1px 1px; -fx-text-fill: black;");
             System.out.println(pc.getSchedule(docId, date, time));
             refreshToggleButtonGroup(pc.getSchedule(docId, date, time));
         }
     }
 
-    public void reschButton(ActionEvent event) 
-    {
-        if(selectedTime == null)
-        {
+    public void reschButton(ActionEvent event) {
+        if (selectedTime == null) {
             System.out.println("Please select a time");
             return;
         }
@@ -138,8 +136,7 @@ public class ReschAppointmentController  implements Initializable
         RadioButton selectedRadioButton = (RadioButton) radios.getSelectedToggle();
         String data = selectedRadioButton.getText();
 
-        if(data.equals("Other"))
-        {
+        if (data.equals("Other")) {
             data = reason.getText();
         }
 
@@ -152,15 +149,14 @@ public class ReschAppointmentController  implements Initializable
 
         pc.reschAppointment(obj.toString(), patId, appID);
 
-        try
-        {
-         //   this.reschButton.getScene().getWindow().hide();
+        try {
+            // this.reschButton.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/manageAppointment.fxml")));
-            //-------------------------------------------------------------------------------------------------//
+            // -------------------------------------------------------------------------------------------------//
             ManageAppointmentController manageAppointmentController = new ManageAppointmentController();
             manageAppointmentController.setData(pc, patId);
-            //-------------------------------------------------------------------------------------------------//
+            // -------------------------------------------------------------------------------------------------//
             loader.setController(manageAppointmentController);
 
             AnchorPane pane = loader.load();
@@ -168,14 +164,12 @@ public class ReschAppointmentController  implements Initializable
             AnchorPane.setBottomAnchor(pane, 0.0);
             AnchorPane.setLeftAnchor(pane, 0.0);
             AnchorPane.setRightAnchor(pane, 0.0);
-AnchorPane parent = (AnchorPane)prevPane.getParent();
-if (parent != null) {
-    parent.getChildren().clear();
-}
-parent.getChildren().add(pane);
-        }
-        catch(Exception e)
-        {
+            AnchorPane parent = (AnchorPane) prevPane.getParent();
+            if (parent != null) {
+                parent.getChildren().clear();
+            }
+            parent.getChildren().add(pane);
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
@@ -197,6 +191,23 @@ parent.getChildren().add(pane);
 
         refreshToggleButtonGroup(pc.getSchedule(docId, date, time));
     }
+    private Callback<DatePicker, DateCell> getDisablePastDatesCellFactory() {
+        return new Callback<>() {
+            @Override
+            public DateCell call(final DatePicker datePicker) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item.isBefore(LocalDate.now())) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;"); // Optional: Set a different background color for disabled dates
+                        }
+                    }
+                };
+            }
+        };
+    }
 
     public void handleToggleButtonAction(ToggleButton selectedButton) 
     {
@@ -204,47 +215,40 @@ parent.getChildren().add(pane);
         {
             ToggleButton button = (ToggleButton) toggle;
 
-            if(!(button.getUserData() instanceof Boolean && (boolean) button.getUserData()))
-            {
+            if (!(button.getUserData() instanceof Boolean && (boolean) button.getUserData())) {
                 continue;
             }
 
-            else if (button != selectedButton) 
-            {
+            else if (button != selectedButton) {
                 button.setStyle("-fx-background-color: #eff6fc; -fx-border-color: #eff6fc; -fx-text-fill: black;");
-            } 
-            
-            else 
-            {
+            }
+
+            else {
                 button.setStyle("-fx-background-color: #2854C3; -fx-border-color: #2854C3; -fx-text-fill: white;");
-                selectedTime=selectedButton.getText();
+                selectedTime = selectedButton.getText();
                 System.out.println("Selected ToggleButton text: " + selectedTime);
             }
         }
     }
 
-    public void refreshToggleButtonGroup(String info) 
-    {
+    public void refreshToggleButtonGroup(String info) {
         timesBox.getChildren().clear();
         times = new ToggleGroup();
 
         JSONArray objs = new JSONArray(info);
 
-        for (int i = 0; i < objs.length(); i++) 
-        {
+        for (int i = 0; i < objs.length(); i++) {
             JSONObject obj = objs.getJSONObject(i);
             ToggleButton button = new ToggleButton(obj.getString("time").substring(0, 5));
             button.setMinWidth(85);
             button.setMinHeight(49);
+            button.setCursor(javafx.scene.Cursor.HAND);
 
             button.setUserData(obj.getBoolean("available"));
 
-            if(!obj.getBoolean("available"))
-            {
+            if (!obj.getBoolean("available")) {
                 button.getStyleClass().add("button_NotAvail");
-            }
-            else
-            {
+            } else {
                 button.getStyleClass().add("inner_big_pane3");
             }
 
@@ -256,12 +260,11 @@ parent.getChildren().add(pane);
         timesBox.setSpacing(15);
     }
 
-    
-    public void backBtnPressed(ActionEvent event){
+    public void backBtnPressed(ActionEvent event) {
         prevPane.setVisible(true);
-    AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
-    //remove last 
-    mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+        AnchorPane mainParentPane = (AnchorPane) prevPane.getParent();
+        // remove last
+        mainParentPane.getChildren().remove(mainParentPane.getChildren().size() - 1);
 
     }
 }

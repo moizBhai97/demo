@@ -24,13 +24,12 @@ public class Patient {
 
     public Patient()
     {
-        appointmentLedger = new AppointmentLedger();
     }
 
     public Patient(int patId)
     {
         this.patId = patId;
-        appointmentLedger = new AppointmentLedger();
+        this.name = DBFactory.getInstance().createHandler("SQL").getPatientName(patId);
     }
 
     public String getName()
@@ -42,17 +41,14 @@ public class Patient {
     public Patient(String info)
     {
         JSONObject obj = new JSONObject(info);
-        //System.out.println(obj.getString("patId"));
 
         this.patId = obj.getInt("patId");
         this.name = obj.getString("name");
         this.email = obj.getString("email");
         this.DOB = obj.getString("DOB");
-        this.DOB = obj.getString("country");
+        this.country = obj.getString("country");
         this.phoneNumber = obj.getString("phoneNumber");
         this.gender = obj.getString("gender");
-
-        appointmentLedger = new AppointmentLedger();
     }
 
     public int getpatId()
@@ -145,7 +141,6 @@ public class Patient {
     {
         try{
 
-            //System.out.println("Patient getHistory");
             setHistory();
             
             JSONArray jsonArray = new JSONArray();
@@ -205,13 +200,16 @@ public class Patient {
 
     public String getAppointList(int value)
     {
+        if(appointmentLedger == null)
+            populateAppointments();
+
         return appointmentLedger.getAppointList(value);
     }
 
-    public void setAppointments()
+    public void populateAppointments()
     {
-        if(appointmentLedger == null)
-            appointmentLedger = new AppointmentLedger();
+        System.out.println("Populating appointments");
+        appointmentLedger = new AppointmentLedger();
             
         appointmentLedger.setPatientAppointments(this.patId);
     }
@@ -259,6 +257,11 @@ public class Patient {
         return obj.toString();
     }
 
+    public void addIllness(int patId, String info)
+    {
+        DBFactory.getInstance().createHandler("SQL").addPatientIllness(patId, info);
+    }
+
     public String get(String value)
     {
         if(value.equals("patId"))
@@ -273,13 +276,20 @@ public class Patient {
         else if(value.equals("DOB"))
             return DOB;
 
+        else if(value.equals("country"))
+            return country;
+
         else if(value.equals("phoneNumber"))
             return phoneNumber;
         
         else if(value.equals("gender"))
             return gender;
+        
+        else if(value.equals("country"))
+            return country;
 
-        return "NULL";
+        else
+            return "NULL";
     }
 
     @Override
@@ -298,6 +308,9 @@ public class Patient {
                 if(!get(key).equals("NULL"))
                     obj.put(key, get(key));
             }
+
+            obj.put("history", getHistory());
+            obj.put("appointments", getAppointList(3));
 
             return obj.toString();
         }

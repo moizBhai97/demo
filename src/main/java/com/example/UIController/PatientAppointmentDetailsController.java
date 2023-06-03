@@ -1,6 +1,7 @@
 package com.example.UIController;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
@@ -22,7 +23,7 @@ import javafx.stage.Stage;
 public class PatientAppointmentDetailsController  implements Initializable
 {
     @FXML
-    private Label name;
+    private Label docName;
     
     @FXML
     private Label date;
@@ -53,11 +54,11 @@ public class PatientAppointmentDetailsController  implements Initializable
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
     {
-        String info = "";//dc.getAppointment(patId, appID);
+        String info = dc.getPatientAppointment(patId, appID);
 
         JSONObject obj = new JSONObject(info);
 
-        name.setText(obj.getJSONObject("doctor").getString("name"));
+        docName.setText(obj.getString("doctor"));
 
         LocalTime startTime = LocalTime.parse(obj.getString("time"));
         LocalTime endTime = startTime.plusHours(1);
@@ -75,31 +76,24 @@ public class PatientAppointmentDetailsController  implements Initializable
 
         amount.setText(obj.getJSONObject("payment").getFloat("amount") + "");
 
+        patId = obj.getInt("patId");
+        patName.setText(obj.getJSONObject("patient").getString("name"));
+
+        String dobString = obj.getJSONObject("patient").getString("DOB");
+
+        LocalDate dob = LocalDate.parse(dobString);
+        int age = LocalDate.now().getYear() - dob.getYear();
+
+        patAge.setText(age + "");
+        patNum.setText(obj.getJSONObject("patient").getString("phoneNumber"));
+
     }
     
-    public void setData(DoctorController dc, int patId, int appID, int docId)
+    public void setData(DoctorController dc, int appID, int docId, int patId)
     {
         this.docId = docId;
         this.dc = dc;
-        this.patId = patId;
         this.appID = appID;
-    }
-
-    public void writeButton(ActionEvent event)
-    {
-        try
-        {
-            // FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/UI/writeReview.fxml"));
-            // Parent root = loader.load();
-            // WriteReviewController wrc = loader.getController();
-            // wrc.setData(pc, patId, docId);
-            // Stage stage = new Stage();
-            // stage.setScene(new Scene(root));
-            // stage.show();
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+        this.patId = patId;
     }
 }

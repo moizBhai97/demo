@@ -10,15 +10,12 @@ import com.example.BackEnd.PatientController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
 
 public class PendingAppointmentDoctorCard {
 
@@ -51,22 +48,12 @@ public class PendingAppointmentDoctorCard {
 
     @FXML
     private AnchorPane rootPane;
+
     int appointID;
     PatientController pc;
     int patId;
     String status;
     int docId;
-
-    public void setDoctor(String name, String date, String timing, String rating) {
-        doctorName.setText(name);
-        this.date.setText(date);
-        this.timing.setText(timing);
-        ratingAmount.setText(rating);
-        double ratingPercentage = Double.parseDouble(rating) / 5.0;
-
-        Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage, ratingStar.getBoundsInLocal().getHeight());
-        ratingStar.setClip(clip);
-    }
 
     public void setCard(String result){
         JSONObject  jsonObject = new JSONObject(result);
@@ -118,16 +105,13 @@ public class PendingAppointmentDoctorCard {
                 pendingAppointmentController.setData(pc, patId, appointID, docId,rootPane);
                 loader.setController(pendingAppointmentController);
             }
-            
-            //-------------------------------------------------------------------------------------------------//
-            //-------------------------------------------------------------------------------------------------//
           
             AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, 0.0);
-            AnchorPane.setBottomAnchor(pane, 0.0);
-            AnchorPane.setLeftAnchor(pane, 0.0);
-            AnchorPane.setRightAnchor(pane, 0.0);
-           // rootPane.setVisible(false);
+            AnchorPane.setTopAnchor(pane, -2.0);
+            AnchorPane.setBottomAnchor(pane, -2.0);
+            AnchorPane.setLeftAnchor(pane, -2.0);
+            AnchorPane.setRightAnchor(pane, -2.0);
+                  
            ((AnchorPane)rootPane.getParent()).getChildren().add(pane);
         } catch (Exception e) {
             e.printStackTrace();

@@ -27,7 +27,6 @@ public class DoctorDetails {
     private int reviews;
 
     private ReviewLedger reviewLedger;
-    private AppointmentLedger appointmentLedger;
     private CertificateLedger certificateLedger;
     private String schedule;
 
@@ -52,7 +51,7 @@ public class DoctorDetails {
         reviewLedger = new ReviewLedger();
         certificateLedger = new CertificateLedger();
     }
-
+    
     public DoctorDetails(String specialization, String description, String location, int stats, int patients, int experience, float rating, String services, String workingHours, float fee, String avail, float checkupRating, float environmentRating, float staffRating, int reviews, int docId)
     {
         this.specialization = specialization;
@@ -109,10 +108,21 @@ public class DoctorDetails {
         }
     }
 
+    // temp
+    public CertificateLedger getCertiLedger()
+    {
+        return certificateLedger;
+    }
+
     public void addCertification(String info, int docId)
     {
         certificateLedger.addCertification(info, docId);
 
+    }
+
+    public String getCertificates()
+    {
+        return certificateLedger.getCertificates();
     }
 
     public String getSpecialization()
@@ -280,14 +290,6 @@ public class DoctorDetails {
         reviewLedger.addReview(info, patId, docId);
     }
 
-    public void setAppointments(int docId)
-    {
-        if(appointmentLedger == null)
-            appointmentLedger = new AppointmentLedger();
-            
-        appointmentLedger.setDoctorAppointments(docId);
-    }
-
     private boolean isDayTime(String time) 
     {
         // Assuming day time slots are from 9 AM to 6 PM
@@ -386,6 +388,7 @@ public class DoctorDetails {
     @Override
     public String toString()
     {
+        System.out.println("DoctorDetails toString");
         try
         {
             JSONParser parser = new JSONParser(); 
@@ -400,6 +403,7 @@ public class DoctorDetails {
                     obj.put(key, get(key));
             }
 
+            System.out.println(obj.toString());
             return obj.toString();
         }
         catch(Exception e)

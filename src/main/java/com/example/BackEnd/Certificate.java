@@ -17,7 +17,7 @@ public class Certificate {
         this.name = json.getString("name");
         this.issueDate = json.getString("issueDate");
         this.expiryDate = json.getString("expiryDate");
-        this.approvedStatus = "Approved";
+        this.approvedStatus = json.getString("approvedStatus");
 
     }
 

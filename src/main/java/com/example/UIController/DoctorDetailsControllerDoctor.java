@@ -8,21 +8,29 @@ import org.json.JSONObject;
 import com.example.BackEnd.DoctorController;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class DoctorDetailsControllerDoctor implements Initializable{
     
     int docId;
-    int patId;
+    //int patId;
     DoctorController dc;
 
     @FXML
@@ -83,7 +91,13 @@ public class DoctorDetailsControllerDoctor implements Initializable{
     private ProgressBar staffProgress;
 
     @FXML
-    private Button certificateBtn;
+    private Hyperlink certificateBtn;
+
+    @FXML
+    private Button appoints;
+
+    @FXML
+    private Pane big_pane;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
@@ -91,7 +105,7 @@ public class DoctorDetailsControllerDoctor implements Initializable{
          
         System.out.println(docId);
 
-        String info = "";//dc.getDocDetails(docId);
+        String info = dc.getDocDetails(docId);
 
         JSONObject obj = new JSONObject(info);
 
@@ -118,10 +132,9 @@ public class DoctorDetailsControllerDoctor implements Initializable{
         
     }
 
-    public void setData(DoctorController dc, int id, int patId)
+    public void setData(DoctorController dc, int id)
     {
         this.dc = dc;
-        this.patId = patId;
         this.docId = id;
     }
 
@@ -140,16 +153,62 @@ public class DoctorDetailsControllerDoctor implements Initializable{
             //-------------------------------------------------------------------------------------------------//
             
             Parent root = loader.load();
-            //stage.setUserData(patientInfo);
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
+            stage.initStyle(StageStyle.UNDECORATED);
             stage.setResizable(false);
-            stage.initModality(Modality.APPLICATION_MODAL); 
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            BoxBlur blur = new BoxBlur();
+            blur.setWidth(10);
+            blur.setHeight(10);
+            blur.setIterations(3);
+            
+
+        // Apply the blur effect to the scene
+            big_pane.setEffect(blur);
+            
+            stage.setOnHidden(event -> {
+                big_pane.setEffect(null); // Remove the blur effect
+            });
+
+            big_pane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+                EventTarget target = event.getTarget();
+                if (!root.getBoundsInParent().contains(event.getX(), event.getY())) {
+                    stage.close(); // Close the child screen
+                }
+            });
+
             stage.show();
             
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void getAppoint(ActionEvent event)
+    {
+        try
+        {
+            this.appoints.getScene().getWindow().hide();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/manageAppointment.fxml")));
+            //-------------------------------------------------------------------------------------------------//
+            ManageAppointmentControllerDoctor manageAppointmentController = new ManageAppointmentControllerDoctor();
+            manageAppointmentController.setData(dc, docId);
+            //-------------------------------------------------------------------------------------------------//
+            loader.setController(manageAppointmentController);
+            loader.load();
+
+            Parent root = loader.getRoot();
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
         }
     }
 }
