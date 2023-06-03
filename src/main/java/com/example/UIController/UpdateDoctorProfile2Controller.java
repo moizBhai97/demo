@@ -3,6 +3,7 @@ package com.example.UIController;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.example.BackEnd.DoctorController;
@@ -47,12 +48,13 @@ public class UpdateDoctorProfile2Controller{
     private DatePicker dp_expire;
 
     DoctorController doctorController = new DoctorController();
-
+    JSONArray certificates;
     int docId;
 
-    void setData(int docId) {
+    void setData(int docId, JSONArray certificates) {
 
         this.docId = docId;
+        this.certificates = certificates;
     }
 
     @FXML
@@ -60,16 +62,19 @@ public class UpdateDoctorProfile2Controller{
 
         try{
 
-            this.btn_approval.getScene().getWindow().hide();
-
             JSONObject json = new JSONObject();
             json.put("name", this.tf_cert.getText());
             json.put("issueDate", this.dp_issue.getValue().toString());
             json.put("expiryDate", this.dp_expire.getValue().toString());
+            json.put("approvedStatus", "Pending");
             
             System.out.println(json.toString());
             
             doctorController.addCertification(json.toString(), docId);
+            certificates.put(json);
+            System.out.println(certificates.toString());
+            
+            this.btn_approval.getScene().getWindow().hide();
         }
         catch(Exception e){
 
