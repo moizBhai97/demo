@@ -19,13 +19,13 @@ public class DoctorLedger {
 
 
         //temp
-        JSONObject info = new JSONObject();
-        info.put("email", "dr.asim@example.com");
-        info.put("password", "drpassword123");
+        // JSONObject info = new JSONObject();
+        // info.put("email", "dr.asim@example.com");
+        // info.put("password", "drpassword123");
 
-        Doctor doctor = getDoctorInstance(info.toString());
-        System.out.println(doctor.toString());
-        doctorList.add(doctor);
+        // Doctor doctor = getDoctorInstance(info.toString());
+        // System.out.println(doctor.toString());
+        // doctorList.add(doctor);
       
     }
 
