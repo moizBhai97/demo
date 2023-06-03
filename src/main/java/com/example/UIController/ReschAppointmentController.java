@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -156,6 +157,15 @@ public class ReschAppointmentController implements Initializable {
     public void reschButton(ActionEvent event) {
         if (selectedTime == null) {
             System.out.println("Please select a time");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No Time Selected!");
+            alert.setContentText("Please select a time to reschedule your appointment.");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == javafx.scene.control.ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
             return;
         }
 
