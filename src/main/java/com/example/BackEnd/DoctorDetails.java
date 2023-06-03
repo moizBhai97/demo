@@ -287,7 +287,23 @@ public class DoctorDetails {
 
     public void addReview(String info, int patId, int docId)
     {
-        reviewLedger.addReview(info, patId, docId);
+        try{
+            reviewLedger.addReview(info, patId, docId);
+            
+            JSONObject obj = new JSONObject();
+            String rating = reviewLedger.getAvgRating(obj.toString());
+            
+            obj = new JSONObject(rating);
+            this.rating = obj.getFloat("rating");
+            this.checkupRating = obj.getFloat("checkupRating");
+            this.environmentRating = obj.getFloat("environmentRating");
+            this.staffRating = obj.getFloat("staffRating");
+            this.stats = obj.getInt("stats");
+            this.reviews = obj.getInt("reviews");    
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 
     private boolean isDayTime(String time) 

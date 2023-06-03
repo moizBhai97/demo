@@ -1057,20 +1057,19 @@ public class SQL extends DBHandler {
             pstmt.setString(3, obj.getString("comment"));
             pstmt.setFloat(4, obj.getFloat("experience"));
             if(obj.getString("recommend").equals("Yes"))
-            {
-                pstmt.setInt(5, 1);
-            }
-            else
-            {
-                pstmt.setInt(5, 0);
-            }
+                {pstmt.setInt(5, 1);}
+            else{pstmt.setInt(5, 0);}
             pstmt.setFloat(6, obj.getFloat("checkupRating"));
             pstmt.setFloat(7, obj.getFloat("environmentRating"));
             pstmt.setFloat(8, obj.getFloat("staffRating"));
             pstmt.executeUpdate();
 
-            pstmt.close();         
-
+            String SQL2 = "UPDATE Doctors SET RATING = (SELECT AVG(EXPERIENCE) FROM Reviews WHERE DOCTOR_ID = ?) WHERE ID = ?;";
+            PreparedStatement pstmt2 = con.prepareStatement(SQL2);
+            pstmt2.setInt(1, docId);
+            pstmt2.setInt(2, docId);
+            
+            pstmt2.executeUpdate();
         }
         catch (SQLException | JSONException e) {
             // con.close();
