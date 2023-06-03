@@ -455,7 +455,7 @@ public class SQL extends DBHandler {
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()){
             System.out.println("SQL getTopDoctors");
 
-            String SQL = "SELECT TOP 4 * FROM DOCTORS ORDER BY ((RATING/5)*60 + STATS*.4) DESC";
+            String SQL = "SELECT TOP 4 * FROM DOCTORS ORDER BY (((SELECT AVG(EXPERIENCE) FROM REVIEWS WHERE DOCTOR_ID = DOCTORS.ID)/5)*60 + (SELECT (AVG(checkupRating)+ AVG(environmentRating)+ AVG(staffRating))/3.0 FROM REVIEWS)*40) DESC";
 
             ResultSet rs = stmt.executeQuery(SQL);
             System.out.println(rs.toString());
