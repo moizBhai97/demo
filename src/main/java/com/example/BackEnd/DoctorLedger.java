@@ -13,11 +13,20 @@ public class DoctorLedger {
     private ArrayList<Doctor> topDoctors;
     private ArrayList<Doctor> doctorList;
 
-
-
     public DoctorLedger() {
         topDoctors = new ArrayList<Doctor>();
         doctorList = new ArrayList<Doctor>();
+
+
+        //temp
+        JSONObject info = new JSONObject();
+        info.put("email", "dr.asim@example.com");
+        info.put("password", "drpassword123");
+
+        Doctor doctor = getDoctorInstance(info.toString());
+        System.out.println(doctor.toString());
+        doctorList.add(doctor);
+      
     }
 
     public void setTopDoctors() {

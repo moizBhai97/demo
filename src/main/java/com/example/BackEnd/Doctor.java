@@ -25,6 +25,7 @@ public class Doctor {
 
     public String getDetails() 
     {
+        System.out.println("Doctor getDetails");
         try 
         {
             String details = doctorDetails.toString();
@@ -38,6 +39,7 @@ public class Doctor {
             obj.put("phoneNumber", phoneNumber);
             obj.put("gender", gender);
 
+            System.out.println("--------------------------------"+obj.toString());
             return obj.toString();
             
         } 
@@ -62,6 +64,11 @@ public class Doctor {
         JSONObject jsonObject = new JSONObject(data);
         this.id = jsonObject.getInt("id");
         this.name = jsonObject.getString("name");
+        this.email = jsonObject.getString("email");
+        this.DOB = jsonObject.getString("DOB");
+        this.country = jsonObject.getString("country");
+        this.phoneNumber = jsonObject.getString("phoneNumber");
+        this.gender = jsonObject.getString("gender");
         this.doctorDetails = new DoctorDetails(jsonObject.getJSONObject("details").toString(), id);
     }
     
@@ -174,6 +181,7 @@ public class Doctor {
         obj.put("country", country);
         obj.put("phoneNumber", phoneNumber);
         obj.put("gender", gender);
+        
 
         return obj.toString();
     }
