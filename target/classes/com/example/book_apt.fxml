@@ -113,7 +113,7 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Pane layoutX="367.0" layoutY="42.0" prefHeight="49.0" prefWidth="264.0" style="-fx-background-color: #D7AB3C;" styleClass="button_night">
+                  <Pane layoutX="367.0" layoutY="42.0" prefHeight="49.0" prefWidth="264.0" style="-fx-background-color: #2854c3;" styleClass="button_night">
                      <children>
                         <ImageView fitHeight="55.0" fitWidth="38.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                            <image>

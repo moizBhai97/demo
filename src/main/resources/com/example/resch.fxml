@@ -30,83 +30,6 @@
          <children>
             <Pane>
                <children>
-                  <Pane fx:id="inner_big_pane1" prefHeight="94.0" prefWidth="245.0" styleClass="inner_big_pane1" stylesheets="@resch.css">
-                     <children>
-                        <Pane layoutY="7.0" prefHeight="79.0" prefWidth="103.0">
-                           <children>
-                              <ImageView fitHeight="58.0" fitWidth="55.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2020.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
-                        <Label fx:id="docName" layoutX="85.0" layoutY="14.0" text="Dr. Amna Irum" textFill="#979797">
-                           <font>
-                              <Font name="System Bold" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="85.0" layoutY="38.0" text="Dermatologist" textFill="#979797" />
-                        <Label layoutX="85.0" layoutY="57.0" text="NUCES FAST Isb" textFill="#979797" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="inner_big_pane11" layoutX="259.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane1" stylesheets="@resch.css">
-                     <children>
-                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
-                           <children>
-                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2016.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
-                        <Label fx:id="texty" layoutX="43.0" layoutY="47.0" styleClass="texty" stylesheets="@resch.css" text="90+">
-                           <font>
-                              <Font name="Serif Regular" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="35.0" layoutY="72.0" text="Patients" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="inner_big_pane111" layoutX="387.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane1" stylesheets="@resch.css">
-                     <children>
-                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
-                           <children>
-                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="17.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2017%20(2).png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
-                        <Label layoutX="25.0" layoutY="47.0" styleClass="texty" stylesheets="@resch.css" text="5+ Years">
-                           <font>
-                              <Font name="Serif Regular" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="28.0" layoutY="72.0" text="Experience" />
-                     </children>
-                  </Pane>
-                  <Pane fx:id="inner_big_pane112" layoutX="513.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane1" stylesheets="@resch.css">
-                     <children>
-                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
-                           <children>
-                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="12.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2018.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
-                        <Label layoutX="46.0" layoutY="47.0" styleClass="texty" stylesheets="@resch.css" text="4.8">
-                           <font>
-                              <Font name="Serif Regular" size="16.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="37.0" layoutY="72.0" text="Ratings" />
-                     </children>
-                  </Pane>
                   <Pane fx:id="big_pane1" layoutY="95.0" prefHeight="302.0" prefWidth="310.0" styleClass="big_pane" stylesheets="@resch.css">
                      <children>
                         <Label layoutX="46.0" layoutY="16.0" text="Reason" textFill="#2854c3">
@@ -198,6 +121,87 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
+                  <Pane fx:id="inner_big_pane12" prefHeight="94.0" prefWidth="245.0" styleClass="inner_big_pane1" stylesheets="@doctor_details.css">
+                     <children>
+                        <Pane layoutY="7.0" prefHeight="79.0" prefWidth="103.0">
+                           <children>
+                              <ImageView fitHeight="58.0" fitWidth="55.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2020.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="name" layoutX="85.0" layoutY="14.0" text="Dr. Amna Irum" textFill="#979797">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="specialization" layoutX="85.0" layoutY="38.0" text="Dermatologist" textFill="#979797" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane113" layoutX="262.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
+                     <children>
+                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
+                           <children>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2016.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="patients" alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="49.0" prefHeight="25.0" prefWidth="41.0" styleClass="texty" stylesheets="@doctor_details.css" text="90" textAlignment="CENTER">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="35.0" layoutY="72.0" text="Patients" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane1111" layoutX="388.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
+                     <children>
+                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
+                           <children>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="17.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2017%20(2).png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="experience" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="47.0" prefHeight="25.0" prefWidth="31.0" styleClass="texty" stylesheets="@doctor_details.css" text="5" textAlignment="CENTER">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="28.0" layoutY="72.0" text="Experience" />
+                        <Label fx:id="experience1" alignment="CENTER" contentDisplay="CENTER" layoutX="46.0" layoutY="47.0" styleClass="texty" stylesheets="@doctor_details.css" text="+ Years">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane1121" layoutX="512.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
+                     <children>
+                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
+                           <children>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="12.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2018.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="rating" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="47.0" prefHeight="25.0" prefWidth="45.0" styleClass="texty" stylesheets="@doctor_details.css" text="4.8">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="37.0" layoutY="72.0" text="Ratings" />
+                     </children>
+                  </Pane>
                </children>
             </Pane>
          </children>

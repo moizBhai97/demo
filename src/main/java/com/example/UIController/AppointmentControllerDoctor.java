@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 import org.json.JSONObject;
 
 import com.example.BackEnd.DoctorController;
-import com.example.BackEnd.PatientController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

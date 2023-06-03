@@ -24,8 +24,6 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.util.Callback;
 
 import com.example.BackEnd.PatientController;
@@ -43,12 +41,6 @@ public class BookAppointmentController implements Initializable {
 
     @FXML
     private Button backBtn;
-
-    @FXML
-    private Pane big_pane1;
-
-    @FXML
-    private Pane bookAppointmentPane;
 
     @FXML
     private Button bookBtn;
@@ -72,22 +64,7 @@ public class BookAppointmentController implements Initializable {
     private Label experience;
 
     @FXML
-    private Label experience1;
-
-    @FXML
     private Label feeLabel;
-
-    @FXML
-    private Pane inner_big_pane1;
-
-    @FXML
-    private Pane inner_big_pane11;
-
-    @FXML
-    private Pane inner_big_pane111;
-
-    @FXML
-    private Pane inner_big_pane112;
 
     @FXML
     private Label name;
@@ -179,13 +156,10 @@ public class BookAppointmentController implements Initializable {
         System.out.println(formattedDate);
         datePick.setText(formattedDate);
 
-        //System.out.println(pc.getSchedule(docId, date, time));
-
         JSONArray objs = new JSONArray(pc.getSchedule(docId, date, time));
 
         refreshToggleButtonGroup(objs.toString());
 
-        
         JSONObject obj = new JSONObject(screenInfo);
 
         name.setText(obj.getString("name"));
@@ -194,11 +168,9 @@ public class BookAppointmentController implements Initializable {
         experience.setText(obj.getInt("experience") + "");
         rating.setText(String.format("%.1f", obj.getFloat("rating")));
         feeLabel.setText(String.format("%.1f", obj.getFloat("fee")));
-
-
     }
 
-    public void setData(PatientController patientController, int Id, int patId,String screenInfo, AnchorPane prevPane){
+    public void setData(PatientController patientController, int Id, int patId, String screenInfo, AnchorPane prevPane){
         this.screenInfo = screenInfo;
         this.pc = patientController;
         this.docId = Id;
@@ -349,7 +321,7 @@ public class BookAppointmentController implements Initializable {
             loader.setLocation((new URL("file:src/main/resources/com/example/payment.fxml")));
 
             PaymentController paymentController = new PaymentController();
-            paymentController.setData(pc, patId,feeLabel.getText() , name.getText(), obj.toString(), prevPane);
+            paymentController.setData(pc, patId, feeLabel.getText() , name.getText(), obj.toString(), prevPane);
             loader.setController(paymentController);
 
             AnchorPane pane = loader.load();

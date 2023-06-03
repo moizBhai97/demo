@@ -80,27 +80,27 @@ public class DoctorDetails {
         {
             reviewLedger = new ReviewLedger(docId);
             certificateLedger = new CertificateLedger(docId);
-            
-
-            info = reviewLedger.getAvgRating(info);
 
             JSONObject obj = new JSONObject(info);
+
+            JSONObject Rating = new JSONObject(reviewLedger.getAvgRating());
 
             this.specialization = obj.getString("specialization");
             this.description = obj.getString("description");
             this.location = obj.getString("location");
-            this.stats = obj.getInt("stats");
+            this.stats = Rating.getInt("stats");
             this.patients = obj.getInt("patients");
             this.experience = obj.getInt("experience");
-            this.rating = obj.getFloat("rating");
+            this.rating = Rating.getFloat("rating");
             this.services = obj.getString("services");
             this.workingHours = obj.getString("workingHours");
             this.fee = obj.getFloat("fee");
             this.availability = obj.getString("availability");
-            this.checkupRating = obj.getFloat("checkupRating");
-            this.environmentRating = obj.getFloat("environmentRating");
-            this.staffRating = obj.getFloat("staffRating");
-            this.reviews = obj.getInt("reviews");
+            this.checkupRating = Rating.getFloat("checkupRating");
+            this.environmentRating = Rating.getFloat("environmentRating");
+            this.staffRating = Rating.getFloat("staffRating");
+            this.reviews = Rating.getInt("reviews");
+            
         }
         catch(Exception e)
         {

@@ -57,6 +57,21 @@ public class ReschAppointmentController  implements Initializable
     @FXML
     private HBox timesBox;
 
+    @FXML
+    private Label name;
+
+    @FXML
+    private Label specialization;
+
+    @FXML
+    private Label patients;
+
+    @FXML
+    private Label experience;
+
+    @FXML
+    private Label rating;
+
     private AnchorPane prevPane;
 
     PatientController pc;
@@ -66,6 +81,7 @@ public class ReschAppointmentController  implements Initializable
     int time;
     String date;
     String selectedTime = null;
+    String screenInfo;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
@@ -89,15 +105,24 @@ public class ReschAppointmentController  implements Initializable
         JSONArray objs = new JSONArray(pc.getSchedule(docId, date, time));
 
         refreshToggleButtonGroup(objs.toString());
+
+        JSONObject obj = new JSONObject(screenInfo);
+
+        name.setText(obj.getJSONObject("doctor").getString("name"));
+        specialization.setText(obj.getJSONObject("doctor").getString("specialization"));
+        patients.setText(obj.getJSONObject("doctor").getString("patients"));
+        experience.setText(obj.getJSONObject("doctor").getString("experience"));
+        rating.setText(String.format("%.1f", obj.getJSONObject("doctor").getFloat("rating")));
     }
     
-    public void setData(PatientController pc, int patId, int appID, int docId, AnchorPane prevPane)
+    public void setData(PatientController pc, int patId, int appID, int docId, AnchorPane prevPane, String info)
     {
         this.pc = pc;
         this.patId = patId;
         this.appID = appID;
         this.docId = docId;
         this.prevPane = prevPane;
+        this.screenInfo = info;
     }
 
     public void morningButton(ActionEvent event) 

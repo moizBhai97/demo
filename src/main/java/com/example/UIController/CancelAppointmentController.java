@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
@@ -28,20 +29,46 @@ public class CancelAppointmentController implements Initializable {
     @FXML
     private Button cancelButton;
 
+    @FXML
+    private Label name;
+    
+    @FXML
+    private Label specialization;
+
+    @FXML
+    private Label patients;
+
+    @FXML
+    private Label experience;
+
+    @FXML
+    private Label rating;
+
     PatientController pc;
     int patId;
     int appID;
+    String screenInfo;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+
+        JSONObject obj = new JSONObject(screenInfo);
+
+        name.setText(obj.getJSONObject("doctor").getString("name"));
+        specialization.setText(obj.getJSONObject("doctor").getString("specialization"));
+        patients.setText(obj.getJSONObject("doctor").getString("patients"));
+        experience.setText(obj.getJSONObject("doctor").getString("experience"));
+        rating.setText(String.format("%.1f", obj.getJSONObject("doctor").getFloat("rating")));
+
         reason.setWrapText(true);
     }
 
-    public void setData(PatientController pc, int patId, int appID, AnchorPane prevPane) {
+    public void setData(PatientController pc, int patId, int appID, AnchorPane prevPane, String info) {
         this.pc = pc;
         this.patId = patId;
         this.appID = appID;
         this.prevPane = prevPane;
+        this.screenInfo = info;
     }
 
     public void cancelButton(ActionEvent event) {

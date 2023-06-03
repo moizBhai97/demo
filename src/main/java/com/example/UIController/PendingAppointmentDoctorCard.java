@@ -66,7 +66,7 @@ public class PendingAppointmentDoctorCard {
         timing.setText(startTime + " - " + endTime);
         Status.setText(jsonObject.getString("status"));
         status = jsonObject.getString("status");
-        ratingAmount.setText(jsonObject.getFloat("rating") + "");
+        ratingAmount.setText(String.format("%.1f", jsonObject.getFloat("rating")));
         double ratingPercentage = jsonObject.getFloat("rating") / 5.0;
 
         Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage, ratingStar.getBoundsInLocal().getHeight());
