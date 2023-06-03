@@ -75,14 +75,14 @@
                            <image>
                               <Image url="@../../images/image%2029.png" />
                            </image>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
                         </ImageView>
                      </graphic>
                      <toggleGroup>
                         <ToggleGroup fx:id="sortingButtons" />
                      </toggleGroup>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ToggleButton>
                   <Button fx:id="alphabetical_sort_btn" layoutX="28.0" layoutY="81.0" mnemonicParsing="false" onAction="#alphabeticalSortPressed" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="A-Z">
                      <cursor>
@@ -148,6 +148,9 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button fx:id="filterRating1" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="32.0" styleClass="filter_rating" text="1">
                                  <graphic>
@@ -157,6 +160,9 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button fx:id="filterRating2" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="32.0" styleClass="filter_rating" text="2">
                                  <graphic>
@@ -166,6 +172,9 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button fx:id="filterRating3" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="32.0" styleClass="filter_rating" text="3">
                                  <graphic>
@@ -175,6 +184,9 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button fx:id="filterRating4" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="32.0" styleClass="filter_rating" text="4">
                                  <graphic>
@@ -184,6 +196,9 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button fx:id="filterRating5" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="32.0" styleClass="filter_rating" text="5">
                                  <graphic>
@@ -193,11 +208,11 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                            </children>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
                         </HBox>
                         <Line endX="80.0" layoutX="100.0" layoutY="37.0" startX="-80.0" style="-fx-stroke: #979797;" />
                         <Button fx:id="filterApply" contentDisplay="CENTER" layoutX="56.0" layoutY="168.0" mnemonicParsing="false" onAction="#filterApplyPressed" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #2854c3; -fx-text-fill: #ffffff;" text="Apply">
