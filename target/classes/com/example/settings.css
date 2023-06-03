@@ -1,0 +1,14 @@
+.editProfile{
+    -fx-background-color: #f2f2f2;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+
+    -fx-text-fill: #2854c3;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+
+.editProfile:hover{
+    -fx-background-color: #e6e6e6;
+    
+}
