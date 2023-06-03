@@ -190,20 +190,3 @@
 .dashboardBtn:hover .text {
   -fx-text-fill: #2854C3;
 }
-
-.backButton{
-    -fx-background-color: #ffffff;
-    -fx-border-color: transparent;
-    -fx-border-width: 2px 2px 2px 2px;
-    -fx-border-radius: 10px;
-    -fx-background-radius: 10px;
-    
-    -fx-font-size: 16px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #2854C3;
-}
-
-.backButton:hover{
-    -fx-background-color: #2854C3;
-    -fx-text-fill: #ffffff;
-}

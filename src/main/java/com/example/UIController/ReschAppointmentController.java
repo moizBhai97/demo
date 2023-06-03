@@ -15,9 +15,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -27,7 +26,7 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class ReschAppointmentController  implements Initializable
 {
@@ -60,10 +59,10 @@ public class ReschAppointmentController  implements Initializable
 
     private AnchorPane prevPane;
 
-    PatientController pc = new PatientController();
-    int patId = 1;
+    PatientController pc;
+    int patId;
     int appID;
-    int docId = 101;
+    int docId;
     int time;
     String date;
     String selectedTime = null;
@@ -71,6 +70,8 @@ public class ReschAppointmentController  implements Initializable
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
     {
+        datePicker.setDayCellFactory(getDisablePastDatesCellFactory());
+
         time = 1;
         reason.setWrapText(true);
 
@@ -84,8 +85,6 @@ public class ReschAppointmentController  implements Initializable
         String formattedDate = dateConvert.format(outputFormatter);
         System.out.println(formattedDate);
         datePick.setText(formattedDate);
-
-        //System.out.println(pc.getSchedule(docId, date, time));
 
         JSONArray objs = new JSONArray(pc.getSchedule(docId, date, time));
 
@@ -154,23 +153,22 @@ public class ReschAppointmentController  implements Initializable
 
         try
         {
-         //   this.reschButton.getScene().getWindow().hide();
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/manageAppointment.fxml")));
-            //-------------------------------------------------------------------------------------------------//
+
             ManageAppointmentController manageAppointmentController = new ManageAppointmentController();
             manageAppointmentController.setData(pc, patId);
-            //-------------------------------------------------------------------------------------------------//
             loader.setController(manageAppointmentController);
 
-            AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, 0.0);
-            AnchorPane.setBottomAnchor(pane, 0.0);
-            AnchorPane.setLeftAnchor(pane, 0.0);
-            AnchorPane.setRightAnchor(pane, 0.0);
-            // rootPane.setVisible(false);
-            ((AnchorPane) prevPane.getParent()).getChildren().clear();
-            ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
+            AnchorPane root = loader.load();
+            AnchorPane.setTopAnchor(root, 0.0);
+            AnchorPane.setBottomAnchor(root, 0.0);
+            AnchorPane.setLeftAnchor(root, 0.0);
+            AnchorPane.setRightAnchor(root, 0.0);
+
+            //((AnchorPane) prevPane.getParent()).getChildren().clear();
+            ((AnchorPane) prevPane.getParent()).getChildren().add(root);
         }
         catch(Exception e)
         {
@@ -194,6 +192,24 @@ public class ReschAppointmentController  implements Initializable
         datePick.setText(formattedDate);
 
         refreshToggleButtonGroup(pc.getSchedule(docId, date, time));
+    }
+
+    private Callback<DatePicker, DateCell> getDisablePastDatesCellFactory() {
+        return new Callback<>() {
+            @Override
+            public DateCell call(final DatePicker datePicker) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item.isBefore(LocalDate.now())) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;"); // Optional: Set a different background color for disabled dates
+                        }
+                    }
+                };
+            }
+        };
     }
 
     public void handleToggleButtonAction(ToggleButton selectedButton) 
@@ -234,6 +250,7 @@ public class ReschAppointmentController  implements Initializable
             ToggleButton button = new ToggleButton(obj.getString("time").substring(0, 5));
             button.setMinWidth(85);
             button.setMinHeight(49);
+            button.setCursor(javafx.scene.Cursor.HAND);
 
             button.setUserData(obj.getBoolean("available"));
 
@@ -257,9 +274,9 @@ public class ReschAppointmentController  implements Initializable
     
     public void backBtnPressed(ActionEvent event){
         prevPane.setVisible(true);
-    AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
-    //remove last 
-    mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+        AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
+        //remove last 
+        mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
 
     }
 }

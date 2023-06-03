@@ -29,7 +29,7 @@ public class SQL extends DBHandler {
         musa = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;";
         abdullah = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;";
 
-        connectionUrl = musa + 
+        connectionUrl = moiz + 
                         "databaseName=SDA;" + 
                         "IntegratedSecurity=true;" + 
                         "encrypt=true;trustServerCertificate=true";
@@ -701,21 +701,6 @@ public class SQL extends DBHandler {
             ResultSet rs = pstmt.executeQuery();
 
             JSONArray appointments = new JSONArray();
-
-            /*
-            "appId": "{{appId}}",
-            "date": "{{date}}",
-            "time": "{{time}}",
-            "problem": "{{problem}}",
-            "status": "{{status}}",
-            "docId": "{{docId}}",
-            "payment": {
-                            "amount": "{{amount}}",
-                            "status": "{{status}}",
-                            "date": "{{date}}",
-                            "time": "{{time}}"
-                        }
-             */
 
             while(rs.next())
             {

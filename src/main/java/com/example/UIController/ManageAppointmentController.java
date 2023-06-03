@@ -13,7 +13,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public class ManageAppointmentController implements Initializable {
@@ -45,16 +44,9 @@ public class ManageAppointmentController implements Initializable {
          pendingAppointmentsFlowPane.setVgap(10);
         pendingAppointmentsFlowPane.setHgap(10);
         pendingAppointmentsFlowPane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
-        //pendingAppointmentsFlowPane.autosize();
+
         pendingAppointmentsScrollPane.getChildrenUnmodifiable().clear();
         pendingAppointmentsScrollPane.setContent(pendingAppointmentsFlowPane);
-
-    //        pendingAppointmentsFlowPane.setPrefWrapLength(0);
-    // pendingAppointmentsFlowPane.widthProperty().addListener((obs, oldVal, newVal) -> {
-    //     if (newVal.doubleValue() > oldVal.doubleValue()) {
-    //         pendingAppointmentsFlowPane.setPrefWrapLength(newVal.doubleValue());
-    //     }
-    // });
 
         fillPendingAppointments();
         fillCompletedAppointments();
@@ -97,7 +89,7 @@ public class ManageAppointmentController implements Initializable {
     }
 
     public String getPendingAppointments() {
-        // Dummy Data for JSON array
+
         System.out.println("Pending Appointments");
         String result = patientController.getAppointList(patId, 1);
 
@@ -105,7 +97,7 @@ public class ManageAppointmentController implements Initializable {
     }
 
     public String getCompletedAppointments() {
-        // Dummy Data for JSON array
+        
         System.out.println("Completed Appointments");
         String result = patientController.getAppointList(patId, 2);
 

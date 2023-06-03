@@ -61,8 +61,14 @@
                         <Image url="@../../images/Polygon%201.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="review_sort_btn" layoutX="167.0" layoutY="81.0" mnemonicParsing="false" onAction="#reviewSortPressed" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="Rating" />
-                  <Button fx:id="price_sort_btn" layoutX="97.0" layoutY="81.0" mnemonicParsing="false" onAction="#priceSelected" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="Price" />
+                  <Button fx:id="review_sort_btn" layoutX="167.0" layoutY="81.0" mnemonicParsing="false" onAction="#reviewSortPressed" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="Rating">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
+                  <Button fx:id="price_sort_btn" layoutX="97.0" layoutY="81.0" mnemonicParsing="false" onAction="#priceSelected" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="Price">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <ToggleButton fx:id="ascen_sort_toggle" layoutX="236.0" layoutY="80.0" mnemonicParsing="false" onAction="#ascendingPressed" styleClass="sort_btn" stylesheets="@search_doctors.css">
                      <graphic>
                         <ImageView fitHeight="16.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
@@ -74,11 +80,20 @@
                      <toggleGroup>
                         <ToggleGroup fx:id="sortingButtons" />
                      </toggleGroup>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </ToggleButton>
-                  <Button fx:id="alphabetical_sort_btn" layoutX="28.0" layoutY="81.0" mnemonicParsing="false" onAction="#alphabeticalSortPressed" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="A-Z" />
+                  <Button fx:id="alphabetical_sort_btn" layoutX="28.0" layoutY="81.0" mnemonicParsing="false" onAction="#alphabeticalSortPressed" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="A-Z">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></Button>
                   <Pane fx:id="searchPane" layoutX="26.0" layoutY="43.0" prefHeight="28.0" prefWidth="469.0" styleClass="search_pane" stylesheets="@search_doctors.css">
                      <children>
-                        <TextField fx:id="searchBar" layoutX="28.0" layoutY="2.0" onAction="#searchTextKeyPressed" prefHeight="25.0" prefWidth="411.0" promptText="Search" styleClass="search" stylesheets="@search_doctors.css" />
+                        <TextField fx:id="searchBar" layoutX="28.0" layoutY="2.0" onAction="#searchTextKeyPressed" prefHeight="25.0" prefWidth="438.0" promptText="Search" styleClass="search" stylesheets="@search_doctors.css">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextField>
                         <Pane layoutX="1.0" prefHeight="25.0" prefWidth="33.0">
                            <children>
                               <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="2.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
@@ -98,9 +113,12 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Label fx:id="doc_count" layoutX="24.0" layoutY="115.0" style="-fx-font-size: 12px; -fx-font-weight: bold;" text="Top Doctors" />
-                  <ScrollPane fx:id="results_scrollpane" fitToWidth="true" layoutX="17.0" layoutY="135.0" prefHeight="411.0" prefWidth="631.0" styleClass="scroll_pane" stylesheets="@search_doctors.css" AnchorPane.bottomAnchor="18.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="135.0" />
+                  <ScrollPane fx:id="results_scrollpane" fitToWidth="true" layoutX="17.0" layoutY="135.0" prefHeight="417.0" prefWidth="631.0" styleClass="scroll_pane" stylesheets="@search_doctors.css" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="135.0" />
                   <Pane fx:id="filter_Pane" layoutX="439.0" layoutY="89.0" prefHeight="202.0" prefWidth="200.0" styleClass="filter_pane" stylesheets="@search_doctors_Searched.css">
                      <children>
                         <Label layoutX="81.0" layoutY="11.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Filters" />
@@ -116,6 +134,9 @@
                                  <String fx:id="specialty_4" fx:value="Dermatologist" />
                               </FXCollections>
                            </items>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ComboBox>
                         <HBox layoutX="-1.0" layoutY="135.0" prefHeight="26.0" prefWidth="200.0" spacing="1.0" stylesheets="@search_doctors.css">
                            <children>
@@ -127,6 +148,9 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button fx:id="filterRating1" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="32.0" styleClass="filter_rating" text="1">
                                  <graphic>
@@ -136,6 +160,9 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button fx:id="filterRating2" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="32.0" styleClass="filter_rating" text="2">
                                  <graphic>
@@ -145,6 +172,9 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button fx:id="filterRating3" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="32.0" styleClass="filter_rating" text="3">
                                  <graphic>
@@ -154,6 +184,9 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button fx:id="filterRating4" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="32.0" styleClass="filter_rating" text="4">
                                  <graphic>
@@ -163,6 +196,9 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                               <Button fx:id="filterRating5" alignment="BASELINE_LEFT" graphicTextGap="0.0" mnemonicParsing="false" onAction="#ratingButtonPressed" prefHeight="24.0" prefWidth="32.0" styleClass="filter_rating" text="5">
                                  <graphic>
@@ -172,11 +208,17 @@
                                        </image>
                                     </ImageView>
                                  </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
                               </Button>
                            </children>
                         </HBox>
                         <Line endX="80.0" layoutX="100.0" layoutY="37.0" startX="-80.0" style="-fx-stroke: #979797;" />
-                        <Button fx:id="filterApply" contentDisplay="CENTER" layoutX="56.0" layoutY="168.0" mnemonicParsing="false" onAction="#filterApplyPressed" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #2854c3; -fx-text-fill: #ffffff;" text="Apply" />
+                        <Button fx:id="filterApply" contentDisplay="CENTER" layoutX="56.0" layoutY="168.0" mnemonicParsing="false" onAction="#filterApplyPressed" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #2854c3; -fx-text-fill: #ffffff;" text="Apply">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor></Button>
                      </children>
                   </Pane>
                </children>
@@ -214,6 +256,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="appointmentBtn" contentDisplay="TOP" mnemonicParsing="false" onAction="#appointmentBtnPressed" styleClass="dashboardBtn" text="Appointments" textFill="#2854c3">
                <graphic>
@@ -223,6 +268,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="settingsBtn" contentDisplay="TOP" mnemonicParsing="false" styleClass="dashboardBtn" text="Settings" textFill="#2854c3">
                <graphic>
@@ -239,6 +287,9 @@
                      </effect>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Button fx:id="logoutBtn" contentDisplay="TOP" mnemonicParsing="false" styleClass="dashboardBtn" text="Logout" textFill="#2854c3">
                <graphic>
@@ -248,6 +299,9 @@
                      </image>
                   </ImageView>
                </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children>
          <BorderPane.margin>

@@ -9,19 +9,15 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -29,12 +25,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.effect.BlurType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -42,6 +36,7 @@ import javafx.scene.layout.StackPane;
 import com.example.BackEnd.PatientController;
 
 public class SearchDoctorController implements Initializable {
+
     PatientController patientController;
     int patId;
 
@@ -276,7 +271,6 @@ public class SearchDoctorController implements Initializable {
             alphabetical_sort_btn.setStyle("-fx-background-color: #2854C3; -fx-text-fill: #ffffff;");
             selectedToggle = alphabetical_sort_btn;
 
-            // sortByAlphabetical();
             createDoctorCards(
                     patientController.sortDoctors(searhcedName, "A-Z", !ascen_sort_toggle.isSelected(), ratingFilter,
                             specialty));
@@ -335,14 +329,9 @@ public class SearchDoctorController implements Initializable {
             imageView.setEffect(new InnerShadow(100, Color.web("#2854c3")));
             searchBtn.setStyle("-fx-text-fill: #2854c3;");
         }
-        // results_grid = new GridPane();
 
         selectedDashbordBtn = searchBtn;
         results_flowpane = new FlowPane();
-
-        // patientController = new PatientController();
-        // results_grid.setHgap(10);
-        // results_grid.setVgap(10);
 
         results_flowpane.setHgap(10);
         results_flowpane.setVgap(10);
@@ -382,19 +371,6 @@ public class SearchDoctorController implements Initializable {
 
     public void refresh() {
 
-        // esults_grid.setHgap(10);
-        // results_grid.setVgap(10);
-        // results_grid.getChildren().clear();
-        //patientController = new PatientController();
-        
-        //esults_grid.setHgap(10);
-        //results_grid.setVgap(10);
-        //results_grid.getChildren().clear();
-        // patientController = new PatientController();
-
-        // esults_grid.setHgap(10);
-        // results_grid.setVgap(10);
-        // results_grid.getChildren().clear();
         results_scrollpane.getChildrenUnmodifiable().clear();
         // set padding
         results_flowpane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
@@ -512,9 +488,6 @@ public class SearchDoctorController implements Initializable {
         settingsBtn.setStyle("-fx-text-fill: #979797");
         settingsBtn.getGraphic().setEffect(null);
 
-        // homeBtn.setStyle("-fx-text-fill: #979797");
-        // profileBtn.setStyle("-fx-text-fill: #979797");
-
     }
 
     public void searchBtnPressed(ActionEvent event) {
@@ -529,16 +502,19 @@ public class SearchDoctorController implements Initializable {
             ImageView imageView = (ImageView) searchBtn.getGraphic();
             imageView.setEffect(new InnerShadow(100, Color.web("#2854c3")));
             searchBtn.setStyle("-fx-text-fill: #2854c3;");
+
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
             SearchDoctorController controller = new SearchDoctorController();
             controller.setData(patientController, patId);
             loader.setController(controller);
+
             AnchorPane root = loader.load();
             AnchorPane.setTopAnchor(root, 0.0);
             AnchorPane.setBottomAnchor(root, 0.0);
             AnchorPane.setLeftAnchor(root, 0.0);
             AnchorPane.setRightAnchor(root, 0.0);
+
             rootPane.getChildren().setAll(root);
         } catch (Exception e) {
             e.printStackTrace();
@@ -562,11 +538,13 @@ public class SearchDoctorController implements Initializable {
             ManageAppointmentController controller = new ManageAppointmentController();
             controller.setData(patientController, patId);
             loader.setController(controller);
+
             AnchorPane root = loader.load();
             AnchorPane.setTopAnchor(root, 0.0);
             AnchorPane.setBottomAnchor(root, 0.0);
             AnchorPane.setLeftAnchor(root, 0.0);
             AnchorPane.setRightAnchor(root, 0.0);
+            
             rootPane.getChildren().clear();
             rootPane.getChildren().add(root);
 

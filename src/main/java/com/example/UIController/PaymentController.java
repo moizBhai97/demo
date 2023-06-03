@@ -18,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class PaymentController  implements Initializable
@@ -40,9 +41,6 @@ public class PaymentController  implements Initializable
     @FXML
     private Button cancelBtn;
 
-    @FXML
-    private Button appoints;
-
     private PatientController pc;
     private int patId;
     private String fee;
@@ -50,6 +48,7 @@ public class PaymentController  implements Initializable
     private String appoint;
     private String date;
     private String time;
+    private AnchorPane prevPane;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
@@ -86,13 +85,14 @@ public class PaymentController  implements Initializable
         }
     }
     
-    public void setData(PatientController pc, int patId, String fee, String docName, String appoint)
+    public void setData(PatientController pc, int patId, String fee, String docName, String appoint, AnchorPane prevPane)
     {
         this.pc = pc;
         this.patId = patId;
         this.fee = fee;
         this.docName = docName;
         this.appoint = appoint;
+        this.prevPane = prevPane;
     }
 
     public void paymentButton(ActionEvent event)
@@ -109,9 +109,22 @@ public class PaymentController  implements Initializable
 
             obj.put("payment", payment);
 
-            System.out.println(obj.toString());
-
             pc.saveAppointment(obj.toString(), patId);
+
+            this.paymentBtn.getScene().getWindow().hide();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors - Copy.fxml")));
+
+            SearchDoctorController searchDoctorController = new SearchDoctorController();
+            searchDoctorController.setData(pc, patId);
+            loader.setController(searchDoctorController);
+
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
         }
         catch(Exception e)
         {
@@ -125,36 +138,15 @@ public class PaymentController  implements Initializable
         try
         {
             pc.cancelSlot(appoint, patId);
+
+            prevPane.setVisible(true);
+            AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
+            mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
         }
         catch(Exception e)
         {
             System.out.println(e);
             e.printStackTrace();
-        }
-    }
-
-    public void getAppoint(ActionEvent event)
-    {
-        try
-        {
-            this.appoints.getScene().getWindow().hide();
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/manageAppointment.fxml")));
-            //-------------------------------------------------------------------------------------------------//
-            ManageAppointmentController manageAppointmentController = new ManageAppointmentController();
-            manageAppointmentController.setData(pc, patId);
-            //-------------------------------------------------------------------------------------------------//
-            loader.setController(manageAppointmentController);
-            loader.load();
-
-            Parent root = loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
         }
     }
 }
