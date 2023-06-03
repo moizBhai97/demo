@@ -59,25 +59,29 @@ public class CancelAppointmentController implements Initializable {
 
         obj.put("reason", reason);
 
-        pc.cancelAppointment(obj.toString(), patId, appID);
+      //  pc.cancelAppointment(obj.toString(), patId, appID);
 
         try {
             // this.cancelButton.getScene().getWindow().hide();
-            FXMLLoader loader = new FXMLLoader();
+         FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/manageAppointment.fxml")));
             // -------------------------------------------------------------------------------------------------//
             ManageAppointmentController manageAppointmentController = new ManageAppointmentController();
             manageAppointmentController.setData(pc, patId);
             // -------------------------------------------------------------------------------------------------//
             loader.setController(manageAppointmentController);
+
             AnchorPane pane = loader.load();
             AnchorPane.setTopAnchor(pane, 0.0);
             AnchorPane.setBottomAnchor(pane, 0.0);
             AnchorPane.setLeftAnchor(pane, 0.0);
             AnchorPane.setRightAnchor(pane, 0.0);
-            // rootPane.setVisible(false);
-            ((AnchorPane) prevPane.getParent()).getChildren().clear();
-            ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
+            AnchorPane parent = (AnchorPane) prevPane.getParent();
+            if (parent != null) {
+                parent.getChildren().clear();
+            }
+            parent.getChildren().add(pane);
+          
         } catch (Exception e) {
             System.out.println(e);
         }

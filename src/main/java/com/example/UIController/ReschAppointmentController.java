@@ -168,9 +168,11 @@ public class ReschAppointmentController  implements Initializable
             AnchorPane.setBottomAnchor(pane, 0.0);
             AnchorPane.setLeftAnchor(pane, 0.0);
             AnchorPane.setRightAnchor(pane, 0.0);
-            // rootPane.setVisible(false);
-            ((AnchorPane) prevPane.getParent()).getChildren().clear();
-            ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
+AnchorPane parent = (AnchorPane)prevPane.getParent();
+if (parent != null) {
+    parent.getChildren().clear();
+}
+parent.getChildren().add(pane);
         }
         catch(Exception e)
         {
