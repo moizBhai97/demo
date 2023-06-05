@@ -17,6 +17,6 @@
       </ImageView>
       <Label fx:id="date" layoutX="89.0" layoutY="30.0" style="-fx-font-size: 10; -fx-text-fill: #8C8FA5;" text="Mon 25, April" />
       <Label fx:id="Status" layoutX="200.0" layoutY="15.0" style="-fx-font-size: 10; -fx-text-fill: #8C8FA5;" text="Booked" />
-      <Button fx:id="viewBtn" alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="0.0" layoutX="166.0" layoutY="73.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#viewButton" prefHeight="24.0" prefWidth="77.0" style="-fx-font-weight: bold; -fx-font-size: 10; -fx-text-alignment: top; -fx-alignment: top;" styleClass="book_apt_btn" stylesheets="@manageAppointment.css" text="View" />
+      <Button fx:id="viewBtn" alignment="TOP_CENTER" contentDisplay="TOP" graphicTextGap="0.0" layoutX="166.0" layoutY="73.0" minHeight="-Infinity" mnemonicParsing="false" onAction="#viewButton" prefHeight="24.0" prefWidth="77.0" style="-fx-font-weight: bold; -fx-font-size: 10;" styleClass="book_apt_btn" stylesheets="@manageAppointment.css" text="View" />
    </children>
 </Pane>

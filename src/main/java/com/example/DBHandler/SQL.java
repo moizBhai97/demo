@@ -265,6 +265,23 @@ public class SQL extends DBHandler {
         }
     }
 
+    public void updatePayment(int appId)
+    {
+        try(Connection con = DriverManager.getConnection(connectionUrl))
+        {
+            String SQL = "UPDATE Payments SET STATUS = 1 WHERE APPOINTMENT_ID = ?;";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, appId);
+            pstmt.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
+            }.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
+        }
+    }
+
     public String getDoctorDetails(int docId)
     {
         try (Connection con = DriverManager.getConnection(connectionUrl)) 

@@ -13,6 +13,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -21,9 +25,14 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.Effect;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Callback;
 
 import com.example.BackEnd.PatientController;
@@ -38,6 +47,9 @@ public class BookAppointmentController implements Initializable {
     int time;
     String date;
     String selectedTime = null;
+
+    @FXML
+    private AnchorPane parentPane;
 
     @FXML
     private Button backBtn;
@@ -321,17 +333,32 @@ public class BookAppointmentController implements Initializable {
             loader.setLocation((new URL("file:src/main/resources/com/example/payment.fxml")));
 
             PaymentController paymentController = new PaymentController();
-            paymentController.setData(pc, patId, feeLabel.getText() , name.getText(), obj.toString(), prevPane);
+            paymentController.setData(pc, patId, feeLabel.getText() , name.getText(), obj.toString(), this.bookBtn.getScene());
             loader.setController(paymentController);
 
-            AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, -1.0);
-            AnchorPane.setBottomAnchor(pane, -2.0);
-            AnchorPane.setLeftAnchor(pane, -2.0);
-            AnchorPane.setRightAnchor(pane, -2.0);
+            Parent parent = loader.load();
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
 
-            //((AnchorPane) prevPane.getParent()).getChildren().clear();
-            ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            Point2D point = prevPane.localToScreen(-2, -2);
+
+            double parentTopLeftX = point.getX();
+            double parentTopLeftY = point.getY();
+
+            System.out.println(parentTopLeftX + " " + parentTopLeftY);
+
+            // Set the child stage position relative to the parent's top left corner
+            stage.setX(parentTopLeftX);
+            stage.setY(parentTopLeftY);
+            stage.setWidth(parentPane.getWidth()-2);
+            stage.setHeight(parentPane.getHeight()-2);
+            
+            stage.show();
         }
         catch(Exception e)
         {

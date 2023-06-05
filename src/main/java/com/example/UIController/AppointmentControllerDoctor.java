@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -37,9 +38,6 @@ public class AppointmentControllerDoctor  implements Initializable
     private Label patNum;
 
     @FXML
-    private Label status;
-
-    @FXML
     private Label amount;
 
     @FXML
@@ -50,6 +48,9 @@ public class AppointmentControllerDoctor  implements Initializable
 
     @FXML
     private Button reportBtn;
+
+    @FXML
+    private Hyperlink verify;
 
     DoctorController dc;
     int patId;
@@ -73,14 +74,12 @@ public class AppointmentControllerDoctor  implements Initializable
 
         if(obj.getJSONObject("payment").getBoolean("status"))
         {
-            status.setText("Paid");
-        }
-        else
-        {
-            status.setText("UnPaid");
+            verify.setDisable(true);
+            verify.setText("Verified");
+            verify.setStyle("-fx-opacity: 1.0; -fx-font-fill: #2854c3;");
         }
 
-        amount.setText(obj.getJSONObject("payment").getFloat("amount") + "");
+        amount.setText(obj.getJSONObject("payment").getFloat("amount") + " Rs");
 
         patId = obj.getInt("patId");
         patName.setText(obj.getJSONObject("patient").getString("name"));
@@ -146,6 +145,33 @@ public class AppointmentControllerDoctor  implements Initializable
             ReportController reportController = new ReportController();
             reportController.setData(dc, patId, docId, patName.getText(), patGender);
             loader.setController(reportController);
+
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
+
+    public void verifyButton(ActionEvent event)
+    {
+        try
+        {
+            dc.verifyPayment(docId, appID);
+
+            this.verify.getScene().getWindow().hide();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/app_detailsDoctor.fxml")));
+
+            AppointmentControllerDoctor appointmentControllerDoctor = new AppointmentControllerDoctor();
+            appointmentControllerDoctor.setData(dc, appID, docId);
+            loader.setController(appointmentControllerDoctor);
 
             Parent root = loader.load();
             Scene scene = new Scene(root);

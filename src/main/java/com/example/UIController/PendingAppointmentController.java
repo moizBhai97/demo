@@ -93,7 +93,7 @@ public class PendingAppointmentController implements Initializable {
             status.setText("UnPaid");
         }
 
-        amount.setText(obj.getJSONObject("payment").getFloat("amount") + "");
+        amount.setText(obj.getJSONObject("payment").getFloat("amount") + " Rs");
 
         patName.setText(obj.getJSONObject("patient").getString("name"));
 

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="564.0" prefWidth="656.8" styleClass="big_pane" stylesheets="@book_apt.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="parentPane" prefHeight="564.0" prefWidth="656.8" styleClass="big_pane" stylesheets="@book_apt.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="backBtn" layoutY="4.0" mnemonicParsing="false" onAction="#backBtnPressed" prefHeight="13.0" prefWidth="82.0" styleClass="Butt_inner_pane" text="&lt;  Back" textFill="#2854c3" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="4.0">
          <font>

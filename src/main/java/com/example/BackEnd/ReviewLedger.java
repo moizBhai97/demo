@@ -111,9 +111,6 @@ public class ReviewLedger {
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
         }
-
-
-        //dbFactory.createHandler("SQL").addReview(info);
     }
     
 }

@@ -54,6 +54,8 @@ public class CertificateLedger {
             objs.put(obj);
         }
 
+        System.out.println(objs.toString());
+
         return objs.toString();
     }
 

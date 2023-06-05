@@ -12,10 +12,8 @@ public class ComplaintCatalog {
     }
 
     public void newComplaint(int patID, String details, int docID){
+        DBFactory.getInstance().createHandler("SQL").addComplaint(patID, details, docID);
         complaints.add(new Complaint(patID, details, docID));
-        //call db to add complaint
-
-         DBFactory.getInstance().createHandler("SQL").addComplaint(patID, details, docID);
     }
 
 

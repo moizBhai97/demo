@@ -8,17 +8,10 @@ import java.util.ResourceBundle;
 import org.json.JSONObject;
 
 import com.example.BackEnd.DoctorController;
-import com.example.BackEnd.PatientController;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
 public class PatientAppointmentDetailsController  implements Initializable
 {
@@ -74,7 +67,7 @@ public class PatientAppointmentDetailsController  implements Initializable
             status.setText("UnPaid");
         }
 
-        amount.setText(obj.getJSONObject("payment").getFloat("amount") + "");
+        amount.setText(obj.getJSONObject("payment").getFloat("amount") + " Rs");
 
         patId = obj.getInt("patId");
         patName.setText(obj.getJSONObject("patient").getString("name"));

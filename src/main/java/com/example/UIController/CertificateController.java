@@ -64,13 +64,13 @@ public class CertificateController implements Initializable{
 
         if(pc == null)
         {
-            jsonString = "[{\"name\":\"Cancer\",\"type\":\"flu\"},{\"name\":\"Death\",\"type\":\"Heat\"}]";
+            jsonString = dc.getCertificates(docId);
         
             //dc.getCertificates(docId);
         }
         else if(dc == null)
         {
-            jsonString = "[{\"name\":\"Cancer\",\"type\":\"flu\"},{\"name\":\"Death\",\"type\":\"Heat\"}]"; 
+            jsonString = pc.getCertificates(docId);
             //pc.getCertificates(docId);
         }
 

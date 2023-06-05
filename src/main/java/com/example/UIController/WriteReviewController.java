@@ -11,7 +11,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -50,6 +49,7 @@ public class WriteReviewController implements Initializable{
     PatientController patientController;
     int docId ;
     int patId ;
+    Scene prev;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -82,6 +82,17 @@ public class WriteReviewController implements Initializable{
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
+
+            Stage prevWin = (Stage) prev.getWindow();
+
+            stage.setWidth(prevWin.getWidth());
+            stage.setHeight(prevWin.getHeight());
+            stage.setX(prevWin.getX());
+            stage.setY(prevWin.getY());
+
+            stage.setMinWidth(825);
+            stage.setMinHeight(680);
+
             stage.setScene(scene);
             stage.show();
         }
@@ -90,19 +101,18 @@ public class WriteReviewController implements Initializable{
         }
     }
     
-    public void setData(PatientController patientController, int docId, int patId,AnchorPane prevPane) {
+    public void setData(PatientController patientController, int docId, int patId, AnchorPane prevPane, Scene prev) {
         this.patientController = patientController;
         this.docId = docId;
         this.patId = patId;
         this.prevPane = prevPane;
+        this.prev = prev;
     }
 
-    
-    public void backBtnPressed(ActionEvent event){
+    public void backBtnPressed(ActionEvent event)
+    {
         prevPane.setVisible(true);
-        AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
-        //remove last 
+        AnchorPane mainParentPane = (AnchorPane)prevPane.getParent(); 
         mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
     }
-
 }
