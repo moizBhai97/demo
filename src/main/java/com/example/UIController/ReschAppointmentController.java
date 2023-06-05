@@ -205,6 +205,11 @@ public class ReschAppointmentController implements Initializable {
                 parent.getChildren().clear();
             }
             parent.getChildren().add(pane);
+
+            SearchDoctorController.clearHeaderTitles();
+            SearchDoctorController.addHeaderTitle("Manage Appointments");
+
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -301,6 +306,8 @@ public class ReschAppointmentController implements Initializable {
         AnchorPane mainParentPane = (AnchorPane) prevPane.getParent();
         // remove last
         mainParentPane.getChildren().remove(mainParentPane.getChildren().size() - 1);
+
+        SearchDoctorController.removeTopTitle();
 
     }
 }

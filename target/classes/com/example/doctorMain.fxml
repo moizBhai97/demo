@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefWidth="810.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <AnchorPane styleClass="top_pane" stylesheets="@search_doctors.css" BorderPane.alignment="TOP_RIGHT">
+         <children>
+            <ImageView fx:id="prof_img" fitHeight="58.0" fitWidth="55.0" layoutX="731.9999999999995" layoutY="7.0" pickOnBounds="true" preserveRatio="true" style="-fx-rotate: 70;" AnchorPane.rightAnchor="19.400000000000432">
+               <image>
+                  <Image url="@../../images/image%2032.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="headerTitle" alignment="CENTER" layoutX="221.0" layoutY="20.0" style="-fx-font-size: 30; -fx-font-weight: bold;" stylesheets="@search_doctors.css" text="Home" textFill="WHITE" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="221.0" AnchorPane.topAnchor="20.0">
+               <font>
+                  <Font name="Segoe UI Bold" size="25.0" />
+               </font>
+            </Label>
+            <Label layoutX="78.0" layoutY="27.0" style="-fx-font-size: 20;" text="HEALTHYSENSE" textFill="WHITE" AnchorPane.leftAnchor="78.0">
+               <font>
+                  <Font name="SansSerif Regular" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="70.0" fitWidth="62.0" layoutX="14.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="14.0">
+               <image>
+                  <Image url="@../../images/image%2023.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </top>
+   <center>
+      <AnchorPane fx:id="rootPane" BorderPane.alignment="CENTER" />
+   </center>
+   <left>
+      <VBox alignment="CENTER" prefHeight="546.0" prefWidth="100.0" spacing="15.0" style="-fx-background-color: white;" stylesheets="@search_doctors.css" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="homeBtn" contentDisplay="TOP" graphicTextGap="3.0" mnemonicParsing="false" onAction="#homeBtnPressed" styleClass="dashboardBtn" text="Home" textFill="#999999" VBox.vgrow="ALWAYS">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/image%2012.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <stylesheets>
+                  <URL value="@doctor_details.css" />
+                  <URL value="@search_doctors.css" />
+               </stylesheets>
+            </Button>
+            <Button fx:id="appointmentBtn" contentDisplay="TOP" mnemonicParsing="false" onAction="#appointmentBtnPressed" styleClass="dashboardBtn" text="Appointments" textFill="#2854c3">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/image%2014.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="settingsBtn" contentDisplay="TOP" mnemonicParsing="false" onAction="#settingsBtnPressed" styleClass="dashboardBtn" text="Settings" textFill="#2854c3">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/image%2015.png" />
+                     </image>
+                     <effect>
+                        <InnerShadow height="0.0" radius="0.0" width="0.0">
+                           <color>
+                              <Color red="0.1568627506494522" green="0.3294117748737335" blue="0.7647058963775635" />
+                           </color>
+                        </InnerShadow>
+                     </effect>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+            <Button fx:id="logoutBtn" contentDisplay="TOP" mnemonicParsing="false" onAction="#logoutBtnPressed" styleClass="dashboardBtn" text="Logout" textFill="#2854c3">
+               <graphic>
+                  <ImageView fitHeight="40.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/image%2012%20(2).png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+      </VBox>
+   </left>
+</BorderPane>

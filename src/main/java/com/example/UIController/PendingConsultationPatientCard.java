@@ -14,10 +14,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class PendingAppointmentPatientCard {
+public class PendingConsultationPatientCard {
 
     @FXML
     private Button viewBtn;
@@ -39,12 +40,14 @@ public class PendingAppointmentPatientCard {
 
     int appointID;
     DoctorController dc;
+    private AnchorPane rootPane;
     int docId;
 
     public void setDoctor(String name, String date, String timing) {
         patName.setText(name);
         this.date.setText(date);
         this.timing.setText(timing);
+
     }
 
     public void setCard(String result){
@@ -58,36 +61,41 @@ public class PendingAppointmentPatientCard {
         Status.setText(jsonObject.getString("status"));
     }
 
-    public void setData(DoctorController dc, int docId) 
-    {
+    public void setData(DoctorController dc, int docId,AnchorPane rootPane) {
         this.dc = dc;
         this.docId = docId;
+        this.rootPane = rootPane;
     }
+   
 
     public void viewButton(ActionEvent event) 
     {
         System.out.println("View Button Clicked");
 
         try {
-            this.viewBtn.getScene().getWindow().hide();
+           // this.viewBtn.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/app_detailsDoctor.fxml")));
+            loader.setLocation((new URL("file:src/main/resources/com/example/consultationDetails.fxml")));
             
-            AppointmentControllerDoctor appointmentControllerDoctor = new AppointmentControllerDoctor();
+            ConsultationControllerDoctor appointmentControllerDoctor = new ConsultationControllerDoctor();
 
-            appointmentControllerDoctor.setData(dc, appointID, docId);
+            appointmentControllerDoctor.setData(dc, appointID, docId,rootPane);
             
             loader.setController(appointmentControllerDoctor);
             
             //-------------------------------------------------------------------------------------------------//
             //-------------------------------------------------------------------------------------------------//
             
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
+            
+            AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+                  
+           ((AnchorPane)rootPane.getParent()).getChildren().add(pane);
+           DoctorMainController.addHeaderTitle("Consultation Details");
             
         } catch (Exception e) {
             e.printStackTrace();

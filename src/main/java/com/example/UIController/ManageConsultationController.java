@@ -10,18 +10,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-public class ManageAppointmentControllerDoctor implements Initializable {
+public class ManageConsultationController implements Initializable {
     @FXML
     ScrollPane completedAppointmentsScrollPane;
 
     @FXML
     ScrollPane pendingAppointmentsScrollPane;
 
-    private GridPane completedAppointmentsGridPane;
-    private GridPane pendingAppointmentsGridPane;
+    @FXML
+    AnchorPane rootPane;
+    private FlowPane completedAppointmentsFlowPane;
+    private FlowPane pendingAppointmentsFlowPane;
 
     private DoctorController doctorController;
     private int docId;
@@ -29,23 +33,24 @@ public class ManageAppointmentControllerDoctor implements Initializable {
     @Override
     public void initialize(java.net.URL arg0, java.util.ResourceBundle arg1) {
 
-        completedAppointmentsGridPane = new GridPane();
-        completedAppointmentsScrollPane.setContent(completedAppointmentsGridPane);
-        completedAppointmentsGridPane.setVgap(10);
-        completedAppointmentsGridPane.setHgap(10);
-        completedAppointmentsGridPane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
+        DoctorMainController.addHeaderTitle("Manage Consultations");
+        completedAppointmentsFlowPane = new FlowPane();
+        completedAppointmentsScrollPane.setContent(completedAppointmentsFlowPane);
+        completedAppointmentsFlowPane.setVgap(10);
+        completedAppointmentsFlowPane.setHgap(10);
+        completedAppointmentsFlowPane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
 
-        pendingAppointmentsGridPane = new GridPane();
-        pendingAppointmentsScrollPane.setContent(pendingAppointmentsGridPane);
-        pendingAppointmentsGridPane.setVgap(10);
-        pendingAppointmentsGridPane.setHgap(10);
-        pendingAppointmentsGridPane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
+        pendingAppointmentsFlowPane = new FlowPane();
+        pendingAppointmentsScrollPane.setContent(pendingAppointmentsFlowPane);
+        pendingAppointmentsFlowPane.setVgap(10);
+        pendingAppointmentsFlowPane.setHgap(10);
+        pendingAppointmentsFlowPane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
 
         fillPendingAppointments();
         fillCompletedAppointments();
     }
 
-    public void setData(DoctorController dc, int docId) 
+    public void setData(DoctorController dc, int docId)
     {
         this.doctorController = dc;
         this.docId = docId;
@@ -55,30 +60,26 @@ public class ManageAppointmentControllerDoctor implements Initializable {
         try {
             String result = getPendingAppointments();
             JSONArray jsonArray = new JSONArray(result);
-            pendingAppointmentsGridPane.getChildren().clear();
-            int rowindex = 0;
-            int columnindex = 0;
+            pendingAppointmentsFlowPane.getChildren().clear();
+         
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(
-                        (new URL("file:src/main/resources/com/example/PendingAppointmentPatientCard.fxml")));
+                        (new URL("file:src/main/resources/com/example/PendingConsultationPatientCard.fxml")));
                 try {
                     Pane pane = fxmlLoader.load();
-                    PendingAppointmentPatientCard pendingAppointmentPatientCard = fxmlLoader.getController();
+                    PendingConsultationPatientCard pendingAppointmentPatientCard = fxmlLoader.getController();
                     pendingAppointmentPatientCard.setCard(jsonArray.getJSONObject(i).toString());
-                    pendingAppointmentPatientCard.setData(doctorController, docId);
-                    pendingAppointmentsGridPane.add(pane, columnindex, rowindex);
+                    pendingAppointmentPatientCard.setData(doctorController, docId,rootPane);
+                    pendingAppointmentsFlowPane.getChildren().add(pane);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                columnindex++;
-                if (columnindex == 2) {
-                    columnindex = 0;
-                    rowindex++;
-                }
+             
             }
+            pendingAppointmentsScrollPane.setContent(pendingAppointmentsFlowPane);
         } catch (Exception e) {
             e.printStackTrace();
 
@@ -105,30 +106,26 @@ public class ManageAppointmentControllerDoctor implements Initializable {
         try {
             String result = getCompletedAppointments();
             JSONArray jsonArray = new JSONArray(result);
-            completedAppointmentsGridPane.getChildren().clear();
-            int rowindex = 0;
-            int columnindex = 0;
+            completedAppointmentsFlowPane.getChildren().clear();
+            
 
             for (int i = 0; i < jsonArray.length(); i++) {
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(
-                        (new URL("file:src/main/resources/com/example/PendingAppointmentPatientCard.fxml")));
+                        (new URL("file:src/main/resources/com/example/PendingConsultationPatientCard.fxml")));
                 try {
                     Pane pane = fxmlLoader.load();
-                    PendingAppointmentPatientCard pendingAppointmentPatientCard = fxmlLoader.getController();
+                    PendingConsultationPatientCard pendingAppointmentPatientCard = fxmlLoader.getController();
                     pendingAppointmentPatientCard.setCard(jsonArray.getJSONObject(i).toString());
-                    pendingAppointmentPatientCard.setData(doctorController, docId);
-                    completedAppointmentsGridPane.add(pane, columnindex, rowindex);
+                    pendingAppointmentPatientCard.setData(doctorController, docId,rootPane);
+                    completedAppointmentsFlowPane.getChildren().add(pane);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                columnindex++;
-                if (columnindex == 2) {
-                    columnindex = 0;
-                    rowindex++;
-                }
+             
             }
+            completedAppointmentsScrollPane.setContent(completedAppointmentsFlowPane);
         } catch (Exception e) {
             e.printStackTrace();
 

@@ -29,7 +29,7 @@ public class SQL extends DBHandler {
         musa = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;";
         abdullah = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;";
 
-        connectionUrl = moiz + 
+        connectionUrl = abdullah + 
                         "databaseName=SDA;" + 
                         "IntegratedSecurity=true;" + 
                         "encrypt=true;trustServerCertificate=true";
@@ -46,6 +46,7 @@ public class SQL extends DBHandler {
             pstmt.setInt(1, docId);
 
             ResultSet rs = pstmt.executeQuery();
+            
 
             rs.next();
 

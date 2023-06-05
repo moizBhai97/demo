@@ -67,13 +67,13 @@ public class SignupController implements Initializable
         System.out.println("Login hyperlink pressed");
 
         try {
-            this.signupButton.getScene().getWindow().hide();
+         //   this.signupButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/login.fxml")));
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            Stage stage = new Stage();
+            Stage stage = (Stage) this.signupButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

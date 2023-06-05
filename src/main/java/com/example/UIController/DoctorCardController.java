@@ -62,6 +62,8 @@ public class DoctorCardController {
     @FXML
     private Label specialization;
 
+    String result;
+
     public void setParentController(SearchDoctorController parentController) {
         this.parentController = parentController;
     }
@@ -101,6 +103,8 @@ public class DoctorCardController {
 
         docName.setText(jsonObject.getString("name"));
         JSONObject innerObject = jsonObject.getJSONObject("details");
+        innerObject.put("name", jsonObject.getString("name") );
+        this.result= innerObject.toString();
         specialization.setText(innerObject.getString("specialization"));
         fee_amount.setText(String.format("%.1f", innerObject.getFloat("fee")));
         card1_satisfied_label.setText(String.format("%.1f", innerObject.getFloat("rating")));
@@ -131,14 +135,40 @@ public class DoctorCardController {
 
             AnchorPane childPane = loader.load();
             anchorPane.getChildren().add(childPane);
-            AnchorPane.setTopAnchor(childPane, -1.0);
-            AnchorPane.setBottomAnchor(childPane, -2.0);
-            AnchorPane.setLeftAnchor(childPane, -2.0);
-            AnchorPane.setRightAnchor(childPane, -2.0);
+            AnchorPane.setTopAnchor(childPane, 0.0);
+            AnchorPane.setBottomAnchor(childPane, 0.0);
+            AnchorPane.setLeftAnchor(childPane, 0.0);
+            AnchorPane.setRightAnchor(childPane, 0.0);
+
+            SearchDoctorController.addHeaderTitle("Doctor Details");
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public void bookAppointmentPressed(ActionEvent event){
+        try{
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/book_apt.fxml")));
+
+            BookAppointmentController bookAptController = new BookAppointmentController();
+            bookAptController.setData(patientController, doctorId, patientId,result, prevPane);
+            loader.setController(bookAptController);
+
+            AnchorPane anchorPane = (AnchorPane) prevPane.getParent();
+            
+            AnchorPane childPane = loader.load();
+            anchorPane.getChildren().add(childPane);
+            AnchorPane.setTopAnchor(childPane, 0.0);
+            AnchorPane.setBottomAnchor(childPane,0.0);
+            AnchorPane.setLeftAnchor(childPane, 0.0);
+            AnchorPane.setRightAnchor(childPane, 0.0);
+
+            SearchDoctorController.addHeaderTitle("Book Appointment");
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
 }

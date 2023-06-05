@@ -89,6 +89,8 @@ public class ManageReviewController implements Initializable {
         AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
         //remove last 
         mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+
+        SearchDoctorController.removeTopTitle();    
     }
 
 }

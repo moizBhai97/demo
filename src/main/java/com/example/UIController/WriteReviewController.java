@@ -73,17 +73,30 @@ public class WriteReviewController implements Initializable{
         {
             this.submitButton.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors - Copy.fxml")));
+            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
 
             SearchDoctorController controller = new SearchDoctorController();
             controller.setData(patientController, patId);
             loader.setController(controller);
 
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
+            Parent parent= prevPane.getParent();
+            AnchorPane anchorPane = loader.load();
+
+            AnchorPane.setTopAnchor(anchorPane, 0.0);
+            AnchorPane.setBottomAnchor(anchorPane, 0.0);
+            AnchorPane.setLeftAnchor(anchorPane, 0.0);
+            AnchorPane.setRightAnchor(anchorPane, 0.0);
+
+
+            if(parent!=null){
+
+                ((AnchorPane)parent).getChildren().clear();
+                
+            }
+            ((AnchorPane)parent).getChildren().add(anchorPane);
+            SearchDoctorController.clearHeaderTitles();
+            SearchDoctorController.addHeaderTitle("Search Doctors");
+
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -103,6 +116,8 @@ public class WriteReviewController implements Initializable{
         AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
         //remove last 
         mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+
+        SearchDoctorController.removeTopTitle();
     }
 
 }

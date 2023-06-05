@@ -64,7 +64,7 @@
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
-      <Button fx:id="card1_book_apt_btn" layoutX="153.0" layoutY="147.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="127.0" styleClass="book_apt_btn" stylesheets="@search_doctors.css" text="Book Appointment">
+      <Button fx:id="card1_book_apt_btn" layoutX="153.0" layoutY="147.0" mnemonicParsing="false" onAction="#bookAppointmentPressed" prefHeight="25.0" prefWidth="127.0" styleClass="book_apt_btn" stylesheets="@search_doctors.css" text="Book Appointment">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>

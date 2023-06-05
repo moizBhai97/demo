@@ -21,9 +21,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Callback;
 
 import com.example.BackEnd.PatientController;
@@ -111,6 +113,9 @@ public class BookAppointmentController implements Initializable {
     private String screenInfo;
 
     @FXML
+    private ImageView ratingStar;
+
+    @FXML
     void cancel(ActionEvent event) {
         try {
             if (cancel_pane.isVisible()) {
@@ -168,6 +173,13 @@ public class BookAppointmentController implements Initializable {
         experience.setText(obj.getInt("experience") + "");
         rating.setText(String.format("%.1f", obj.getFloat("rating")));
         feeLabel.setText(String.format("%.1f", obj.getFloat("fee")));
+
+        double ratingPercentage = obj.getFloat("rating") / 5.0;
+
+        Rectangle clip = new Rectangle(0, 0, ratingStar.getFitWidth() * ratingPercentage,
+                ratingStar.getBoundsInLocal().getHeight());
+        ratingStar.setClip(clip);
+
     }
 
     public void setData(PatientController patientController, int Id, int patId, String screenInfo, AnchorPane prevPane){
@@ -325,13 +337,14 @@ public class BookAppointmentController implements Initializable {
             loader.setController(paymentController);
 
             AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, -1.0);
-            AnchorPane.setBottomAnchor(pane, -2.0);
-            AnchorPane.setLeftAnchor(pane, -2.0);
-            AnchorPane.setRightAnchor(pane, -2.0);
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane,0.0);
+            AnchorPane.setLeftAnchor(pane,0.0);
+            AnchorPane.setRightAnchor(pane,0.0);
 
             //((AnchorPane) prevPane.getParent()).getChildren().clear();
             ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
+            
         }
         catch(Exception e)
         {
@@ -344,6 +357,7 @@ public class BookAppointmentController implements Initializable {
         prevPane.setVisible(true);
         AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
         mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+        SearchDoctorController.removeTopTitle();
     }
 
 }

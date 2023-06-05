@@ -6,7 +6,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="card1" prefHeight="103.0" prefWidth="260.0" styleClass="doc_pane" stylesheets="@manageAppointment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.PendingAppointmentPatientCard">
+<Pane fx:id="card1" prefHeight="103.0" prefWidth="260.0" styleClass="doc_pane" stylesheets="@manageAppointment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.PendingConsultationPatientCard">
    <children>
       <Label fx:id="patName" layoutX="89.0" layoutY="15.0" style="-fx-font-weight: bold; -fx-font-size: 11;" text="Dr. Faiza M" />
       <Label fx:id="timing" layoutX="89.0" layoutY="45.0" style="-fx-font-size: 10; -fx-text-fill: #8C8FA5;" text="09:30 am - 10:30 pm" />

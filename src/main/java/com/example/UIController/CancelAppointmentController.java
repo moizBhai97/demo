@@ -100,6 +100,9 @@ public class CancelAppointmentController implements Initializable {
             AnchorPane.setLeftAnchor(pane, 0.0);
             AnchorPane.setRightAnchor(pane, 0.0);
             AnchorPane parent = (AnchorPane) prevPane.getParent();
+
+            SearchDoctorController.clearHeaderTitles();
+            SearchDoctorController.addHeaderTitle("Manage Appointment");
             if (parent != null) {
                 parent.getChildren().clear();
             }
@@ -114,5 +117,6 @@ public class CancelAppointmentController implements Initializable {
         prevPane.setVisible(true);
         AnchorPane mainParentPane = (AnchorPane) prevPane.getParent();
         mainParentPane.getChildren().remove(mainParentPane.getChildren().size() - 1);
+        SearchDoctorController.removeTopTitle();
     }
 }

@@ -58,16 +58,19 @@ public class UpdateDoctorProfileController implements Initializable{
     @FXML
     private AnchorPane addPane;
 
-    UpdateDoctorProfile2Controller updateDoctorProfile2Controller = new UpdateDoctorProfile2Controller();
-    DoctorController doctorController = new DoctorController();
+    AddCertificationController addCertificationController = new AddCertificationController();
+    DoctorController doctorController ;
 
     JSONArray certificates;
     int docId = 101 ;
+    private AnchorPane rootPane;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
+       // DoctorMainController.setHeaderTitle("Update Profile");
         JSONObject data = new JSONObject(doctorController.getDoctorData(docId));
+        DoctorMainController.addHeaderTitle("Update Profile");
 
         System.out.println(data.toString());
 
@@ -84,9 +87,11 @@ public class UpdateDoctorProfileController implements Initializable{
         refresh();
     }
 
-    void setData(int docId) {
+    void setData(DoctorController doctorController,int docId,AnchorPane rootPane){
 
         this.docId = docId;
+        this.doctorController = doctorController;
+        this.rootPane = rootPane;
     }
 
     public void refresh()
@@ -124,11 +129,11 @@ public class UpdateDoctorProfileController implements Initializable{
             //this.btn_add1.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/updateProfile3Copy.fxml")));
+            loader.setLocation((new URL("file:src/main/resources/com/example/AddCertificationPopup.fxml")));
 
-            updateDoctorProfile2Controller = new UpdateDoctorProfile2Controller();
-            updateDoctorProfile2Controller.setData(docId, certificates);
-            loader.setController(updateDoctorProfile2Controller);
+            addCertificationController = new AddCertificationController();
+            addCertificationController.setData(docId, certificates);
+            loader.setController(addCertificationController);
 
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -143,6 +148,16 @@ public class UpdateDoctorProfileController implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    
+    public void backBtnPressed(ActionEvent event)
+    {
+        rootPane.setVisible(true);
+        AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
+        //remove last 
+        mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+        DoctorMainController.popHeaderTitle();
     }
 
 }

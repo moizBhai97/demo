@@ -9,22 +9,33 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -185,6 +196,28 @@ public class SearchDoctorController implements Initializable {
     private Button selectedDashbordBtn;
 
     @FXML
+    private Label headerTitle;
+
+    private static ObservableList<Label> headerTitles = FXCollections.observableArrayList();
+
+    public static void addHeaderTitle(String title) {
+        Label label = new Label(title);
+        label.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        StringProperty textProperty = new SimpleStringProperty(title);
+        label.textProperty().bind(textProperty);
+        headerTitles.add(label);
+        // headerTitle.setText(title);
+    }
+
+    public static void clearHeaderTitles() {
+        headerTitles.clear();
+    }
+
+    public static void removeTopTitle() {
+        headerTitles.remove(headerTitles.size() - 1);
+    }
+
+    @FXML
     public void filter_toggle(ActionEvent event) {
         try {
             if (filter_Pane.isVisible()) {
@@ -216,9 +249,27 @@ public class SearchDoctorController implements Initializable {
         filterRatingAll.setGraphic(blueStarIcon);
     }
 
+    public boolean isSearchNull() {
+
+        if (searhcedName == null) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No search query");
+            alert.setContentText("Please enter a name to search for");
+            alert.showAndWait();
+            return true;
+        }
+        return false;
+
+    }
+
     @FXML
     public void filterApplyPressed(ActionEvent event) {
         String specialty = (String) specialtiesList.getValue();
+
+        if (isSearchNull()) {
+            return;
+        }
         if (selectedToggle != null)
             createDoctorCards(patientController.sortDoctors(searhcedName, selectedToggle.getText(),
                     !ascen_sort_toggle.isSelected(), ratingFilter, specialty));
@@ -232,7 +283,9 @@ public class SearchDoctorController implements Initializable {
 
     @FXML
     public void ratingButtonPressed(ActionEvent event) {
-
+        if (isSearchNull()) {
+            return;
+        }
         Button btn = (Button) event.getSource();
         String id = btn.getId();
         if (id.equals("filterRatingAll")) {
@@ -265,6 +318,9 @@ public class SearchDoctorController implements Initializable {
 
     @FXML
     public void alphabeticalSortPressed(ActionEvent event) {
+        if (isSearchNull()) {
+            return;
+        }
         if (selectedToggle != alphabetical_sort_btn) {
 
             resetSortColors();
@@ -279,6 +335,9 @@ public class SearchDoctorController implements Initializable {
 
     @FXML
     void ascendingPressed(ActionEvent event) {
+        if (isSearchNull()) {
+            return;
+        }
         if (ascen_sort_toggle.isSelected()) {
             // change color
             ascen_sort_toggle.setStyle("-fx-background-color: #a1a1a1; -fx-text-fill: #ffffff;");
@@ -296,6 +355,9 @@ public class SearchDoctorController implements Initializable {
 
     @FXML
     void priceSelected(ActionEvent event) {
+        if (isSearchNull()) {
+            return;
+        }
         if (selectedToggle != price_sort_btn) {
             resetSortColors();
             price_sort_btn.setStyle("-fx-background-color: #2854C3; -fx-text-fill: #ffffff;");
@@ -309,6 +371,9 @@ public class SearchDoctorController implements Initializable {
 
     @FXML
     void reviewSortPressed(ActionEvent event) {
+        if (isSearchNull()) {
+            return;
+        }
         if (selectedToggle != review_sort_btn) {
             resetSortColors();
             review_sort_btn.setStyle("-fx-background-color: #2854C3; -fx-text-fill: #ffffff;");
@@ -330,6 +395,15 @@ public class SearchDoctorController implements Initializable {
             searchBtn.setStyle("-fx-text-fill: #2854c3;");
         }
 
+        addHeaderTitle("Search");
+
+        headerTitles.addListener((ListChangeListener<Label>) change -> {
+            if (headerTitles.isEmpty()) {
+                headerTitle.setText("");
+            } else {
+                headerTitle.textProperty().bind(headerTitles.get(headerTitles.size() - 1).textProperty());
+            }
+        });
         selectedDashbordBtn = searchBtn;
         results_flowpane = new FlowPane();
 
@@ -353,6 +427,8 @@ public class SearchDoctorController implements Initializable {
         filterRatingAll.setGraphic(blueStarIcon);
         filter_Pane.setVisible(false);
 
+
+
         refresh();
         return;
     }
@@ -363,7 +439,7 @@ public class SearchDoctorController implements Initializable {
         System.out.println(patId);
     }
 
-    //GridPane results_grid;
+    // GridPane results_grid;
 
     public void setPatientController(PatientController patientController) {
         this.patientController = patientController;
@@ -374,7 +450,7 @@ public class SearchDoctorController implements Initializable {
         results_scrollpane.getChildrenUnmodifiable().clear();
         // set padding
         results_flowpane.setPadding(new javafx.geometry.Insets(10, 10, 10, 10));
-        
+
         results_flowpane.setStyle("-fx-background-color: transparent;");
 
         createDoctorCards(patientController.getTopDoctors());
@@ -497,6 +573,9 @@ public class SearchDoctorController implements Initializable {
                 return;
             }
 
+            clearHeaderTitles();
+            addHeaderTitle("Search");
+
             selectedDashbordBtn = searchBtn;
             resetDashboardButtons();
             ImageView imageView = (ImageView) searchBtn.getGraphic();
@@ -528,6 +607,8 @@ public class SearchDoctorController implements Initializable {
                 return;
             }
 
+            clearHeaderTitles();
+            addHeaderTitle("Manage Appointments");
             selectedDashbordBtn = appointmentBtn;
             resetDashboardButtons();
             ImageView imageView = (ImageView) appointmentBtn.getGraphic();
@@ -544,11 +625,67 @@ public class SearchDoctorController implements Initializable {
             AnchorPane.setBottomAnchor(root, 0.0);
             AnchorPane.setLeftAnchor(root, 0.0);
             AnchorPane.setRightAnchor(root, 0.0);
-            
+
             rootPane.getChildren().clear();
             rootPane.getChildren().add(root);
 
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void settingsBtnPressed(ActionEvent event){
+        try{
+            if(selectedDashbordBtn == settingsBtn){
+                return;
+            }
+
+            clearHeaderTitles();
+            addHeaderTitle("Settings");
+            selectedDashbordBtn = settingsBtn;
+            resetDashboardButtons();
+            ImageView imageView = (ImageView) settingsBtn.getGraphic();
+            imageView.setEffect(new InnerShadow(100, Color.web("#2854c3")));
+            settingsBtn.setStyle("-fx-text-fill: #2854c3;");
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/Settings.fxml")));
+            PatientSettingsController controller = new PatientSettingsController();
+            controller.setData(patientController, patId);
+            loader.setController(controller);
+
+            AnchorPane root = loader.load();
+            AnchorPane.setTopAnchor(root, 0.0);
+            AnchorPane.setBottomAnchor(root, 0.0);
+            AnchorPane.setLeftAnchor(root, 0.0);
+            AnchorPane.setRightAnchor(root, 0.0);
+            
+            rootPane.getChildren().clear();
+            rootPane.getChildren().add(root);
+
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    public void logoutBtnPressed(ActionEvent event){
+
+        try{
+            if(selectedDashbordBtn == logoutBtn){
+                return;
+            }
+
+            FXMLLoader loader = new FXMLLoader(new URL("file:src/main/resources/com/example/start.fxml"));
+
+            Parent root = loader.load();
+            Stage stage = (Stage) logoutBtn.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.show();
+            
+
+        }
+        catch(Exception e){
             e.printStackTrace();
         }
     }

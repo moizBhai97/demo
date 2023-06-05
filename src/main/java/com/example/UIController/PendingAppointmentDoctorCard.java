@@ -107,12 +107,15 @@ public class PendingAppointmentDoctorCard {
             }
           
             AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, -2.0);
-            AnchorPane.setBottomAnchor(pane, -2.0);
-            AnchorPane.setLeftAnchor(pane, -2.0);
-            AnchorPane.setRightAnchor(pane, -2.0);
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+
                   
            ((AnchorPane)rootPane.getParent()).getChildren().add(pane);
+
+           SearchDoctorController.addHeaderTitle("Appointment Details");
         } catch (Exception e) {
             e.printStackTrace();
         }

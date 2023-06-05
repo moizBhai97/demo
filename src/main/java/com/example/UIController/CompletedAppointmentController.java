@@ -116,6 +116,8 @@ public class CompletedAppointmentController  implements Initializable
         prevPane.setVisible(true);
         AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
         mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+
+        SearchDoctorController.removeTopTitle();
     }
 
     public void writeButton(ActionEvent event)
@@ -131,12 +133,14 @@ public class CompletedAppointmentController  implements Initializable
             fxmlLoader.setController(controller);
 
             AnchorPane pane = fxmlLoader.load();
-            AnchorPane.setTopAnchor(pane, -2.0);
-            AnchorPane.setBottomAnchor(pane, -2.0);
-            AnchorPane.setLeftAnchor(pane, -2.0);
-            AnchorPane.setRightAnchor(pane, -2.0);
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
             
             ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
+
+            SearchDoctorController.addHeaderTitle("Write Review");
         }
         catch(Exception e)
         {
