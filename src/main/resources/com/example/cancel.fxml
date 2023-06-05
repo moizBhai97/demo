@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="564.0" prefWidth="656.8" styleClass="big_pane" stylesheets="@app_detail.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="564.0" prefWidth="656.8" styleClass="big_pane" stylesheets="@app_detail.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backBtnPressed" styleClass="Butt_inner_pane" text="&lt;  Back" textFill="#2854c3">
          <font>
