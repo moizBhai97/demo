@@ -66,9 +66,13 @@ public class DoctorMainController implements Initializable {
         // headerTitle.textProperty().bind(headerTitles.peek().textProperty());
         headerTitles.addListener((ListChangeListener<Label>) change -> {
             if (headerTitles.isEmpty()) {
-                headerTitle.setText("");
+                if (headerTitle != null) {
+                    headerTitle.setText("AAAaa");
+                }
             } else {
-                headerTitle.setText((headerTitles.get(headerTitles.size() - 1).getText() ));
+                if (headerTitle != null) {
+                    headerTitle.setText((headerTitles.get(headerTitles.size() - 1).getText()));
+                }
             }
         });
         try {
@@ -95,7 +99,7 @@ public class DoctorMainController implements Initializable {
 
     public static void popHeaderTitle() {
         headerTitles.remove(headerTitles.size() - 1);
-       // headerTitle.setText(headerTitleStack.peek().getText());
+        // headerTitle.setText(headerTitleStack.peek().getText());
     }
     // public static void setHeaderTitle(String title) {
     // headerTitle.setText(title);
@@ -104,8 +108,8 @@ public class DoctorMainController implements Initializable {
     public static void addHeaderTitle(String title) {
         Label label = new Label(title);
         label.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
-        //StringProperty textProperty = new SimpleStringProperty(title);
-       // label.textProperty().bind(textProperty);
+        // StringProperty textProperty = new SimpleStringProperty(title);
+        // label.textProperty().bind(textProperty);
         headerTitles.add(label);
         // headerTitle.setText(title);
     }
@@ -238,10 +242,10 @@ public class DoctorMainController implements Initializable {
         this.docId = docId;
     }
 
-     public void logoutBtnPressed(ActionEvent event){
+    public void logoutBtnPressed(ActionEvent event) {
 
-        try{
-            if(selectedDashbordBtn == logoutBtn){
+        try {
+            if (selectedDashbordBtn == logoutBtn) {
                 return;
             }
 
@@ -251,10 +255,8 @@ public class DoctorMainController implements Initializable {
             Stage stage = (Stage) logoutBtn.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
-            
 
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

@@ -211,6 +211,7 @@ public class SearchDoctorController implements Initializable {
 
     public static void clearHeaderTitles() {
         headerTitles.clear();
+       // headerTitles.add(new Label("Search Doctor"));
     }
 
     public static void removeTopTitle() {
@@ -395,15 +396,19 @@ public class SearchDoctorController implements Initializable {
             searchBtn.setStyle("-fx-text-fill: #2854c3;");
         }
 
+        
+     headerTitles.addListener((ListChangeListener<Label>) change -> {
+    if (headerTitles.isEmpty()) {
+        if (headerTitle != null) {
+            headerTitle.setText("AAAaa");
+        }
+    } else {
+        if (headerTitle != null) {
+            headerTitle.setText((headerTitles.get(headerTitles.size() - 1).getText()));
+        }
+    }
+});
         addHeaderTitle("Search");
-
-        headerTitles.addListener((ListChangeListener<Label>) change -> {
-            if (headerTitles.isEmpty()) {
-                headerTitle.setText("");
-            } else {
-                headerTitle.setText((headerTitles.get(headerTitles.size() - 1).getText()) );
-            }
-        });
         selectedDashbordBtn = searchBtn;
         results_flowpane = new FlowPane();
 
