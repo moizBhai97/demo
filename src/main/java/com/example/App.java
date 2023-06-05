@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -281,6 +282,11 @@ public class App extends Application {
                     Parent root = FXMLLoader.load(getClass().getResource("start.fxml"));
                     Scene scene = new Scene(root);
                     Stage stage = new Stage();
+                    Image img=new Image("file:src/main/resources/images/image 11.png");
+                    stage.setTitle("HealthySense");
+                    
+                    stage.getIcons().add(img);
+
                     stage.setScene(scene);
                     stage.show();
                 } catch (IOException e) {
@@ -305,7 +311,7 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-    
+
     public static void main(String[] args) {
         launch();
         System.out.println("Gay world");
