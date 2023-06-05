@@ -5,7 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,50 +16,19 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.UpdatePatientProfileController">
+
+<AnchorPane style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane prefHeight="640.0" prefWidth="924.0">
+      <Button fx:id="button_back" alignment="CENTER" mnemonicParsing="false" onAction="#backBtnPressed" prefHeight="36.0" prefWidth="81.0" styleClass="backBtn" stylesheets="@settings.css" text="&lt;  Back" textAlignment="CENTER" textFill="#2854c3" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <HBox alignment="CENTER" layoutY="28.0" prefHeight="528.0" prefWidth="664.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="28.0">
          <children>
-            <Pane fx:id="top_pane" prefHeight="94.0" prefWidth="800.0" styleClass="top_pane" stylesheets="@profile.css">
+            <Pane prefHeight="545.0" prefWidth="664.0">
                <children>
-                  <Pane layoutX="14.0" layoutY="7.0" prefHeight="70.0" prefWidth="62.0">
-                     <children>
-                        <ImageView fitHeight="70.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/image%2023.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="690.0" layoutY="6.0" prefHeight="79.0" prefWidth="103.0">
-                     <children>
-                        <ImageView fitHeight="58.0" fitWidth="55.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/photo.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <Label layoutX="70.0" layoutY="38.0" text="HEALTHYSENSE" textFill="WHITE">
-                     <font>
-                        <Font name="SansSerif Regular" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="347.0" layoutY="38.0" text="Update Profile" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="21.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane layoutX="136.0" layoutY="95.0" prefHeight="545.0" prefWidth="664.0">
-               <children>
-                  <Button fx:id="button_back" alignment="CENTER" layoutX="-5.0" layoutY="4.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="81.0" style="-fx-background-color: transparent;" styleClass="button_back" text="&lt;  Back" textAlignment="CENTER" textFill="#2854c3" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Button>
-                  <VBox layoutX="28.0" layoutY="46.0" prefHeight="430.0" prefWidth="259.0" spacing="8.0">
+                  <VBox layoutX="28.0" layoutY="6.0" prefHeight="430.0" prefWidth="259.0" spacing="8.0">
                      <children>
                         <Label text="Profile Photo" />
                         <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="259.0" spacing="20.0">
@@ -67,7 +36,8 @@
                               <ImageView fitHeight="65.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../images/photo.png" />
-                                 </image></ImageView>
+                                 </image>
+                              </ImageView>
                               <Button id="button_back" mnemonicParsing="false" prefHeight="35.0" prefWidth="75.0" style="-fx-background-color: transparent;" styleClass="button_back" textAlignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
@@ -116,19 +86,19 @@
                         </TextField>
                      </children>
                   </VBox>
-                  <Button fx:id="btn_updateProfile" layoutX="381.0" layoutY="456.0" mnemonicParsing="false" onAction="#updateProfile" prefHeight="58.0" prefWidth="244.0" style="-fx-background-color: #2854C3;" styleClass="button_big" stylesheets="@profile.css" text="Update Profile" textFill="WHITE">
+                  <Button fx:id="btn_updateProfile" layoutX="381.0" layoutY="423.0" mnemonicParsing="false" onAction="#updateProfile" prefHeight="58.0" prefWidth="244.0" style="-fx-background-color: #2854C3;" styleClass="button_big" stylesheets="@profile.css" text="Update Profile" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </Button>
-                  <Pane layoutX="349.0" layoutY="46.0" prefHeight="366.0" prefWidth="270.0" style="-fx-border-radius: 5;">
+                  <Pane layoutX="349.0" layoutY="9.0" prefHeight="366.0" prefWidth="270.0" style="-fx-border-radius: 5;">
                      <children>
                         <Label layoutX="7.0" text="Medical History">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <VBox layoutY="25.0" maxHeight="366.0" prefHeight="207.0" prefWidth="269.0" style="-fx-border-color: bebebe; -fx-border-radius: 4;">
+                        <VBox layoutY="25.0" maxHeight="366.0" prefHeight="339.0" prefWidth="269.0" style="-fx-border-color: bebebe; -fx-border-radius: 4;">
                            <children>
                               <HBox prefHeight="38.0" prefWidth="259.0" spacing="130.0">
                                  <children>
@@ -152,9 +122,9 @@
                                     <Insets left="10.0" right="10.0" />
                                  </VBox.margin>
                               </Line>
-                              <ScrollPane hbarPolicy="NEVER" maxHeight="366.0" prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: transparent; -fx-background-color: transparent;">
+                              <ScrollPane hbarPolicy="NEVER" maxHeight="366.0" prefHeight="297.0" prefWidth="268.0" style="-fx-border-color: transparent; -fx-background-color: transparent;">
                                  <content>
-                                    <FlowPane fx:id="flowPane" maxHeight="366.0" prefHeight="163.0" prefWidth="250.0">
+                                    <FlowPane fx:id="flowPane" maxHeight="366.0" prefHeight="292.0" prefWidth="265.0" style="-fx-background-color: white;">
                                        <children>
                                           <AnchorPane prefHeight="35.0" prefWidth="255.0">
                                              <children>
@@ -198,73 +168,10 @@
                   </Pane>
                </children>
             </Pane>
-            <VBox layoutX="-13.0" layoutY="94.0" prefHeight="546.0" prefWidth="149.0">
-               <children>
-                  <AnchorPane fx:id="side_anchor" prefHeight="556.0" prefWidth="150.0" styleClass="side_anchor" stylesheets="@profile.css">
-                     <children>
-                        <Pane fx:id="iner_pane1" layoutX="17.0" layoutY="25.0" prefHeight="79.0" prefWidth="114.0" styleClass="inner_pane" stylesheets="@profile.css">
-                           <children>
-                              <Button layoutX="7.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="103.0" styleClass="Butt_inner_pane" stylesheets="@profile.css" textFill="#2854c3" />
-                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2012.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="48.0" layoutY="57.0" text="Home" textFill="#979797" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="iner_pane11" layoutX="17.0" layoutY="109.0" prefHeight="70.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@profile.css">
-                           <children>
-                              <Button layoutX="5.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="114.0" styleClass="Butt_inner_pane" stylesheets="@profile.css" textFill="#2854c3" />
-                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2002.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="47.0" layoutY="48.0" text="Search" textFill="#979797" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="iner_pane111" layoutX="17.0" layoutY="190.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@profile.css">
-                           <children>
-                              <Button layoutX="3.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="127.0" styleClass="Butt_inner_pane" stylesheets="@profile.css" textFill="#2854c3" />
-                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2014.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="26.0" layoutY="57.0" text="Appointments" textFill="#979797" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="iner_pane1111" layoutX="17.0" layoutY="279.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@profile.css">
-                           <children>
-                              <Button layoutX="-2.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="127.0" styleClass="Butt_inner_pane" stylesheets="@profile.css" textFill="#2854c3" />
-                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/settings.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="42.0" layoutY="57.0" text="Settings" textFill="#2854c3" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="iner_pane1112" layoutX="17.0" layoutY="366.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@profile.css">
-                           <children>
-                              <Button layoutX="3.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="127.0" styleClass="Butt_inner_pane" stylesheets="@profile.css" textFill="#2854c3" />
-                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2012%20(2).png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="46.0" layoutY="50.0" text="Logout" textFill="#979797" />
-                           </children>
-                        </Pane>
-                     </children>
-                     <effect>
-                        <DropShadow height="10.0" radius="4.5" width="10.0" />
-                     </effect>
-                  </AnchorPane>
-               </children>
-            </VBox>
          </children>
-      </Pane>
+      </HBox>
    </children>
-</HBox>
+   <effect>
+      <InnerShadow />
+   </effect>
+</AnchorPane>

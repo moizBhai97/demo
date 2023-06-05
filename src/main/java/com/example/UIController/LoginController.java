@@ -17,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -24,7 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class LoginController implements Initializable{
+public class LoginController implements Initializable {
     @FXML
     private Button loginButton;
     @FXML
@@ -32,7 +33,7 @@ public class LoginController implements Initializable{
     @FXML
     private TextField emailTextField;
 
-    //DummyController dummyController;
+    // DummyController dummyController;
 
     boolean isPatient = true;
     PatientController patientController = new PatientController();
@@ -40,16 +41,13 @@ public class LoginController implements Initializable{
 
     DoctorController doctorController = new DoctorController();
 
-    DoctorDetailsControllerDoctor doctorDetailsController;
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // TODO Auto-generated method stub
-        if(isPatient){
-        emailTextField.setText("ali.ahmed@example.com");
-        passwordTextField.setText("password123");
-        }
-        else if(!isPatient){
+        if (isPatient) {
+            emailTextField.setText("ali.ahmed@example.com");
+            passwordTextField.setText("password123");
+        } else if (!isPatient) {
             emailTextField.setText("dr.asim@example.com");
             passwordTextField.setText("drpassword123");
         }
@@ -57,30 +55,57 @@ public class LoginController implements Initializable{
         return;
     }
 
-    public void setData(DoctorController dc, PatientController pc, boolean isPatient){
+    public void setData(DoctorController dc, PatientController pc, boolean isPatient) {
         this.doctorController = dc;
         this.patientController = pc;
         this.isPatient = isPatient;
     }
 
-    public void loginButton(ActionEvent event){
+    public void loginButton(ActionEvent event) {
         System.out.println("Login Button pressed");
 
         JSONObject loginInfo = new JSONObject();
         loginInfo.put("email", this.emailTextField.getText());
         loginInfo.put("password", this.passwordTextField.getText());
 
+        String email = this.emailTextField.getText();
+
+        if (!email.matches("[a-zA-Z0-9._]+@[a-zA-Z0-9]+\\.[a-zA-Z]+")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Email");
+            alert.setHeaderText(null);
+            alert.setContentText("Please enter a valid email address.");
+            alert.showAndWait();
+            return;
+        }
+
         System.out.println(loginInfo.toString());
 
-        if(isPatient){
+        if (isPatient) {
             System.out.println("Patient login");
 
             int patId = Integer.parseInt(patientController.login(loginInfo.toString()));
             System.out.println(patId);
 
             try {
-            this.loginButton.getScene().getWindow().hide();
+             //   this.loginButton.getScene().getWindow().hide();
 
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors - Copy.fxml")));
+
+                searchDoctorController = new SearchDoctorController();
+                searchDoctorController.setData(patientController, patId);
+
+                loader.setController(searchDoctorController);
+
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) this.loginButton.getScene().getWindow();
+                stage.setScene(scene);
+                stage.setMinWidth(810);
+                stage.show();
+
+<<<<<<< HEAD
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors - Copy.fxml")));
             
@@ -99,52 +124,53 @@ public class LoginController implements Initializable{
 
             stage.show();
             
+=======
+>>>>>>> 3d720c1f0fe74f6a5ee13655d34bbd2a4a98cbe9
             } catch (IOException e) {
                 System.err.println(String.format("Error: %s", e.getMessage()));
             }
-        }
-        else if (!isPatient){
+        } else if (!isPatient) {
 
             int docId = Integer.parseInt(doctorController.login(loginInfo.toString()));
             System.out.println(docId);
 
             try {
-            this.loginButton.getScene().getWindow().hide();
+               // this.loginButton.getScene().getWindow().hide();
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/doctor_detailsDoctor.fxml")));
-            
-            doctorDetailsController = new DoctorDetailsControllerDoctor();
-            
-            doctorDetailsController.setData(doctorController, docId);
-            loader.setController(doctorDetailsController);
-            
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-            
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation((new URL("file:src/main/resources/com/example/doctorMain.fxml")));
+
+                DoctorMainController doctorMainController = new DoctorMainController();
+
+                doctorMainController.setData(doctorController, docId);
+                loader.setController(doctorMainController);
+
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) this.loginButton.getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+
             } catch (IOException e) {
                 System.err.println(String.format("Error: %s", e.getMessage()));
                 e.printStackTrace();
             }
 
         }
-        
+
     }
 
-    public void signupHyperlink(ActionEvent event){
+    public void signupHyperlink(ActionEvent event) {
         System.out.println("Signup hyperlink pressed");
 
         try {
-            this.loginButton.getScene().getWindow().hide();
+           // this.loginButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/signup.fxml")));
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            Stage stage = new Stage();
+            Stage stage = (Stage) this.loginButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

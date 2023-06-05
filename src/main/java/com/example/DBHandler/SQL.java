@@ -29,7 +29,7 @@ public class SQL extends DBHandler {
         musa = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;";
         abdullah = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;";
 
-        connectionUrl = moiz + 
+        connectionUrl = abdullah + 
                         "databaseName=SDA;" + 
                         "IntegratedSecurity=true;" + 
                         "encrypt=true;trustServerCertificate=true";
@@ -46,6 +46,7 @@ public class SQL extends DBHandler {
             pstmt.setInt(1, docId);
 
             ResultSet rs = pstmt.executeQuery();
+            
 
             rs.next();
 
@@ -882,11 +883,10 @@ public class SQL extends DBHandler {
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
 
             JSONObject obj = new JSONObject(details);
-            String description = obj.getString("description");
             String reason = obj.getString("reason");
 
-            String SQL = "INSERT INTO Complaints (patient_ID, description, reason, doctor_ID) VALUES (" + patID + ", '"
-                    + description + "', '" + reason + "', " + docID + ")";
+            String SQL = "INSERT INTO Complaints (patient_ID, reason, doctor_ID) VALUES (" + patID + ", '"
+                      + reason + "', " + docID + ")";
             stmt.executeUpdate(SQL);
            
 

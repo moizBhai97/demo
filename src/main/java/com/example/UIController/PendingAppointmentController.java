@@ -135,6 +135,8 @@ public class PendingAppointmentController implements Initializable {
 
             ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
 
+            SearchDoctorController.addHeaderTitle("Cancel Appointment");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -145,6 +147,8 @@ public class PendingAppointmentController implements Initializable {
         AnchorPane mainParentPane = (AnchorPane) prevPane.getParent();
         // remove last
         mainParentPane.getChildren().remove(mainParentPane.getChildren().size() - 1);
+
+        SearchDoctorController.removeTopTitle();
 
     }
 
@@ -160,12 +164,13 @@ public class PendingAppointmentController implements Initializable {
             loader.setController(reschAppointmentController);
 
             AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, -2.0);
-            AnchorPane.setBottomAnchor(pane, -2.0);
-            AnchorPane.setLeftAnchor(pane, -2.0);
-            AnchorPane.setRightAnchor(pane, -2.0);
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
 
             ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
+            
 
         } catch (Exception e) {
             e.printStackTrace();

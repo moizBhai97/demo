@@ -12,6 +12,11 @@ import com.example.BackEnd.DoctorController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+<<<<<<< HEAD
+=======
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+>>>>>>> 3d720c1f0fe74f6a5ee13655d34bbd2a4a98cbe9
 
 public class PatientAppointmentDetailsController  implements Initializable
 {
@@ -43,6 +48,8 @@ public class PatientAppointmentDetailsController  implements Initializable
     int patId;
     int appID;
     int docId;
+
+    private AnchorPane rootPane;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
@@ -82,11 +89,21 @@ public class PatientAppointmentDetailsController  implements Initializable
 
     }
     
-    public void setData(DoctorController dc, int appID, int docId, int patId)
+    public void setData(DoctorController dc, int appID, int docId, int patId,AnchorPane rootPane)
     {
         this.docId = docId;
         this.dc = dc;
         this.appID = appID;
         this.patId = patId;
+        this.rootPane = rootPane;
+    }
+    
+    public void backBtnPressed(ActionEvent event)
+    {
+        rootPane.setVisible(true);
+        AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
+        //remove last 
+        mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+        DoctorMainController.popHeaderTitle();  
     }
 }

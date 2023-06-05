@@ -20,21 +20,23 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.Effect;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class DoctorDetailsController implements Initializable{
-    
+public class DoctorDetailsController implements Initializable {
+
     int docId;
     int patId;
     PatientController pc;
 
     @FXML
     private Label name;
-    
+
     @FXML
     private Label specialization;
 
@@ -96,19 +98,21 @@ public class DoctorDetailsController implements Initializable{
 
     @FXML
     private AnchorPane parentPane;
-    
+
     @FXML
     private Button reviewsBtn;
 
     @FXML
     private Hyperlink certificateBtn;
 
+    @FXML
+    private ImageView ratingStar;
+
     String screenInfo;
 
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1) 
-    {
-         
+    public void initialize(URL arg0, ResourceBundle arg1) {
+
         System.out.println(docId);
 
         screenInfo = pc.getDocDetails(docId);
@@ -136,15 +140,20 @@ public class DoctorDetailsController implements Initializable{
         envProgress.setProgress(obj.getFloat("environmentRating") / 100);
         staffProgress.setProgress(obj.getFloat("staffRating") / 100);
 
-        if(availability.getText().equals("Available"))
+        double ratingPercentage = obj.getFloat("rating") / 5.0;
+
+        Rectangle clip = new Rectangle(0, 0, ratingStar.getFitWidth() * ratingPercentage,
+                ratingStar.getBoundsInLocal().getHeight());
+        ratingStar.setClip(clip);
+
+        if (availability.getText().equals("Available"))
             bookButton.setDisable(false);
         else
             bookButton.setDisable(true);
-        
+
     }
 
-    public void setData(PatientController pc, int id, int patId, AnchorPane rootPane)
-    {
+    public void setData(PatientController pc, int id, int patId, AnchorPane rootPane) {
 
         this.pc = pc;
         this.patId = patId;
@@ -152,70 +161,72 @@ public class DoctorDetailsController implements Initializable{
         this.rootPane = rootPane;
     }
 
-    public void bookButton(ActionEvent event){
+    public void bookButton(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/book_apt.fxml")));
-            
+
             BookAppointmentController bookAppointmentController = new BookAppointmentController();
-            bookAppointmentController.setData(pc, docId, patId,screenInfo,rootPane);
+            bookAppointmentController.setData(pc, docId, patId, screenInfo, rootPane);
             loader.setController(bookAppointmentController);
-            
+
             AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, -1.0);
-            AnchorPane.setBottomAnchor(pane, -2.0);
-            AnchorPane.setLeftAnchor(pane, -2.0);
-            AnchorPane.setRightAnchor(pane, -2.0);
-            
-            //((AnchorPane) rootPane.getParent()).getChildren().clear();
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+
+            // ((AnchorPane) rootPane.getParent()).getChildren().clear();
             ((AnchorPane) rootPane.getParent()).getChildren().add(pane);
-            
+
+            SearchDoctorController.addHeaderTitle("Book Appointment");
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void backBtnPressed(ActionEvent event)
-    {
+    public void backBtnPressed(ActionEvent event) {
         rootPane.setVisible(true);
-        AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
-        //remove last 
-        mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+        AnchorPane mainParentPane = (AnchorPane) rootPane.getParent();
+        // remove last
+        mainParentPane.getChildren().remove(mainParentPane.getChildren().size() - 1);
+        SearchDoctorController.removeTopTitle();
     }
-    
-    public void reviewsButton(ActionEvent event)
-    {
+
+    public void reviewsButton(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/manageReview.fxml")));
-            
+
             ManageReviewController reviewsController = new ManageReviewController();
             reviewsController.setData(pc, patId, docId, rootPane);
             loader.setController(reviewsController);
-            
+
             AnchorPane pane = loader.load();
             AnchorPane.setTopAnchor(pane, -1.0);
             AnchorPane.setBottomAnchor(pane, 0.0);
             AnchorPane.setLeftAnchor(pane, 0.0);
             AnchorPane.setRightAnchor(pane, 0.0);
-            
-            //((AnchorPane) rootPane.getParent()).getChildren().clear();
-            ((AnchorPane) rootPane.getParent()).getChildren().add(pane);           
+
+            // ((AnchorPane) rootPane.getParent()).getChildren().clear();
+            ((AnchorPane) rootPane.getParent()).getChildren().add(pane);
+
+            SearchDoctorController.addHeaderTitle("Reviews");
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void certificateButton()
-    {
+    public void certificateButton() {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/certificate.fxml")));
-            
+
             CertificateController certificateController = new CertificateController();
             certificateController.setData(pc, null, docId);
             loader.setController(certificateController);
-            
+
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -232,21 +243,21 @@ public class DoctorDetailsController implements Initializable{
             Effect otherEffects = parentPane.getEffect();
 
             parentPane.setEffect(blur);
-            
+
             stage.setOnHidden(event -> {
                 parentPane.setEffect(null);
                 parentPane.setEffect(otherEffects);
             });
 
             // parentPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            //     EventTarget target = event.getTarget();
-            //     if (!root.getBoundsInParent().contains(event.getX(), event.getY())) {
-            //         stage.close();
-            //     }
+            // EventTarget target = event.getTarget();
+            // if (!root.getBoundsInParent().contains(event.getX(), event.getY())) {
+            // stage.close();
+            // }
             // });
 
             stage.show();
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         }

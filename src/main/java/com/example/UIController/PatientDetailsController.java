@@ -29,6 +29,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseButton;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -60,12 +61,14 @@ public class PatientDetailsController implements Initializable{
 
     @FXML
     private TableView<JSONObject> table2;
+    private AnchorPane rootPane;
 
-    public void setData(DoctorController dc, int docId, int patId)
+    public void setData(DoctorController dc, int docId, int patId,AnchorPane rootPane)
     {
         this.dc = dc;
         this.docId = docId;
         this.patId = patId;
+        this.rootPane = rootPane;
     }
 
 
@@ -236,21 +239,24 @@ public class PatientDetailsController implements Initializable{
     {
         try
         {
-            win.hide();
+            //win.hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/patient_appoint.fxml")));
             //-------------------------------------------------------------------------------------------------//
             
             PatientAppointmentDetailsController patientAppointmentDetailsController = new PatientAppointmentDetailsController();
 
-            patientAppointmentDetailsController.setData(dc, appId, docId, patId);
+            patientAppointmentDetailsController.setData(dc, appId, docId, patId,rootPane);
             loader.setController(patientAppointmentDetailsController);
 
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
+            AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+                  
+           ((AnchorPane)rootPane.getParent()).getChildren().add(pane);
+           DoctorMainController.addHeaderTitle("Patient Appointment Details");
         }
         catch(Exception e)
         {
@@ -258,6 +264,16 @@ public class PatientDetailsController implements Initializable{
             e.printStackTrace();
         }
         
+    }
+
+    @FXML
+    public void backBtnPressed(ActionEvent event)
+    {
+        rootPane.setVisible(true);
+        AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
+        //remove last 
+        mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+        DoctorMainController.popHeaderTitle();  
     }
 
 

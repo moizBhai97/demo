@@ -15,7 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 
-public class UpdatePatientProfile2Controller {
+public class AddRecordController {
 
     @FXML
     private Button addButton;
@@ -50,15 +50,16 @@ public class UpdatePatientProfile2Controller {
     @FXML
     private String type_5;
 
-    PatientController patientController = new PatientController();
+    PatientController patientController;
     int patId;
     JSONArray history;
 
-    public void setData(int patId, JSONArray history)
+    public void setData(int patId, JSONArray history, PatientController patientController)
     {
         this.patId = patId;
         this.history = history;
         System.out.println("Patient ID: " + this.patId);
+        this.patientController = patientController;
     }
     
     @FXML

@@ -18,9 +18,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class AppointmentControllerDoctor  implements Initializable
+public class ConsultationControllerDoctor  implements Initializable
 {
     @FXML
     private Label docName;
@@ -58,6 +59,7 @@ public class AppointmentControllerDoctor  implements Initializable
     int docId;
     String patGender;
 
+    private AnchorPane rootPane;
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
     {
@@ -95,11 +97,12 @@ public class AppointmentControllerDoctor  implements Initializable
 
     }
     
-    public void setData(DoctorController dc, int appID, int docId)
+    public void setData(DoctorController dc, int appID, int docId, AnchorPane rootPane)
     {
         this.docId = docId;
         this.dc = dc;
         this.appID = appID;
+        this.rootPane = rootPane;
     }
 
     public void viewButton(ActionEvent event) 
@@ -107,24 +110,28 @@ public class AppointmentControllerDoctor  implements Initializable
         System.out.println("View Button Clicked");
 
         try {
-            this.viewBtn.getScene().getWindow().hide();
+           // this.viewBtn.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/patient_details.fxml")));
             
             PatientDetailsController patientDetailsController = new PatientDetailsController();
 
-            patientDetailsController.setData(dc, docId, patId);
+            patientDetailsController.setData(dc, docId, patId,rootPane);
             loader.setController(patientDetailsController);
             
             //-------------------------------------------------------------------------------------------------//
             //-------------------------------------------------------------------------------------------------//
             
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
+            
+            AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+                  
+           ((AnchorPane)rootPane.getParent()).getChildren().add(pane);
+            DoctorMainController.addHeaderTitle("Patient Details");
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -136,21 +143,26 @@ public class AppointmentControllerDoctor  implements Initializable
     {
         try
         {
-            this.reportBtn.getScene().getWindow().hide();
+           // this.reportBtn.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/report.fxml")));
 
 
             ReportController reportController = new ReportController();
-            reportController.setData(dc, patId, docId, patName.getText(), patGender);
+            reportController.setData(dc, patId, docId, patName.getText(), patGender,rootPane );
             loader.setController(reportController);
 
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
+         
+            
+            AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+                  
+           ((AnchorPane)rootPane.getParent()).getChildren().add(pane);
+            DoctorMainController.addHeaderTitle("Report Patient");
         }
         catch(Exception e)
         {
@@ -184,4 +196,14 @@ public class AppointmentControllerDoctor  implements Initializable
             System.out.println(e);
         }
     }
+    
+    public void backBtnPressed(ActionEvent event)
+    {
+        rootPane.setVisible(true);
+        AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
+        //remove last 
+        mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+        DoctorMainController.popHeaderTitle();
+    }
+
 }

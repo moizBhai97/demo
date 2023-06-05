@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,25 +14,27 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane styleClass="big_pane" stylesheets="@patient_details.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Pane prefHeight="640.0" prefWidth="924.0">
+      <Button fx:id="backBtn" alignment="CENTER" mnemonicParsing="false" onAction="#backBtnPressed" style="-fx-background-color: transparent;" styleClass="button_back" text="&lt;  Back" textAlignment="CENTER" textFill="#2854c3" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
+      <HBox alignment="CENTER" layoutY="37.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="37.0">
          <children>
-            <Pane layoutX="136.0" layoutY="95.0" prefHeight="545.0" prefWidth="664.0" styleClass="big_pane" stylesheets="@patient_details.css">
+            <Pane prefHeight="509.0" prefWidth="664.0" styleClass="big_pane" stylesheets="@patient_details.css">
                <children>
-                  <Button fx:id="button_back" alignment="CENTER" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="81.0" style="-fx-background-color: transparent;" styleClass="button_back" text="&lt;  Back" textAlignment="CENTER" textFill="#2854c3" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Button>
-                  <VBox layoutX="28.0" layoutY="46.0" prefHeight="215.0" prefWidth="259.0" spacing="8.0">
+                  <VBox layoutX="27.0" layoutY="14.0" prefHeight="215.0" prefWidth="259.0" spacing="8.0">
                      <children>
                         <HBox alignment="CENTER_LEFT" prefHeight="65.0" prefWidth="259.0" spacing="20.0">
                            <children>
                               <ImageView fitHeight="65.0" fitWidth="68.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../../images/photo.png" />
-                                 </image></ImageView>
+                                 </image>
+                              </ImageView>
                               <Button id="button_back" mnemonicParsing="false" prefHeight="35.0" prefWidth="75.0" style="-fx-background-color: transparent;" styleClass="button_back" textAlignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
@@ -43,7 +45,8 @@
                         <Label text="Name">
                            <font>
                               <Font name="System Bold" size="12.0" />
-                           </font></Label>
+                           </font>
+                        </Label>
                         <TextField fx:id="name" accessibleRole="TEXT" editable="false" prefHeight="35.0" prefWidth="259.0" promptText="Musa Haroon" style="-fx-background-color: e2e2e2; -fx-border-radius: 4;" styleClass="textField_username" stylesheets="@patient_details.css">
                            <font>
                               <Font size="14.0" />
@@ -57,7 +60,7 @@
                         </TextField>
                      </children>
                   </VBox>
-                  <Pane layoutX="28.0" layoutY="282.0" prefHeight="232.0" prefWidth="271.0" style="-fx-border-radius: 5;">
+                  <Pane layoutX="27.0" layoutY="250.0" prefHeight="232.0" prefWidth="271.0" style="-fx-border-radius: 5;">
                      <children>
                         <VBox fx:id="history" layoutY="23.0" prefHeight="209.0" prefWidth="271.0" style="-fx-border-color: bebebe; -fx-border-radius: 4;" stylesheets="@patient_details.css">
                            <children>
@@ -76,7 +79,7 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane layoutX="332.0" layoutY="32.0" prefHeight="232.0" prefWidth="271.0" style="-fx-border-radius: 5;">
+                  <Pane layoutX="331.0" prefHeight="232.0" prefWidth="271.0" style="-fx-border-radius: 5;">
                      <children>
                         <Label layoutY="14.0" text="Gender" />
                         <TextField fx:id="gender" accessibleRole="TEXT" editable="false" layoutY="39.0" prefHeight="35.0" prefWidth="259.0" promptText="Female" style="-fx-background-color: #e2e2e2; -fx-border-radius: 4;" styleClass="textField_username" stylesheets="@patient_details.css">
@@ -98,7 +101,7 @@
                         </TextField>
                      </children>
                   </Pane>
-                  <Pane layoutX="332.0" layoutY="282.0" prefHeight="232.0" prefWidth="271.0" style="-fx-border-radius: 5;">
+                  <Pane layoutX="331.0" layoutY="250.0" prefHeight="232.0" prefWidth="271.0" style="-fx-border-radius: 5;">
                      <children>
                         <VBox fx:id="appoints" layoutY="23.0" prefHeight="209.0" prefWidth="271.0" style="-fx-border-color: bebebe; -fx-border-radius: 4;" stylesheets="@patient_details.css">
                            <children>
@@ -119,105 +122,10 @@
                   </Pane>
                </children>
             </Pane>
-            <VBox layoutX="-13.0" layoutY="94.0" prefHeight="546.0" prefWidth="149.0">
-               <children>
-                  <AnchorPane fx:id="side_anchor" prefHeight="556.0" prefWidth="150.0" styleClass="side_anchor" stylesheets="@patient_details.css">
-                     <children>
-                        <Pane fx:id="iner_pane1" layoutX="17.0" layoutY="25.0" prefHeight="79.0" prefWidth="114.0" styleClass="inner_pane" stylesheets="@patient_details.css">
-                           <children>
-                              <Button layoutX="7.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="103.0" styleClass="Butt_inner_pane" stylesheets="@patient_details.css" textFill="#2854c3" />
-                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2012.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="48.0" layoutY="57.0" text="Home" textFill="#979797" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="iner_pane11" layoutX="17.0" layoutY="109.0" prefHeight="70.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@patient_details.css">
-                           <children>
-                              <Button layoutX="5.0" layoutY="-1.0" mnemonicParsing="false" prefHeight="70.0" prefWidth="114.0" styleClass="Butt_inner_pane" stylesheets="@patient_details.css" textFill="#2854c3" />
-                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2002.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="47.0" layoutY="48.0" text="Search" textFill="#979797" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="iner_pane111" layoutX="17.0" layoutY="190.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@patient_details.css">
-                           <children>
-                              <Button layoutX="3.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="127.0" styleClass="Butt_inner_pane" stylesheets="@patient_details.css" textFill="#2854c3" />
-                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2014.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="26.0" layoutY="57.0" text="Appointments" textFill="#979797" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="iner_pane1111" layoutX="17.0" layoutY="279.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@patient_details.css">
-                           <children>
-                              <Button layoutX="-2.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="127.0" styleClass="Butt_inner_pane" stylesheets="@patient_details.css" textFill="#2854c3" />
-                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/settings.png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="42.0" layoutY="57.0" text="Settings" textFill="#2854c3" />
-                           </children>
-                        </Pane>
-                        <Pane fx:id="iner_pane1112" layoutX="17.0" layoutY="366.0" prefHeight="79.0" prefWidth="127.0" styleClass="inner_pane" stylesheets="@patient_details.css">
-                           <children>
-                              <Button layoutX="3.0" mnemonicParsing="false" prefHeight="79.0" prefWidth="127.0" styleClass="Butt_inner_pane" stylesheets="@patient_details.css" textFill="#2854c3" />
-                              <ImageView fitHeight="40.0" fitWidth="58.0" layoutX="44.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2012%20(2).png" />
-                                 </image>
-                              </ImageView>
-                              <Label layoutX="46.0" layoutY="50.0" text="Logout" textFill="#979797" />
-                           </children>
-                        </Pane>
-                     </children>
-                     <effect>
-                        <DropShadow height="10.0" radius="4.5" width="10.0" />
-                     </effect>
-                  </AnchorPane>
-               </children>
-            </VBox>
-            <Pane fx:id="top_pane" prefHeight="94.0" prefWidth="800.0" styleClass="top_pane" stylesheets="@patient_details.css">
-               <children>
-                  <Pane layoutX="14.0" layoutY="7.0" prefHeight="70.0" prefWidth="62.0">
-                     <children>
-                        <ImageView fitHeight="70.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/image%2023.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <Pane layoutX="690.0" layoutY="6.0" prefHeight="79.0" prefWidth="103.0">
-                     <children>
-                        <ImageView fitHeight="58.0" fitWidth="55.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/photo.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <Label layoutX="70.0" layoutY="38.0" text="HEALTHYSENSE" textFill="WHITE">
-                     <font>
-                        <Font name="SansSerif Regular" size="14.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="328.0" layoutY="39.0" text="Patient Details" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="21.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
          </children>
-      </Pane>
+      </HBox>
    </children>
-</HBox>
+   <effect>
+      <InnerShadow />
+   </effect>
+</AnchorPane>
