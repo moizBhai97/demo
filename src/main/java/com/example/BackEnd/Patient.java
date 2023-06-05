@@ -259,6 +259,8 @@ public class Patient {
 
     public void addIllness(int patId, String info)
     {
+        PatientHistory history = new PatientHistory(info);
+        patientHistoryList.add(history);
         DBFactory.getInstance().createHandler("SQL").addPatientIllness(patId, info);
     }
 

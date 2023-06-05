@@ -28,6 +28,16 @@ public class PatientLedger {
         
     }
 
+    public void addPatient(String info)
+    {
+        try{
+            dbFactory.createHandler("SQL").addPatient(info);
+        }catch (Exception e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+
+        }
+    }
+
     public void setPatient(int patId)
     {
         try{
@@ -103,19 +113,16 @@ public class PatientLedger {
         }
     }
     
-    public boolean updateProfile(int patId, String info)
+    public void updateProfile(int patId, String info)
     {
         try{
             
             dbFactory.createHandler("SQL").updatePatientProfile(patId, info);
             getPatient(patId).updateProfile(info);
 
-
-            return true;
         } catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-            return false;
         }
     }
 }

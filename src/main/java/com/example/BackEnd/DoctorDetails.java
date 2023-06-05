@@ -25,10 +25,10 @@ public class DoctorDetails {
     private float environmentRating;
     private float staffRating;
     private int reviews;
+    private String schedule;
 
     private ReviewLedger reviewLedger;
     private CertificateLedger certificateLedger;
-    private String schedule;
 
     public DoctorDetails()
     {

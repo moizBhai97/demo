@@ -75,6 +75,6 @@
     -fx-prompt-text-fill: rgba(211, 211, 211) ;
 } */
 
-#myComboBox .prompt-text{
+#genderComboBox .prompt-text{
     -fx-text-fill: #aaaaaa;
 }

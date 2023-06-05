@@ -14,12 +14,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane prefHeight="460.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="460.0" prefWidth="340.0" styleClass="top_pane" stylesheets="@login.css" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" prefHeight="460.0" prefWidth="0.0" styleClass="top_pane" stylesheets="@login.css" HBox.hgrow="ALWAYS">
                <children>
                   <ImageView fitHeight="276.0" fitWidth="253.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -33,7 +32,7 @@
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="460.0" prefWidth="300.0" spacing="10.0" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
                   <Label text="Login" textFill="#2854c3">
                      <font>
@@ -85,7 +84,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Group>
+                  <Group fx:id="signupGroup">
                      <children>
                         <Label layoutY="3.0" text="Don't have an account?" />
                         <Hyperlink layoutX="124.0" onAction="#signupHyperlink" text="SignUp" textFill="#2854c3" />

@@ -29,7 +29,7 @@ public class SQL extends DBHandler {
         musa = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;";
         abdullah = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;";
 
-        connectionUrl = abdullah + 
+        connectionUrl = musa + 
                         "databaseName=SDA;" + 
                         "IntegratedSecurity=true;" + 
                         "encrypt=true;trustServerCertificate=true";
@@ -552,10 +552,15 @@ public class SQL extends DBHandler {
 
             ResultSet rs = pstmt.executeQuery();
 
+            if(rs.next() == false)
+            {
+                throw new Exception("No such user");
+            }
+
             JSONParser parser = new JSONParser();
             JSONObject patient = new JSONObject(
                 parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());                
-                rs.next();
+                //rs.next();
             patient.put("patId", rs.getInt("id"));
             patient.put("name", rs.getString("name"));
             patient.put("email", rs.getString("email"));
@@ -574,7 +579,7 @@ public class SQL extends DBHandler {
             // con.close();
 
             e.printStackTrace();
-            return "[]";
+            return null;
         }
 
 
@@ -968,6 +973,32 @@ public class SQL extends DBHandler {
             pstmt.executeUpdate();
         }
         catch (SQLException | JSONException e) {
+            // con.close();
+
+            e.printStackTrace();
+        }
+    }
+
+    public void addPatient(String info)
+    {
+        try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement())
+        {
+
+            JSONObject obj = new JSONObject(info);
+            String SQL = "INSERT INTO PATIENTS (NAME, EMAIL, PASSWORD, DOB, COUNTRY, PHONE_NUMBER, GENDER) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setString(1, obj.getString("name"));
+            pstmt.setString(2, obj.getString("email"));
+            pstmt.setString(3, obj.getString("password"));
+            pstmt.setString(4, obj.getString("DOB"));
+            pstmt.setString(5, obj.getString("country"));
+            pstmt.setString(6, obj.getString("phoneNumber"));
+            pstmt.setString(7, obj.getString("gender"));
+
+            pstmt.executeUpdate();
+
+        }catch (SQLException | JSONException e) {
             // con.close();
 
             e.printStackTrace();

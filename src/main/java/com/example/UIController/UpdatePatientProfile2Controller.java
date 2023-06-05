@@ -93,9 +93,9 @@ public class UpdatePatientProfile2Controller {
             }
             
             //SET RESTRICTION
-            if(description.length() > 100)
+            if(description.length() > 20)
             {
-                descriptionError.setText("*(max characters: )");
+                descriptionError.setText("*(max characters: 20)");
                 descriptionError.setVisible(true);
                 flag = true;
             }

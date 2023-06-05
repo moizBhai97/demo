@@ -9,6 +9,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -18,12 +19,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="460.0" prefWidth="673.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.SignupController">
+<AnchorPane prefHeight="460.0" prefWidth="640.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.SignupController">
    <children>
-      <HBox layoutX="1.0" prefHeight="460.0" prefWidth="673.0" spacing="25.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+      <HBox layoutX="1.0" prefHeight="460.0" prefWidth="673.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="460.0" prefWidth="271.0" styleClass="top_pane" stylesheets="@login.css" HBox.hgrow="ALWAYS">
+            <VBox alignment="CENTER" prefHeight="460.0" prefWidth="216.0" styleClass="top_pane" stylesheets="@login.css" HBox.hgrow="ALWAYS">
                <children>
                   <ImageView fitHeight="276.0" fitWidth="253.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -80,9 +80,8 @@
                               </Pane>
                            </children>
                         </Pane>
-                        <Pane fx:id="passwordTextField" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
+                        <Pane maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
                            <children>
-                              <TextField fx:id="searchBar31" layoutX="28.0" layoutY="1.0" prefHeight="25.0" prefWidth="207.0" promptText="Password" styleClass="search" stylesheets="@search_doctors_Searched.css" />
                               <Pane layoutX="1.0" prefHeight="25.0" prefWidth="33.0">
                                  <children>
                                     <ImageView fitHeight="25.0" fitWidth="64.0" layoutX="2.0" layoutY="2.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
@@ -92,11 +91,11 @@
                                     </ImageView>
                                  </children>
                               </Pane>
+                              <PasswordField fx:id="passwordTextField" layoutX="28.0" layoutY="1.0" prefHeight="25.0" prefWidth="207.0" promptText="Password" style="-fx-background-color: transparent;" />
                            </children>
                         </Pane>
                         <Pane fx:id="searchPane3" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
                            <children>
-                              <TextField fx:id="confirmPasswordTextField" layoutX="28.0" layoutY="1.0" prefHeight="25.0" prefWidth="207.0" promptText="Confirm Password" styleClass="search" stylesheets="@search_doctors_Searched.css" />
                               <Pane layoutX="1.0" prefHeight="25.0" prefWidth="33.0">
                                  <children>
                                     <ImageView fitHeight="25.0" fitWidth="64.0" layoutX="2.0" layoutY="2.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
@@ -106,6 +105,7 @@
                                     </ImageView>
                                  </children>
                               </Pane>
+                              <PasswordField fx:id="confirmPasswordTextField" layoutX="28.0" layoutY="2.0" prefHeight="25.0" prefWidth="207.0" promptText="Confirm Password" style="-fx-background-color: transparent;" />
                            </children>
                         </Pane>
                         <Pane fx:id="searchPane12" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
@@ -124,7 +124,7 @@
                                     </ImageView>
                                  </children>
                               </Pane>
-                              <DatePicker fx:id="DOBdatePicker" layoutX="27.0" layoutY="2.0" prefHeight="25.0" prefWidth="214.0" promptText="Date of Birth" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="date-picker" stylesheets="@signup.css" />
+                              <DatePicker fx:id="DOBdatePicker" editable="false" layoutX="27.0" layoutY="2.0" prefHeight="25.0" prefWidth="214.0" promptText="Date of Birth" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="date-picker" stylesheets="@signup.css" />
                            </children>
                         </Pane>
                         <Pane fx:id="searchPane32" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
@@ -138,11 +138,31 @@
                                     </ImageView>
                                  </children>
                               </Pane>
-                              <ComboBox id="myComboBox" fx:id="genderComboBox" layoutX="28.0" layoutY="3.0" prefHeight="22.0" prefWidth="208.0" promptText="Gender" style="-fx-background-color: transparent;" styleClass="combo-box" stylesheets="@signup.css">
+                              <ComboBox id="myComboBox" fx:id="genderComboBox" layoutX="28.0" layoutY="3.0" prefHeight="22.0" prefWidth="208.0" promptText="Gender" style="-fx-background-color: transparent;" stylesheets="@signup.css">
                                  <items>
                                     <FXCollections fx:factory="observableArrayList">
                                        <String fx:id="gender_1" fx:value="Male" />
                                        <String fx:id="gender_2" fx:value="Female" />    
+                                    </FXCollections>
+                                 </items>
+                              </ComboBox>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="searchPane3211" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
+                           <children>
+                              <Pane layoutX="1.0" prefHeight="25.0" prefWidth="33.0">
+                                 <children>
+                                    <ImageView fitHeight="25.0" fitWidth="64.0" layoutX="2.0" layoutY="2.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/per.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <ComboBox id="myComboBox" fx:id="countryComboBox" layoutX="28.0" layoutY="3.0" prefHeight="22.0" prefWidth="208.0" promptText="Country" style="-fx-background-color: transparent;" styleClass="combo-box" stylesheets="@signup.css">
+                                 <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                       <String fx:id="country1" fx:value="Pakistan" />
                                     </FXCollections>
                                  </items>
                               </ComboBox>

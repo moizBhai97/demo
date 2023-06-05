@@ -55,7 +55,6 @@ public class Doctor {
         this.id = docId;
         this.name = DBFactory.getInstance().createHandler("SQL").getDoctorName(docId);
     }
-
     
     public Doctor(String data) 
     {

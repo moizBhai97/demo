@@ -13,12 +13,27 @@ public class PatientController {
         patientLedger = new PatientLedger();
     }
 
+    public void signup(String info)
+    {
+        try{
+            patientLedger.addPatient(info);
+        }catch (Exception e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+
+        }
+    }
+
     public String login(String info)
     {
         System.out.println("Pateint controller login");
         try{
 
             Patient patient = patientLedger.getPatient(info);
+            if(patient == null)
+            {
+                throw new Exception("Patient not found");
+            }
+
             patient.populateAppointments();
             doctorLedger.setAppointmentDoctors(patient.getpatId());
             doctorLedger.setTopDoctors();
@@ -245,15 +260,5 @@ public class PatientController {
         }
             return "Invalid type";
         
-    }
-
-    public String editDetails(String info, int patId) {
-        try {
-         //   patientLedger.editPatientDetails(info);
-            return "Details edited successfully";
-        }
-        catch(Exception e) {
-            return "Error editing details";
-        }
     }
 }

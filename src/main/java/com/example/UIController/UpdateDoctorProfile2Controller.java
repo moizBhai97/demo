@@ -1,6 +1,7 @@
 package com.example.UIController;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import org.json.JSONArray;
@@ -11,6 +12,7 @@ import com.example.BackEnd.DoctorController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -61,6 +63,31 @@ public class UpdateDoctorProfile2Controller{
     void addCertification(ActionEvent event) {
 
         try{
+
+            if(this.tf_cert.getText().isEmpty() || this.dp_issue.getValue() == null || this.dp_expire.getValue() == null){
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid Input");
+                alert.setContentText("Please fill all the fields");
+                return;
+            }
+            if(this.tf_cert.getText().length() > 20){
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid Input");
+                alert.setContentText("Maximum length of certification name is 20 characters");
+                return;
+            }
+            if(this.dp_issue.getValue().isAfter(this.dp_expire.getValue()) || this.dp_issue.getValue().isEqual(this.dp_expire.getValue()) || this.dp_issue.getValue().isAfter(LocalDate.now())){
+
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid Input");
+                alert.setContentText("Please enter valid dates");
+                return;
+            }
 
             JSONObject json = new JSONObject();
             json.put("name", this.tf_cert.getText());
