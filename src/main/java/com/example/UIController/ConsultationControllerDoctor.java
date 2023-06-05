@@ -181,15 +181,18 @@ public class ConsultationControllerDoctor  implements Initializable
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/app_detailsDoctor.fxml")));
 
-            AppointmentControllerDoctor appointmentControllerDoctor = new AppointmentControllerDoctor();
-            appointmentControllerDoctor.setData(dc, appID, docId);
+            ConsultationControllerDoctor appointmentControllerDoctor = new ConsultationControllerDoctor();
+            appointmentControllerDoctor.setData(dc, appID, docId, rootPane);
             loader.setController(appointmentControllerDoctor);
 
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
+            AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+                  
+            ((AnchorPane)rootPane.getParent()).getChildren().add(pane);
+            DoctorMainController.addHeaderTitle("Consultation Details");
         }
         catch(Exception e)
         {

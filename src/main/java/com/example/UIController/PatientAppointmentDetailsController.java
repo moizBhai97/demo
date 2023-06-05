@@ -9,14 +9,12 @@ import org.json.JSONObject;
 
 import com.example.BackEnd.DoctorController;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
-<<<<<<< HEAD
-=======
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
->>>>>>> 3d720c1f0fe74f6a5ee13655d34bbd2a4a98cbe9
 
 public class PatientAppointmentDetailsController  implements Initializable
 {

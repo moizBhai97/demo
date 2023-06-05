@@ -78,25 +78,7 @@ public class WriteReviewController implements Initializable{
             SearchDoctorController controller = new SearchDoctorController();
             controller.setData(patientController, patId);
             loader.setController(controller);
-
-<<<<<<< HEAD
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-
-            Stage prevWin = (Stage) prev.getWindow();
-
-            stage.setWidth(prevWin.getWidth());
-            stage.setHeight(prevWin.getHeight());
-            stage.setX(prevWin.getX());
-            stage.setY(prevWin.getY());
-
-            stage.setMinWidth(825);
-            stage.setMinHeight(680);
-
-            stage.setScene(scene);
-            stage.show();
-=======
+            
             Parent parent= prevPane.getParent();
             AnchorPane anchorPane = loader.load();
 
@@ -115,7 +97,6 @@ public class WriteReviewController implements Initializable{
             SearchDoctorController.clearHeaderTitles();
             SearchDoctorController.addHeaderTitle("Search Doctors");
 
->>>>>>> 3d720c1f0fe74f6a5ee13655d34bbd2a4a98cbe9
         }
         catch (Exception e) {
             e.printStackTrace();

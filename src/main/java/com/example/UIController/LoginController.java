@@ -90,22 +90,6 @@ public class LoginController implements Initializable {
             try {
              //   this.loginButton.getScene().getWindow().hide();
 
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors - Copy.fxml")));
-
-                searchDoctorController = new SearchDoctorController();
-                searchDoctorController.setData(patientController, patId);
-
-                loader.setController(searchDoctorController);
-
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) this.loginButton.getScene().getWindow();
-                stage.setScene(scene);
-                stage.setMinWidth(810);
-                stage.show();
-
-<<<<<<< HEAD
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors - Copy.fxml")));
             
@@ -124,8 +108,6 @@ public class LoginController implements Initializable {
 
             stage.show();
             
-=======
->>>>>>> 3d720c1f0fe74f6a5ee13655d34bbd2a4a98cbe9
             } catch (IOException e) {
                 System.err.println(String.format("Error: %s", e.getMessage()));
             }

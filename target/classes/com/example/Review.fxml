@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
-<AnchorPane prefHeight="564.0" prefWidth="656.8" styleClass="big_pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="564.0" prefWidth="656.8" styleClass="big_pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="backBtn" layoutX="4.0" layoutY="3.0" mnemonicParsing="false" onAction="#backBtnPressed" prefHeight="17.0" prefWidth="63.0" style="-fx-background-color: transparent;" styleClass="Butt_inner_pane" text="&lt;  Back" textFill="#2854c3" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="1.0">
          <font>
