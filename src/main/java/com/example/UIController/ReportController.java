@@ -67,7 +67,7 @@ public class ReportController implements Initializable {
 
         JSONObject obj = new JSONObject();
 
-        obj.put("reason", reason);
+        obj.put("reason", info);
 
         dc.newComplaint(patId, obj.toString(), docId);
 

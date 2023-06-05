@@ -12,6 +12,7 @@ public class DoctorController {
 
         doctorLedger = new DoctorLedger();
         patientLedger = new PatientLedger();
+        complaintCatalog = new ComplaintCatalog();
     }
 
     //public void setDate()

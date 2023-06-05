@@ -68,7 +68,7 @@ public class DoctorMainController implements Initializable {
             if (headerTitles.isEmpty()) {
                 headerTitle.setText("");
             } else {
-                headerTitle.textProperty().bind(headerTitles.get(headerTitles.size() - 1).textProperty());
+                headerTitle.setText((headerTitles.get(headerTitles.size() - 1).getText() ));
             }
         });
         try {
@@ -104,8 +104,8 @@ public class DoctorMainController implements Initializable {
     public static void addHeaderTitle(String title) {
         Label label = new Label(title);
         label.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
-        StringProperty textProperty = new SimpleStringProperty(title);
-        label.textProperty().bind(textProperty);
+        //StringProperty textProperty = new SimpleStringProperty(title);
+       // label.textProperty().bind(textProperty);
         headerTitles.add(label);
         // headerTitle.setText(title);
     }
