@@ -16,16 +16,6 @@ public class DoctorLedger {
     public DoctorLedger() {
         topDoctors = new ArrayList<Doctor>();
         doctorList = new ArrayList<Doctor>();
-
-
-        //temp
-        // JSONObject info = new JSONObject();
-        // info.put("email", "dr.asim@example.com");
-        // info.put("password", "drpassword123");
-
-        // Doctor doctor = getDoctorInstance(info.toString());
-        // System.out.println(doctor.toString());
-        // doctorList.add(doctor);
       
     }
 
@@ -102,6 +92,7 @@ public class DoctorLedger {
 
             Doctor doctor = new Doctor(doctorInfo);
             doctorList.add(doctor);
+            System.out.println("-----" + doctorList.toString());
 
             return doctor;
         } catch (Exception e) {
@@ -212,6 +203,8 @@ public class DoctorLedger {
 
     public Doctor getDoctor(int docId) 
     {
+        System.out.println("Ledger getDoctor\n" + doctorList.toString());
+
         for(int i = 0; i < doctorList.size(); i++)
         {
             if(doctorList.get(i).getId() == docId)

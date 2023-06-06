@@ -57,12 +57,12 @@ public class ReviewLedger {
         
     }
 
-    public String getAvgRating(String info)
+    public String getAvgRating()
     {
 
         System.out.println("getAvgRating: ");
         
-        JSONObject obj = new JSONObject(info);
+        JSONObject obj = new JSONObject();
 
         float checkupRating = 0;
         float environmentRating = 0;

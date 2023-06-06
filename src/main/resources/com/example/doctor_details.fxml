@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,9 +16,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="parentPane" prefHeight="564.0" prefWidth="656.8" style="-fx-background-color: white;" stylesheets="@doctor_details.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="parentPane" prefHeight="564.0" prefWidth="656.8" style="-fx-background-color: white;" stylesheets="@doctor_details.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox alignment="CENTER" layoutX="7.0" layoutY="46.0" prefHeight="509.0" prefWidth="592.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="46.0">
+      <HBox alignment="CENTER" layoutX="7.0" layoutY="46.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="46.0">
          <children>
             <Pane prefHeight="510.0" prefWidth="662.0" style="-fx-background-color: white;">
                <children>
@@ -116,21 +117,28 @@
                   </Pane>
                   <Pane fx:id="inner_big_pane112" layoutX="519.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
                      <children>
-                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
-                           <children>
-                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="12.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/image%2018.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
+                        <ImageView fx:id="starOutline" fitHeight="40.0" fitWidth="40.0" layoutX="34.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/starOutline.png" />
+                           </image>
+                           <effect>
+                              <Shadow height="0.0" radius="0.0" width="0.0" />
+                           </effect>
+                        </ImageView>
                         <Label fx:id="rating" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="47.0" prefHeight="25.0" prefWidth="45.0" styleClass="texty" stylesheets="@doctor_details.css" text="4.8">
                            <font>
                               <Font name="Serif Regular" size="16.0" />
                            </font>
                         </Label>
                         <Label layoutX="37.0" layoutY="72.0" text="Ratings" />
+                        <ImageView fx:id="ratingStar" fitHeight="30.0" fitWidth="30.0" layoutX="42.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/image%2033.png" />
+                           </image>
+                           <effect>
+                              <Shadow height="0.0" radius="0.0" width="0.0" />
+                           </effect>
+                        </ImageView>
                      </children>
                   </Pane>
                   <Pane fx:id="inner_big_pane113" layoutX="521.0" layoutY="107.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane21" stylesheets="@doctor_details.css">
@@ -230,10 +238,13 @@
             </Pane>
          </children>
       </HBox>
-      <Button fx:id="backBtn" alignment="TOP_LEFT" layoutY="1.0" mnemonicParsing="false" onAction="#backBtnPressed" prefHeight="26.0" prefWidth="70.0" style="-fx-background-color: transparent; -fx-text-fill: #2854c3; -fx-font-weight: bold;" text="&lt;  Back">
+      <Button fx:id="backBtn" alignment="TOP_LEFT" layoutY="1.0" mnemonicParsing="false" onAction="#backBtnPressed" styleClass="backBtn" stylesheets="@settings.css" text="&lt;  Back" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="1.0">
          <cursor>
             <Cursor fx:constant="HAND" />
-         </cursor></Button>
+         </cursor>
+         <font>
+            <Font size="16.0" />
+         </font></Button>
    </children>
    <effect>
       <InnerShadow />

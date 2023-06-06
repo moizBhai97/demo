@@ -18,10 +18,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.InnerShadow;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class UpdatePatientProfileController implements Initializable{
@@ -64,8 +67,9 @@ public class UpdatePatientProfileController implements Initializable{
     
     JSONArray history;
 
-    int patId = 1;
-    PatientController patientController = new PatientController();
+    int patId;
+    PatientController patientController;
+    private AnchorPane rootPane;
 
 
     @Override
@@ -93,6 +97,12 @@ public class UpdatePatientProfileController implements Initializable{
         refresh();
     }
 
+    public void setData(PatientController patientController, int patId,AnchorPane rootPane)
+    {
+        this.patId = patId;
+        this.patientController = patientController;
+        this.rootPane = rootPane;
+    }
     public void refresh()
     {
         flowPane.getChildren().clear();
@@ -104,7 +114,7 @@ public class UpdatePatientProfileController implements Initializable{
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation((new URL("file:src/main/resources/com/example/patientRecordCard.fxml")));
                 PatientRecordCardController patientRecordCardController = new PatientRecordCardController();
-                patientRecordCardController.setData(patId, i+1, obj.toString(), history);
+                patientRecordCardController.setData(patId, i+1, obj.toString(), history, patientController);
                 loader.setController(patientRecordCardController);
                 AnchorPane aPane = loader.load();
                 flowPane.getChildren().add(aPane);
@@ -125,8 +135,8 @@ public class UpdatePatientProfileController implements Initializable{
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/addRecordPopup.fxml")));
 
-            UpdatePatientProfile2Controller updatePatientProfile2Controller = new UpdatePatientProfile2Controller();
-            updatePatientProfile2Controller.setData(patId, history);
+            AddRecordController updatePatientProfile2Controller = new AddRecordController();
+            updatePatientProfile2Controller.setData(patId, history, patientController);
 
             loader.setController(updatePatientProfile2Controller);
 
@@ -198,12 +208,43 @@ public class UpdatePatientProfileController implements Initializable{
             profile.put("gender", this.tf_gender.getText());
 
             patientController.updateProfile(patId, profile.toString());
+
+            SearchDoctorController.clearHeaderTitles();
+            SearchDoctorController.addHeaderTitle("Settings");
+            
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/Settings.fxml")));
+            PatientSettingsController controller = new PatientSettingsController();
+            controller.setData(patientController, patId);
+            loader.setController(controller);
+
+            AnchorPane root = loader.load();
+            AnchorPane.setTopAnchor(root, 0.0);
+            AnchorPane.setBottomAnchor(root, 0.0);
+            AnchorPane.setLeftAnchor(root, 0.0);
+            AnchorPane.setRightAnchor(root, 0.0);
+            
+            Parent parent = rootPane.getParent();
+            if(parent!=null){
+                ((AnchorPane)parent).getChildren().clear();
+            }
+            ((AnchorPane)rootPane).getChildren().add(root);
             
         }
         catch(Exception e)
         {
             System.out.println(e);
         }
+    }
+
+
+    
+    public void backBtnPressed(ActionEvent event) {
+        rootPane.setVisible(true);
+        AnchorPane mainParentPane = (AnchorPane) rootPane.getParent();
+        // remove last
+        mainParentPane.getChildren().remove(mainParentPane.getChildren().size() - 1);
+        SearchDoctorController.removeTopTitle();
     }
 
 }

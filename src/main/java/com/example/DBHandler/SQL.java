@@ -46,6 +46,7 @@ public class SQL extends DBHandler {
             pstmt.setInt(1, docId);
 
             ResultSet rs = pstmt.executeQuery();
+            
 
             rs.next();
 
@@ -306,7 +307,7 @@ public class SQL extends DBHandler {
 
             pstmt.close();
 
-            SQL = "SELECT COUNT(ID) FROM Appointments WHERE DOCTOR_ID = ? AND STATUS = 'Completed' ;";
+            SQL = "SELECT COUNT(Distinct PATIENT_ID) FROM Appointments WHERE DOCTOR_ID = ? AND STATUS = 'Completed' ;";
             pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, docId);
             rs = pstmt.executeQuery();
@@ -354,35 +355,6 @@ public class SQL extends DBHandler {
             return null;
         } 
     }
-    
-// public String getDummyDoctor(String name){
-//     ArrayList<Doctor> dummyDoctors = new ArrayList<Doctor>();
-//     String[] specializations = {"Cardiologist", "Dermatologist", "Dentist", "Psychiatrist"};
-//     String[] hospitals = {"Mayo Clinic", "Johns Hopkins Hospital", "Cleveland Clinic", "Massachusetts General Hospital", "UCSF Medical Center", "Brigham and Women's Hospital", "New York-Presbyterian Hospital", "Stanford Health Care-Stanford Hospital", "Hospitals of the University of Pennsylvania-Penn Presbyterian", "Cedars-Sinai Medical Center"};
-//     List<DoctorTemp> doctorTemps = new ArrayList<DoctorTemp>();
-//         char[] chars = "abcdefghijklmnopqrstuvwxyz".toCharArray();
-        
-        
-//         //generate random doctorTemps
-//         for(int i=0;i<10;i++){
-//             StringBuilder sb = new StringBuilder();
-//             sb.append("M ");
-//             for (int j = 0; j < 10; j++) {
-//                 sb.append(chars[(int) (Math.random() * chars.length)]);
-//             }
-//             con.close();
-//             return doctors.toString();
-
-//         } catch (SQLException | JSONException | IOException | ParseException e) {
-//             // con.close();
-
-//             e.printStackTrace();
-//         }
-
-//         return "[]";
-
-//         //
-//     }
 
      public String getDoctors(String name) 
      {
@@ -390,8 +362,8 @@ public class SQL extends DBHandler {
 
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
 
-            String SQL = "SELECT (SELECT COUNT(ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients, id, NAME, EMAIL, DOB, COUNTRY, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, STATS, PATIENTS_TREATED, EXPERIENCE, RATING, WORKING_HOURS, FEE, AVAILABILITY FROM DOCTORS d where d.name LIKE '%" + name + "%';";
-
+            String SQL = "SELECT (SELECT COUNT(Distinct PATIENT_ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients, id, NAME, EMAIL, DOB, COUNTRY, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, EXPERIENCE, WORKING_HOURS, FEE, AVAILABILITY FROM DOCTORS d where d.name LIKE '%" + name + "%';";
+ 
             ResultSet rs = stmt.executeQuery(SQL);
 
             JSONArray doctors = new JSONArray();
@@ -412,10 +384,8 @@ public class SQL extends DBHandler {
                 innerObj.put("specialization", rs.getString("specialization"));
                 innerObj.put("description", rs.getString("description"));
                 innerObj.put("location", rs.getString("location"));
-                innerObj.put("stats", rs.getFloat("stats"));
-                innerObj.put("patients", rs.getInt("patients_treated"));
+                innerObj.put("patients", rs.getInt("Patients"));
                 innerObj.put("experience", rs.getInt("experience"));
-                innerObj.put("rating", rs.getFloat("rating"));
                 innerObj.put("workingHours", rs.getString("working_hours"));
                 innerObj.put("fee", rs.getInt("fee"));
                 innerObj.put("availability", rs.getString("availability"));
@@ -455,7 +425,7 @@ public class SQL extends DBHandler {
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()){
             System.out.println("SQL getTopDoctors");
 
-            String SQL = "SELECT TOP 4 * FROM DOCTORS ORDER BY (((SELECT AVG(EXPERIENCE) FROM REVIEWS WHERE DOCTOR_ID = DOCTORS.ID)/5)*60 + (SELECT (AVG(checkupRating)+ AVG(environmentRating)+ AVG(staffRating))/3.0 FROM REVIEWS)*40) DESC";
+            String SQL = "SELECT TOP 4 *, (SELECT COUNT(Distinct PATIENT_ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients FROM DOCTORS d ORDER BY (((SELECT AVG(EXPERIENCE) FROM REVIEWS WHERE DOCTOR_ID = d.ID)/5)*60 + (SELECT (AVG(checkupRating)+ AVG(environmentRating)+ AVG(staffRating))/3.0 FROM REVIEWS WHERE DOCTOR_ID = d.ID)*40) DESC";
 
             ResultSet rs = stmt.executeQuery(SQL);
             System.out.println(rs.toString());
@@ -477,10 +447,8 @@ public class SQL extends DBHandler {
                 detailsObj.put("specialization", rs.getString("specialization"));
                 detailsObj.put("description", rs.getString("description"));
                 detailsObj.put("location", rs.getString("location"));
-                detailsObj.put("stats", rs.getFloat("stats"));
-                detailsObj.put("patients", rs.getInt("patients_treated"));
+                detailsObj.put("patients", rs.getInt("Patients"));
                 detailsObj.put("experience", rs.getInt("experience"));
-                detailsObj.put("rating", rs.getFloat("rating"));
                 detailsObj.put("workingHours", rs.getString("working_hours"));
                 detailsObj.put("fee", rs.getInt("fee"));
                 detailsObj.put("availability", rs.getString("availability"));
@@ -500,9 +468,8 @@ public class SQL extends DBHandler {
 
                 doctors.put(doctorObj);
             }
-
-            //System.out.println(doctors.toString());
             return doctors.toString();
+            
         } catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
             }.getClass().getEnclosingMethod().getName());
@@ -595,7 +562,7 @@ public class SQL extends DBHandler {
             JSONObject information = new JSONObject(info); 
             
             try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
-                String SQL = "SELECT NAME, ID, EMAIL, DOB, COUNTRY, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, STATS, PATIENTS_TREATED, EXPERIENCE, RATING, WORKING_HOURS, FEE, AVAILABILITY FROM Doctors WHERE email = ? AND password = ?";
+                String SQL = "SELECT (SELECT COUNT(Distinct PATIENT_ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients, NAME, ID, EMAIL, DOB, COUNTRY, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, EXPERIENCE, WORKING_HOURS, FEE, AVAILABILITY FROM Doctors d WHERE email = ? AND password = ?";
                 PreparedStatement pstmt = con.prepareStatement(SQL);
                 pstmt.setString(1, information.getString("email"));
                 pstmt.setString(2, information.getString("password"));
@@ -617,10 +584,8 @@ public class SQL extends DBHandler {
                 detailsObj.put("specialization", rs.getString("specialization"));
                 detailsObj.put("description", rs.getString("description"));
                 detailsObj.put("location", rs.getString("location"));
-                detailsObj.put("stats", rs.getFloat("stats"));
-                detailsObj.put("patients", rs.getInt("patients_treated"));
+                detailsObj.put("patients", rs.getInt("Patients"));
                 detailsObj.put("experience", rs.getInt("experience"));
-                detailsObj.put("rating", rs.getFloat("rating"));
                 detailsObj.put("workingHours", rs.getString("working_hours"));
                 detailsObj.put("fee", rs.getInt("fee"));
                 detailsObj.put("availability", rs.getString("availability"));
@@ -760,21 +725,6 @@ public class SQL extends DBHandler {
 
             JSONArray appointments = new JSONArray();
 
-            /*
-            "appId": "{{appId}}",
-            "date": "{{date}}",
-            "time": "{{time}}",
-            "problem": "{{problem}}",
-            "status": "{{status}}",
-            "docId": "{{docId}}",
-            "payment": {
-                            "amount": "{{amount}}",
-                            "status": "{{status}}",
-                            "date": "{{date}}",
-                            "time": "{{time}}"
-                        }
-             */
-
             while(rs.next())
             {
                 JSONObject obj = new JSONObject();
@@ -822,7 +772,7 @@ public class SQL extends DBHandler {
         {
             System.out.println("SQL getAppointmentDoctors");
 
-            String SQL = "SELECT * FROM Doctors WHERE ID IN (SELECT DOCTOR_ID FROM Appointments WHERE PATIENT_ID = ?);";
+            String SQL = "SELECT *, (SELECT COUNT(Distinct PATIENT_ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients FROM Doctors d WHERE ID IN (SELECT DOCTOR_ID FROM Appointments WHERE PATIENT_ID = ?);";
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, patId);
             ResultSet rs = pstmt.executeQuery();
@@ -845,10 +795,8 @@ public class SQL extends DBHandler {
                 detailsObj.put("specialization", rs.getString("specialization"));
                 detailsObj.put("description", rs.getString("description"));
                 detailsObj.put("location", rs.getString("location"));
-                detailsObj.put("stats", rs.getFloat("stats"));
-                detailsObj.put("patients", rs.getInt("patients_treated"));
+                detailsObj.put("patients", rs.getInt("Patients"));
                 detailsObj.put("experience", rs.getInt("experience"));
-                detailsObj.put("rating", rs.getFloat("rating"));
                 detailsObj.put("workingHours", rs.getString("working_hours"));
                 detailsObj.put("fee", rs.getInt("fee"));
                 detailsObj.put("availability", rs.getString("availability"));
@@ -919,31 +867,14 @@ public class SQL extends DBHandler {
         } 
     }
 
-    // public static void main(String[] args) throws Exception {
-    // String connectionUrl = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;" +
-    // "databaseName=SDA;" +
-    // "IntegratedSecurity=true" + ";encrypt=true;trustServerCertificate=true";
-    // try (Connection con = DriverManager.getConnection(connectionUrl); Statement
-    // stmt = con.createStatement()) {
-    // String SQL = "SELECT * FROM Patients";
-    // ResultSet rs = stmt.executeQuery(SQL);
-    // //print all columns and rows in resultset
-
-    // } catch (SQLException e) {
-    // e.printStackTrace();
-    // }
-    // }
- 
-
     public void addComplaint(int patID, String details, int docID) {
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
 
             JSONObject obj = new JSONObject(details);
-            String description = obj.getString("description");
             String reason = obj.getString("reason");
 
-            String SQL = "INSERT INTO Complaints (patient_ID, description, reason, doctor_ID) VALUES (" + patID + ", '"
-                    + description + "', '" + reason + "', " + docID + ")";
+            String SQL = "INSERT INTO Complaints (patient_ID, reason, doctor_ID) VALUES (" + patID + ", '"
+                      + reason + "', " + docID + ")";
             stmt.executeUpdate(SQL);
            
 

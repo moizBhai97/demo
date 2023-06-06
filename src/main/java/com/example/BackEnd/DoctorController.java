@@ -25,7 +25,6 @@ public class DoctorController {
     public String login(String info)
     {
         try{
-
             Doctor doctor = doctorLedger.getDoctorInstance(info);
             doctor.setAppointments(doctor.getId());
             patientLedger.setAppointmentPatients(doctor.getId());
@@ -42,7 +41,7 @@ public class DoctorController {
     public void addCertification(String info, int docId)
     {
         try{
-            JSONObject json = new JSONObject(info);
+            //JSONObject json = new JSONObject(info);
             doctorLedger.getDoctor(docId).getDoctorDetails().addCertification(info, docId);
 
 

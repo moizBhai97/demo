@@ -8,6 +8,7 @@
 <?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,232 +16,244 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="564.0" prefWidth="656.8" styleClass="big_pane" stylesheets="@book_apt.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane styleClass="big_pane" stylesheets="@book_apt.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Button fx:id="backBtn" layoutY="4.0" mnemonicParsing="false" onAction="#backBtnPressed" prefHeight="13.0" prefWidth="82.0" styleClass="Butt_inner_pane" text="&lt;  Back" textFill="#2854c3" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="4.0">
+      <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backBtnPressed" styleClass="backBtn" stylesheets="@settings.css" text="&lt;  Back" textFill="#2854c3" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="16.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Pane layoutX="10.0" layoutY="46.0">
+      <HBox alignment="CENTER" layoutX="7.0" layoutY="46.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="46.0">
          <children>
-            <Pane fx:id="bookAppointmentPane" layoutX="2.0" layoutY="100.0">
+            <Pane>
                <children>
-                  <Pane fx:id="big_pane1" prefHeight="311.0" prefWidth="335.0" styleClass="big_pane" stylesheets="@book_apt.css">
+                  <Pane fx:id="bookAppointmentPane" layoutX="2.0" layoutY="100.0">
                      <children>
-                        <TextArea fx:id="problem_text" layoutX="42.0" layoutY="200.0" prefHeight="107.0" prefWidth="275.0" promptText="Describe Problem" style="-fx-background-radius: 8px; -fx-border-radius: 8px;">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor></TextArea>
-                        <ToggleButton fx:id="day" alignment="BASELINE_LEFT" layoutX="38.0" layoutY="55.0" mnemonicParsing="false" onAction="#morningButton" prefHeight="40.0" prefWidth="134.0" selected="true" styleClass="button_big" stylesheets="@book_apt.css" text="Morning" textFill="WHITE">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/Group%20500.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <toggleGroup>
-                              <ToggleGroup fx:id="period" />
-                           </toggleGroup>
+                        <Pane fx:id="big_pane1" prefHeight="311.0" prefWidth="335.0" styleClass="big_pane" stylesheets="@book_apt.css">
+                           <children>
+                              <TextArea fx:id="problem_text" layoutX="42.0" layoutY="200.0" prefHeight="107.0" prefWidth="275.0" promptText="Describe Problem" style="-fx-background-radius: 8px; -fx-border-radius: 8px;">
+                                 <cursor>
+                                    <Cursor fx:constant="TEXT" />
+                                 </cursor>
+                              </TextArea>
+                              <ToggleButton fx:id="day" alignment="BASELINE_LEFT" layoutX="38.0" layoutY="55.0" mnemonicParsing="false" onAction="#morningButton" prefHeight="40.0" prefWidth="134.0" selected="true" styleClass="button_big" stylesheets="@book_apt.css" text="Morning" textFill="WHITE">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/Group%20500.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="period" />
+                                 </toggleGroup>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ToggleButton>
+                              <ToggleButton fx:id="night" alignment="BASELINE_LEFT" layoutX="189.0" layoutY="55.0" mnemonicParsing="false" onAction="#nightButton" prefHeight="40.0" prefWidth="134.0" styleClass="button_night" stylesheets="@book_apt.css" text="Evening" toggleGroup="$period">
+                                 <graphic>
+                                    <ImageView fitHeight="24.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/Group%20502.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </ToggleButton>
+                              <Label alignment="BASELINE_LEFT" layoutX="41.0" layoutY="175.0" prefHeight="31.0" prefWidth="134.0" text="Describe your problem" textFill="#8c8fa5" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <HBox fx:id="timesBox" layoutX="38.0" layoutY="113.0" prefHeight="50.0" prefWidth="286.0" spacing="10.0">
+                                 <children>
+                                    <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="button_big" stylesheets="@resch.css" text="9:30 am" textFill="WHITE">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="times" />
+                                       </toggleGroup>
+                                    </ToggleButton>
+                                    <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@resch.css" text="10:30 am" toggleGroup="$times" />
+                                    <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@resch.css" text="11:30 am" toggleGroup="$times" />
+                                 </children>
+                              </HBox>
+                              <Pane layoutX="-87.0" layoutY="14.0" prefHeight="31.0" prefWidth="160.0">
+                                 <children>
+                                    <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="134.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/Calendar.png" />
+                                       </image>
+                                    </ImageView>
+                                    <DatePicker fx:id="datePicker" editable="false" layoutX="-1.0" layoutY="3.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#datePickerPressed" prefHeight="18.0" prefWidth="160.0" styleClass="date-picker" stylesheets="@resch.css">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </DatePicker>
+                                    <Pane layoutX="-2.0" prefHeight="31.0" prefWidth="137.0" />
+                                 </children>
+                              </Pane>
+                              <Label fx:id="datePick" alignment="BASELINE_LEFT" layoutX="81.0" layoutY="14.0" prefHeight="31.0" prefWidth="254.0" text="21 January, Friday" textFill="#8c8fa5" wrapText="true">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Button fx:id="bookBtn" layoutX="399.0" layoutY="254.0" mnemonicParsing="false" onAction="#bookButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@book_apt.css" text="Book Appointment" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
-                        </ToggleButton>
-                        <ToggleButton fx:id="night" alignment="BASELINE_LEFT" layoutX="189.0" layoutY="55.0" mnemonicParsing="false" onAction="#nightButton" prefHeight="40.0" prefWidth="134.0" styleClass="button_night" stylesheets="@book_apt.css" text="Evening" toggleGroup="$period">
-                           <graphic>
-                              <ImageView fitHeight="24.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../images/Group%20502.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                        </ToggleButton>
-                        <Label alignment="BASELINE_LEFT" layoutX="41.0" layoutY="175.0" prefHeight="31.0" prefWidth="134.0" text="Describe your problem" textFill="#8c8fa5" wrapText="true">
+                        </Button>
+                        <Label alignment="BASELINE_LEFT" layoutX="367.0" layoutY="14.0" prefHeight="31.0" prefWidth="134.0" text="Fee Information" textFill="#8c8fa5" wrapText="true">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <HBox fx:id="timesBox" layoutX="38.0" layoutY="113.0" prefHeight="50.0" prefWidth="286.0" spacing="10.0">
+                        <Pane layoutX="367.0" layoutY="42.0" prefHeight="49.0" prefWidth="264.0" style="-fx-background-color: #2854c3;" styleClass="button_night">
                            <children>
-                              <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="button_big" stylesheets="@resch.css" text="9:30 am" textFill="WHITE">
-                                 <toggleGroup>
-                                    <ToggleGroup fx:id="times" />
-                                 </toggleGroup>
-                              </ToggleButton>
-                              <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@resch.css" text="10:30 am" toggleGroup="$times" />
-                              <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@resch.css" text="11:30 am" toggleGroup="$times" />
-                           </children>
-                        </HBox>
-                        <Pane layoutX="-87.0" layoutY="14.0" prefHeight="31.0" prefWidth="160.0">
-                           <children>
-                              <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="134.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="55.0" fitWidth="38.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../images/Calendar.png" />
+                                    <Image url="@../../images/Group%20544.png" />
                                  </image>
                               </ImageView>
-                              <DatePicker fx:id="datePicker" editable="false" layoutX="-1.0" layoutY="3.0" nodeOrientation="LEFT_TO_RIGHT" onAction="#datePickerPressed" prefHeight="18.0" prefWidth="160.0" styleClass="date-picker" stylesheets="@resch.css">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </DatePicker>
-                              <Pane layoutX="-2.0" prefHeight="31.0" prefWidth="137.0" />
+                              <Label layoutX="54.0" layoutY="5.0" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" text="Clinic Session" />
+                              <Label layoutX="54.0" layoutY="21.0" style="-fx-text-fill: white; -fx-font-size: 9; -fx-font-weight: bold;" text="Complete Session (Best Option)" />
+                              <Label fx:id="feeLabel" layoutX="151.0" layoutY="5.0" prefHeight="16.0" prefWidth="41.0" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" text="1000" />
+                              <Label layoutX="202.0" layoutY="5.0" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" text="Rs/Session" />
                            </children>
                         </Pane>
-                        <Label fx:id="datePick" alignment="BASELINE_LEFT" layoutX="81.0" layoutY="14.0" prefHeight="31.0" prefWidth="254.0" text="21 January, Friday" textFill="#8c8fa5" wrapText="true">
+                     </children>
+                  </Pane>
+                  <Pane fx:id="confirm_pane" layoutX="180.0" layoutY="85.0" prefHeight="232.0" prefWidth="236.0" style="-fx-background-color: #ededed;" styleClass="inner_big_pane1" visible="false">
+                     <children>
+                        <Label layoutX="58.0" layoutY="7.0" prefHeight="20.0" prefWidth="125.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Confirm Booking" />
+                        <Button fx:id="yes_btn_confirm" layoutX="12.0" layoutY="116.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" styleClass="button_big" stylesheets="@book_apt.css" text="Yes" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="no_btn_confirm" layoutX="12.0" layoutY="164.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" style="-fx-background-color: white; -fx-text-fill: black;" styleClass="button_big" stylesheets="@book_apt.css" text="No" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="cancel_pane" layoutX="183.0" layoutY="90.0" prefHeight="232.0" prefWidth="236.0" style="-fx-background-color: #ededed;" styleClass="inner_big_pane1" visible="false">
+                     <children>
+                        <Label layoutX="69.0" layoutY="7.0" prefHeight="20.0" prefWidth="125.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Are you sure?" />
+                        <Button fx:id="yes_btn_cancel" layoutX="12.0" layoutY="116.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" styleClass="button_big" stylesheets="@book_apt.css" text="Yes" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="no_btn_cancel" layoutX="12.0" layoutY="164.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" style="-fx-background-color: white; -fx-text-fill: black;" styleClass="button_big" stylesheets="@book_apt.css" text="No" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane1" layoutX="4.0" layoutY="2.0" prefHeight="94.0" prefWidth="245.0" styleClass="inner_big_pane1" stylesheets="@doctor_details.css">
+                     <children>
+                        <Pane layoutY="7.0" prefHeight="79.0" prefWidth="103.0">
+                           <children>
+                              <ImageView fitHeight="58.0" fitWidth="55.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2020.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="name" layoutX="85.0" layoutY="14.0" text="Dr. Amna Irum" textFill="#979797">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="specialization" layoutX="85.0" layoutY="38.0" text="Dermatologist" textFill="#979797" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane11" layoutX="263.0" layoutY="2.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
+                     <children>
+                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
+                           <children>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2016.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="patients" alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="49.0" prefHeight="25.0" prefWidth="41.0" styleClass="texty" stylesheets="@doctor_details.css" text="90" textAlignment="CENTER">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="35.0" layoutY="72.0" text="Patients" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane111" layoutX="391.0" layoutY="2.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
+                     <children>
+                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
+                           <children>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="17.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2017%20(2).png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="experience" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="47.0" prefHeight="25.0" prefWidth="31.0" styleClass="texty" stylesheets="@doctor_details.css" text="5" textAlignment="CENTER">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="28.0" layoutY="72.0" text="Experience" />
+                        <Label fx:id="experience1" alignment="CENTER" contentDisplay="CENTER" layoutX="46.0" layoutY="47.0" styleClass="texty" stylesheets="@doctor_details.css" text="+ Years">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
                            </font>
                         </Label>
                      </children>
                   </Pane>
-                  <Button fx:id="bookBtn" layoutX="399.0" layoutY="254.0" mnemonicParsing="false" onAction="#bookButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@book_apt.css" text="Book Appointment" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
-                  <Label alignment="BASELINE_LEFT" layoutX="367.0" layoutY="14.0" prefHeight="31.0" prefWidth="134.0" text="Fee Information" textFill="#8c8fa5" wrapText="true">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Pane layoutX="367.0" layoutY="42.0" prefHeight="49.0" prefWidth="264.0" style="-fx-background-color: #D7AB3C;" styleClass="button_night">
+                  <Pane fx:id="inner_big_pane112" layoutX="517.0" layoutY="2.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
                      <children>
-                        <ImageView fitHeight="55.0" fitWidth="38.0" layoutX="7.0" layoutY="6.0" pickOnBounds="true" preserveRatio="true">
+                        <Label fx:id="rating" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="47.0" prefHeight="25.0" prefWidth="45.0" styleClass="texty" stylesheets="@doctor_details.css" text="4.8">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="37.0" layoutY="72.0" text="Ratings" />
+                        <ImageView fx:id="starOutline" fitHeight="40.0" fitWidth="40.0" layoutX="34.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../images/Group%20544.png" />
+                              <Image url="@../../images/starOutline.png" />
                            </image>
+                           <effect>
+                              <Shadow height="0.0" radius="0.0" width="0.0" />
+                           </effect>
                         </ImageView>
-                        <Label layoutX="54.0" layoutY="5.0" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" text="Clinic Session" />
-                        <Label layoutX="54.0" layoutY="21.0" style="-fx-text-fill: white; -fx-font-size: 9; -fx-font-weight: bold;" text="Complete Session (Best Option)" />
-                        <Label fx:id="feeLabel" layoutX="151.0" layoutY="5.0" prefHeight="16.0" prefWidth="41.0" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" text="1000" />
-                        <Label layoutX="202.0" layoutY="5.0" style="-fx-text-fill: white; -fx-font-size: 11; -fx-font-weight: bold;" text="Rs/Session" />
-                     </children>
-                  </Pane>
-               </children>
-            </Pane>
-            <Pane fx:id="confirm_pane" layoutX="180.0" layoutY="85.0" prefHeight="232.0" prefWidth="236.0" style="-fx-background-color: #ededed;" styleClass="inner_big_pane1" visible="false">
-               <children>
-                  <Label layoutX="58.0" layoutY="7.0" prefHeight="20.0" prefWidth="125.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Confirm Booking" />
-                  <Button fx:id="yes_btn_confirm" layoutX="12.0" layoutY="116.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" styleClass="button_big" stylesheets="@book_apt.css" text="Yes" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="no_btn_confirm" layoutX="12.0" layoutY="164.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" style="-fx-background-color: white; -fx-text-fill: black;" styleClass="button_big" stylesheets="@book_apt.css" text="No" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-               </children>
-            </Pane>
-            <Pane fx:id="cancel_pane" layoutX="183.0" layoutY="90.0" prefHeight="232.0" prefWidth="236.0" style="-fx-background-color: #ededed;" styleClass="inner_big_pane1" visible="false">
-               <children>
-                  <Label layoutX="69.0" layoutY="7.0" prefHeight="20.0" prefWidth="125.0" style="-fx-font-size: 15; -fx-font-weight: bold;" text="Are you sure?" />
-                  <Button fx:id="yes_btn_cancel" layoutX="12.0" layoutY="116.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" styleClass="button_big" stylesheets="@book_apt.css" text="Yes" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="no_btn_cancel" layoutX="12.0" layoutY="164.0" mnemonicParsing="false" prefHeight="33.0" prefWidth="211.0" style="-fx-background-color: white; -fx-text-fill: black;" styleClass="button_big" stylesheets="@book_apt.css" text="No" textFill="WHITE">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
-               </children>
-            </Pane>
-            <Pane fx:id="inner_big_pane1" layoutX="9.0" layoutY="2.0" prefHeight="94.0" prefWidth="245.0" styleClass="inner_big_pane1" stylesheets="@doctor_details.css">
-               <children>
-                  <Pane layoutY="7.0" prefHeight="79.0" prefWidth="103.0">
-                     <children>
-                        <ImageView fitHeight="58.0" fitWidth="55.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="ratingStar" fitHeight="30.0" fitWidth="30.0" layoutX="42.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../images/image%2020.png" />
+                              <Image url="@../../images/image%2033.png" />
                            </image>
+                           <effect>
+                              <Shadow height="0.0" radius="0.0" width="0.0" />
+                           </effect>
                         </ImageView>
                      </children>
                   </Pane>
-                  <Label fx:id="name" layoutX="85.0" layoutY="14.0" text="Dr. Amna Irum" textFill="#979797">
-                     <font>
-                        <Font name="System Bold" size="16.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="specialization" layoutX="85.0" layoutY="38.0" text="Dermatologist" textFill="#979797" />
-               </children>
-            </Pane>
-            <Pane fx:id="inner_big_pane11" layoutX="268.0" layoutY="2.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
-               <children>
-                  <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
-                     <children>
-                        <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/image%2016.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <Label fx:id="patients" alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="49.0" prefHeight="25.0" prefWidth="41.0" styleClass="texty" stylesheets="@doctor_details.css" text="90" textAlignment="CENTER">
-                     <font>
-                        <Font name="Serif Regular" size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="35.0" layoutY="72.0" text="Patients" />
-               </children>
-            </Pane>
-            <Pane fx:id="inner_big_pane111" layoutX="396.0" layoutY="2.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
-               <children>
-                  <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
-                     <children>
-                        <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="17.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/image%2017%20(2).png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <Label fx:id="experience" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="47.0" prefHeight="25.0" prefWidth="31.0" styleClass="texty" stylesheets="@doctor_details.css" text="5" textAlignment="CENTER">
-                     <font>
-                        <Font name="Serif Regular" size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="28.0" layoutY="72.0" text="Experience" />
-                  <Label fx:id="experience1" alignment="CENTER" contentDisplay="CENTER" layoutX="46.0" layoutY="47.0" styleClass="texty" stylesheets="@doctor_details.css" text="+ Years">
-                     <font>
-                        <Font name="Serif Regular" size="16.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
-            <Pane fx:id="inner_big_pane112" layoutX="522.0" layoutY="2.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
-               <children>
-                  <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
-                     <children>
-                        <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="12.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/image%2018.png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </Pane>
-                  <Label fx:id="rating" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="47.0" prefHeight="25.0" prefWidth="45.0" styleClass="texty" stylesheets="@doctor_details.css" text="4.8">
-                     <font>
-                        <Font name="Serif Regular" size="16.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="37.0" layoutY="72.0" text="Ratings" />
                </children>
             </Pane>
          </children>
-      </Pane>
+      </HBox>
    </children>
    <effect>
       <InnerShadow />

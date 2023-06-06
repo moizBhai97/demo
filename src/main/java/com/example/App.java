@@ -27,272 +27,287 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        GridPane root = new GridPane();
-        scene = new Scene(root, 640, 480);
-        root.setAlignment(javafx.geometry.Pos.CENTER);
 
-        Button button = new Button("Boook Appointment Screen");
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("book_apt.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        root.add(button, 0, 0);
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("start.fxml"));
+            Scene scene = new Scene(root);
+            stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        Button button2 = new Button("Search Doctors Screen 1");
-        button2.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
+        // GridPane root = new GridPane();
+        // scene = new Scene(root, 640, 480);
+        // root.setAlignment(javafx.geometry.Pos.CENTER);
 
-                    FXMLLoader loader =  new FXMLLoader();
-                   // loader.setLocation(getClass().getResource("search_doctors.fxml"));
-                    loader.setLocation(getClass().getResource("search_doctors - Copy.fxml"));
+        // Button button = new Button("Boook Appointment Screen");
+        // button.setOnAction(new EventHandler<ActionEvent>() {
+        // @Override
+        // public void handle(ActionEvent event) {
+        // try {
+        // Parent root = FXMLLoader.load(getClass().getResource("book_apt.fxml"));
+        // Scene scene = new Scene(root);
+        // Stage stage = new Stage();
+        // stage.setScene(scene);
+        // stage.show();
+        // stage.setScene(scene);
+        // stage.show();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
+        // });
+        // root.add(button, 0, 0);
 
-                    //loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
-                    
-                    SearchDoctorController searchDoctorController = new SearchDoctorController();
+        // Button button2 = new Button("Search Doctors Screen 1");
+        // button2.setOnAction(new EventHandler<ActionEvent>() {
+        // @Override
+        // public void handle(ActionEvent event) {
+        // try {
 
-                    //searchDoctorController.setData(patientController, info.getInt("patId"));
-                    loader.setController(searchDoctorController);
-                    Parent root = loader.load();
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                    // stage.setScene(scene);
-                    // stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        root.add(button2, 0, 1);
+        // FXMLLoader loader = new FXMLLoader();
+        // // loader.setLocation(getClass().getResource("search_doctors.fxml"));
+        // loader.setLocation(getClass().getResource("search_doctors - Copy.fxml"));
 
-        Button button3 = new Button("Search Doctors Screen 2");
-        button3.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("search_doctors_Searched.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        root.add(button3, 0, 2);
+        // //loader.setLocation((new
+        // URL("file:src/main/resources/com/example/search_doctors.fxml")));
 
-        Button button4 = new Button("Doctor details");
-        button4.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("doctor_details.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        root.add(button4, 0, 3);
+        // SearchDoctorController searchDoctorController = new SearchDoctorController();
 
-        Button button5 = new Button("Manage Appointments");
-        button5.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("manageAppointment.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        root.add(button5, 0, 4);
+        // //searchDoctorController.setData(patientController, info.getInt("patId"));
+        // loader.setController(searchDoctorController);
+        // Parent root = loader.load();
+        // Scene scene = new Scene(root);
+        // Stage stage = new Stage();
+        // stage.setScene(scene);
+        // stage.show();
+        // // stage.setScene(scene);
+        // // stage.show();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
+        // });
+        // root.add(button2, 0, 1);
 
-        Button button6 = new Button("Cancel Appointments");
-        button6.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("cancel.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        root.add(button6, 0, 5);
+        // Button button3 = new Button("Search Doctors Screen 2");
+        // button3.setOnAction(new EventHandler<ActionEvent>() {
+        // @Override
+        // public void handle(ActionEvent event) {
+        // try {
+        // Parent root =
+        // FXMLLoader.load(getClass().getResource("search_doctors_Searched.fxml"));
+        // Scene scene = new Scene(root);
+        // Stage stage = new Stage();
+        // stage.setScene(scene);
+        // stage.show();
+        // stage.setScene(scene);
+        // stage.show();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
+        // });
+        // root.add(button3, 0, 2);
 
-        Button button7 = new Button("pendingAppointment Details");
-        button7.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("app_detail.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        root.add(button7, 0, 6);
+        // Button button4 = new Button("Doctor details");
+        // button4.setOnAction(new EventHandler<ActionEvent>() {
+        // @Override
+        // public void handle(ActionEvent event) {
+        // try {
+        // Parent root = FXMLLoader.load(getClass().getResource("doctor_details.fxml"));
+        // Scene scene = new Scene(root);
+        // Stage stage = new Stage();
+        // stage.setScene(scene);
+        // stage.show();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
+        // });
+        // root.add(button4, 0, 3);
 
-        Button button8 = new Button("finished Appointment Details 2");
-        button8.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("app_detail 2.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        root.add(button8, 0, 7);
+        // Button button5 = new Button("Manage Appointments");
+        // button5.setOnAction(new EventHandler<ActionEvent>() {
+        // @Override
+        // public void handle(ActionEvent event) {
+        // try {
+        // Parent root =
+        // FXMLLoader.load(getClass().getResource("manageAppointment.fxml"));
+        // Scene scene = new Scene(root);
+        // Stage stage = new Stage();
+        // stage.setScene(scene);
+        // stage.show();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
+        // });
+        // root.add(button5, 0, 4);
 
-        Button button9 = new Button("Review");
-        button9.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("Review.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        root.add(button9, 0, 8);
+        // Button button6 = new Button("Cancel Appointments");
+        // button6.setOnAction(new EventHandler<ActionEvent>() {
+        // @Override
+        // public void handle(ActionEvent event) {
+        // try {
+        // Parent root = FXMLLoader.load(getClass().getResource("cancel.fxml"));
+        // Scene scene = new Scene(root);
+        // Stage stage = new Stage();
+        // stage.setScene(scene);
+        // stage.show();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
+        // });
+        // root.add(button6, 0, 5);
 
-        Button button10 = new Button("Update profile 1");
-        button10.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("UpdateProfile1.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        root.add(button10, 0, 9);
+        // Button button7 = new Button("pendingAppointment Details");
+        // button7.setOnAction(new EventHandler<ActionEvent>() {
+        // @Override
+        // public void handle(ActionEvent event) {
+        // try {
+        // Parent root = FXMLLoader.load(getClass().getResource("app_detail.fxml"));
+        // Scene scene = new Scene(root);
+        // Stage stage = new Stage();
+        // stage.setScene(scene);
+        // stage.show();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
+        // });
+        // root.add(button7, 0, 6);
 
-        Button button11 = new Button("Update profile 2");
-        button11.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("UpdateProfile2.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        root.add(button11, 0, 10);
+        // Button button8 = new Button("finished Appointment Details 2");
+        // button8.setOnAction(new EventHandler<ActionEvent>() {
+        // @Override
+        // public void handle(ActionEvent event) {
+        // try {
+        // Parent root = FXMLLoader.load(getClass().getResource("app_detail 2.fxml"));
+        // Scene scene = new Scene(root);
+        // Stage stage = new Stage();
+        // stage.setScene(scene);
+        // stage.show();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
+        // });
+        // root.add(button8, 0, 7);
 
-        Button button12 = new Button("Update profile 3");
-        button12.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("patient_details.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        root.add(button12, 0, 11);
+        // Button button9 = new Button("Review");
+        // button9.setOnAction(new EventHandler<ActionEvent>() {
+        // @Override
+        // public void handle(ActionEvent event) {
+        // try {
+        // Parent root = FXMLLoader.load(getClass().getResource("Review.fxml"));
+        // Scene scene = new Scene(root);
+        // Stage stage = new Stage();
+        // stage.setScene(scene);
+        // stage.show();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
+        // });
+        // root.add(button9, 0, 8);
 
-        Button button13 = new Button("Resched apt");
-        button13.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("certificate.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    //turn maximize off
-                    stage.setResizable(false);
-                    stage.initModality(Modality.APPLICATION_MODAL); // Set the stage as modal
-                    
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        root.add(button13, 0, 12);
+        // Button button10 = new Button("Update profile 1");
+        // button10.setOnAction(new EventHandler<ActionEvent>() {
+        // @Override
+        // public void handle(ActionEvent event) {
+        // try {
+        // Parent root = FXMLLoader.load(getClass().getResource("UpdateProfile1.fxml"));
+        // Scene scene = new Scene(root);
+        // Stage stage = new Stage();
+        // stage.setScene(scene);
+        // stage.show();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
+        // });
+        // root.add(button10, 0, 9);
 
-        Button button14 = new Button("Start");
-        button14.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("start.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-        root.add(button14, 0, 13);
+        // Button button11 = new Button("Update profile 2");
+        // button11.setOnAction(new EventHandler<ActionEvent>() {
+        // @Override
+        // public void handle(ActionEvent event) {
+        // try {
+        // Parent root = FXMLLoader.load(getClass().getResource("UpdateProfile2.fxml"));
+        // Scene scene = new Scene(root);
+        // Stage stage = new Stage();
+        // stage.setScene(scene);
+        // stage.show();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
+        // });
+        // root.add(button11, 0, 10);
 
-        stage.setScene(scene);
+        // Button button12 = new Button("Update profile 3");
+        // button12.setOnAction(new EventHandler<ActionEvent>() {
+        // @Override
+        // public void handle(ActionEvent event) {
+        // try {
+        // Parent root =
+        // FXMLLoader.load(getClass().getResource("patient_details.fxml"));
+        // Scene scene = new Scene(root);
+        // Stage stage = new Stage();
+        // stage.setScene(scene);
+        // stage.show();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
+        // });
+        // root.add(button12, 0, 11);
 
-        stage.show();
+        // Button button13 = new Button("Resched apt");
+        // button13.setOnAction(new EventHandler<ActionEvent>() {
+        // @Override
+        // public void handle(ActionEvent event) {
+        // try {
+        // Parent root = FXMLLoader.load(getClass().getResource("certificate.fxml"));
+        // Scene scene = new Scene(root);
+        // Stage stage = new Stage();
+        // stage.setScene(scene);
+        // //turn maximize off
+        // stage.setResizable(false);
+        // stage.initModality(Modality.APPLICATION_MODAL); // Set the stage as modal
+
+        // stage.show();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
+        // });
+        // root.add(button13, 0, 12);
+
+        // Button button14 = new Button("Start");
+        // button14.setOnAction(new EventHandler<ActionEvent>() {
+        // @Override
+        // public void handle(ActionEvent event) {
+        // try {
+        // Parent root = FXMLLoader.load(getClass().getResource("start.fxml"));
+        // Scene scene = new Scene(root);
+        // Stage stage = new Stage();
+        // stage.setScene(scene);
+        // stage.show();
+        // } catch (IOException e) {
+        // e.printStackTrace();
+        // }
+        // }
+        // });
+        // root.add(button14, 0, 13);
+
+        // stage.setScene(scene);
+
+        // stage.show();
 
     }
 

@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="460.0" prefWidth="640.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.SignupController">
+<AnchorPane prefHeight="460.0" prefWidth="673.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.SignupController">
    <children>
       <HBox layoutX="1.0" prefHeight="460.0" prefWidth="673.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -138,7 +138,7 @@
                                     </ImageView>
                                  </children>
                               </Pane>
-                              <ComboBox id="myComboBox" fx:id="genderComboBox" layoutX="28.0" layoutY="3.0" prefHeight="22.0" prefWidth="208.0" promptText="Gender" style="-fx-background-color: transparent;" stylesheets="@signup.css">
+                              <ComboBox fx:id="genderComboBox" layoutX="28.0" layoutY="3.0" prefHeight="22.0" prefWidth="208.0" promptText="Gender" stylesheets="@signup.css">
                                  <items>
                                     <FXCollections fx:factory="observableArrayList">
                                        <String fx:id="gender_1" fx:value="Male" />

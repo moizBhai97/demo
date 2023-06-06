@@ -46,7 +46,7 @@ public class StartController implements Initializable{
         System.out.println("Patient Button pressed");
 
         try {
-            this.patientButton.getScene().getWindow().hide();
+           // this.patientButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/login.fxml")));
@@ -59,7 +59,7 @@ public class StartController implements Initializable{
 
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            Stage stage = new Stage();
+            Stage stage = (Stage) patientButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -71,7 +71,7 @@ public class StartController implements Initializable{
         System.out.println("Doctor Button pressed");
 
         try {
-            this.doctorButton.getScene().getWindow().hide();
+            //this.doctorButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/login.fxml")));
@@ -84,7 +84,7 @@ public class StartController implements Initializable{
 
             Parent root = loader.load();
             Scene scene = new Scene(root);
-            Stage stage = new Stage();
+            Stage stage = (Stage) doctorButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

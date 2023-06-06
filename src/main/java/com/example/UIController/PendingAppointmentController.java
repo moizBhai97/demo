@@ -1,6 +1,7 @@
 package com.example.UIController;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
@@ -63,12 +64,14 @@ public class PendingAppointmentController implements Initializable {
     int patId;
     int appID;
     int docId;
+    String info;
 
     private AnchorPane prevPane;
 
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        String info = pc.getAppointment(patId, appID);
+    public void initialize(URL arg0, ResourceBundle arg1) 
+    {
+        info = pc.getAppointment(patId, appID);
 
         JSONObject obj = new JSONObject(info);
 
@@ -76,10 +79,12 @@ public class PendingAppointmentController implements Initializable {
         specialization.setText(obj.getJSONObject("doctor").getString("specialization"));
         patients.setText(obj.getJSONObject("doctor").getString("patients"));
         experience.setText(obj.getJSONObject("doctor").getString("experience"));
-        rating.setText(obj.getJSONObject("doctor").getString("rating"));
+        rating.setText(String.format("%.1f", obj.getJSONObject("doctor").getFloat("rating")));
+
         LocalTime startTime = LocalTime.parse(obj.getString("time"));
         LocalTime endTime = startTime.plusHours(1);
         timing.setText(startTime + " - " + endTime);
+
         date.setText(obj.getString("date"));
 
         if (obj.getJSONObject("payment").getBoolean("status")) {
@@ -89,6 +94,15 @@ public class PendingAppointmentController implements Initializable {
         }
 
         amount.setText(obj.getJSONObject("payment").getFloat("amount") + "");
+
+        patName.setText(obj.getJSONObject("patient").getString("name"));
+
+        String dobString = obj.getJSONObject("patient").getString("DOB");
+        LocalDate dob = LocalDate.parse(dobString);
+        int age = LocalDate.now().getYear() - dob.getYear();
+        patAge.setText(age + "");
+
+        patNum.setText(obj.getJSONObject("patient").getString("phoneNumber"));
 
     }
 
@@ -110,7 +124,7 @@ public class PendingAppointmentController implements Initializable {
             loader.setLocation((new URL("file:src/main/resources/com/example/cancel.fxml")));
 
             CancelAppointmentController cancelAppointmentController = new CancelAppointmentController();
-            cancelAppointmentController.setData(pc, patId, appID, prevPane);
+            cancelAppointmentController.setData(pc, patId, appID, prevPane, info);
             loader.setController(cancelAppointmentController);
 
             AnchorPane pane = loader.load();
@@ -120,6 +134,8 @@ public class PendingAppointmentController implements Initializable {
             AnchorPane.setRightAnchor(pane, 0.0);
 
             ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
+
+            SearchDoctorController.addHeaderTitle("Cancel Appointment");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,6 +148,8 @@ public class PendingAppointmentController implements Initializable {
         // remove last
         mainParentPane.getChildren().remove(mainParentPane.getChildren().size() - 1);
 
+        SearchDoctorController.removeTopTitle();
+
     }
 
     public void rschButton(ActionEvent event) {
@@ -142,16 +160,17 @@ public class PendingAppointmentController implements Initializable {
             loader.setLocation((new URL("file:src/main/resources/com/example/resch.fxml")));
 
             ReschAppointmentController reschAppointmentController = new ReschAppointmentController();
-            reschAppointmentController.setData(pc, patId, appID, docId, prevPane);
+            reschAppointmentController.setData(pc, patId, appID, docId, prevPane, info);
             loader.setController(reschAppointmentController);
 
             AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, -2.0);
-            AnchorPane.setBottomAnchor(pane, -2.0);
-            AnchorPane.setLeftAnchor(pane, -2.0);
-            AnchorPane.setRightAnchor(pane, -2.0);
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
 
             ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
+            
 
         } catch (Exception e) {
             e.printStackTrace();

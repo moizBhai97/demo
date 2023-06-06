@@ -264,6 +264,13 @@ public class Patient {
         DBFactory.getInstance().createHandler("SQL").addPatientIllness(patId, info);
     }
 
+    public void removeIllness(int patId, int sid)
+    {
+        // remove fromm list
+        
+        DBFactory.getInstance().createHandler("SQL").deletePatientIllness(patId, sid);
+    }
+
     public String get(String value)
     {
         if(value.equals("patId"))

@@ -74,6 +74,11 @@ public class PatientController {
         patientLedger.getPatient(patId).addIllness(patId, info);
     }
 
+    public void removeIllness(int patId, int sid)
+    {
+        patientLedger.getPatient(patId).removeIllness(patId, sid);
+    }
+
     public String getPatientHistory(int patId)
     {
         Patient patient = patientLedger.getPatient(patId);

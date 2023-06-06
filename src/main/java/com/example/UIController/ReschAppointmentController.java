@@ -17,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -59,6 +60,21 @@ public class ReschAppointmentController implements Initializable {
     @FXML
     private HBox timesBox;
 
+    @FXML
+    private Label name;
+
+    @FXML
+    private Label specialization;
+
+    @FXML
+    private Label patients;
+
+    @FXML
+    private Label experience;
+
+    @FXML
+    private Label rating;
+
     private AnchorPane prevPane;
 
     PatientController pc = new PatientController();
@@ -68,6 +84,7 @@ public class ReschAppointmentController implements Initializable {
     int time;
     String date;
     String selectedTime = null;
+    String screenInfo;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
@@ -93,14 +110,24 @@ public class ReschAppointmentController implements Initializable {
         JSONArray objs = new JSONArray(pc.getSchedule(docId, date, time));
 
         refreshToggleButtonGroup(objs.toString());
-    }
 
-    public void setData(PatientController pc, int patId, int appID, int docId, AnchorPane prevPane) {
+        JSONObject obj = new JSONObject(screenInfo);
+
+        name.setText(obj.getJSONObject("doctor").getString("name"));
+        specialization.setText(obj.getJSONObject("doctor").getString("specialization"));
+        patients.setText(obj.getJSONObject("doctor").getString("patients"));
+        experience.setText(obj.getJSONObject("doctor").getString("experience"));
+        rating.setText(String.format("%.1f", obj.getJSONObject("doctor").getFloat("rating")));
+    }
+    
+    public void setData(PatientController pc, int patId, int appID, int docId, AnchorPane prevPane, String info)
+    {
         this.pc = pc;
         this.patId = patId;
         this.appID = appID;
         this.docId = docId;
         this.prevPane = prevPane;
+        this.screenInfo = info;
     }
 
     public void morningButton(ActionEvent event) {
@@ -130,6 +157,15 @@ public class ReschAppointmentController implements Initializable {
     public void reschButton(ActionEvent event) {
         if (selectedTime == null) {
             System.out.println("Please select a time");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No Time Selected!");
+            alert.setContentText("Please select a time to reschedule your appointment.");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == javafx.scene.control.ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
             return;
         }
 
@@ -169,6 +205,11 @@ public class ReschAppointmentController implements Initializable {
                 parent.getChildren().clear();
             }
             parent.getChildren().add(pane);
+
+            SearchDoctorController.clearHeaderTitles();
+            SearchDoctorController.addHeaderTitle("Manage Appointments");
+
+
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -265,6 +306,8 @@ public class ReschAppointmentController implements Initializable {
         AnchorPane mainParentPane = (AnchorPane) prevPane.getParent();
         // remove last
         mainParentPane.getChildren().remove(mainParentPane.getChildren().size() - 1);
+
+        SearchDoctorController.removeTopTitle();
 
     }
 }

@@ -66,7 +66,7 @@ public class PendingAppointmentDoctorCard {
         timing.setText(startTime + " - " + endTime);
         Status.setText(jsonObject.getString("status"));
         status = jsonObject.getString("status");
-        ratingAmount.setText(jsonObject.getFloat("rating") + "");
+        ratingAmount.setText(String.format("%.1f", jsonObject.getFloat("rating")));
         double ratingPercentage = jsonObject.getFloat("rating") / 5.0;
 
         Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage, ratingStar.getBoundsInLocal().getHeight());
@@ -107,12 +107,15 @@ public class PendingAppointmentDoctorCard {
             }
           
             AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, -2.0);
-            AnchorPane.setBottomAnchor(pane, -2.0);
-            AnchorPane.setLeftAnchor(pane, -2.0);
-            AnchorPane.setRightAnchor(pane, -2.0);
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+
                   
            ((AnchorPane)rootPane.getParent()).getChildren().add(pane);
+
+           SearchDoctorController.addHeaderTitle("Appointment Details");
         } catch (Exception e) {
             e.printStackTrace();
         }

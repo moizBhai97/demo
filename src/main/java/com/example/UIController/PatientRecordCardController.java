@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import com.example.BackEnd.DBFactory;
+import com.example.BackEnd.PatientController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -37,6 +38,8 @@ public class PatientRecordCardController implements Initializable{
     int sid;
     int idTag;
 
+    PatientController patientController;
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
@@ -50,20 +53,20 @@ public class PatientRecordCardController implements Initializable{
         this.index.setText(index + ". ");
     }
     
-    public void setData(int patId, int index, String info, JSONArray history)
+    public void setData(int patId, int index, String info, JSONArray history, PatientController patientController)
     {
         this.patId = patId;
         this.history = history;
         obj = new JSONObject(info);
         sid = obj.getInt("sid");
         idTag = index;
+        this.patientController = patientController;
     }
 
     @FXML
     void removeIllness(ActionEvent event) {
 
         try{
-            DBFactory.getInstance().createHandler("SQL").deletePatientIllness(patId, sid);
 
             FlowPane flowPane = (FlowPane)aPane.getParent();
             int index = flowPane.getChildren().indexOf(aPane);
@@ -71,7 +74,11 @@ public class PatientRecordCardController implements Initializable{
             System.out.println(idTag);
             
             flowPane.getChildren().remove(aPane);
+
+            System.out.println(history.toString());
             history.remove(index);
+            patientController.removeIllness(patId, sid);
+            System.out.println(history.toString());
             
             for(int i = index; i < flowPane.getChildren().size(); i++)
             {

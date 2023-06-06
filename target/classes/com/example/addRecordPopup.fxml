@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="pane_add_rec" prefHeight="200.0" prefWidth="204.0" style="-fx-border-radius: 5; -fx-background-color: ededed;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="pane_add_rec" prefHeight="200.0" prefWidth="204.0" style="-fx-border-radius: 5; -fx-background-color: ededed;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutY="45.0" prefHeight="111.0" prefWidth="203.0" spacing="6.0" style="-fx-background-color: ededed; -fx-border-radius: 5;">
          <children>

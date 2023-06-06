@@ -12,3 +12,29 @@
     -fx-background-color: #e6e6e6;
     
 }
+
+
+.big_pane{
+
+    -fx-background-color: #ffffff;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-style: solid;
+    -fx-effect: innerShadow( gaussian , rgba(0,0,0,0.5) , 10, 0.5 , 0 , 0 );
+
+}
+
+.backBtn{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+
+    -fx-text-fill: #2854c3;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.backBtn:hover{
+    -fx-background-color: #e6e6e6;
+    
+}

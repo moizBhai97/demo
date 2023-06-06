@@ -21,11 +21,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.Effect;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class UpdateDoctorProfileController implements Initializable{
 
@@ -57,17 +61,22 @@ public class UpdateDoctorProfileController implements Initializable{
     private Label addIndex;
     @FXML
     private AnchorPane addPane;
+    @FXML
+    private AnchorPane parentPane;
 
-    UpdateDoctorProfile2Controller updateDoctorProfile2Controller = new UpdateDoctorProfile2Controller();
-    DoctorController doctorController = new DoctorController();
+    AddCertificationController addCertificationController = new AddCertificationController();
+    DoctorController doctorController ;
 
     JSONArray certificates;
     int docId = 101 ;
+    private AnchorPane rootPane;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
+       // DoctorMainController.setHeaderTitle("Update Profile");
         JSONObject data = new JSONObject(doctorController.getDoctorData(docId));
+        DoctorMainController.addHeaderTitle("Update Profile");
 
         System.out.println(data.toString());
 
@@ -84,9 +93,11 @@ public class UpdateDoctorProfileController implements Initializable{
         refresh();
     }
 
-    void setData(int docId) {
+    void setData(DoctorController doctorController,int docId,AnchorPane rootPane){
 
         this.docId = docId;
+        this.doctorController = doctorController;
+        this.rootPane = rootPane;
     }
 
     public void refresh()
@@ -124,17 +135,32 @@ public class UpdateDoctorProfileController implements Initializable{
             //this.btn_add1.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/updateProfile3Copy.fxml")));
+            loader.setLocation((new URL("file:src/main/resources/com/example/AddCertificationPopup.fxml")));
 
-            updateDoctorProfile2Controller = new UpdateDoctorProfile2Controller();
-            updateDoctorProfile2Controller.setData(docId, certificates);
-            loader.setController(updateDoctorProfile2Controller);
+            addCertificationController = new AddCertificationController();
+            addCertificationController.setData(docId, certificates, doctorController);
+            loader.setController(addCertificationController);
 
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
+
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            BoxBlur blur = new BoxBlur();
+            blur.setWidth(10);
+            blur.setHeight(10);
+            blur.setIterations(3);
+
+            Effect otherEffects = parentPane.getEffect();
+
+            parentPane.setEffect(blur);
             
-            stage.setOnHidden(e-> {    
+            stage.setOnHidden(e-> {   
+                parentPane.setEffect(null);
+                parentPane.setEffect(otherEffects); 
                 refresh();
              });
 
@@ -143,6 +169,16 @@ public class UpdateDoctorProfileController implements Initializable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    
+    public void backBtnPressed(ActionEvent event)
+    {
+        rootPane.setVisible(true);
+        AnchorPane mainParentPane = (AnchorPane)rootPane.getParent();
+        //remove last 
+        mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+        DoctorMainController.popHeaderTitle();
     }
 
 }
