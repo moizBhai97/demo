@@ -5,9 +5,7 @@ import java.util.ResourceBundle;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
 
-import com.example.BackEnd.DBFactory;
 import com.example.BackEnd.PatientController;
 
 import javafx.event.ActionEvent;

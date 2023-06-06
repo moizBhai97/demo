@@ -1,7 +1,6 @@
 package com.example.BackEnd;
 
 import java.io.FileReader;
-import java.security.cert.Certificate;
 import java.util.Set;
 
 import org.json.JSONArray;

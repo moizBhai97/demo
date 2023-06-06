@@ -20,7 +20,6 @@ public class DoctorSettingsController {
     public void setData(DoctorController doctorController, int docId) {
         this.doctorController = doctorController;
         this.docId = docId;
-        this.rootPane = rootPane;
     }
 
     public void updateProfilePressed(ActionEvent event)

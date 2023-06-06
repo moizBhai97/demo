@@ -1,8 +1,6 @@
 package com.example.UIController;
 
-import java.net.URL;
 import java.time.LocalDate;
-import java.util.ResourceBundle;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,7 +9,6 @@ import com.example.BackEnd.DoctorController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
