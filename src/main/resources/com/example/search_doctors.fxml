@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane fx:id="childAnchorPane" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="childAnchorPane" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fx:id="filter_img" fitHeight="24.0" fitWidth="28.0" layoutX="551.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
@@ -26,7 +26,7 @@
       </ImageView>
       <Button fx:id="review_sort_btn" layoutX="167.0" layoutY="81.0" mnemonicParsing="false" onAction="#reviewSortPressed" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="Rating" />
       <Button fx:id="price_sort_btn" layoutX="97.0" layoutY="81.0" mnemonicParsing="false" onAction="#priceSelected" prefHeight="25.0" prefWidth="62.0" styleClass="sort_btn" stylesheets="@search_doctors.css" text="Price" />
-      <ToggleButton fx:id="ascen_sort_toggle" layoutX="236.0" layoutY="80.0" mnemonicParsing="false" onAction="#ascendingPressed" styleClass="sort_btn" stylesheets="@search_doctors.css">
+      <ToggleButton fx:id="ascen_sort_toggle" layoutX="236.0" layoutY="80.0" mnemonicParsing="false" onAction="#ascendingPressed" stylesheets="@search_doctors.css">
          <graphic>
             <ImageView fitHeight="16.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>

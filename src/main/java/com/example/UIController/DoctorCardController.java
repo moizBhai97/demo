@@ -18,7 +18,6 @@ import javafx.scene.shape.Rectangle;
 
 public class DoctorCardController {
 
-    private SearchDoctorController parentController;
     private PatientController patientController;
 
     int doctorId;
@@ -64,9 +63,7 @@ public class DoctorCardController {
 
     String result;
 
-    public void setParentController(SearchDoctorController parentController) {
-        this.parentController = parentController;
-    }
+    
 
     public void setPatientController(PatientController patientController) {
         this.patientController = patientController;

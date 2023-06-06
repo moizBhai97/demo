@@ -1,15 +1,14 @@
 package com.example.UIController;
 
-import com.example.App;
 import java.io.IOException;
+
+import com.example.App;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 public class PrimaryController {

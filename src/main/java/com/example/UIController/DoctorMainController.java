@@ -2,12 +2,9 @@ package com.example.UIController;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.Stack;
 
 import com.example.BackEnd.DoctorController;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;

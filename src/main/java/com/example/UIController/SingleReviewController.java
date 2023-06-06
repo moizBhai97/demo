@@ -39,25 +39,24 @@ public class SingleReviewController {
     String status;
     int docId;
 
-    public void setCard(String result){
-        JSONObject  jsonObject = new JSONObject(result);
+    public void setCard(String result) {
+        JSONObject jsonObject = new JSONObject(result);
 
         name.setText(jsonObject.getString("name"));
         text.setText(jsonObject.getString("comment"));
         ratingAmount.setText(jsonObject.getFloat("experience") + "");
         double ratingPercentage = jsonObject.getFloat("experience") / 5.0;
 
-        Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage, ratingStar.getBoundsInLocal().getHeight());
+        Rectangle clip = new Rectangle(0, 0, ratingStar.getBoundsInLocal().getWidth() * ratingPercentage,
+                ratingStar.getBoundsInLocal().getHeight());
         ratingStar.setClip(clip);
 
     }
 
-    public void setData(PatientController pc, int patId, int docId) 
-    {
+    public void setData(PatientController pc, int patId, int docId) {
         this.docId = docId;
         this.pc = pc;
         this.patId = patId;
 
-        
     }
 }
