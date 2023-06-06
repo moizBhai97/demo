@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
@@ -54,6 +55,9 @@ public class CompletedAppointmentController  implements Initializable
     @FXML
     private Label timing;
 
+    @FXML
+    private Button write;
+
     private AnchorPane prevPane;
 
     PatientController pc;
@@ -89,7 +93,7 @@ public class CompletedAppointmentController  implements Initializable
             status.setText("UnPaid");
         }
 
-        amount.setText(obj.getJSONObject("payment").getFloat("amount") + "");
+        amount.setText(obj.getJSONObject("payment").getFloat("amount") + " Rs");
 
         patName.setText(obj.getJSONObject("patient").getString("name"));
 
@@ -129,7 +133,7 @@ public class CompletedAppointmentController  implements Initializable
             fxmlLoader.setLocation((new URL("file:src/main/resources/com/example/Review.fxml")));
 
             WriteReviewController controller = new WriteReviewController();
-            controller.setData(pc, patId, docId, prevPane);
+            controller.setData(pc, patId, docId, prevPane, this.write.getScene());
             fxmlLoader.setController(controller);
 
             AnchorPane pane = fxmlLoader.load();

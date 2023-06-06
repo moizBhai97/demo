@@ -169,6 +169,7 @@ public class SignupController implements Initializable
             Stage stage = (Stage) this.signupButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
+            stage.centerOnScreen();
         } catch (IOException e) {
             e.printStackTrace();
         }

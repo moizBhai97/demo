@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="460.0" prefWidth="673.0" stylesheets="@login.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.SignupController">
+   <children>
+      <HBox layoutX="1.0" prefHeight="460.0" prefWidth="673.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="460.0" prefWidth="216.0" styleClass="top_pane" stylesheets="@login.css" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fitHeight="276.0" fitWidth="253.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/LOGOsharp.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="HealthySense" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="29.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="SignUp" textFill="#2854c3">
+                     <font>
+                        <Font name="Segoe UI Bold" size="35.0" />
+                     </font>
+                  </Label>
+                  <Label text="Welcome!" textFill="#2854c3">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label text="Create an account" />
+                  <VBox alignment="TOP_CENTER" prefHeight="302.0" prefWidth="244.0" spacing="10.0">
+                     <children>
+                        <Pane fx:id="searchPane311" maxWidth="240.0" prefHeight="28.0" prefWidth="239.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
+                           <children>
+                              <TextField fx:id="nameTextField" layoutX="28.0" layoutY="1.0" prefHeight="25.0" prefWidth="207.0" promptText="Name" styleClass="search" stylesheets="@search_doctors_Searched.css" />
+                              <Pane layoutX="1.0" prefHeight="25.0" prefWidth="33.0">
+                                 <children>
+                                    <ImageView fitHeight="25.0" fitWidth="64.0" layoutX="2.0" layoutY="2.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/per.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="searchPane33" maxWidth="240.0" prefHeight="28.0" prefWidth="239.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
+                           <children>
+                              <TextField fx:id="emailTextField" layoutX="28.0" layoutY="1.0" prefHeight="25.0" prefWidth="207.0" promptText="Email" styleClass="search" stylesheets="@search_doctors_Searched.css" />
+                              <Pane layoutX="1.0" prefHeight="25.0" prefWidth="33.0">
+                                 <children>
+                                    <ImageView fitHeight="25.0" fitWidth="64.0" layoutX="2.0" layoutY="2.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/per.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                        <Pane maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
+                           <children>
+                              <Pane layoutX="1.0" prefHeight="25.0" prefWidth="33.0">
+                                 <children>
+                                    <ImageView fitHeight="25.0" fitWidth="64.0" layoutX="2.0" layoutY="2.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/per.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <PasswordField fx:id="passwordTextField" layoutX="28.0" layoutY="1.0" prefHeight="25.0" prefWidth="207.0" promptText="Password" style="-fx-background-color: transparent;" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="searchPane3" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
+                           <children>
+                              <Pane layoutX="1.0" prefHeight="25.0" prefWidth="33.0">
+                                 <children>
+                                    <ImageView fitHeight="25.0" fitWidth="64.0" layoutX="2.0" layoutY="2.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/per.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <PasswordField fx:id="confirmPasswordTextField" layoutX="28.0" layoutY="2.0" prefHeight="25.0" prefWidth="207.0" promptText="Confirm Password" style="-fx-background-color: transparent;" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="searchPane12" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
+                           <children>
+                              <ImageView accessibleRole="DATE_PICKER" fitHeight="20.0" fitWidth="20.0" layoutX="214.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/Calendar.png" />
+                                 </image>
+                              </ImageView>
+                              <Pane layoutX="1.0" prefHeight="25.0" prefWidth="33.0">
+                                 <children>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="2.0" layoutY="2.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/per.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <DatePicker fx:id="DOBdatePicker" editable="false" layoutX="27.0" layoutY="2.0" prefHeight="25.0" prefWidth="214.0" promptText="Date of Birth" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="date-picker" stylesheets="@signup.css" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="searchPane32" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
+                           <children>
+                              <Pane layoutX="1.0" prefHeight="25.0" prefWidth="33.0">
+                                 <children>
+                                    <ImageView fitHeight="25.0" fitWidth="64.0" layoutX="2.0" layoutY="2.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/per.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <ComboBox fx:id="genderComboBox" layoutX="28.0" layoutY="3.0" prefHeight="22.0" prefWidth="208.0" promptText="Gender" stylesheets="@signup.css">
+                                 <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                       <String fx:id="gender_1" fx:value="Male" />
+                                       <String fx:id="gender_2" fx:value="Female" />    
+                                    </FXCollections>
+                                 </items>
+                              </ComboBox>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="searchPane3211" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
+                           <children>
+                              <Pane layoutX="1.0" prefHeight="25.0" prefWidth="33.0">
+                                 <children>
+                                    <ImageView fitHeight="25.0" fitWidth="64.0" layoutX="2.0" layoutY="2.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/per.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                              <ComboBox id="myComboBox" fx:id="countryComboBox" layoutX="28.0" layoutY="3.0" prefHeight="22.0" prefWidth="208.0" promptText="Country" style="-fx-background-color: transparent;" styleClass="combo-box" stylesheets="@signup.css">
+                                 <items>
+                                    <FXCollections fx:factory="observableArrayList">
+                                       <String fx:id="country1" fx:value="Pakistan" />
+                                    </FXCollections>
+                                 </items>
+                              </ComboBox>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="searchPane321" maxWidth="-Infinity" prefHeight="28.0" prefWidth="240.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
+                           <children>
+                              <TextField fx:id="phoneNumberTextField" layoutX="28.0" layoutY="1.0" prefHeight="25.0" prefWidth="207.0" promptText="Phone Number" styleClass="search" stylesheets="@search_doctors_Searched.css" />
+                              <Pane layoutX="1.0" prefHeight="25.0" prefWidth="33.0">
+                                 <children>
+                                    <ImageView fitHeight="25.0" fitWidth="64.0" layoutX="2.0" layoutY="2.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../images/per.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </Pane>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <Button fx:id="signupButton" mnemonicParsing="false" onAction="#signupButton" prefHeight="0.0" prefWidth="239.0" styleClass="button_big" stylesheets="@resch.css" text="SignUp" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </Button>
+                  <Group>
+                     <children>
+                        <Label layoutY="3.0" text="Already have an account?" />
+                        <Hyperlink layoutX="132.0" onAction="#loginHyperlink" text="Login" textFill="#2854c3" />
+                     </children>
+                  </Group>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

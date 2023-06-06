@@ -308,13 +308,13 @@ public class DoctorDetails {
     private boolean isDayTime(String time) 
     {
         // Assuming day time slots are from 9 AM to 6 PM
-        return time.compareTo("09:00") >= 0 && time.compareTo("18:00") < 0;
+        return time.compareTo("08:00") >= 0 && time.compareTo("17:00") < 0;
     }
     
     private boolean isNightTime(String time) 
     {
         //Assuming night time slots are from 6 PM to 10 PM
-        return time.compareTo("18:00") >= 0 && time.compareTo("22:00") < 0;
+        return time.compareTo("17:00") >= 0 && time.compareTo("23:00") < 0;
     }
 
     public String getSchedule(int docId, String date, int value)

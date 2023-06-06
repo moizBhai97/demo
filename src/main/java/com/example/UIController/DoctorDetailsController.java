@@ -249,13 +249,6 @@ public class DoctorDetailsController implements Initializable {
                 parentPane.setEffect(otherEffects);
             });
 
-            // parentPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            // EventTarget target = event.getTarget();
-            // if (!root.getBoundsInParent().contains(event.getX(), event.getY())) {
-            // stage.close();
-            // }
-            // });
-
             stage.show();
 
         } catch (Exception e) {

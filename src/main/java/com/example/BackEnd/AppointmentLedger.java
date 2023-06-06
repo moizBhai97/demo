@@ -75,8 +75,6 @@ public class AppointmentLedger {
                 dbFactory.createHandler("SQL").updateAppointment(appId, obj.toString(), value);
                 
                 getAppointment(appId).setStatus("Cancelled");
-
-                System.out.println(getAppointment(appId).toString());
             }
 
             if(value == 2)
@@ -116,7 +114,6 @@ public class AppointmentLedger {
 
     public String getAppointList(int value)
     {
-        System.out.println("Patient Appoints:" + appointments.size());
         JSONArray objs = new JSONArray();
             
         for(int i = 0; i < appointments.size(); i++ )

@@ -189,6 +189,19 @@ public class PatientController {
         }
     }
 
+    public String getCertificates(int docId)
+    {
+        try{
+            JSONArray certificates = new JSONArray(doctorLedger.getDoctor(docId).getDoctorDetails().getCertificates());
+            System.out.println(certificates.toString());
+            return certificates.toString();
+
+        }catch (Exception e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            return "";
+        }
+    }
+
     public String getDocDetails(int docId)
     {
         try

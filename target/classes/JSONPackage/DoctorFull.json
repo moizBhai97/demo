@@ -1,0 +1,18 @@
+{
+    "id": "{{id}}",
+    "name": "{{name}}",
+    "email": "{{email}}",
+    "dob": "{{dob}}",
+    "phoneNumber": "{{phoneNumber}}",
+    "gender": "{{gender}}",
+    "specialization": "{{specialization}}",
+    "description": "{{description}}",
+    "location": "{{location}}",
+    "stats": "{{stats}}",
+    "patients": "{{patients}}",
+    "experience": "{{experience}}",
+    "rating": "{{rating}}",
+    "workingHours": "{{workingHours}}",
+    "fee": "{{fee}}",
+    "availability": "{{availability}}"
+}

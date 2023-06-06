@@ -93,6 +93,16 @@ public class ReschAppointmentController implements Initializable {
 
         time = 1;
         reason.setWrapText(true);
+        reason.setDisable(true);
+        reason.setStyle("-fx-opacity: 1.0; -fx-background-color: #f4f4f4;");
+        radios.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                RadioButton selectedRadioButton = (RadioButton) newValue;
+                String buttonText = selectedRadioButton.getText();
+                reason.setDisable(!buttonText.equals("Other"));  // Enable/disable the text area based on selection
+                reason.setStyle(buttonText.equals("Other") ? "-fx-opacity: 1.0;" : "-fx-opacity: 0.5;");  // Adjust opacity based on selection
+            }
+        });
 
         String dateUnformatted = LocalDate.now().toString();
         DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -154,7 +164,8 @@ public class ReschAppointmentController implements Initializable {
         }
     }
 
-    public void reschButton(ActionEvent event) {
+    public void reschButton(ActionEvent event) 
+    {
         if (selectedTime == null) {
             System.out.println("Please select a time");
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -170,9 +181,40 @@ public class ReschAppointmentController implements Initializable {
         }
 
         RadioButton selectedRadioButton = (RadioButton) radios.getSelectedToggle();
+
+        if(selectedRadioButton == null)
+        {
+            System.out.println("Please select a reason");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No Reason Selected!");
+            alert.setContentText("Please select a reason to reschedule your appointment.");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == javafx.scene.control.ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+            return;
+        }
+
         String data = selectedRadioButton.getText();
 
         if (data.equals("Other")) {
+
+            if (reason.getText().isEmpty()) {
+                System.out.println("Please enter a reason");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("No Reason Entered!");
+                alert.setContentText("Please enter a reason in the text area.");
+                alert.showAndWait().ifPresent(rs -> {
+                    if (rs == javafx.scene.control.ButtonType.OK) {
+                        System.out.println("Pressed OK.");
+                    }
+                });
+                return;
+            }
+
             data = reason.getText();
         }
 
@@ -257,6 +299,8 @@ public class ReschAppointmentController implements Initializable {
             ToggleButton button = (ToggleButton) toggle;
 
             if (!(button.getUserData() instanceof Boolean && (boolean) button.getUserData())) {
+                selectedTime = null;
+                System.out.println("Selected ToggleButton text: " + selectedTime);
                 continue;
             }
 

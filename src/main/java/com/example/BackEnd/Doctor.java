@@ -96,6 +96,11 @@ public class Doctor {
     {
         return appointmentLedger.getAppointList(value);
     }
+
+    public void verifyPayment(int appId)
+    {
+        appointmentLedger.getAppointment(appId).verifyPayment();
+    }
     
     public int getId() {
         return id;

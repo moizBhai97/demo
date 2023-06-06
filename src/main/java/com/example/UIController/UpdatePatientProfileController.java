@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.example.BackEnd.Patient;
 import com.example.BackEnd.PatientController;
 
 import javafx.event.ActionEvent;
@@ -18,13 +17,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.InnerShadow;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class UpdatePatientProfileController implements Initializable{

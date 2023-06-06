@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -38,9 +39,6 @@ public class ConsultationControllerDoctor  implements Initializable
     private Label patNum;
 
     @FXML
-    private Label status;
-
-    @FXML
     private Label amount;
 
     @FXML
@@ -51,6 +49,9 @@ public class ConsultationControllerDoctor  implements Initializable
 
     @FXML
     private Button reportBtn;
+
+    @FXML
+    private Hyperlink verify;
 
     DoctorController dc;
     int patId;
@@ -75,14 +76,12 @@ public class ConsultationControllerDoctor  implements Initializable
 
         if(obj.getJSONObject("payment").getBoolean("status"))
         {
-            status.setText("Paid");
-        }
-        else
-        {
-            status.setText("UnPaid");
+            verify.setDisable(true);
+            verify.setText("Verified");
+            verify.setStyle("-fx-opacity: 1.0; -fx-font-fill: #2854c3;");
         }
 
-        amount.setText(obj.getJSONObject("payment").getFloat("amount") + "");
+        amount.setText(obj.getJSONObject("payment").getFloat("amount") + " Rs");
 
         patId = obj.getInt("patId");
         patName.setText(obj.getJSONObject("patient").getString("name"));
@@ -171,6 +170,35 @@ public class ConsultationControllerDoctor  implements Initializable
         }
     }
 
+    public void verifyButton(ActionEvent event)
+    {
+        try
+        {
+            dc.verifyPayment(docId, appID);
+
+            this.verify.getScene().getWindow().hide();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/app_detailsDoctor.fxml")));
+
+            ConsultationControllerDoctor appointmentControllerDoctor = new ConsultationControllerDoctor();
+            appointmentControllerDoctor.setData(dc, appID, docId, rootPane);
+            loader.setController(appointmentControllerDoctor);
+
+            AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+                  
+            ((AnchorPane)rootPane.getParent()).getChildren().add(pane);
+            DoctorMainController.addHeaderTitle("Consultation Details");
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+        }
+    }
     
     public void backBtnPressed(ActionEvent event)
     {

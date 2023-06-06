@@ -65,6 +65,11 @@ public class DoctorController {
         }
     }
 
+    public void verifyPayment(int docId, int appId)
+    {
+        doctorLedger.getDoctor(docId).verifyPayment(appId);
+    }
+
     public String getDoctorData(int docId)
     {
         try{

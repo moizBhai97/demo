@@ -72,6 +72,8 @@ public class LoginController implements Initializable {
     public void loginButton(ActionEvent event) {
         System.out.println("Login Button pressed");
 
+        this.loginButton.getScene().getWindow().hide();
+
         if(this.emailTextField.getText().isEmpty() || this.passwordTextField.getText().isEmpty()){
             Alert alert = new Alert(AlertType.ERROR);
             alert.setTitle("Invalid Input");
@@ -126,30 +128,26 @@ public class LoginController implements Initializable {
                 System.out.println(patId);
              //   this.loginButton.getScene().getWindow().hide();
 
-                FXMLLoader loader = new FXMLLoader();
-                loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors - Copy.fxml")));
-                
-                searchDoctorController = new SearchDoctorController();
-                searchDoctorController.setData(patientController, patId);
-    
-                loader.setController(searchDoctorController);
-                
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) this.loginButton.getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors - Copy.fxml")));
             
-            } catch (Throwable e) {
-                Alert alert = new Alert(AlertType.ERROR);
-                alert.setTitle("User Not Found");
-                alert.setHeaderText("Error: Email and Password do not match");
-                alert.setContentText("Please enter a valid Email and Password");
-                alert.showAndWait().ifPresent(rs -> {
-                if (rs == ButtonType.OK) {
-                    System.out.println("Pressed OK.");
-                }
-            });
+            searchDoctorController = new SearchDoctorController();
+            searchDoctorController.setData(patientController, patId);
+ 
+            loader.setController(searchDoctorController);
+            
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+
+            stage.setMinWidth(825);
+            stage.setMinHeight(680);
+
+            stage.show();
+            stage.centerOnScreen();
+            
+            } catch (IOException e) {
                 System.err.println(String.format("Error: %s", e.getMessage()));
             }
         } else if (!isPatient) {
@@ -172,7 +170,12 @@ public class LoginController implements Initializable {
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) this.loginButton.getScene().getWindow();
                 stage.setScene(scene);
+
+                stage.setMinWidth(825);
+                stage.setMinHeight(680);
+
                 stage.show();
+                stage.centerOnScreen();
 
             } catch (IOException e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -202,6 +205,7 @@ public class LoginController implements Initializable {
             Stage stage = (Stage) this.loginButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();
+            stage.centerOnScreen();
         } catch (IOException e) {
             e.printStackTrace();
         }

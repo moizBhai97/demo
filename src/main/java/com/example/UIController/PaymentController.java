@@ -41,6 +41,9 @@ public class PaymentController  implements Initializable
     @FXML
     private Button cancelBtn;
 
+    @FXML
+    private AnchorPane parentPane;
+
     private PatientController pc;
     private int patId;
     private String fee;
@@ -48,13 +51,18 @@ public class PaymentController  implements Initializable
     private String appoint;
     private String date;
     private String time;
-    private AnchorPane prevPane;
+    Scene prev;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
     {
         try
         {
+            AnchorPane.setTopAnchor(parentPane, 0.0);
+            AnchorPane.setBottomAnchor(parentPane, 0.0);
+            AnchorPane.setLeftAnchor(parentPane, 0.0);
+            AnchorPane.setRightAnchor(parentPane, 0.0);
+
             String dateUnformatted = LocalDate.now().toString();
             DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate dateConvert = LocalDate.parse(dateUnformatted, inputFormatter);
@@ -85,14 +93,14 @@ public class PaymentController  implements Initializable
         }
     }
     
-    public void setData(PatientController pc, int patId, String fee, String docName, String appoint, AnchorPane prevPane)
+    public void setData(PatientController pc, int patId, String fee, String docName, String appoint, Scene prev)
     {
         this.pc = pc;
         this.patId = patId;
         this.fee = fee;
         this.docName = docName;
         this.appoint = appoint;
-        this.prevPane = prevPane;
+        this.prev = prev;
     }
 
     public void paymentButton(ActionEvent event)
@@ -111,8 +119,6 @@ public class PaymentController  implements Initializable
 
             pc.saveAppointment(obj.toString(), patId);
 
-            this.paymentBtn.getScene().getWindow().hide();
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors - Copy.fxml")));
 
@@ -124,7 +130,21 @@ public class PaymentController  implements Initializable
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
+            prev.getWindow().hide();
+            this.paymentBtn.getScene().getWindow().hide();
+
+            Stage prevWin = (Stage) prev.getWindow();
+
+            stage.setWidth(prevWin.getWidth());
+            stage.setHeight(prevWin.getHeight());
+            stage.setX(prevWin.getX());
+            stage.setY(prevWin.getY());
+
+            stage.setMinWidth(825);
+            stage.setMinHeight(680);
+
             stage.show();
+            stage.centerOnScreen();
         }
         catch(Exception e)
         {
@@ -139,9 +159,7 @@ public class PaymentController  implements Initializable
         {
             pc.cancelSlot(appoint, patId);
 
-            prevPane.setVisible(true);
-            AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
-            mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
+            this.cancelBtn.getScene().getWindow().hide();
         }
         catch(Exception e)
         {

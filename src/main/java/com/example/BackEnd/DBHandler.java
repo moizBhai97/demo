@@ -28,4 +28,5 @@ abstract public class DBHandler {
   public abstract String getSchedule(int docId, String date);
   public abstract String getDoctorName(int docId);
   public abstract String getPatientName(int patId);
+  public abstract void updatePayment(int appID);
 }

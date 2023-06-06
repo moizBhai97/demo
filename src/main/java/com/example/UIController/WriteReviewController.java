@@ -11,8 +11,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -44,6 +42,7 @@ public class WriteReviewController implements Initializable{
     PatientController patientController;
     int docId ;
     int patId ;
+    Scene prev;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -72,7 +71,7 @@ public class WriteReviewController implements Initializable{
             SearchDoctorController controller = new SearchDoctorController();
             controller.setData(patientController, patId);
             loader.setController(controller);
-
+            
             Parent parent= prevPane.getParent();
             AnchorPane anchorPane = loader.load();
 
@@ -97,21 +96,20 @@ public class WriteReviewController implements Initializable{
         }
     }
     
-    public void setData(PatientController patientController, int docId, int patId,AnchorPane prevPane) {
+    public void setData(PatientController patientController, int docId, int patId, AnchorPane prevPane, Scene prev) {
         this.patientController = patientController;
         this.docId = docId;
         this.patId = patId;
         this.prevPane = prevPane;
+        this.prev = prev;
     }
 
-    
-    public void backBtnPressed(ActionEvent event){
+    public void backBtnPressed(ActionEvent event)
+    {
         prevPane.setVisible(true);
-        AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
-        //remove last 
+        AnchorPane mainParentPane = (AnchorPane)prevPane.getParent(); 
         mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
 
         SearchDoctorController.removeTopTitle();
     }
-
 }

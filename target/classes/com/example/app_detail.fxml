@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="564.0" prefWidth="656.8" styleClass="big_pane" stylesheets="@app_detail.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backBtnPressed" prefHeight="17.0" prefWidth="82.0" styleClass="Butt_inner_pane" text="&lt;  Back" textFill="#2854c3" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <HBox alignment="CENTER" layoutX="14.0" layoutY="43.0" prefHeight="494.0" prefWidth="620.0" AnchorPane.bottomAnchor="43.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="39.0" AnchorPane.topAnchor="43.0">
+         <children>
+            <Pane prefHeight="464.0" prefWidth="622.0">
+               <children>
+                  <Button fx:id="rschBtn" layoutX="401.0" layoutY="335.0" mnemonicParsing="false" onAction="#rschButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@app_detail.css" text="Reschedule Appointment" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="cancelBtn" layoutX="401.0" layoutY="404.0" mnemonicParsing="false" onAction="#cancelButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@app_detail.css" text="Cancel Appointment" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Pane fx:id="inner_big_pane3" layoutY="123.0" prefHeight="331.0" prefWidth="344.0" styleClass="inner_big_pane3" stylesheets="@app_detail.css">
+                     <children>
+                        <Label layoutX="48.0" layoutY="32.0" text="Appointment Timing" textFill="#979797">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="date" alignment="TOP_LEFT" layoutX="58.0" layoutY="58.0" prefHeight="31.0" prefWidth="175.0" text="Today-21 January, Friday" textFill="#979797" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="timing" alignment="TOP_LEFT" layoutX="58.0" layoutY="83.0" prefHeight="31.0" prefWidth="175.0" text="10:30 am-11:30 am" textFill="#2854c3" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="48.0" layoutY="134.0" text="Patient Information" textFill="#979797">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="TOP_LEFT" layoutX="64.0" layoutY="159.0" prefHeight="31.0" prefWidth="175.0" text="Name:" textFill="#979797" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="TOP_LEFT" layoutX="64.0" layoutY="179.0" prefHeight="31.0" prefWidth="175.0" text="Age:" textFill="#979797" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="patName" alignment="TOP_LEFT" layoutX="109.0" layoutY="159.0" prefHeight="31.0" prefWidth="175.0" text="Musa Haroon Satti" textFill="#979797" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="patAge" alignment="TOP_LEFT" layoutX="109.0" layoutY="179.0" prefHeight="31.0" prefWidth="175.0" text="5" textFill="#979797" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="TOP_LEFT" layoutX="64.0" layoutY="199.0" prefHeight="31.0" prefWidth="175.0" text="Phone:" textFill="#979797" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="patNum" alignment="TOP_LEFT" layoutX="109.0" layoutY="199.0" prefHeight="31.0" prefWidth="175.0" text="+923332333444" textFill="#979797" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="54.0" layoutY="230.0" text="Fees Information" textFill="#979797">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="status" alignment="TOP_LEFT" layoutX="64.0" layoutY="255.0" prefHeight="31.0" prefWidth="175.0" text="Paid" textFill="#2854c3" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="amount" alignment="TOP_LEFT" layoutX="64.0" layoutY="277.0" prefHeight="31.0" prefWidth="175.0" text="1000 Rs" textFill="#979797" wrapText="true">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="25.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/clock.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="25.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/per.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="17.0" fitWidth="20.0" layoutX="35.0" layoutY="234.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/fee.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane12" prefHeight="94.0" prefWidth="245.0" styleClass="inner_big_pane1" stylesheets="@doctor_details.css">
+                     <children>
+                        <Pane layoutY="7.0" prefHeight="79.0" prefWidth="103.0">
+                           <children>
+                              <ImageView fitHeight="58.0" fitWidth="55.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2020.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="name" layoutX="85.0" layoutY="14.0" text="Dr. Amna Irum" textFill="#979797">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="specialization" layoutX="85.0" layoutY="38.0" text="Dermatologist" textFill="#979797" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane113" layoutX="259.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
+                     <children>
+                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
+                           <children>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2016.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="patients" alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="49.0" prefHeight="25.0" prefWidth="41.0" styleClass="texty" stylesheets="@doctor_details.css" text="90" textAlignment="CENTER">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="35.0" layoutY="72.0" text="Patients" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane1111" layoutX="387.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
+                     <children>
+                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
+                           <children>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="17.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2017%20(2).png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="experience" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="47.0" prefHeight="25.0" prefWidth="31.0" styleClass="texty" stylesheets="@doctor_details.css" text="5" textAlignment="CENTER">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="28.0" layoutY="72.0" text="Experience" />
+                        <Label fx:id="experience1" alignment="CENTER" contentDisplay="CENTER" layoutX="46.0" layoutY="47.0" styleClass="texty" stylesheets="@doctor_details.css" text="+ Years">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane1121" layoutX="513.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
+                     <children>
+                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
+                           <children>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="12.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2018.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="rating" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="47.0" prefHeight="25.0" prefWidth="45.0" styleClass="texty" stylesheets="@doctor_details.css" text="4.8">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="37.0" layoutY="72.0" text="Ratings" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+   </children>
+   <effect>
+      <InnerShadow />
+   </effect>
+</AnchorPane>

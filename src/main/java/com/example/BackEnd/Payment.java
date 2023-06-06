@@ -37,6 +37,11 @@ public class Payment {
         status = obj.getBoolean("status");
     }
 
+    public void setStatus(Boolean status)
+    {
+        this.status = status;
+    }
+
     public String get(String key)
     {
         if(key.equals("date"))

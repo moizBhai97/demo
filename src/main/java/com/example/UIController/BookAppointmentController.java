@@ -13,6 +13,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Bounds;
+import javafx.geometry.Point2D;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
@@ -21,10 +26,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Callback;
 
@@ -40,6 +48,9 @@ public class BookAppointmentController implements Initializable {
     int time;
     String date;
     String selectedTime = null;
+
+    @FXML
+    private AnchorPane parentPane;
 
     @FXML
     private Button backBtn;
@@ -260,6 +271,7 @@ public class BookAppointmentController implements Initializable {
 
             if(!(button.getUserData() instanceof Boolean && (boolean) button.getUserData()))
             {
+                selectedTime = null;
                 continue;
             }
 
@@ -315,9 +327,31 @@ public class BookAppointmentController implements Initializable {
     {
         try
         {
-            if(selectedTime == null)
-            {
+            if (selectedTime == null) {
                 System.out.println("Please select a time");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("No Time Selected!");
+                alert.setContentText("Please select a time to reschedule your appointment.");
+                alert.showAndWait().ifPresent(rs -> {
+                    if (rs == javafx.scene.control.ButtonType.OK) {
+                        System.out.println("Pressed OK.");
+                    }
+                });
+                return;
+            }
+
+            if (problem_text.getText().isEmpty()) {
+                System.out.println("Please enter a reason");
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText("No Reason Entered!");
+                alert.setContentText("Please enter a reason in the text area.");
+                alert.showAndWait().ifPresent(rs -> {
+                    if (rs == javafx.scene.control.ButtonType.OK) {
+                        System.out.println("Pressed OK.");
+                    }
+                });
                 return;
             }
 
@@ -333,17 +367,32 @@ public class BookAppointmentController implements Initializable {
             loader.setLocation((new URL("file:src/main/resources/com/example/payment.fxml")));
 
             PaymentController paymentController = new PaymentController();
-            paymentController.setData(pc, patId, feeLabel.getText() , name.getText(), obj.toString(), prevPane);
+            paymentController.setData(pc, patId, feeLabel.getText() , name.getText(), obj.toString(), this.bookBtn.getScene());
             loader.setController(paymentController);
 
-            AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, 0.0);
-            AnchorPane.setBottomAnchor(pane,0.0);
-            AnchorPane.setLeftAnchor(pane,0.0);
-            AnchorPane.setRightAnchor(pane,0.0);
+            Parent parent = loader.load();
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
 
-            //((AnchorPane) prevPane.getParent()).getChildren().clear();
-            ((AnchorPane) prevPane.getParent()).getChildren().add(pane);
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            Point2D point = prevPane.localToScreen(0, 0);
+
+            double parentTopLeftX = point.getX();
+            double parentTopLeftY = point.getY();
+
+            System.out.println(parentTopLeftX + " " + parentTopLeftY);
+
+            // Set the child stage position relative to the parent's top left corner
+            stage.setX(parentTopLeftX);
+            stage.setY(parentTopLeftY);
+            stage.setWidth(parentPane.getWidth());
+            stage.setHeight(parentPane.getHeight());
+            
+            stage.show();
             
         }
         catch(Exception e)

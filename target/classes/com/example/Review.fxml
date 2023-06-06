@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
+
+<AnchorPane prefHeight="564.0" prefWidth="656.8" styleClass="big_pane" stylesheets="@style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="backBtn" layoutX="4.0" layoutY="3.0" mnemonicParsing="false" onAction="#backBtnPressed" prefHeight="17.0" prefWidth="63.0" style="-fx-background-color: transparent;" styleClass="Butt_inner_pane" text="&lt;  Back" textFill="#2854c3" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="1.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <HBox alignment="CENTER" layoutX="14.0" layoutY="47.0" prefHeight="482.0" prefWidth="627.0" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="53.0" AnchorPane.topAnchor="47.0">
+         <children>
+            <Pane>
+               <children>
+                  <Pane fx:id="inner_big_pane1" prefHeight="94.0" prefWidth="245.0" styleClass="inner_big_pane1" stylesheets="@style.css">
+                     <children>
+                        <Pane layoutY="7.0" prefHeight="79.0" prefWidth="103.0">
+                           <children>
+                              <ImageView fitHeight="58.0" fitWidth="55.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/doc.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="doctorName" layoutX="85.0" layoutY="14.0" text="Dr. Amna Irum" textFill="#979797">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="doctorSpecialization" layoutX="85.0" layoutY="38.0" text="Dermatologist" textFill="#979797" />
+                     </children>
+                  </Pane>
+                  <VBox layoutY="108.0" prefHeight="87.0" prefWidth="245.0">
+                     <children>
+                        <Label text="How was your overall experience?" textFill="#2854c3">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <Rating fx:id="overallRating" minHeight="-Infinity" minWidth="-Infinity" partialRating="true" rating="5.0">
+                           <effect>
+                              <InnerShadow height="255.0" radius="68.5">
+                                 <color>
+                                    <Color red="0.1568627506494522" green="0.3294117748737335" blue="0.7647058963775635" />
+                                 </color>
+                              </InnerShadow>
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Rating>
+                     </children>
+                  </VBox>
+                  <VBox layoutY="195.0" prefHeight="170.0" prefWidth="331.0">
+                     <children>
+                        <Label text="Comments" textFill="#2854c3">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <TextArea fx:id="commentBox" prefHeight="145.0" prefWidth="322.0">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextArea>
+                     </children>
+                  </VBox>
+                  <VBox layoutY="377.0" prefHeight="87.0" prefWidth="227.0">
+                     <children>
+                        <Label text="Would you recommend them to a friend?" textFill="#2854c3" wrapText="true">
+                           <font>
+                              <Font size="16.0" />
+                           </font>
+                        </Label>
+                        <HBox prefHeight="37.0" prefWidth="227.0" spacing="20.0">
+                           <children>
+                              <RadioButton fx:id="yesRadioButton" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@cancel.css" text="Yes" textFill="#8c8f85">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="recommend" />
+                                 </toggleGroup>
+                              </RadioButton>
+                              <RadioButton fx:id="noRadioButton" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@cancel.css" text="No" textFill="#8c8f85" toggleGroup="$recommend" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" layoutX="397.0" layoutY="195.0" prefHeight="170.0" prefWidth="208.0" spacing="10.0">
+                     <children>
+                        <Label text="Rate the checkup" textFill="#2854c3">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Rating fx:id="checkupRating" minHeight="-Infinity" minWidth="-Infinity" partialRating="true" rating="4.5">
+                           <effect>
+                              <InnerShadow height="255.0" radius="68.5">
+                                 <color>
+                                    <Color red="0.1568627506494522" green="0.3294117748737335" blue="0.7647058963775635" />
+                                 </color>
+                              </InnerShadow>
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Rating>
+                        <Label text="Clinic environment" textFill="#2854c3">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Rating fx:id="clinicRating" minHeight="-Infinity" minWidth="-Infinity" partialRating="true" rating="2.5">
+                           <effect>
+                              <InnerShadow height="255.0" radius="68.5">
+                                 <color>
+                                    <Color red="0.1568627506494522" green="0.3294117748737335" blue="0.7647058963775635" />
+                                 </color>
+                              </InnerShadow>
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Rating>
+                        <Label text="Staff behaviour" textFill="#2854c3">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Rating fx:id="staffRating" minHeight="-Infinity" minWidth="-Infinity" partialRating="true" rating="5.0">
+                           <effect>
+                              <InnerShadow height="255.0" radius="68.5">
+                                 <color>
+                                    <Color red="0.1568627506494522" green="0.3294117748737335" blue="0.7647058963775635" />
+                                 </color>
+                              </InnerShadow>
+                           </effect>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </Rating>
+                     </children>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </VBox>
+                  <Button id="button_submit" fx:id="submitButton" layoutX="382.0" layoutY="430.0" mnemonicParsing="false" onAction="#submitButton" prefHeight="49.0" prefWidth="239.0" style="-fx-background-color: #2854C3; -fx-border-radius: 10; -fx-background-radius: 10;" styleClass="submit_button" text="Submit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Pane fx:id="inner_big_pane11" layoutX="260.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@cancel.css">
+                     <children>
+                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
+                           <children>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2016.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="texty" layoutX="43.0" layoutY="47.0" styleClass="texty" stylesheets="@cancel.css" text="90+">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="35.0" layoutY="72.0" text="Patients" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane111" layoutX="388.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@cancel.css">
+                     <children>
+                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
+                           <children>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="17.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2017%20(2).png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label layoutX="25.0" layoutY="47.0" styleClass="texty" stylesheets="@cancel.css" text="5+ Years">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="28.0" layoutY="72.0" text="Experience" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane112" layoutX="514.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@cancel.css">
+                     <children>
+                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
+                           <children>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="12.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2018.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label layoutX="46.0" layoutY="47.0" styleClass="texty" stylesheets="@cancel.css" text="4.8">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="37.0" layoutY="72.0" text="Ratings" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+   </children>
+   <effect>
+      <InnerShadow />
+   </effect>
+</AnchorPane>
