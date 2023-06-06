@@ -66,8 +66,10 @@ public class DoctorMainController implements Initializable {
         // headerTitle.textProperty().bind(headerTitles.peek().textProperty());
         headerTitles.addListener((ListChangeListener<Label>) change -> {
             if (headerTitles.isEmpty()) {
+                if(headerTitle != null)
                 headerTitle.setText("");
             } else {
+                if(headerTitle != null)
                 headerTitle.setText((headerTitles.get(headerTitles.size() - 1).getText() ));
             }
         });

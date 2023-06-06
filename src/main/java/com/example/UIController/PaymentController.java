@@ -41,6 +41,9 @@ public class PaymentController  implements Initializable
     @FXML
     private Button cancelBtn;
 
+    @FXML
+    private AnchorPane parentPane;
+
     private PatientController pc;
     private int patId;
     private String fee;
@@ -55,6 +58,11 @@ public class PaymentController  implements Initializable
     {
         try
         {
+            AnchorPane.setTopAnchor(parentPane, 0.0);
+            AnchorPane.setBottomAnchor(parentPane, 0.0);
+            AnchorPane.setLeftAnchor(parentPane, 0.0);
+            AnchorPane.setRightAnchor(parentPane, 0.0);
+
             String dateUnformatted = LocalDate.now().toString();
             DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             LocalDate dateConvert = LocalDate.parse(dateUnformatted, inputFormatter);

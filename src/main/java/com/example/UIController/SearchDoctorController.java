@@ -14,8 +14,6 @@ import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -399,8 +397,10 @@ public class SearchDoctorController implements Initializable {
 
         headerTitles.addListener((ListChangeListener<Label>) change -> {
             if (headerTitles.isEmpty()) {
+                if(headerTitle != null)
                 headerTitle.setText("");
             } else {
+                if(headerTitle != null)
                 headerTitle.setText((headerTitles.get(headerTitles.size() - 1).getText()) );
             }
         });
