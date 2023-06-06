@@ -70,11 +70,11 @@ public class DoctorMainController implements Initializable {
                 headerTitle.setText("");
         } else {
                 if (headerTitle != null) {
-                    headerTitle.setText("AAAaa");
+                    headerTitle.setText(headerTitles.get(headerTitles.size() - 1).getText() );
                 }
             }
         });
-        
+
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/doctorHome.fxml")));
