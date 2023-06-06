@@ -643,7 +643,7 @@ public class SQL extends DBHandler {
 
             //System.out.println("SQL getPatientHistory");
             
-            String SQL = "SELECT SID, TYPE, DESCRIPTION FROM PATIENT_HISTORY WHERE ID = ?;";
+            String SQL = "SELECT TYPE, DESCRIPTION FROM PATIENT_HISTORY WHERE ID = ?;";
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, patId);
             ResultSet rs = pstmt.executeQuery();
@@ -653,7 +653,7 @@ public class SQL extends DBHandler {
             while(rs.next())
             {
                 JSONObject newObj = new JSONObject();
-                newObj.put("sid", rs.getInt("SID"));
+                //newObj.put("sid", rs.getInt("SID"));
                 newObj.put("type", rs.getString("TYPE"));
                 newObj.put("description", rs.getString("DESCRIPTION"));
 

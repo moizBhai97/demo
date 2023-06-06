@@ -99,7 +99,6 @@
                                     <ToggleGroup fx:id="recommend" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton fx:id="noRadioButton" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@cancel.css" text="No" textFill="#8c8f85" toggleGroup="$recommend" />
                            </children>
                         </HBox>
                      </children>
