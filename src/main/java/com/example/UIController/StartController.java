@@ -67,6 +67,10 @@ public class StartController implements Initializable{
             stage.setMinWidth(825);
             stage.setMinHeight(480);
 
+
+            stage.setWidth(825);
+            stage.setHeight(480);
+
             stage.show();
             stage.centerOnScreen();
         } catch (IOException e) {
@@ -96,6 +100,9 @@ public class StartController implements Initializable{
 
             stage.setMinWidth(825);
             stage.setMinHeight(480);
+
+            stage.setWidth(825);
+            stage.setHeight(480);
 
             stage.show();
             stage.centerOnScreen();

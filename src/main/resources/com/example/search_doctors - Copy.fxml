@@ -24,7 +24,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <AnchorPane prefHeight="78.0" styleClass="top_pane" stylesheets="@search_doctors.css" BorderPane.alignment="TOP_RIGHT">
          <children>
@@ -52,7 +52,7 @@
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane fx:id="rootPane" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="rootPane" prefHeight="564.0" prefWidth="657.0" BorderPane.alignment="CENTER">
          <children>
             <AnchorPane fx:id="childAnchorPane" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -75,6 +75,9 @@
                            <image>
                               <Image url="@../../images/image%2029.png" />
                            </image>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
                         </ImageView>
                      </graphic>
                      <toggleGroup>
@@ -158,6 +161,9 @@
                                        <image>
                                           <Image url="@../../images/image%2033.png" />
                                        </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </ImageView>
                                  </graphic>
                                  <cursor>
@@ -170,6 +176,9 @@
                                        <image>
                                           <Image url="@../../images/image%2033.png" />
                                        </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </ImageView>
                                  </graphic>
                                  <cursor>
@@ -182,6 +191,9 @@
                                        <image>
                                           <Image url="@../../images/image%2033.png" />
                                        </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </ImageView>
                                  </graphic>
                                  <cursor>
@@ -194,6 +206,9 @@
                                        <image>
                                           <Image url="@../../images/image%2033.png" />
                                        </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </ImageView>
                                  </graphic>
                                  <cursor>
@@ -206,6 +221,9 @@
                                        <image>
                                           <Image url="@../../images/image%2033.png" />
                                        </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </ImageView>
                                  </graphic>
                                  <cursor>

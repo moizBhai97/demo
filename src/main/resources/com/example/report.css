@@ -66,10 +66,10 @@
 
     -fx-background-color: #2854C3;
     -fx-border-color: #2854C3;
-    -fx-border-width: 2px 2px 2px 2px;
-    -fx-border-radius: 20px;
-    -fx-background-radius: 20px;
     -fx-border-style: solid;
+    -fx-border-width: 2px 2px 2px 2px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
 }
 
 .texty{

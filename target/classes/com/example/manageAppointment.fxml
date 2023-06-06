@@ -16,9 +16,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="rootPane" styleClass="big_pane" stylesheets="@manageAppointment.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootPane" prefHeight="564.0" prefWidth="657.0" styleClass="big_pane" stylesheets="@manageAppointment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutX="24.0" layoutY="8.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="8.0">
+      <VBox layoutX="16.0" layoutY="14.0" prefHeight="688.0" prefWidth="719.0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="10.0">
          <children>
             <Label style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #8C8FA5;" text="Pending" />
             <ScrollPane fx:id="pendingAppointmentsScrollPane" fitToWidth="true" prefHeight="234.0" prefWidth="662.0" styleClass="scroll_pane" stylesheets="@search_doctors.css">
@@ -94,7 +94,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </Label>
-            <ScrollPane fx:id="completedAppointmentsScrollPane" fitToWidth="true" prefHeight="316.0" prefWidth="640.0" styleClass="scroll_pane" stylesheets="@search_doctors.css">
+            <ScrollPane fx:id="completedAppointmentsScrollPane" fitToWidth="true" prefHeight="245.0" prefWidth="633.0" styleClass="scroll_pane" stylesheets="@search_doctors.css">
                <content>
                   <GridPane fx:id="completed_grid_pane" hgap="30.0" prefHeight="239.0" prefWidth="593.0" styleClass="grid_pane" stylesheets="@manageAppointment.css" vgap="10.0">
                      <columnConstraints>

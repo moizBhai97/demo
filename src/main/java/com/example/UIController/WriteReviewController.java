@@ -51,19 +51,35 @@ public class WriteReviewController implements Initializable{
 
     @FXML
     void submitButton(ActionEvent event) {
-        
-        JSONObject review = new JSONObject();
-        review.put("comment", commentBox.getText());
-        review.put("experience", overallRating.getRating());
-        review.put("recommend", ((RadioButton)recommend.getSelectedToggle()).getText());
-        review.put("checkupRating", checkupRating.getRating());
-        review.put("environmentRating", clinicRating.getRating());
-        review.put("staffRating", staffRating.getRating());
-
-        patientController.submitReview(review.toString(), docId, patId);
-
         try
         {
+            boolean hasComment = true;
+            if(commentBox == null || commentBox.getText() == "" || commentBox.getText().isBlank())
+                hasComment = false;
+        
+            
+
+            JSONObject review = new JSONObject();
+            if(hasComment){review.put("comment", commentBox.getText());}
+            //else {review.put("comment", "");}
+
+            review.put("experience", overallRating.getRating());
+            
+            if(recommend.getSelectedToggle() != null){
+                if(((RadioButton)recommend.getSelectedToggle()).getText().equals("Yes"))
+                {
+                    review.put("recommend", "Yes");
+                }
+            }
+
+
+            //review.put("recommend", ((RadioButton)recommend.getSelectedToggle()).getText());
+            review.put("checkupRating", checkupRating.getRating());
+            review.put("environmentRating", clinicRating.getRating());
+            review.put("staffRating", staffRating.getRating());
+
+            patientController.submitReview(review.toString(), docId, patId);
+
             this.submitButton.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
@@ -71,7 +87,7 @@ public class WriteReviewController implements Initializable{
             SearchDoctorController controller = new SearchDoctorController();
             controller.setData(patientController, patId);
             loader.setController(controller);
-            
+
             Parent parent= prevPane.getParent();
             AnchorPane anchorPane = loader.load();
 

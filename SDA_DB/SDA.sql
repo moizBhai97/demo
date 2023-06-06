@@ -11,7 +11,7 @@ SELECT
 FROM 
     sys.dm_exec_sessions
 WHERE 
-    database_id = DB_ID('SDA');
+    database_id = DB_ID('GCR');
 
 
 ALTER TABLE PAYMENTS

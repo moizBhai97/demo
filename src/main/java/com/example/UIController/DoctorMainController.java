@@ -74,7 +74,7 @@ public class DoctorMainController implements Initializable {
                 }
             }
         });
-        
+
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/doctorHome.fxml")));
@@ -254,7 +254,15 @@ public class DoctorMainController implements Initializable {
             Parent root = loader.load();
             Stage stage = (Stage) logoutBtn.getScene().getWindow();
             stage.setScene(new Scene(root));
+            
+            stage.setMinWidth(825);
+            stage.setMinHeight(480);
+
+            stage.setWidth(825);
+            stage.setHeight(480);
+            
             stage.show();
+            stage.centerOnScreen();
 
         } catch (Exception e) {
             e.printStackTrace();

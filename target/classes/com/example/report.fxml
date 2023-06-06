@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
@@ -13,15 +14,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefWidth="598.0" styleClass="big_pane" stylesheets="@report.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="564.0" prefWidth="657.0" styleClass="big_pane" stylesheets="@report.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backBtnPressed" style="-fx-background-color: transparent;" text="&lt;  Back" textFill="#2854c3" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
-            <Font name="System Bold" size="16.0" />
+            <Font name="System Bold" size="12.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
-      <HBox alignment="CENTER" layoutX="14.0" layoutY="42.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="42.0">
+      <HBox alignment="CENTER" layoutX="7.0" layoutY="50.0" prefHeight="491.0" prefWidth="588.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="50.0">
          <children>
             <Pane>
                <children>
@@ -48,6 +51,9 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                   <Pane fx:id="big_pane1" layoutX="-1.0" layoutY="95.0" prefHeight="394.0" prefWidth="318.0" styleClass="big_pane" stylesheets="@report.css">
                      <children>
@@ -66,7 +72,10 @@
                         <RadioButton fx:id="radio121" layoutX="29.0" layoutY="145.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@report.css" text="I don't like him" textFill="#8c8f85" toggleGroup="$radios" />
                         <RadioButton fx:id="radio1211" layoutX="29.0" layoutY="175.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@report.css" text="I don't want to tell" textFill="#8c8f85" toggleGroup="$radios" />
                         <RadioButton fx:id="radio12111" layoutX="29.0" layoutY="205.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@report.css" text="Other" textFill="#8c8f85" toggleGroup="$radios" />
-                        <TextArea fx:id="reason" layoutX="35.0" layoutY="239.0" prefHeight="134.0" prefWidth="254.0" promptText="Enter Reason" />
+                        <TextArea fx:id="reason" layoutX="35.0" layoutY="239.0" prefHeight="134.0" prefWidth="254.0" promptText="Enter Reason">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextArea>
                      </children>
                   </Pane>
                </children>

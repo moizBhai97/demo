@@ -14,10 +14,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane styleClass="big_pane" stylesheets="@doctor_details.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="564.0" prefWidth="657.0" styleClass="big_pane" stylesheets="@doctor_details.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox alignment="CENTER" layoutX="-10.0" layoutY="2.0" AnchorPane.bottomAnchor="2.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="2.0">
          <children>
             <Pane fx:id="big_pane" prefHeight="546.0" prefWidth="664.0" stylesheets="@doctor_details.css">
                <children>
@@ -40,7 +39,7 @@
                         <Label fx:id="specialization" layoutX="85.0" layoutY="38.0" text="Dermatologist" textFill="#979797" />
                      </children>
                   </Pane>
-                  <Pane layoutY="116.0" prefHeight="119.0" prefWidth="525.0" styleClass="big_pane" stylesheets="@doctor_details.css">
+                  <Pane layoutX="14.0" layoutY="117.0" prefHeight="119.0" prefWidth="480.0" styleClass="big_pane" stylesheets="@doctor_details.css">
                      <children>
                         <Pane fx:id="circle_pane" layoutX="35.0" layoutY="25.0" prefHeight="49.0" prefWidth="48.0" styleClass="circle_pane" stylesheets="@doctor_details.css">
                            <children>
