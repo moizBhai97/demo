@@ -84,10 +84,11 @@ public class DoctorCardController {
         this.prevPane = prevPane;
     }
 
-    public void setDoctor(String name, String specialization, String price, String rating) {
+    public void setDoctor(String name, String specialization, String price, String rating, String Location) {
         docName.setText(name);
         this.specialization.setText(specialization);
         fee_amount.setText(String.valueOf(price));
+        card1_location_label.setText(Location);
         String formattedRating = String.format("%.2f", Double.parseDouble(rating));
         card1_satisfied_label.setText(formattedRating);
         double ratingPercentage = Double.parseDouble(rating) / 5.0;
@@ -107,6 +108,7 @@ public class DoctorCardController {
         this.result= innerObject.toString();
         specialization.setText(innerObject.getString("specialization"));
         fee_amount.setText(String.format("%.1f", innerObject.getFloat("fee")));
+        card1_location_label.setText(innerObject.getString("location"));
         card1_satisfied_label.setText(String.format("%.1f", innerObject.getFloat("rating")));
         double ratingPercentage = innerObject.getFloat("rating") / 5.0;
 

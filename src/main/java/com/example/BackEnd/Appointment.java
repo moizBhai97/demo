@@ -85,6 +85,12 @@ public class Appointment {
         return status;
     }
 
+    public void verifyPayment()
+    {
+        DBFactory.getInstance().createHandler("SQL").updatePayment(appId);
+        payment.setStatus(true);
+    }
+
     public String get(String value)
     {
         if(value.equals("appId"))

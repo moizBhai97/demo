@@ -259,7 +259,16 @@ public class Patient {
 
     public void addIllness(int patId, String info)
     {
+        PatientHistory history = new PatientHistory(info);
+        patientHistoryList.add(history);
         DBFactory.getInstance().createHandler("SQL").addPatientIllness(patId, info);
+    }
+
+    public void removeIllness(int patId, int sid)
+    {
+        // remove fromm list
+        
+        DBFactory.getInstance().createHandler("SQL").deletePatientIllness(patId, sid);
     }
 
     public String get(String value)

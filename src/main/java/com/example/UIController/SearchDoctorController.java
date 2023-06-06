@@ -14,8 +14,6 @@ import javafx.stage.Stage;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -397,18 +395,28 @@ public class SearchDoctorController implements Initializable {
         }
 
         
-     headerTitles.addListener((ListChangeListener<Label>) change -> {
-    if (headerTitles.isEmpty()) {
-        if (headerTitle != null) {
-            headerTitle.setText("AAAaa");
-        }
-    } else {
-        if (headerTitle != null) {
-            headerTitle.setText((headerTitles.get(headerTitles.size() - 1).getText()));
-        }
-    }
-});
+        headerTitles.addListener((ListChangeListener<Label>) change -> {
+        if (headerTitles.isEmpty()) {
+                if (headerTitle != null) {
+                    headerTitle.setText("AAAaa");
+                }
+        } else {
+                if (headerTitle != null) {
+                    headerTitle.setText((headerTitles.get(headerTitles.size() - 1).getText()));
+                }
+            }
+        });
         addHeaderTitle("Search");
+
+        headerTitles.addListener((ListChangeListener<Label>) change -> {
+            if (headerTitles.isEmpty()) {
+                if(headerTitle != null)
+                headerTitle.setText("");
+            } else {
+                if(headerTitle != null)
+                headerTitle.setText((headerTitles.get(headerTitles.size() - 1).getText()) );
+            }
+        });
         selectedDashbordBtn = searchBtn;
         results_flowpane = new FlowPane();
 
@@ -686,8 +694,15 @@ public class SearchDoctorController implements Initializable {
             Parent root = loader.load();
             Stage stage = (Stage) logoutBtn.getScene().getWindow();
             stage.setScene(new Scene(root));
-            stage.show();
+
+            stage.setMinWidth(825);
+            stage.setMinHeight(480);
+
+            stage.setWidth(825);
+            stage.setHeight(480);
             
+            stage.show();
+            stage.centerOnScreen();
 
         }
         catch(Exception e){

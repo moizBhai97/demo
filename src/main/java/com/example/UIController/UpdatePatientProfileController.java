@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.example.BackEnd.Patient;
 import com.example.BackEnd.PatientController;
 
 import javafx.event.ActionEvent;
@@ -18,13 +17,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.InnerShadow;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class UpdatePatientProfileController implements Initializable{
@@ -114,7 +108,7 @@ public class UpdatePatientProfileController implements Initializable{
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation((new URL("file:src/main/resources/com/example/patientRecordCard.fxml")));
                 PatientRecordCardController patientRecordCardController = new PatientRecordCardController();
-                patientRecordCardController.setData(patId, i+1, obj.toString(), history);
+                patientRecordCardController.setData(patId, i+1, obj.toString(), history, patientController);
                 loader.setController(patientRecordCardController);
                 AnchorPane aPane = loader.load();
                 flowPane.getChildren().add(aPane);
@@ -136,7 +130,7 @@ public class UpdatePatientProfileController implements Initializable{
             loader.setLocation((new URL("file:src/main/resources/com/example/addRecordPopup.fxml")));
 
             AddRecordController updatePatientProfile2Controller = new AddRecordController();
-            updatePatientProfile2Controller.setData(patId, history,patientController);
+            updatePatientProfile2Controller.setData(patId, history, patientController);
 
             loader.setController(updatePatientProfile2Controller);
 

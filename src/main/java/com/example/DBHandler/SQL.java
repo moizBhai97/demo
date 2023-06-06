@@ -1,22 +1,18 @@
 package com.example.DBHandler;
 
-import com.example.BackEnd.DBHandler;
-import com.microsoft.sqlserver.jdbc.SQLServerDriver;
-
 import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import com.example.BackEnd.DBHandler;
 
 public class SQL extends DBHandler {
     String connectionUrl;
@@ -263,6 +259,23 @@ public class SQL extends DBHandler {
             }.getClass().getEnclosingMethod().getName());
 
             return -1;
+        }
+    }
+
+    public void updatePayment(int appId)
+    {
+        try(Connection con = DriverManager.getConnection(connectionUrl))
+        {
+            String SQL = "UPDATE Payments SET STATUS = 1 WHERE APPOINTMENT_ID = ?;";
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setInt(1, appId);
+            pstmt.executeUpdate();
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
+            }.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
@@ -519,10 +532,15 @@ public class SQL extends DBHandler {
 
             ResultSet rs = pstmt.executeQuery();
 
+            if(rs.next() == false)
+            {
+                throw new Exception("No such user");
+            }
+
             JSONParser parser = new JSONParser();
             JSONObject patient = new JSONObject(
                 parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());                
-                rs.next();
+                //rs.next();
             patient.put("patId", rs.getInt("id"));
             patient.put("name", rs.getString("name"));
             patient.put("email", rs.getString("email"));
@@ -541,7 +559,7 @@ public class SQL extends DBHandler {
             // con.close();
 
             e.printStackTrace();
-            return "[]";
+            return null;
         }
 
 
@@ -899,6 +917,32 @@ public class SQL extends DBHandler {
             pstmt.executeUpdate();
         }
         catch (SQLException | JSONException e) {
+            // con.close();
+
+            e.printStackTrace();
+        }
+    }
+
+    public void addPatient(String info)
+    {
+        try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement())
+        {
+
+            JSONObject obj = new JSONObject(info);
+            String SQL = "INSERT INTO PATIENTS (NAME, EMAIL, PASSWORD, DOB, COUNTRY, PHONE_NUMBER, GENDER) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement pstmt = con.prepareStatement(SQL);
+            pstmt.setString(1, obj.getString("name"));
+            pstmt.setString(2, obj.getString("email"));
+            pstmt.setString(3, obj.getString("password"));
+            pstmt.setString(4, obj.getString("DOB"));
+            pstmt.setString(5, obj.getString("country"));
+            pstmt.setString(6, obj.getString("phoneNumber"));
+            pstmt.setString(7, obj.getString("gender"));
+
+            pstmt.executeUpdate();
+
+        }catch (SQLException | JSONException e) {
             // con.close();
 
             e.printStackTrace();

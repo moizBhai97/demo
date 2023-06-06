@@ -55,7 +55,6 @@ public class Doctor {
         this.id = docId;
         this.name = DBFactory.getInstance().createHandler("SQL").getDoctorName(docId);
     }
-
     
     public Doctor(String data) 
     {
@@ -96,6 +95,11 @@ public class Doctor {
     public String getAppointList(int value)
     {
         return appointmentLedger.getAppointList(value);
+    }
+
+    public void verifyPayment(int appId)
+    {
+        appointmentLedger.getAppointment(appId).verifyPayment();
     }
     
     public int getId() {

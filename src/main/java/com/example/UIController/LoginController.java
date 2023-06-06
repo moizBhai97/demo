@@ -14,11 +14,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
@@ -32,6 +35,8 @@ public class LoginController implements Initializable {
     private TextField passwordTextField;
     @FXML
     private TextField emailTextField;
+    @FXML
+    private Group signupGroup;
 
     // DummyController dummyController;
 
@@ -50,6 +55,8 @@ public class LoginController implements Initializable {
         } else if (!isPatient) {
             emailTextField.setText("dr.asim@example.com");
             passwordTextField.setText("drpassword123");
+
+            signupGroup.setVisible(false);
         }
         // /loginButton.fire();
         return;
@@ -64,6 +71,37 @@ public class LoginController implements Initializable {
     public void loginButton(ActionEvent event) {
         System.out.println("Login Button pressed");
 
+      //  this.loginButton.getScene().getWindow().hide();
+
+        if (this.emailTextField.getText().isEmpty() || this.passwordTextField.getText().isEmpty()) {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText("Error: Empty Fields");
+            alert.setContentText("Please fill all fields");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                    System.out.println("Pressed OK.");
+                }
+            });
+
+            return;
+        }
+        if (!this.emailTextField.getText().matches("[a-zA-Z0-9._]+@[a-zA-Z0-9]+\\.[a-zA-Z]+")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText("Error: Invalid Email");
+            alert.setContentText("Please enter a valid email address.");
+            alert.showAndWait();
+            return;
+        }
+        if (!this.passwordTextField.getText().matches("[a-zA-Z0-9._]+")) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText("Error: Invalid Password");
+            alert.setContentText("Password should not contain special characters other than '.' and '_'");
+            alert.showAndWait();
+            return;
+        }
         JSONObject loginInfo = new JSONObject();
         loginInfo.put("email", this.emailTextField.getText());
         loginInfo.put("password", this.passwordTextField.getText());
@@ -82,13 +120,12 @@ public class LoginController implements Initializable {
         System.out.println(loginInfo.toString());
 
         if (isPatient) {
-            System.out.println("Patient login");
-
-            int patId = Integer.parseInt(patientController.login(loginInfo.toString()));
-            System.out.println(patId);
-
             try {
-             //   this.loginButton.getScene().getWindow().hide();
+                System.out.println("Patient login");
+
+                int patId = Integer.parseInt(patientController.login(loginInfo.toString()));
+                System.out.println(patId);
+                // this.loginButton.getScene().getWindow().hide();
 
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors - Copy.fxml")));
@@ -100,21 +137,26 @@ public class LoginController implements Initializable {
 
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
-                Stage stage = (Stage) this.loginButton.getScene().getWindow();
+                Stage stage = (Stage)this.loginButton.getScene().getWindow();
+
                 stage.setScene(scene);
-                stage.setMinWidth(810);
+
+                stage.setMinWidth(825);
+                stage.setMinHeight(680);
+
                 stage.show();
+                stage.centerOnScreen();
 
             } catch (IOException e) {
                 System.err.println(String.format("Error: %s", e.getMessage()));
             }
         } else if (!isPatient) {
 
-            int docId = Integer.parseInt(doctorController.login(loginInfo.toString()));
-            System.out.println(docId);
-
             try {
-               // this.loginButton.getScene().getWindow().hide();
+                int docId = Integer.parseInt(doctorController.login(loginInfo.toString()));
+                System.out.println(docId);
+
+                // this.loginButton.getScene().getWindow().hide();
 
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation((new URL("file:src/main/resources/com/example/doctorMain.fxml")));
@@ -128,9 +170,19 @@ public class LoginController implements Initializable {
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) this.loginButton.getScene().getWindow();
                 stage.setScene(scene);
+
+                stage.setMinWidth(825);
+                stage.setMinHeight(680);
+
                 stage.show();
+                stage.centerOnScreen();
 
             } catch (IOException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Input");
+                alert.setHeaderText("Error: User Not Found");
+                alert.setContentText("Please enter a valid Email and Password");
+                alert.showAndWait();
                 System.err.println(String.format("Error: %s", e.getMessage()));
                 e.printStackTrace();
             }
@@ -139,11 +191,12 @@ public class LoginController implements Initializable {
 
     }
 
+    @FXML
     public void signupHyperlink(ActionEvent event) {
         System.out.println("Signup hyperlink pressed");
 
         try {
-           // this.loginButton.getScene().getWindow().hide();
+            // this.loginButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/signup.fxml")));
@@ -151,7 +204,15 @@ public class LoginController implements Initializable {
             Scene scene = new Scene(root);
             Stage stage = (Stage) this.loginButton.getScene().getWindow();
             stage.setScene(scene);
+
+            stage.setMinWidth(825);
+            stage.setMinHeight(480);
+
+            stage.setWidth(825);
+            stage.setHeight(480);
+
             stage.show();
+            stage.centerOnScreen();
         } catch (IOException e) {
             e.printStackTrace();
         }

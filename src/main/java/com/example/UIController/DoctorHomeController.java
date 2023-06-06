@@ -30,7 +30,6 @@ import javafx.stage.StageStyle;
 public class DoctorHomeController implements Initializable{
     
     int docId;
-    //int patId;
     DoctorController dc;
 
     @FXML

@@ -92,6 +92,7 @@ public class DoctorLedger {
 
             Doctor doctor = new Doctor(doctorInfo);
             doctorList.add(doctor);
+            System.out.println("-----" + doctorList.toString());
 
             return doctor;
         } catch (Exception e) {
@@ -202,6 +203,8 @@ public class DoctorLedger {
 
     public Doctor getDoctor(int docId) 
     {
+        System.out.println("Ledger getDoctor\n" + doctorList.toString());
+
         for(int i = 0; i < doctorList.size(); i++)
         {
             if(doctorList.get(i).getId() == docId)

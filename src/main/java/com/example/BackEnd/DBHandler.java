@@ -21,10 +21,12 @@ abstract public class DBHandler {
   public abstract void addCertification(String info, int docId);
   public abstract void addComplaint(int patID, String details, int docID);
   public abstract void addReview(String info, int patId, int docId);
+  public abstract void addPatient(String info);
   public abstract void addPatientIllness(int patId, String info);
   public abstract void deletePatientIllness(int patId, int sid);
   public abstract void updatePatientProfile(int patId, String info);
   public abstract String getSchedule(int docId, String date);
   public abstract String getDoctorName(int docId);
   public abstract String getPatientName(int patId);
+  public abstract void updatePayment(int appID);
 }

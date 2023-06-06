@@ -14,7 +14,7 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefWidth="810.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <AnchorPane styleClass="top_pane" stylesheets="@search_doctors.css" BorderPane.alignment="TOP_RIGHT">
          <children>
@@ -42,10 +42,10 @@
       </AnchorPane>
    </top>
    <center>
-      <AnchorPane fx:id="rootPane" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="rootPane" prefHeight="564.0" prefWidth="657.0" BorderPane.alignment="CENTER" />
    </center>
    <left>
-      <VBox alignment="CENTER" prefHeight="546.0" prefWidth="100.0" spacing="15.0" style="-fx-background-color: white;" stylesheets="@search_doctors.css" BorderPane.alignment="CENTER">
+      <VBox alignment="CENTER" prefHeight="546.0" prefWidth="130.0" spacing="15.0" style="-fx-background-color: white;" stylesheets="@search_doctors.css" BorderPane.alignment="CENTER">
          <children>
             <Button fx:id="homeBtn" contentDisplay="TOP" graphicTextGap="3.0" mnemonicParsing="false" onAction="#homeBtnPressed" styleClass="dashboardBtn" text="Home" textFill="#999999" VBox.vgrow="ALWAYS">
                <graphic>

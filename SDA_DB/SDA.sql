@@ -10,7 +10,7 @@ SELECT
 FROM 
     sys.dm_exec_sessions
 WHERE 
-    database_id = DB_ID('SDA');
+    database_id = DB_ID('GCR');
 
 
 ALTER TABLE PAYMENTS
@@ -743,8 +743,7 @@ VALUES
 (31, 5, 'The diagnosis was accurate, but the doctor seemed distant.', 3.8, 4.0, 3.5, 4.0, 1);
 -- Insert data into APPOINTMENTS table
 INSERT INTO APPOINTMENTS (DOCTOR_ID, PATIENT_ID, DATE, TIME, STATUS, PROBLEM)
-VALUES (102, 1, '2023-05-01', '9:00:00', 'Completed', 'Fuck u butch'),
-	   (101, 1, '2023-06-01', '10:00:00', 'Booked', 'My Heart is aching.'),
+VALUES (101, 1, '2023-06-01', '10:00:00', 'Booked', 'My Heart is aching.'),
        (102, 2, '2023-06-02', '11:00:00', 'Completed', 'My skin is dry.'),
        (103, 3, '2023-06-03', '12:00:00', 'Cancelled', 'My bones are weak.'),
        (104, 4, '2023-06-04', '13:00:00', 'Booked', 'The kid cant walk no more.'),
@@ -752,7 +751,7 @@ VALUES (102, 1, '2023-05-01', '9:00:00', 'Completed', 'Fuck u butch'),
 
 INSERT INTO PAYMENTS (APPOINTMENT_ID, DATE, TIME, STATUS, AMOUNT)
 VALUES (1, '2023-05-01', '10:00:00', 1, 1200),
-	   (2, '2023-05-02', '11:00:00', 1, 1500),
+	   (2, '2023-05-02', '11:00:00', 0, 1500),
 	   (3, '2023-05-03', '12:00:00', 1, 2000),
 	   (4, '2023-05-04', '13:00:00', 1, 1000),
 	   (5, '2023-05-05', '14:00:00', 1, 800)

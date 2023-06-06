@@ -65,16 +65,16 @@ public class DoctorMainController implements Initializable {
         homeBtn.setStyle("-fx-text-fill: #2854c3;");
         // headerTitle.textProperty().bind(headerTitles.peek().textProperty());
         headerTitles.addListener((ListChangeListener<Label>) change -> {
-            if (headerTitles.isEmpty()) {
+        if (headerTitles.isEmpty()) {
+                if(headerTitle != null)
+                headerTitle.setText("");
+        } else {
                 if (headerTitle != null) {
-                    headerTitle.setText("AAAaa");
-                }
-            } else {
-                if (headerTitle != null) {
-                    headerTitle.setText((headerTitles.get(headerTitles.size() - 1).getText()));
+                    headerTitle.setText(headerTitles.get(headerTitles.size() - 1).getText());
                 }
             }
         });
+
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/doctorHome.fxml")));
@@ -254,7 +254,15 @@ public class DoctorMainController implements Initializable {
             Parent root = loader.load();
             Stage stage = (Stage) logoutBtn.getScene().getWindow();
             stage.setScene(new Scene(root));
+            
+            stage.setMinWidth(825);
+            stage.setMinHeight(480);
+
+            stage.setWidth(825);
+            stage.setHeight(480);
+            
             stage.show();
+            stage.centerOnScreen();
 
         } catch (Exception e) {
             e.printStackTrace();

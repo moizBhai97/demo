@@ -9,7 +9,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.example.BackEnd.DoctorController;
-import com.example.BackEnd.PatientController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,11 +20,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.BoxBlur;
+import javafx.scene.effect.Effect;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class UpdateDoctorProfileController implements Initializable{
 
@@ -57,6 +58,8 @@ public class UpdateDoctorProfileController implements Initializable{
     private Label addIndex;
     @FXML
     private AnchorPane addPane;
+    @FXML
+    private AnchorPane parentPane;
 
     AddCertificationController addCertificationController = new AddCertificationController();
     DoctorController doctorController ;
@@ -132,14 +135,29 @@ public class UpdateDoctorProfileController implements Initializable{
             loader.setLocation((new URL("file:src/main/resources/com/example/AddCertificationPopup.fxml")));
 
             addCertificationController = new AddCertificationController();
-            addCertificationController.setData(docId, certificates);
+            addCertificationController.setData(docId, certificates, doctorController);
             loader.setController(addCertificationController);
 
             Parent root = loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
+
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+
+            BoxBlur blur = new BoxBlur();
+            blur.setWidth(10);
+            blur.setHeight(10);
+            blur.setIterations(3);
+
+            Effect otherEffects = parentPane.getEffect();
+
+            parentPane.setEffect(blur);
             
-            stage.setOnHidden(e-> {    
+            stage.setOnHidden(e-> {   
+                parentPane.setEffect(null);
+                parentPane.setEffect(otherEffects); 
                 refresh();
              });
 

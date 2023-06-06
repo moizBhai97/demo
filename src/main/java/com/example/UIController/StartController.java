@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,6 +22,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class StartController implements Initializable{
@@ -61,7 +63,16 @@ public class StartController implements Initializable{
             Scene scene = new Scene(root);
             Stage stage = (Stage) patientButton.getScene().getWindow();
             stage.setScene(scene);
+
+            stage.setMinWidth(825);
+            stage.setMinHeight(480);
+
+
+            stage.setWidth(825);
+            stage.setHeight(480);
+
             stage.show();
+            stage.centerOnScreen();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,7 +97,15 @@ public class StartController implements Initializable{
             Scene scene = new Scene(root);
             Stage stage = (Stage) doctorButton.getScene().getWindow();
             stage.setScene(scene);
+
+            stage.setMinWidth(825);
+            stage.setMinHeight(480);
+
+            stage.setWidth(825);
+            stage.setHeight(480);
+
             stage.show();
+            stage.centerOnScreen();
         } catch (IOException e) {
             e.printStackTrace();
         }

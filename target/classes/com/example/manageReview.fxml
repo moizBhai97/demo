@@ -15,10 +15,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane styleClass="big_pane" stylesheets="@manageAppointment.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="564.0" prefWidth="657.0" styleClass="big_pane" stylesheets="@manageAppointment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label layoutX="22.0" layoutY="50.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #8C8FA5;" text="Latest Reviews" />
-      <ScrollPane fx:id="reviewsScrollPane" layoutX="22.0" layoutY="68.0" prefHeight="459.0" prefWidth="638.0" styleClass="scroll_pane" stylesheets="@search_doctors.css">
+      <ScrollPane fx:id="reviewsScrollPane" layoutX="22.0" layoutY="68.0" prefHeight="459.0" prefWidth="625.0" styleClass="scroll_pane" stylesheets="@search_doctors.css">
          <content>
             <GridPane fx:id="reviewsGridPane" hgap="30.0" prefHeight="234.0" prefWidth="618.0" styleClass="grid_pane" stylesheets="@manageAppointment.css" vgap="10.0">
               <columnConstraints>

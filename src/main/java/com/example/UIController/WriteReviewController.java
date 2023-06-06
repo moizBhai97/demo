@@ -11,8 +11,6 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,25 +21,19 @@ import org.json.JSONObject;
 import com.example.BackEnd.PatientController;
 
 public class WriteReviewController implements Initializable{
-
+    
     @FXML
     private Rating checkupRating;
-
     @FXML
     private Rating clinicRating;
-
     @FXML
     private TextArea commentBox;
-
     @FXML
     private Rating overallRating;
-
     @FXML
     private ToggleGroup recommend;
-
     @FXML
     private Rating staffRating;
-
     @FXML
     private Button submitButton;
 
@@ -50,6 +42,7 @@ public class WriteReviewController implements Initializable{
     PatientController patientController;
     int docId ;
     int patId ;
+    Scene prev;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -58,19 +51,35 @@ public class WriteReviewController implements Initializable{
 
     @FXML
     void submitButton(ActionEvent event) {
-        
-        JSONObject review = new JSONObject();
-        review.put("comment", commentBox.getText());
-        review.put("experience", overallRating.getRating());
-        review.put("recommend", ((RadioButton)recommend.getSelectedToggle()).getText());
-        review.put("checkupRating", checkupRating.getRating());
-        review.put("environmentRating", clinicRating.getRating());
-        review.put("staffRating", staffRating.getRating());
-
-        patientController.submitReview(review.toString(), docId, patId);
-
         try
         {
+            boolean hasComment = true;
+            if(commentBox == null || commentBox.getText() == "" || commentBox.getText().isBlank())
+                hasComment = false;
+        
+            
+
+            JSONObject review = new JSONObject();
+            if(hasComment){review.put("comment", commentBox.getText());}
+            //else {review.put("comment", "");}
+
+            review.put("experience", overallRating.getRating());
+            
+            if(recommend.getSelectedToggle() != null){
+                if(((RadioButton)recommend.getSelectedToggle()).getText().equals("Yes"))
+                {
+                    review.put("recommend", "Yes");
+                }
+            }
+
+
+            //review.put("recommend", ((RadioButton)recommend.getSelectedToggle()).getText());
+            review.put("checkupRating", checkupRating.getRating());
+            review.put("environmentRating", clinicRating.getRating());
+            review.put("staffRating", staffRating.getRating());
+
+            patientController.submitReview(review.toString(), docId, patId);
+
             this.submitButton.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
@@ -103,21 +112,20 @@ public class WriteReviewController implements Initializable{
         }
     }
     
-    public void setData(PatientController patientController, int docId, int patId,AnchorPane prevPane) {
+    public void setData(PatientController patientController, int docId, int patId, AnchorPane prevPane, Scene prev) {
         this.patientController = patientController;
         this.docId = docId;
         this.patId = patId;
         this.prevPane = prevPane;
+        this.prev = prev;
     }
 
-    
-    public void backBtnPressed(ActionEvent event){
+    public void backBtnPressed(ActionEvent event)
+    {
         prevPane.setVisible(true);
-        AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
-        //remove last 
+        AnchorPane mainParentPane = (AnchorPane)prevPane.getParent(); 
         mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);
 
         SearchDoctorController.removeTopTitle();
     }
-
 }
