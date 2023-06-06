@@ -58,32 +58,27 @@
     -fx-font-size: 10px;
     -fx-text-fill: #2854C3;
 }
-
-.sort_btn:hover{
-    -fx-background-color: #2854C3;
-      -fx-text-fill: #ffffff;
-}
-
-.sort_btn:hover .image-view{
-        -fx-effect: innershadow(three-pass-box, #ffffff, 10, 0, 0, 10);
-    
-}
-
-.filter_rating:hover .image-view{
-        -fx-effect: innershadow(three-pass-box, #ffffff, 10, 0, 0, 10);
-    
-}
-
 .sort_btn_selected{
-    -fx-background-color: #2854C3;
+    -fx-background-color: #ededed;
     -fx-border-color: #2854C3;
     -fx-border-width: 2px 2px 2px 2px;
     -fx-border-radius: 20px;
     -fx-background-radius: 20px;
     -fx-border-style: solid;
     -fx-font-size: 10px;
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #ededed;
 }
+
+
+/* .sort_btn:hover .image-view{
+        -fx-effect: innershadow(three-pass-box, #ffffff, 10, 0, 0, 10);
+    
+} */
+
+/* .filter_rating:hover .image-view{
+        -fx-effect: innershadow(three-pass-box, #ffffff, 10, 0, 0, 10);
+    
+} */
 .search {
     -fx-background-color: transparent;
 }

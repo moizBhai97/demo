@@ -10,13 +10,16 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -201,15 +204,15 @@ public class SearchDoctorController implements Initializable {
     public static void addHeaderTitle(String title) {
         Label label = new Label(title);
         label.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
-        //StringProperty textProperty = new SimpleStringProperty(title);
-       // label.textProperty().bind(textProperty);
+        // StringProperty textProperty = new SimpleStringProperty(title);
+        // label.textProperty().bind(textProperty);
         headerTitles.add(label);
         // headerTitle.setText(title);
     }
 
     public static void clearHeaderTitles() {
         headerTitles.clear();
-       // headerTitles.add(new Label("Search Doctor"));
+        // headerTitles.add(new Label("Search Doctor"));
     }
 
     public static void removeTopTitle() {
@@ -394,13 +397,12 @@ public class SearchDoctorController implements Initializable {
             searchBtn.setStyle("-fx-text-fill: #2854c3;");
         }
 
-        
         headerTitles.addListener((ListChangeListener<Label>) change -> {
-        if (headerTitles.isEmpty()) {
+            if (headerTitles.isEmpty()) {
                 if (headerTitle != null) {
                     headerTitle.setText("AAAaa");
                 }
-        } else {
+            } else {
                 if (headerTitle != null) {
                     headerTitle.setText((headerTitles.get(headerTitles.size() - 1).getText()));
                 }
@@ -410,11 +412,11 @@ public class SearchDoctorController implements Initializable {
 
         headerTitles.addListener((ListChangeListener<Label>) change -> {
             if (headerTitles.isEmpty()) {
-                if(headerTitle != null)
-                headerTitle.setText("");
+                if (headerTitle != null)
+                    headerTitle.setText("");
             } else {
-                if(headerTitle != null)
-                headerTitle.setText((headerTitles.get(headerTitles.size() - 1).getText()) );
+                if (headerTitle != null)
+                    headerTitle.setText((headerTitles.get(headerTitles.size() - 1).getText()));
             }
         });
         selectedDashbordBtn = searchBtn;
@@ -439,8 +441,6 @@ public class SearchDoctorController implements Initializable {
 
         filterRatingAll.setGraphic(blueStarIcon);
         filter_Pane.setVisible(false);
-
-
 
         refresh();
         return;
@@ -515,6 +515,7 @@ public class SearchDoctorController implements Initializable {
     public void searchTextKeyPressed(ActionEvent event) {
 
         System.out.println("searched");
+        String result = " ";
 
         Media media = null;
         try {
@@ -553,11 +554,28 @@ public class SearchDoctorController implements Initializable {
         StackPane.setAlignment(mediaView, Pos.CENTER);
 
         results_scrollpane.setContent(stackPane);
-
+        mediaPlayer.play();
         mediaPlayer.setOnEndOfMedia(() -> {
-
-            searchDoctor(searhcedName);
+            mediaPlayer.seek(Duration.ZERO);
+            mediaPlayer.play();
         });
+        Task<String> task = new Task<String>() {
+            @Override
+            protected String call() throws Exception {
+                return patientController.searchDoctor(searhcedName);
+            }
+        };
+
+        task.setOnSucceeded(e -> {
+            mediaPlayer.stop();
+            Platform.runLater(() -> {
+                resetFilterPane();
+                createDoctorCards(task.getValue());
+            });
+        });
+
+        Thread thread = new Thread(task);
+        thread.start();
         selectedToggle = null;
 
         resetSortColors();
@@ -647,9 +665,9 @@ public class SearchDoctorController implements Initializable {
         }
     }
 
-    public void settingsBtnPressed(ActionEvent event){
-        try{
-            if(selectedDashbordBtn == settingsBtn){
+    public void settingsBtnPressed(ActionEvent event) {
+        try {
+            if (selectedDashbordBtn == settingsBtn) {
                 return;
             }
 
@@ -671,21 +689,19 @@ public class SearchDoctorController implements Initializable {
             AnchorPane.setBottomAnchor(root, 0.0);
             AnchorPane.setLeftAnchor(root, 0.0);
             AnchorPane.setRightAnchor(root, 0.0);
-            
+
             rootPane.getChildren().clear();
             rootPane.getChildren().add(root);
 
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
+    public void logoutBtnPressed(ActionEvent event) {
 
-    public void logoutBtnPressed(ActionEvent event){
-
-        try{
-            if(selectedDashbordBtn == logoutBtn){
+        try {
+            if (selectedDashbordBtn == logoutBtn) {
                 return;
             }
 
@@ -700,12 +716,11 @@ public class SearchDoctorController implements Initializable {
 
             stage.setWidth(825);
             stage.setHeight(480);
-            
+
             stage.show();
             stage.centerOnScreen();
 
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
