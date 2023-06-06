@@ -1,55 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.Shadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 
 
-<HBox fx:id="hb" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.SingleReviewController">
+<AnchorPane styleClass="doc_pane" stylesheets="@manageAppointment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.SingleReviewController">
    <children>
-      <AnchorPane styleClass="doc_pane" stylesheets="@manageAppointment.css" HBox.hgrow="ALWAYS">
+      <Label fx:id="text" alignment="TOP_LEFT" layoutX="17.0" layoutY="35.0" maxWidth="500.0" style="-fx-font-size: 12; -fx-text-fill: #8C8FA5;" text="mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm" wrapText="true" />
+      <Label fx:id="name" layoutX="17.0" layoutY="18.0" prefHeight="13.0" prefWidth="213.0" style="-fx-font-size: 14; -fx-text-fill: #00000;" text="Moiz" wrapText="true" />
+      <AnchorPane layoutX="215.0" layoutY="10.0" prefHeight="26.0" prefWidth="54.0" AnchorPane.rightAnchor="0.20000000000002416" AnchorPane.topAnchor="10.0">
          <children>
-            <VBox layoutX="17.0" layoutY="35.0" prefHeight="70.0" prefWidth="246.0">
-               <children>
-                  <HBox prefHeight="71.0" prefWidth="246.0" VBox.vgrow="ALWAYS">
-                     <children>
-                        <Label fx:id="text" prefHeight="13.0" prefWidth="213.0" style="-fx-font-size: 12; -fx-text-fill: #8C8FA5;" text="Mon 25, April" wrapText="true" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <Label fx:id="name" layoutX="17.0" layoutY="18.0" prefHeight="13.0" prefWidth="213.0" style="-fx-font-size: 14; -fx-text-fill: #00000;" text="Moiz" wrapText="true" />
-            <AnchorPane layoutX="215.0" layoutY="10.0" prefHeight="26.0" prefWidth="54.0" AnchorPane.rightAnchor="0.20000000000002416" AnchorPane.topAnchor="10.0">
-               <children>
-                  <Label fx:id="ratingAmount" layoutX="25.0" layoutY="5.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="9.0" prefWidth="17.0" style="-fx-font-size: 9;" text="4.8" textAlignment="RIGHT" AnchorPane.rightAnchor="11.399999999999999" AnchorPane.topAnchor="5.0" />
-                  <ImageView fx:id="ratingStar" fitHeight="10.0" fitWidth="10.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="30.370369911193848" AnchorPane.topAnchor="5.0">
-                     <image>
-                        <Image url="@../../images/image%2033.png" />
-                     </image>
-                     <effect>
-                        <Shadow height="1.0" radius="0.0" width="0.0">
-                           <color>
-                              <Color red="0.1568627506494522" green="0.3294117748737335" blue="0.7647058963775635" />
-                           </color>
-                        </Shadow>
-                     </effect>
-                  </ImageView>
-                  <ImageView fx:id="starOutline" fitHeight="13.0" fitWidth="13.0" layoutX="11.459260177612302" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="29.940739822387698" AnchorPane.topAnchor="5.0">
-                     <image>
-                        <Image url="@../../images/starOutline.png" />
-                     </image>
-                     <effect>
-                        <Shadow height="0.0" radius="0.0" width="0.0" />
-                     </effect>
-                  </ImageView>
-               </children>
-            </AnchorPane>
+            <Label fx:id="ratingAmount" layoutX="25.0" layoutY="5.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="9.0" prefWidth="17.0" style="-fx-font-size: 9;" text="4.8" textAlignment="RIGHT" AnchorPane.rightAnchor="11.399999999999999" AnchorPane.topAnchor="5.0" />
+            <ImageView fx:id="ratingStar" fitHeight="10.0" fitWidth="10.0" layoutX="14.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="30.370369911193848" AnchorPane.topAnchor="5.0">
+               <image>
+                  <Image url="@../../images/image%2033.png" />
+               </image>
+               <effect>
+                  <Shadow height="1.0" radius="0.0" width="0.0">
+                     <color>
+                        <Color red="0.1568627506494522" green="0.3294117748737335" blue="0.7647058963775635" />
+                     </color>
+                  </Shadow>
+               </effect>
+            </ImageView>
+            <ImageView fx:id="starOutline" fitHeight="13.0" fitWidth="13.0" layoutX="11.459260177612302" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="29.940739822387698" AnchorPane.topAnchor="5.0">
+               <image>
+                  <Image url="@../../images/starOutline.png" />
+               </image>
+               <effect>
+                  <Shadow height="0.0" radius="0.0" width="0.0" />
+               </effect>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>
-</HBox>
+   <padding>
+      <Insets bottom="10.0" />
+   </padding>
+</AnchorPane>

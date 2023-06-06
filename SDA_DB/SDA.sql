@@ -538,7 +538,7 @@ SELECT * FROM REVIEWS;
 INSERT INTO REVIEWS (DOCTOR_ID, PATIENT_ID, COMMENT, EXPERIENCE, checkupRating, environmentRating, staffRating, RECOMMEND)
 VALUES
 -- Reviews for Doctor ID 1
-(1, 1, 'Great doctor, explained everything clearly.', 4.5, 4.5, 4.5, 4.5, 1),
+(1, 1, 'Great doctor, explained everything clearly. mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm', 4.5, 4.5, 4.5, 4.5, 1),
 (1, 2, 'Very satisfied with the treatment, would highly recommend.', 4.8, 4.8, 4.5, 4.7, 1),
 (1, 3, 'Good doctor, but the waiting time was longer than expected.', 3.5, 4.0, 3.5, 3.0, 1),
 (1, 4, 'Excellent experience, the doctor was very attentive.', 5.0, 5.0, 4.5, 5.0, 1),

@@ -17,8 +17,16 @@
 
 <AnchorPane prefHeight="564.0" prefWidth="657.0" styleClass="big_pane" stylesheets="@manageAppointment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
+      <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backBtnPressed" styleClass="backBtn" stylesheets="@settings.css" text="&lt;  Back" textFill="#2854c3">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
       <Label layoutX="22.0" layoutY="50.0" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #8C8FA5;" text="Latest Reviews" />
-      <ScrollPane fx:id="reviewsScrollPane" layoutX="22.0" layoutY="68.0" prefHeight="459.0" prefWidth="625.0" styleClass="scroll_pane" stylesheets="@search_doctors.css">
+      <ScrollPane fx:id="reviewsScrollPane" layoutX="22.0" layoutY="68.0" prefHeight="459.0" prefWidth="625.0" styleClass="scroll_pane" stylesheets="@search_doctors.css" AnchorPane.bottomAnchor="35.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="68.0">
          <content>
             <GridPane fx:id="reviewsGridPane" hgap="30.0" prefHeight="234.0" prefWidth="618.0" styleClass="grid_pane" stylesheets="@manageAppointment.css" vgap="10.0">
               <columnConstraints>
@@ -79,14 +87,6 @@
             <Insets top="10.0" />
          </padding>
       </ScrollPane>
-      <Button fx:id="backBtn" layoutX="4.0" layoutY="4.0" mnemonicParsing="false" onAction="#backBtnPressed" prefHeight="27.0" prefWidth="58.0" style="-fx-font-size: 12; -fx-font-weight: bold; -fx-background-color: transparent;" text="&lt;  Back" textFill="#2854c3" AnchorPane.leftAnchor="2.0" AnchorPane.topAnchor="2.0">
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
    </children>
    <effect>
       <InnerShadow />
