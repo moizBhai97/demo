@@ -201,15 +201,11 @@ public class SearchDoctorController implements Initializable {
     public static void addHeaderTitle(String title) {
         Label label = new Label(title);
         label.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
-        // StringProperty textProperty = new SimpleStringProperty(title);
-        // label.textProperty().bind(textProperty);
         headerTitles.add(label);
-        // headerTitle.setText(title);
     }
 
     public static void clearHeaderTitles() {
         headerTitles.clear();
-        // headerTitles.add(new Label("Search Doctor"));
     }
 
     public static void removeTopTitle() {
@@ -449,8 +445,6 @@ public class SearchDoctorController implements Initializable {
         System.out.println(patId);
     }
 
-    // GridPane results_grid;
-
     public void setPatientController(PatientController patientController) {
         this.patientController = patientController;
     }
@@ -468,13 +462,6 @@ public class SearchDoctorController implements Initializable {
         doc_count.setText("Top Doctors");
 
     }
-
-    // public void searchDoctor(String value) {
-    //     resetFilterPane();
-    //     String result = patientController.searchDoctor(value);
-    //     createDoctorCards(result);
-
-    // }
 
     public void createDoctorCards(String result) {
         try {

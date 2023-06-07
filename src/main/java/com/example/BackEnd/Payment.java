@@ -30,11 +30,18 @@ public class Payment {
 
     public Payment(String info)
     {
-        JSONObject obj = new JSONObject(info);
-        date = obj.getString("date");
-        time = obj.getString("time");
-        amount = obj.getDouble("amount");
-        status = obj.getBoolean("status");
+        try
+        {
+            JSONObject obj = new JSONObject(info);
+            date = obj.getString("date");
+            time = obj.getString("time");
+            amount = obj.getDouble("amount");
+            status = obj.getBoolean("status");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void setStatus(Boolean status)
@@ -77,6 +84,7 @@ public class Payment {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + "Payment" + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }

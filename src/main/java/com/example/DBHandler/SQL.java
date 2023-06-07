@@ -1,14 +1,12 @@
 package com.example.DBHandler;
 
 import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,7 +26,7 @@ public class SQL extends DBHandler {
         musa = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;";
         abdullah = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;";
 
-        connectionUrl = abdullah + 
+        connectionUrl = moiz + 
                         "databaseName=SDA;" + 
                         "IntegratedSecurity=true;" + 
                         "encrypt=true;trustServerCertificate=true";
@@ -231,9 +229,8 @@ public class SQL extends DBHandler {
 
             return appId;
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
-
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return -1;
         }
     }
@@ -244,9 +241,10 @@ public class SQL extends DBHandler {
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, appId);
             pstmt.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -333,9 +331,8 @@ public class SQL extends DBHandler {
         }
     }
 
-    public String getDoctors(String name) {
-        System.out.println("SQL getDoctors");
-
+     public String getDoctors(String name) 
+     {
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
 
             String SQL = "SELECT (SELECT COUNT(Distinct PATIENT_ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients, id, NAME, EMAIL, DOB, COUNTRY, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, EXPERIENCE, WORKING_HOURS, FEE, AVAILABILITY FROM DOCTORS d where d.name LIKE '%"
@@ -443,8 +440,8 @@ public class SQL extends DBHandler {
             return doctors.toString();
 
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }
@@ -467,15 +464,15 @@ public class SQL extends DBHandler {
             pstmt.setInt(7, patId);
 
             pstmt.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
-public String getPatient(String info) throws SQLException, IOException, ParseException, Exception {
-
-        System.out.println("SQL getPatient");
+    public String getPatient(String info) throws Exception{
 
         JSONObject information = new JSONObject(info);
 
@@ -493,8 +490,7 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
 
             JSONParser parser = new JSONParser();
             JSONObject patient = new JSONObject(
-                    parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());
-            // rs.next();
+            parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());
             patient.put("patId", rs.getInt("id"));
             patient.put("name", rs.getString("name"));
             patient.put("email", rs.getString("email"));
@@ -510,23 +506,18 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
             return patient.toString();
 
         } catch (Exception e) {
-            // con.close();
-
-          //  e.printStackTrace();
             throw e;
-            // return null;
         }
+
 
     }
 
-    public String getDoctor(String info) {
+    public String getDoctor(String info) throws Exception{
 
-        try {
-            System.out.println("SQL getDoctor");
-            System.out.println(info);
-
-            JSONObject information = new JSONObject(info);
-
+        try
+        {
+            JSONObject information = new JSONObject(info); 
+            
             try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
                 String SQL = "SELECT (SELECT COUNT(Distinct PATIENT_ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients, NAME, ID, EMAIL, DOB, COUNTRY, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, EXPERIENCE, WORKING_HOURS, FEE, AVAILABILITY FROM Doctors d WHERE email = ? AND password = ?";
                 PreparedStatement pstmt = con.prepareStatement(SQL);
@@ -574,15 +565,14 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
                 return doctorObj.toString();
 
             } catch (SQLException | JSONException e) {
-                // con.close();
-
                 e.printStackTrace();
-                return "[]";
+                throw e;
             }
-        } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
-            return null;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            throw e;
         }
 
     }
@@ -591,9 +581,7 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
 
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
 
-            //System.out.println("SQL getPatientHistory");
-            
-            String SQL = "SELECT SID, TYPE, DESCRIPTION FROM PATIENT_HISTORY WHERE ID = ?;";
+            String SQL = "SELECT TYPE, DESCRIPTION FROM PATIENT_HISTORY WHERE ID = ?;";
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, patId);
             ResultSet rs = pstmt.executeQuery();
@@ -609,12 +597,13 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
                 history.put(newObj);
             }
 
-            // System.out.println(history.toString());
             return history.toString();
 
-        } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }
@@ -661,12 +650,10 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
                 appointments.put(obj);
             }
 
-            System.out.println(appointments.toString());
-
             return appointments.toString();
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }
@@ -712,12 +699,10 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
                 appointments.put(obj);
             }
 
-            System.out.println(appointments.toString());
-
             return appointments.toString();
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }
@@ -805,7 +790,6 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
                 patients.put(patientObj);
             }
 
-            System.out.println(patients.toString());
             return patients.toString();
         } catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
@@ -828,8 +812,6 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
             con.close();
 
         } catch (SQLException | JSONException e) {
-            // con.close();
-
             e.printStackTrace();
         }
     }
@@ -850,15 +832,14 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
             pstmt.executeUpdate();
         }
         catch (SQLException | JSONException e) {
-            // con.close();
-            //e.printStackTrace();
             throw e;
-            //throw new Throwable(e);
         }
     }
 
-    public void addPatient(String info) {
-        try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
+    public void addPatient(String info) throws Exception
+    {
+        try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement())
+        {
 
             JSONObject obj = new JSONObject(info);
             String SQL = "INSERT INTO PATIENTS (NAME, EMAIL, PASSWORD, DOB, COUNTRY, PHONE_NUMBER, GENDER) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -874,15 +855,14 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
 
             pstmt.executeUpdate();
 
-        } catch (SQLException | JSONException e) {
-            // con.close();
-
-            e.printStackTrace();
+        }catch (Exception e) {
+            throw e;
         }
     }
 
-    public void addPatientIllness(int patId, String info) {
-        try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
+    public void addPatientIllness(int patId, String info) throws Exception
+    {
+        try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement() ){
             JSONObject obj = new JSONObject(info);
             String SQL = "INSERT INTO PATIENT_HISTORY (ID, TYPE, DESCRIPTION) VALUES (?, ?, ?);";
 
@@ -892,8 +872,10 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
             pstmt.setString(3, obj.getString("description"));
 
             pstmt.executeUpdate();
-        } catch (SQLException | JSONException e) {
-            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            throw e;
         }
     }
 
@@ -966,17 +948,8 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
             pstmt.setFloat(7, obj.getFloat("environmentRating"));
             pstmt.setFloat(8, obj.getFloat("staffRating"));
             pstmt.executeUpdate();
-
-            // String SQL2 = "UPDATE Doctors SET RATING = (SELECT AVG(EXPERIENCE) FROM Reviews WHERE DOCTOR_ID = ?) WHERE ID = ?;";
-            // PreparedStatement pstmt2 = con.prepareStatement(SQL2);
-            // pstmt2.setInt(1, docId);
-            // pstmt2.setInt(2, docId);
-            
-            // pstmt2.executeUpdate();
         }
         catch (SQLException | JSONException e) {
-            // con.close();
-
             e.printStackTrace();
         }
     }

@@ -89,8 +89,6 @@ public class ManageAppointmentController implements Initializable {
     }
 
     public String getPendingAppointments() {
-
-        System.out.println("Pending Appointments");
         String result = patientController.getAppointList(patId, 1);
 
         return result;
@@ -98,7 +96,6 @@ public class ManageAppointmentController implements Initializable {
 
     public String getCompletedAppointments() {
         
-        System.out.println("Completed Appointments");
         String result = patientController.getAppointList(patId, 2);
 
         return result;

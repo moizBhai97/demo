@@ -18,7 +18,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BoxBlur;
@@ -72,11 +71,8 @@ public class UpdateDoctorProfileController implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         // TODO Auto-generated method stub
-       // DoctorMainController.setHeaderTitle("Update Profile");
         JSONObject data = new JSONObject(doctorController.getDoctorData(docId));
         DoctorMainController.addHeaderTitle("Update Profile");
-
-        System.out.println(data.toString());
 
         tf_username.setText(data.getString("name"));
         tf_email.setText(data.getString("email"));
@@ -87,7 +83,6 @@ public class UpdateDoctorProfileController implements Initializable{
 
 
         certificates = new JSONArray(doctorController.getCertificates(docId));
-        System.out.println(certificates.toString() + "-----------------------------------");
         refresh();
     }
 
@@ -130,7 +125,6 @@ public class UpdateDoctorProfileController implements Initializable{
         System.out.println("Add Certification Button pressed");
 
         try {
-            //this.btn_add1.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/AddCertificationPopup.fxml")));

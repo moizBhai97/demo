@@ -9,6 +9,7 @@ import com.example.BackEnd.PatientController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -55,7 +56,7 @@ public class AddRecordController {
     }
     
     @FXML
-    void addRecord(ActionEvent event) {
+    void addRecord(ActionEvent event) throws Exception{
         
         try{
 
@@ -78,7 +79,7 @@ public class AddRecordController {
                 flag = true;
             }
             
-            if(description == null || description.length() == 0)
+            if(description == null || description.length() == 0 || description.trim().isBlank())
             {
                 descriptionError.setText("*(Enter a description)");
                 descriptionError.setVisible(true);
@@ -107,7 +108,14 @@ public class AddRecordController {
         }
         catch(Exception e)
         {
-            System.out.println(e);
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Duplicate Record");
+            alert.setContentText("You have already added this record");
+            alert.showAndWait();
+
+            throw e;
         }
     }
 

@@ -40,16 +40,23 @@ public class Review {
 
     public Review(String info)
     {
-        JSONObject obj = new JSONObject(info);
-        experience = obj.getFloat("experience");
-        if(obj.has("comment"))
-            comment = obj.getString("comment");
-        if(obj.has("recommend"))
-            recommend = obj.getBoolean("recommend");
-        checkupRating = obj.getFloat("checkupRating");
-        environmentRating = obj.getFloat("environmentRating");
-        staffRating = obj.getFloat("staffRating");
-        patId = obj.getInt("patId");
+        try
+        {
+            JSONObject obj = new JSONObject(info);
+            experience = obj.getFloat("experience");
+            if(obj.has("comment"))
+                comment = obj.getString("comment");
+            if(obj.has("recommend"))
+                recommend = obj.getBoolean("recommend");
+            checkupRating = obj.getFloat("checkupRating");
+            environmentRating = obj.getFloat("environmentRating");
+            staffRating = obj.getFloat("staffRating");
+            patId = obj.getInt("patId");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public float getExperience() {
@@ -110,6 +117,7 @@ public class Review {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     } 

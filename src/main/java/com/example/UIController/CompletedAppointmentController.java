@@ -133,7 +133,7 @@ public class CompletedAppointmentController  implements Initializable
             fxmlLoader.setLocation((new URL("file:src/main/resources/com/example/Review.fxml")));
 
             WriteReviewController controller = new WriteReviewController();
-            controller.setData(pc, patId, docId, prevPane, this.write.getScene());
+            controller.setData(pc, docId, patId, appID, prevPane, this.write.getScene());
             fxmlLoader.setController(controller);
 
             AnchorPane pane = fxmlLoader.load();

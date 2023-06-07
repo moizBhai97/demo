@@ -56,16 +56,11 @@ public class SignupController implements Initializable {
         // TODO Auto-generated method stub
         return;
     }
+    
+    public void signupButton(ActionEvent event) throws Exception{
+        try{
 
-    public void signupButton(ActionEvent event) {
-        System.out.println("Signup button pressed");
-
-        try {
-
-            if (nameTextField.getText().equals("") || emailTextField.getText().equals("")
-                    || passwordTextField.getText().equals("") || DOBdatePicker.getValue() == null
-                    || genderComboBox.getValue() == null || countryComboBox.getValue() == null
-                    || phoneNumberTextField.getText().equals("")) {
+            if(nameTextField.getText().trim().isBlank() || emailTextField.getText().trim().isBlank() || passwordTextField.getText().trim().isBlank() || phoneNumberTextField.getText().trim().isBlank()){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Input");
                 alert.setHeaderText("Error: Empty fields");
@@ -73,21 +68,19 @@ public class SignupController implements Initializable {
                 alert.showAndWait();
                 return;
             }
-
-            if (nameTextField.getText().isBlank() || emailTextField.getText().isBlank()
-                    || passwordTextField.getText().isBlank() || phoneNumberTextField.getText().isBlank()) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Invalid Input");
-                alert.setHeaderText("Error: Empty fields");
-                alert.setContentText("Please fill all the fields");
-                alert.showAndWait();
-
-            }
-            if (!nameTextField.getText().matches("[a-zA-Z._ ]+")) {
+            if(!nameTextField.getText().matches("[a-zA-Z._ ]+")){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Input");
                 alert.setHeaderText("Error: Invalid Name");
                 alert.setContentText("Name should only contain alphabets, spaces, '.' and '_'");
+                alert.showAndWait();
+                return;
+            }
+            if (!emailTextField.getText().matches("[a-zA-Z0-9._]+@[a-zA-Z0-9]+\\.[a-zA-Z]+")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Input");
+                alert.setHeaderText("Error: Invalid Email");
+                alert.setContentText("Please enter a valid email address.");
                 alert.showAndWait();
                 return;
             }
@@ -107,16 +100,7 @@ public class SignupController implements Initializable {
                 alert.showAndWait();
                 return;
             }
-            // if(!confirmPasswordTextField.getText().matches("[a-zA-Z0-9._]+")) {
-            // Alert alert = new Alert(Alert.AlertType.ERROR);
-            // alert.setTitle("Invalid Input");
-            // alert.setHeaderText("Error: Invalid Password");
-            // alert.setContentText("Password should not contain special characters other
-            // than '.' and '_'");
-            // alert.showAndWait();
-            // return;
-            // }
-            if (!passwordTextField.getText().equals(confirmPasswordTextField.getText())) {
+            if(!passwordTextField.getText().equals(confirmPasswordTextField.getText())){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Input");
                 alert.setHeaderText("Error: Passwords do not match");
@@ -124,15 +108,7 @@ public class SignupController implements Initializable {
                 alert.showAndWait();
                 return;
             }
-            if (!emailTextField.getText().matches("[a-zA-Z0-9._]+@[a-zA-Z0-9]+\\.[a-zA-Z]+")) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Invalid Input");
-                alert.setHeaderText("Error: Invalid Email");
-                alert.setContentText("Please enter a valid email address.");
-                alert.showAndWait();
-                return;
-            }
-            if (!phoneNumberTextField.getText().matches("[0-9]+") || phoneNumberTextField.getText().length() != 11) {
+            if (!phoneNumberTextField.getText().matches("[0-9]+") || phoneNumberTextField.getText().trim().length() != 11) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Input");
                 alert.setHeaderText("Error: Invalid Phone Number");
@@ -142,35 +118,37 @@ public class SignupController implements Initializable {
             }
 
             JSONObject patient = new JSONObject();
-
-            patient.put("name", nameTextField.getText());
-            patient.put("email", emailTextField.getText());
-            patient.put("password", passwordTextField.getText());
+            
+            patient.put("name", nameTextField.getText().trim());
+            patient.put("email", emailTextField.getText().trim());
+            patient.put("password", passwordTextField.getText().trim());
             patient.put("DOB", DOBdatePicker.getValue().toString());
             patient.put("gender", genderComboBox.getValue().toString());
             patient.put("country", countryComboBox.getValue().toString());
-            patient.put("phoneNumber", phoneNumberTextField.getText());
-
+            patient.put("phoneNumber", phoneNumberTextField.getText().trim());
+            
             patientController.signup(patient.toString());
 
             this.signupButton.getScene().getWindow().hide();
             loadLogin();
-        } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+        }catch(Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Account already exists");
+            alert.setContentText("An account has already been made using that email address");
+            alert.showAndWait();
+
+            throw e;
         }
     }
 
     public void loginHyperlink(ActionEvent event) {
         System.out.println("Login hyperlink pressed");
-        // this.signupButton.getScene().getWindow().hide();
         loadLogin();
     }
 
     public void loadLogin() {
         try {
-            // this.signupButton.getScene().getWindow().hide();
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/login.fxml")));
 

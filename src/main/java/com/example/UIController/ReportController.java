@@ -136,6 +136,7 @@ public class ReportController implements Initializable {
 
         } catch (Exception e) {
             System.out.println(e);
+            e.printStackTrace();
         }
     }
 

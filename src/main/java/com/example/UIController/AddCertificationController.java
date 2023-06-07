@@ -111,7 +111,6 @@ public class AddCertificationController{
             alert.setContentText("The Certification has already been added");
             alert.showAndWait();
 
-            //e.printStackTrace();
             throw e;
         }
     }
