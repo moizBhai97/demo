@@ -87,9 +87,9 @@ public class AddRecordController {
             }
             
             //SET RESTRICTION 
-            if(description.length() > 20)
+            if(description.length() > 255)
             {
-                descriptionError.setText("*(max characters: 20)");
+                descriptionError.setText("*(max characters: 255)");
                 descriptionError.setVisible(true);
                 flag = true;
             }

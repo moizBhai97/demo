@@ -166,7 +166,7 @@
                                                    <children>
                                                       <Label fx:id="index" prefHeight="25.0" text="1. " />
                                                       <Label fx:id="description" prefHeight="25.0" text="mmmmmmmmmm" wrapText="true" />
-                                                      <Button fx:id="remove" mnemonicParsing="false" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: transparent;" styleClass="button_remove" text="Remove-" textFill="#00000080">
+                                                      <Button fx:id="remove" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" style="-fx-background-color: transparent;" styleClass="button_remove" text="Remove-" textFill="#00000080">
                                                          <font>
                                                             <Font name="System Italic" size="12.0" />
                                                          </font>

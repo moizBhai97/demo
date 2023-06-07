@@ -10,10 +10,10 @@
       <HBox fx:id="hBox" layoutX="10.0" layoutY="5.0" prefHeight="25.0" AnchorPane.leftAnchor="10.0">
          <children>
             <Label fx:id="index" prefHeight="25.0" text="1. " />
-            <Label fx:id="name" prefHeight="25.0" text="mmmmmmmmmm" />
+            <Label fx:id="name" maxWidth="156.0" prefHeight="25.0" prefWidth="156.0" text="jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj" wrapText="true" />
          </children>
       </HBox>
       <Line endX="133.5" layoutX="111.0" layoutY="35.0" startX="-100.0" stroke="#bebebe" AnchorPane.bottomAnchor="0.5" />
-      <Label fx:id="status" layoutX="171.0" layoutY="5.0" prefHeight="25.0" text=" (Pending)" textFill="#aaaaaa" />
+      <Label fx:id="status" layoutX="191.0" layoutY="5.0" prefHeight="25.0" text=" (Pending)" textFill="#aaaaaa" />
    </children>
 </AnchorPane>

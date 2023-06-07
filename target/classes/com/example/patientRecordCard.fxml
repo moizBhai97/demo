@@ -14,7 +14,7 @@
       <HBox layoutX="10.0" layoutY="5.0" prefHeight="25.0" AnchorPane.leftAnchor="10.0">
          <children>
             <Label fx:id="index" prefHeight="25.0" text="1. " />
-            <Label fx:id="description" prefHeight="25.0" text="mmmmmmmmmmm" />
+            <Label fx:id="description" maxWidth="113.0" prefHeight="25.0" prefWidth="113.0" text="mmmmmmmmmmm" wrapText="true" />
             <Button fx:id="removeButton" mnemonicParsing="false" onAction="#removeIllness" prefHeight="25.0" prefWidth="62.0" style="-fx-background-color: transparent;" styleClass="button_remove" text="Remove-" textFill="#00000080">
                <font>
                   <Font name="System Italic" size="12.0" />
