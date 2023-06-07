@@ -4,6 +4,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import org.json.JSONObject;
@@ -16,13 +17,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class PaymentController  implements Initializable
-{
+public class PaymentController implements Initializable {
     @FXML
     private Label dateTime;
 
@@ -54,10 +57,8 @@ public class PaymentController  implements Initializable
     Scene prev;
 
     @Override
-    public void initialize(URL arg0, ResourceBundle arg1) 
-    {
-        try
-        {
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        try {
             AnchorPane.setTopAnchor(parentPane, 0.0);
             AnchorPane.setBottomAnchor(parentPane, 0.0);
             AnchorPane.setLeftAnchor(parentPane, 0.0);
@@ -85,16 +86,13 @@ public class PaymentController  implements Initializable
             totalAmount.setText(fee);
 
             name.setText(docName);
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
         }
     }
-    
-    public void setData(PatientController pc, int patId, String fee, String docName, String appoint, Scene prev)
-    {
+
+    public void setData(PatientController pc, int patId, String fee, String docName, String appoint, Scene prev) {
         this.pc = pc;
         this.patId = patId;
         this.fee = fee;
@@ -103,12 +101,15 @@ public class PaymentController  implements Initializable
         this.prev = prev;
     }
 
-    public void paymentButton(ActionEvent event)
-    {
-        try
-        {
+   public void paymentButton(ActionEvent event) {
+    Alert alert = new Alert(AlertType.CONFIRMATION);
+    alert.setTitle("Confirm Payment");
+    alert.setHeaderText("Are you sure you want to make this payment?");
+    Optional<ButtonType> result = alert.showAndWait();
+    if (result.isPresent() && result.get() == ButtonType.OK) {
+        try {
             JSONObject obj = new JSONObject(appoint);
-            
+
             JSONObject payment = new JSONObject();
             payment.put("amount", fee);
             payment.put("status", false);
@@ -152,17 +153,14 @@ public class PaymentController  implements Initializable
             e.printStackTrace();
         }
     }
+}
 
-    public void cancelButton(ActionEvent event) 
-    {
-        try
-        {
+    public void cancelButton(ActionEvent event) {
+        try {
             pc.cancelSlot(appoint, patId);
 
             this.cancelBtn.getScene().getWindow().hide();
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             System.out.println(e);
             e.printStackTrace();
         }

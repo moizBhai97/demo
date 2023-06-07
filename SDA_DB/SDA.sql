@@ -3,6 +3,35 @@
 USE SDA
 -- USE lab
 
+-- CREATE PROCEDURE SLOTS
+-- AS
+-- DECLARE @startDate DATE = GETDATE();
+-- DECLARE @endDate DATE = DATEADD(DAY, 10, @startDate);
+
+-- DECLARE @doctorId INT = 1;
+
+-- WHILE @doctorId <= 31
+-- BEGIN
+--     DECLARE @date DATE = @startDate;
+
+--     WHILE @date <= @endDate
+--     BEGIN
+--         INSERT INTO APPOINTMENT_SLOTS (DOCTOR_ID, DATE, TIME, AVAILABLE)
+--         VALUES 
+--         (@doctorId, @date, '10:00:00', 1),
+--         (@doctorId, @date, '12:00:00', 1),
+--         (@doctorId, @date, '14:00:00', 1),
+--         (@doctorId, @date, '18:00:00', 1),
+--         (@doctorId, @date, '20:00:00', 1),
+--         (@doctorId, @date, '22:00:00', 1);
+
+--         SET @date = DATEADD(DAY, 1, @date);
+--     END
+
+--     SET @doctorId = @doctorId + 1;
+-- END
+
+
 -- SELECT 
 --     session_id, 
 --     login_name, 
@@ -533,8 +562,8 @@ VALUES (1, 1, 'Long waiting time'),
        (4, 4, 'Didnt shower'),
        (5, 5, 'Unhygienic conditions');
 
-select * from PATIENTS;
-SELECT * FROM REVIEWS;
+-- select * from PATIENTS;
+-- SELECT * FROM REVIEWS;
 -- Insert data into REVIEWS table
 INSERT INTO REVIEWS (DOCTOR_ID, PATIENT_ID, COMMENT, EXPERIENCE, checkupRating, environmentRating, staffRating, RECOMMEND)
 VALUES
@@ -743,48 +772,10 @@ VALUES
 (31, 4, 'Satisfied with the treatment, the doctor was friendly.', 4.5, 4.5, 4.0, 4.5, 1),
 (31, 5, 'The diagnosis was accurate, but the doctor seemed distant.', 3.8, 4.0, 3.5, 4.0, 1);
 -- Insert data into APPOINTMENTS table
-INSERT INTO APPOINTMENTS (DOCTOR_ID, PATIENT_ID, DATE, TIME, STATUS, PROBLEM)
-VALUES (101, 1, '2023-06-01', '10:00:00', 'Booked', 'My Heart is aching.'),
-       (102, 2, '2023-06-02', '11:00:00', 'Completed', 'My skin is dry.'),
-       (103, 3, '2023-06-03', '12:00:00', 'Cancelled', 'My bones are weak.'),
-       (104, 4, '2023-06-04', '13:00:00', 'Booked', 'The kid cant walk no more.'),
-       (105, 5, '2023-06-05', '14:00:00', 'Completed', 'My teeth are falling');
-
-INSERT INTO PAYMENTS (APPOINTMENT_ID, DATE, TIME, STATUS, AMOUNT)
-VALUES (1, '2023-05-01', '10:00:00', 1, 1200),
-	   (2, '2023-05-02', '11:00:00', 0, 1500),
-	   (3, '2023-05-03', '12:00:00', 1, 2000),
-	   (4, '2023-05-04', '13:00:00', 1, 1000),
-	   (5, '2023-05-05', '14:00:00', 1, 800)
 
 -- Insert data into APPOINTMENT_SLOTS table
-GO
-DECLARE @startDate DATE = GETDATE();
-DECLARE @endDate DATE = DATEADD(DAY, 10, @startDate);
 
-DECLARE @doctorId INT = 1;
-
-WHILE @doctorId <= 31
-BEGIN
-    DECLARE @date DATE = @startDate;
-
-    WHILE @date <= @endDate
-    BEGIN
-        INSERT INTO APPOINTMENT_SLOTS (DOCTOR_ID, DATE, TIME, AVAILABLE)
-        VALUES 
-        (@doctorId, @date, '10:00:00', 1),
-        (@doctorId, @date, '12:00:00', 1),
-        (@doctorId, @date, '14:00:00', 1),
-        (@doctorId, @date, '18:00:00', 1),
-        (@doctorId, @date, '20:00:00', 1),
-        (@doctorId, @date, '22:00:00', 1);
-
-        SET @date = DATEADD(DAY, 1, @date);
-    END
-
-    SET @doctorId = @doctorId + 1;
-END
-GO
+--EXEC SLOTS;
 
 -- Select * from APPOINTMENTS;
 
@@ -796,12 +787,11 @@ GO
 
 -- Select * from REVIEWS;
 
- Select * from APPOINTMENT_SLOTS;
+ --Select * from APPOINTMENT_SLOTS;
 
 -- SElect count(*) from APPOINTMENTS;
 
--- SElect * from DOCTORS
-
+-- SElect * from PATIENTS
 -- SELECT (SELECT COUNT(Distinct PATIENT_ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients, id, NAME, EMAIL, DOB, COUNTRY, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, STATS, PATIENTS_TREATED, EXPERIENCE, RATING, WORKING_HOURS, FEE, AVAILABILITY FROM DOCTORS d where d.name LIKE '%a%';
 
 -- Select * from COMPLAINTS;

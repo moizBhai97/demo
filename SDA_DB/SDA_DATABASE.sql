@@ -1,14 +1,15 @@
 IF EXISTS (
     SELECT name
     FROM sys.databases
-    WHERE name = N'SDA'
+    WHERE name = 'SDA'
         AND state = 0
 )
 BEGIN
-    ALTER DATABASE SDA SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+    USE master;
+    ALTER DATABASE SDA SET SINGLE_USER;
     DROP DATABASE SDA;
 END
 
+-- Create the SDA database
 CREATE DATABASE SDA;
-
 

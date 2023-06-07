@@ -29,4 +29,7 @@ abstract public class DBHandler {
   public abstract String getDoctorName(int docId);
   public abstract String getPatientName(int patId);
   public abstract void updatePayment(int appID);
+
+  public abstract void createDatabaseAndTables(String createDatabaseSqlFilePath, String createTablesSqlFilePath);
+  
 }
