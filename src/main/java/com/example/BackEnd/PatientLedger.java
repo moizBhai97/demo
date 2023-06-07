@@ -14,18 +14,7 @@ public class PatientLedger {
     public PatientLedger()
     {
         dbFactory = DBFactory.getInstance();
-        patientList = new ArrayList<Patient>();
-
-        // Patient patient = new Patient(1);
-        // patient.setName("Musa");
-        // patient.setEmail("musa@gmail.com");
-        // patient.setDOB("12/12/1999");
-        // patient.setCountry("Pakistan");
-        // patient.setPhoneNumber("123456789");
-        // patient.setGender("Male");
-
-        // patientList.add(patient);
-        
+        patientList = new ArrayList<Patient>();  
     }
 
     public void addPatient(String info)
@@ -34,7 +23,7 @@ public class PatientLedger {
             dbFactory.createHandler("SQL").addPatient(info);
         }catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-
+            e.printStackTrace();
         }
     }
 
@@ -47,6 +36,7 @@ public class PatientLedger {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
@@ -64,8 +54,8 @@ public class PatientLedger {
             }
 
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
@@ -98,6 +88,7 @@ public class PatientLedger {
         } catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }
@@ -109,6 +100,7 @@ public class PatientLedger {
         } catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return "";
         }
     }
@@ -123,6 +115,7 @@ public class PatientLedger {
         } catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 }

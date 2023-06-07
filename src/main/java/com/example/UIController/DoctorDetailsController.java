@@ -174,7 +174,6 @@ public class DoctorDetailsController implements Initializable {
             AnchorPane.setLeftAnchor(pane, 0.0);
             AnchorPane.setRightAnchor(pane, 0.0);
 
-            // ((AnchorPane) rootPane.getParent()).getChildren().clear();
             ((AnchorPane) rootPane.getParent()).getChildren().add(pane);
 
             SearchDoctorController.addHeaderTitle("Book Appointment");
@@ -207,7 +206,6 @@ public class DoctorDetailsController implements Initializable {
             AnchorPane.setLeftAnchor(pane, 0.0);
             AnchorPane.setRightAnchor(pane, 0.0);
 
-            // ((AnchorPane) rootPane.getParent()).getChildren().clear();
             ((AnchorPane) rootPane.getParent()).getChildren().add(pane);
 
             SearchDoctorController.addHeaderTitle("Reviews");

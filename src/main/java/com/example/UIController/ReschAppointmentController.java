@@ -112,7 +112,6 @@ public class ReschAppointmentController implements Initializable {
         System.out.println(formattedDate);
         datePick.setText(formattedDate);
 
-        // System.out.println(pc.getSchedule(docId, date, time));
 
         JSONArray objs = new JSONArray(pc.getSchedule(docId, date, time));
 
@@ -225,7 +224,6 @@ public class ReschAppointmentController implements Initializable {
         pc.reschAppointment(obj.toString(), patId, appID);
 
         try {
-            // this.reschButton.getScene().getWindow().hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/manageAppointment.fxml")));
             // -------------------------------------------------------------------------------------------------//

@@ -255,8 +255,7 @@ public class SQL extends DBHandler {
         } 
         catch (Exception e) 
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
 
             return -1;
         }
@@ -273,8 +272,7 @@ public class SQL extends DBHandler {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -371,8 +369,6 @@ public class SQL extends DBHandler {
 
      public String getDoctors(String name) 
      {
-        System.out.println("SQL getDoctors");
-
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
 
             String SQL = "SELECT (SELECT COUNT(Distinct PATIENT_ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients, id, NAME, EMAIL, DOB, COUNTRY, PHONE_NUMBER, GENDER, SPECIALIZATION, DESCRIPTION, LOCATION, EXPERIENCE, WORKING_HOURS, FEE, AVAILABILITY FROM DOCTORS d where d.name LIKE '%" + name + "%';";
@@ -484,8 +480,8 @@ public class SQL extends DBHandler {
             return doctors.toString();
             
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }
@@ -514,13 +510,11 @@ public class SQL extends DBHandler {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
     public String getPatient(String info) {
-
-        
-        System.out.println("SQL getPatient");
 
         JSONObject information = new JSONObject(info);
         
@@ -539,8 +533,8 @@ public class SQL extends DBHandler {
 
             JSONParser parser = new JSONParser();
             JSONObject patient = new JSONObject(
-                parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());                
-                //rs.next();
+            parser.parse(new FileReader("src/main/resources/JSONPackage/Patient.json")).toString());                
+
             patient.put("patId", rs.getInt("id"));
             patient.put("name", rs.getString("name"));
             patient.put("email", rs.getString("email"));
@@ -551,13 +545,10 @@ public class SQL extends DBHandler {
 
                 
             con.close();
-            System.out.println(patient.toString());
             
             return patient.toString();
 
         } catch ( Exception e) {
-            // con.close();
-
             e.printStackTrace();
             return null;
         }
@@ -569,9 +560,6 @@ public class SQL extends DBHandler {
 
         try
         {
-            System.out.println("SQL getDoctor");
-            System.out.println(info);
-            
             JSONObject information = new JSONObject(info); 
             
             try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
@@ -622,8 +610,6 @@ public class SQL extends DBHandler {
                 return doctorObj.toString();
     
             } catch (SQLException | JSONException e) {
-                // con.close();
-    
                 e.printStackTrace();
                 return "[]";
             }
@@ -631,6 +617,7 @@ public class SQL extends DBHandler {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
 
@@ -641,8 +628,6 @@ public class SQL extends DBHandler {
 
         try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()){
 
-            //System.out.println("SQL getPatientHistory");
-            
             String SQL = "SELECT TYPE, DESCRIPTION FROM PATIENT_HISTORY WHERE ID = ?;";
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, patId);
@@ -661,13 +646,13 @@ public class SQL extends DBHandler {
                 history.put(newObj);
             }
 
-            //System.out.println(history.toString());
             return history.toString();
 
         }
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }
@@ -716,12 +701,10 @@ public class SQL extends DBHandler {
                 appointments.put(obj);
             }
 
-            System.out.println(appointments.toString());
-
             return appointments.toString();
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }
@@ -769,12 +752,10 @@ public class SQL extends DBHandler {
                 appointments.put(obj);
             }
 
-            System.out.println(appointments.toString());
-
             return appointments.toString();
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }
@@ -869,7 +850,6 @@ public class SQL extends DBHandler {
                 patients.put(patientObj);
             }
 
-            System.out.println(patients.toString());
             return patients.toString();
         } 
         catch (Exception e) 
@@ -895,8 +875,6 @@ public class SQL extends DBHandler {
             con.close();
 
         } catch (SQLException | JSONException e) {
-            // con.close();
-
             e.printStackTrace();
         }
     }
@@ -917,10 +895,7 @@ public class SQL extends DBHandler {
             pstmt.executeUpdate();
         }
         catch ( Exception e) {
-            // con.close();
-            //e.printStackTrace();
             throw e;
-            //throw new Throwable(e);
         }
     }
 
@@ -944,8 +919,6 @@ public class SQL extends DBHandler {
             pstmt.executeUpdate();
 
         }catch (SQLException | JSONException e) {
-            // con.close();
-
             e.printStackTrace();
         }
     }
@@ -1047,17 +1020,8 @@ public class SQL extends DBHandler {
             pstmt.setFloat(7, obj.getFloat("environmentRating"));
             pstmt.setFloat(8, obj.getFloat("staffRating"));
             pstmt.executeUpdate();
-
-            // String SQL2 = "UPDATE Doctors SET RATING = (SELECT AVG(EXPERIENCE) FROM Reviews WHERE DOCTOR_ID = ?) WHERE ID = ?;";
-            // PreparedStatement pstmt2 = con.prepareStatement(SQL2);
-            // pstmt2.setInt(1, docId);
-            // pstmt2.setInt(2, docId);
-            
-            // pstmt2.executeUpdate();
         }
         catch (SQLException | JSONException e) {
-            // con.close();
-
             e.printStackTrace();
         }
     }

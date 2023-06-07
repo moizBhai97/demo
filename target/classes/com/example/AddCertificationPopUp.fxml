@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="593.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #2854C3; -fx-border-width: 2;" stylesheets="@profile.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="btn_cross" layoutX="524.0" layoutY="36.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="41.0" style="-fx-background-color: transparent;" />
+      <Label layoutX="93.0" layoutY="116.0" text="Certification Name">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="218.0" layoutY="36.0" text="Add Certification">
+         <font>
+            <Font name="System Bold" size="21.0" />
+         </font>
+      </Label>
+      <Line endX="388.0" layoutX="152.0" layoutY="72.0" startX="-100.0" stroke="#bebebe" />
+      <TextField fx:id="tf_cert" layoutX="88.0" layoutY="143.0" prefHeight="31.0" prefWidth="428.0" styleClass="textField_username" stylesheets="@profile.css">
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor></TextField>
+      <Label layoutX="90.0" layoutY="206.0" text="Issue Date">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tf_issue" layoutX="86.0" layoutY="231.0" prefHeight="31.0" prefWidth="199.0" styleClass="textField_username" stylesheets="@profile.css" />
+      <Label layoutX="313.0" layoutY="206.0" text="Expiration Date">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tf_expire" layoutX="309.0" layoutY="232.0" prefHeight="31.0" prefWidth="199.0" styleClass="textField_username" stylesheets="@profile.css" />
+      <Button fx:id="btn_approval" layoutX="194.0" layoutY="298.0" mnemonicParsing="false" onAction="#addCertification" prefHeight="35.0" prefWidth="206.0" style="-fx-background-color: #2854C3; -fx-border-radius: 10; -fx-background-radius: 10;" text="Send For Approval" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="541.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/cross.png" />
+         </image>
+      </ImageView>
+      <ImageView accessibleRole="DATE_PICKER" fitHeight="20.0" fitWidth="20.0" layoutX="259.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/Calendar.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <DatePicker fx:id="dp_issue" layoutX="91.0" layoutY="234.0" prefHeight="20.0" prefWidth="189.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="date-picker" stylesheets="@signup.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></DatePicker>
+      <ImageView accessibleRole="DATE_PICKER" fitHeight="20.0" fitWidth="20.0" layoutX="482.0" layoutY="237.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../images/Calendar.png" />
+         </image>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </ImageView>
+      <DatePicker fx:id="dp_expire" layoutX="314.0" layoutY="235.0" prefHeight="20.0" prefWidth="189.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="date-picker" stylesheets="@signup.css">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></DatePicker>
+      <Button fx:id="btn_cross" layoutX="543.0" layoutY="21.0" mnemonicParsing="false" onAction="#close" prefHeight="30.0" prefWidth="28.0" style="-fx-background-color: transparent;">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+   </children>
+</Pane>

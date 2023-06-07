@@ -53,7 +53,6 @@ public class LoginController implements Initializable {
 
             signupGroup.setVisible(false);
         }
-        // /loginButton.fire();
         return;
     }
 
@@ -64,9 +63,6 @@ public class LoginController implements Initializable {
     }
 
     public void loginButton(ActionEvent event) {
-        System.out.println("Login Button pressed");
-
-      //  this.loginButton.getScene().getWindow().hide();
 
         if (this.emailTextField.getText().isEmpty() || this.passwordTextField.getText().isEmpty()) {
             Alert alert = new Alert(AlertType.ERROR);
@@ -119,8 +115,6 @@ public class LoginController implements Initializable {
                 System.out.println("Patient login");
 
                 int patId = Integer.parseInt(patientController.login(loginInfo.toString()));
-                System.out.println(patId);
-                // this.loginButton.getScene().getWindow().hide();
 
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors - Copy.fxml")));
@@ -144,14 +138,12 @@ public class LoginController implements Initializable {
 
             } catch (IOException e) {
                 System.err.println(String.format("Error: %s", e.getMessage()));
+                e.printStackTrace();
             }
         } else if (!isPatient) {
 
             try {
                 int docId = Integer.parseInt(doctorController.login(loginInfo.toString()));
-                System.out.println(docId);
-
-                // this.loginButton.getScene().getWindow().hide();
 
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation((new URL("file:src/main/resources/com/example/doctorMain.fxml")));

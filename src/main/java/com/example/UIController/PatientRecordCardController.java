@@ -57,7 +57,6 @@ public class PatientRecordCardController implements Initializable{
         this.patId = patId;
         this.history = history;
         this.info = info;        
-        //sid = obj.getInt("sid");
         idTag = index;
         this.patientController = patientController;
     }

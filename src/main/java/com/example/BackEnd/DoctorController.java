@@ -15,11 +15,16 @@ public class DoctorController {
         complaintCatalog = new ComplaintCatalog();
     }
 
-    //public void setDate()
-
-    public void newComplaint(int patID, String details, int docID) {
-        complaintCatalog.newComplaint(patID, details, docID);
-
+    public void newComplaint(int patID, String details, int docID) 
+    {
+        try
+        {
+            complaintCatalog.newComplaint(patID, details, docID);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public String login(String info)
@@ -33,6 +38,7 @@ public class DoctorController {
             
         }catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return "";
         }
         
@@ -41,12 +47,11 @@ public class DoctorController {
     public void addCertification(String info, int docId) throws Exception
     {
         try{
-            //JSONObject json = new JSONObject(info);
             doctorLedger.getDoctor(docId).getDoctorDetails().addCertification(info, docId);
-
 
         }catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             throw e;
         }
         
@@ -57,18 +62,25 @@ public class DoctorController {
     {
         try{
             JSONArray certificates = new JSONArray(doctorLedger.getDoctor(docId).getDoctorDetails().getCertificates());
-            System.out.println(certificates.toString());
             return certificates.toString();
 
         }catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return "";
         }
     }
 
     public void verifyPayment(int docId, int appId)
     {
-        doctorLedger.getDoctor(docId).verifyPayment(appId);
+        try
+        {
+            doctorLedger.getDoctor(docId).verifyPayment(appId);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public String getDoctorData(int docId)
@@ -77,6 +89,7 @@ public class DoctorController {
             return doctorLedger.getDoctor(docId).getMainDetails();
         }catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return "";
         }
         
@@ -109,6 +122,7 @@ public class DoctorController {
         catch (Exception e) 
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return "";
         }
         
@@ -116,23 +130,39 @@ public class DoctorController {
 
     public String getPatientHistory(int patId)
     {
-        Patient patient = patientLedger.getPatient(patId);
+        try
+        {
+            Patient patient = patientLedger.getPatient(patId);
 
-        return patient.getHistory();
+            return patient.getHistory();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public String getAppointList(int docId, int value) 
     {
-        String info = doctorLedger.getDoctor(docId).getAppointList(value);
-
-        JSONArray arr = new JSONArray(info);
-
-        for(int i=0; i<arr.length(); i++)
+        try
         {
-            arr.getJSONObject(i).put("name", patientLedger.getPatient(arr.getJSONObject(i).getInt("patId")).getName());
-        }
+            String info = doctorLedger.getDoctor(docId).getAppointList(value);
 
-        return arr.toString();
+            JSONArray arr = new JSONArray(info);
+
+            for(int i=0; i<arr.length(); i++)
+            {
+                arr.getJSONObject(i).put("name", patientLedger.getPatient(arr.getJSONObject(i).getInt("patId")).getName());
+            }
+
+            return arr.toString();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public String getDocDetails(int docId)
@@ -144,35 +174,50 @@ public class DoctorController {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }
 
     public String getAppointment(int docId, int appId) 
     {
-        String info = doctorLedger.getDoctor(docId).getAppointment(appId);
+        try
+        {
+            String info = doctorLedger.getDoctor(docId).getAppointment(appId);
 
-        JSONObject obj = new JSONObject(info);
+            JSONObject obj = new JSONObject(info);
 
-        obj.put("doctor", doctorLedger.getDoctor(docId).getName());
+            obj.put("doctor", doctorLedger.getDoctor(docId).getName());
 
-        obj.put("patient", new JSONObject(patientLedger.getPatient(obj.getInt("patId")).getDetails()));
+            obj.put("patient", new JSONObject(patientLedger.getPatient(obj.getInt("patId")).getDetails()));
 
-        System.out.println("Patient ID: " + obj.getInt("patId"));
-
-        return obj.toString();
+            return obj.toString();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public String getPatientAppointment(int patId, int appId) 
     {
-        String info = patientLedger.getPatient(patId).getAppointment(appId);
+        try
+        {
+            String info = patientLedger.getPatient(patId).getAppointment(appId);
 
-        JSONObject obj = new JSONObject(info);
+            JSONObject obj = new JSONObject(info);
 
-        obj.put("doctor", doctorLedger.getDoctor(obj.getInt("docId")).getName());
+            obj.put("doctor", doctorLedger.getDoctor(obj.getInt("docId")).getName());
 
-        obj.put("patient", new JSONObject(patientLedger.getPatient(patId).getDetails()));
+            obj.put("patient", new JSONObject(patientLedger.getPatient(patId).getDetails()));
 
-        return obj.toString();
+            return obj.toString();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

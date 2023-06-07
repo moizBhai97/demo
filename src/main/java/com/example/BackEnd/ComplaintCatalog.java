@@ -11,10 +11,17 @@ public class ComplaintCatalog {
         complaints = new ArrayList<>();
     }
 
-    public void newComplaint(int patID, String details, int docID){
-        DBFactory.getInstance().createHandler("SQL").addComplaint(patID, details, docID);
-        complaints.add(new Complaint(patID, details, docID));
+    public void newComplaint(int patID, String details, int docID)
+    {
+        try
+        {
+            DBFactory.getInstance().createHandler("SQL").addComplaint(patID, details, docID);
+            complaints.add(new Complaint(patID, details, docID));
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
-
 
 }

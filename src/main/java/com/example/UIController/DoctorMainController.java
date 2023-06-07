@@ -60,7 +60,7 @@ public class DoctorMainController implements Initializable {
         imageView = (ImageView) homeBtn.getGraphic();
         imageView.setEffect(new InnerShadow(100, Color.web("#2854c3")));
         homeBtn.setStyle("-fx-text-fill: #2854c3;");
-        // headerTitle.textProperty().bind(headerTitles.peek().textProperty());
+
         headerTitles.addListener((ListChangeListener<Label>) change -> {
         if (headerTitles.isEmpty()) {
                 if(headerTitle != null)
@@ -96,19 +96,14 @@ public class DoctorMainController implements Initializable {
 
     public static void popHeaderTitle() {
         headerTitles.remove(headerTitles.size() - 1);
-        // headerTitle.setText(headerTitleStack.peek().getText());
     }
-    // public static void setHeaderTitle(String title) {
-    // headerTitle.setText(title);
-    // }
 
     public static void addHeaderTitle(String title) {
         Label label = new Label(title);
         label.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
-        // StringProperty textProperty = new SimpleStringProperty(title);
-        // label.textProperty().bind(textProperty);
+
         headerTitles.add(label);
-        // headerTitle.setText(title);
+
     }
 
     public void resetDashboardButtons() {

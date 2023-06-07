@@ -120,8 +120,6 @@ public class DoctorCardController {
     public void viewProfileBtn(ActionEvent event) {
         System.out.println("book button clicked");
         try {
-            // this.card1_book_apt_btn.getScene().getWindow().hide();
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/doctor_details.fxml")));
 

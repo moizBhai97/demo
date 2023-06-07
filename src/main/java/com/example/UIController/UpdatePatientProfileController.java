@@ -23,7 +23,6 @@ import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.Effect;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -218,8 +217,6 @@ public class UpdatePatientProfileController implements Initializable{
                 alert.setHeaderText("No changes made");
                 alert.setContentText("Please make some changes to update profile");
                 alert.showAndWait();
-
-                //System.out.println("No changes made");
                 return;
             }
             

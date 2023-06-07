@@ -98,14 +98,6 @@ public class SignupController implements Initializable
                 alert.showAndWait();
                 return;
             }
-            // if(!confirmPasswordTextField.getText().matches("[a-zA-Z0-9._]+")) {
-            //     Alert alert = new Alert(Alert.AlertType.ERROR);
-            //     alert.setTitle("Invalid Input");
-            //     alert.setHeaderText("Error: Invalid Password");
-            //     alert.setContentText("Password should not contain special characters other than '.' and '_'");
-            //     alert.showAndWait();
-            //     return;
-            // }
             if(!passwordTextField.getText().equals(confirmPasswordTextField.getText())){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Input");
@@ -160,8 +152,6 @@ public class SignupController implements Initializable
     public void loadLogin()
     {
         try {
-         //   this.signupButton.getScene().getWindow().hide();
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/login.fxml")));
 

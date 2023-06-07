@@ -231,7 +231,6 @@ public class PatientDetailsController implements Initializable{
     {
         try
         {
-            //win.hide();
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/patient_appoint.fxml")));
             //-------------------------------------------------------------------------------------------------//

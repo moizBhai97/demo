@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="460.0" prefWidth="0.0" styleClass="top_pane" stylesheets="@login.css" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fitHeight="276.0" fitWidth="253.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/LOGOsharp.png" />
+                     </image>
+                  </ImageView>
+                  <Label text="HealthySense" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="29.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" spacing="10.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Login" textFill="#2854c3">
+                     <font>
+                        <Font name="Segoe UI Bold" size="35.0" />
+                     </font>
+                  </Label>
+                  <Label text="Welcome back!" textFill="#2854c3">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label text="Sign in to continue" />
+                  <Pane fx:id="searchPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="28.0" prefWidth="239.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
+                     <children>
+                        <TextField fx:id="emailTextField" layoutX="28.0" layoutY="1.0" prefHeight="25.0" prefWidth="207.0" promptText="Email" styleClass="search" stylesheets="@search_doctors_Searched.css">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextField>
+                        <Pane layoutX="1.0" prefHeight="25.0" prefWidth="33.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="4.0" layoutY="5.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/VectorMail.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                  </Pane>
+                  <Pane fx:id="searchPane1" maxWidth="-Infinity" prefHeight="28.0" prefWidth="239.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
+                     <children>
+                        <TextField fx:id="passwordTextField" layoutX="28.0" layoutY="1.0" prefHeight="25.0" prefWidth="207.0" promptText="Password" styleClass="search" stylesheets="@search_doctors_Searched.css">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextField>
+                        <Pane layoutX="1.0" prefHeight="25.0" prefWidth="33.0">
+                           <children>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="2.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/Vectorpassword.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                     </children>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin>
+                  </Pane>
+                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButton" prefHeight="0.0" prefWidth="239.0" styleClass="button_big" stylesheets="@resch.css" text="Login" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Group fx:id="signupGroup">
+                     <children>
+                        <Label layoutY="3.0" text="Don't have an account?" />
+                        <Hyperlink layoutX="124.0" onAction="#signupHyperlink" text="SignUp" textFill="#2854c3" />
+                     </children>
+                  </Group>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

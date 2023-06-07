@@ -162,7 +162,7 @@ public class DoctorHomeController implements Initializable{
             blur.setIterations(3);
             
 
-        // Apply the blur effect to the scene
+            // Apply the blur effect to the scene
             big_pane.setEffect(blur);
             
             stage.setOnHidden(event -> {
@@ -182,29 +182,4 @@ public class DoctorHomeController implements Initializable{
             e.printStackTrace();
         }
     }
-
-    // public void getAppoint(ActionEvent event)
-    // {
-    //     try
-    //     {
-    //         this.appoints.getScene().getWindow().hide();
-    //         FXMLLoader loader = new FXMLLoader();
-    //         loader.setLocation((new URL("file:src/main/resources/com/example/manageAppointment.fxml")));
-    //         //-------------------------------------------------------------------------------------------------//
-    //         ManageAppointmentControllerDoctor manageAppointmentController = new ManageAppointmentControllerDoctor();
-    //         manageAppointmentController.setData(dc, docId);
-    //         //-------------------------------------------------------------------------------------------------//
-    //         loader.setController(manageAppointmentController);
-    //         loader.load();
-
-    //         Parent root = loader.getRoot();
-    //         Stage stage = new Stage();
-    //         stage.setScene(new Scene(root));
-    //         stage.show();
-    //     }
-    //     catch(Exception e)
-    //     {
-    //         System.out.println(e);
-    //     }
-    // }
 }

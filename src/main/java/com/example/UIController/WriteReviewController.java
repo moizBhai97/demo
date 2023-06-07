@@ -62,7 +62,6 @@ public class WriteReviewController implements Initializable{
 
             JSONObject review = new JSONObject();
             if(hasComment){review.put("comment", commentBox.getText());}
-            //else {review.put("comment", "");}
 
             review.put("experience", overallRating.getRating());
             
@@ -78,7 +77,6 @@ public class WriteReviewController implements Initializable{
             }
 
 
-            //review.put("recommend", ((RadioButton)recommend.getSelectedToggle()).getText());
             review.put("checkupRating", checkupRating.getRating());
             review.put("environmentRating", clinicRating.getRating());
             review.put("staffRating", staffRating.getRating());

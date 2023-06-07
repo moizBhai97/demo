@@ -81,12 +81,9 @@ public class PendingAppointmentDoctorCard {
     }
  
 
-    public void viewButton(ActionEvent event) 
-    {
-        System.out.println("View Button Clicked");
+    public void viewButton(ActionEvent event) {
 
         try {
-            //this.viewBtn.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             if(!status.equals("Booked"))

@@ -30,44 +30,46 @@ public class Appointment {
         this.payment = null;
     }
 
-    public Appointment(int appId, String date, String time, String problem, int docId, int patId)
-    {
-        this.appId = appId;
-        this.date = date;
-        this.time = time;
-        this.problem = problem;
-        this.docId = docId;
-        this.patId = patId;
-        this.status = "Booked";
-        this.payment = new Payment();
-    }
-
     public Appointment(String info, int patId, int appId)
     {
-        JSONObject obj = new JSONObject(info);
+        try
+        {
+            JSONObject obj = new JSONObject(info);
         
-        this.appId = appId;
-        this.date = obj.getString("date");
-        this.time = obj.getString("time");
-        this.problem = obj.getString("problem");
-        this.docId = obj.getInt("docId");
-        this.patId = patId;
-        this.status = "Booked";
-        this.payment = new Payment(obj.getJSONObject("payment").toString());
+            this.appId = appId;
+            this.date = obj.getString("date");
+            this.time = obj.getString("time");
+            this.problem = obj.getString("problem");
+            this.docId = obj.getInt("docId");
+            this.patId = patId;
+            this.status = "Booked";
+            this.payment = new Payment(obj.getJSONObject("payment").toString());
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public Appointment(String info)
     {
-        JSONObject obj = new JSONObject(info);
+        try
+        {
+            JSONObject obj = new JSONObject(info);
         
-        this.appId = obj.getInt("appId");
-        this.date = obj.getString("date");
-        this.time = obj.getString("time");
-        this.problem = obj.getString("problem");
-        this.docId = obj.getInt("docId");
-        this.patId = obj.getInt("patId");
-        this.status = obj.getString("status");
-        this.payment = new Payment(obj.getJSONObject("payment").toString());
+            this.appId = obj.getInt("appId");
+            this.date = obj.getString("date");
+            this.time = obj.getString("time");
+            this.problem = obj.getString("problem");
+            this.docId = obj.getInt("docId");
+            this.patId = obj.getInt("patId");
+            this.status = obj.getString("status");
+            this.payment = new Payment(obj.getJSONObject("payment").toString());
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public int getAppId()
@@ -87,8 +89,15 @@ public class Appointment {
 
     public void verifyPayment()
     {
-        DBFactory.getInstance().createHandler("SQL").updatePayment(appId);
-        payment.setStatus(true);
+        try
+        {
+            DBFactory.getInstance().createHandler("SQL").updatePayment(appId);
+            payment.setStatus(true);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public String get(String value)
@@ -129,6 +138,7 @@ public class Appointment {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
@@ -156,6 +166,7 @@ public class Appointment {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     } 
