@@ -15,17 +15,17 @@ public class PatientController {
         patientLedger = new PatientLedger();
     }
 
-    public void signup(String info)
+    public void signup(String info) throws Exception
     {
         try{
             patientLedger.addPatient(info);
         }catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-
+            //System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            throw e;
         }
     }
 
-    public String login(String info)
+    public String login(String info) throws Exception
     {
         System.out.println("Pateint controller login");
         try{
@@ -47,14 +47,9 @@ public class PatientController {
             return "" + (patient.getpatId());
             
         }catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Error: Invalid Credentials");
-            alert.setContentText("Email and Password do not Match");
-            alert.showAndWait();
-
-            return "";
+            //System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            
+            throw e;
         }
         
     }
@@ -77,9 +72,14 @@ public class PatientController {
 
     }
 
-    public void addIllness(int patId, String info)
+    public void addIllness(int patId, String info) throws Exception
     {
-        patientLedger.getPatient(patId).addIllness(patId, info);
+        try{
+            patientLedger.getPatient(patId).addIllness(patId, info);
+
+        }catch(Exception e){
+            throw e;
+        }
     }
 
     public void removeIllness(int patId, String info)

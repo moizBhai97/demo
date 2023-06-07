@@ -258,11 +258,15 @@ public class Patient {
         return obj.toString();
     }
 
-    public void addIllness(int patId, String info)
+    public void addIllness(int patId, String info)throws Exception
     {
-        PatientHistory history = new PatientHistory(info);
-        patientHistoryList.add(history);
-        DBFactory.getInstance().createHandler("SQL").addPatientIllness(patId, info);
+        try{
+            PatientHistory history = new PatientHistory(info);
+            patientHistoryList.add(history);
+            DBFactory.getInstance().createHandler("SQL").addPatientIllness(patId, info);
+        }catch(Exception e){
+            throw e;
+        }
     }
 
     public void removeIllness(int patId, String info)

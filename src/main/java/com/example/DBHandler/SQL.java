@@ -517,7 +517,7 @@ public class SQL extends DBHandler {
         }
     }
 
-    public String getPatient(String info) {
+    public String getPatient(String info) throws Exception{
 
         
         System.out.println("SQL getPatient");
@@ -559,13 +559,13 @@ public class SQL extends DBHandler {
             // con.close();
 
             e.printStackTrace();
-            return null;
+            throw e;
         }
 
 
     }
 
-    public String getDoctor(String info){
+    public String getDoctor(String info) throws Exception{
 
         try
         {
@@ -625,13 +625,13 @@ public class SQL extends DBHandler {
                 // con.close();
     
                 e.printStackTrace();
-                return "[]";
+                throw e;
             }
         }
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-            return null;
+            throw e;
         }
 
     }
@@ -924,7 +924,7 @@ public class SQL extends DBHandler {
         }
     }
 
-    public void addPatient(String info)
+    public void addPatient(String info) throws Exception
     {
         try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement())
         {
@@ -943,14 +943,14 @@ public class SQL extends DBHandler {
 
             pstmt.executeUpdate();
 
-        }catch (SQLException | JSONException e) {
+        }catch (Exception e) {
             // con.close();
-
-            e.printStackTrace();
+            //e.printStackTrace();
+            throw e;
         }
     }
 
-    public void addPatientIllness(int patId, String info)
+    public void addPatientIllness(int patId, String info) throws Exception
     {
         try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement() ){
             JSONObject obj = new JSONObject(info);
@@ -965,7 +965,8 @@ public class SQL extends DBHandler {
         }
         catch(SQLException | JSONException e)
         {
-            e.printStackTrace();
+            //e.printStackTrace();
+            throw e;
         }
     }
 

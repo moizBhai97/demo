@@ -14,7 +14,7 @@
 <Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="593.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #2854C3; -fx-border-width: 2;" stylesheets="@profile.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="btn_cross" layoutX="524.0" layoutY="36.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="41.0" style="-fx-background-color: transparent;" />
-      <Label layoutX="93.0" layoutY="116.0" text="Certification Name">
+      <Label layoutX="85.0" layoutY="118.0" text="Certification Name">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -25,7 +25,7 @@
          </font>
       </Label>
       <Line endX="388.0" layoutX="152.0" layoutY="72.0" startX="-100.0" stroke="#bebebe" />
-      <TextField fx:id="tf_cert" layoutX="88.0" layoutY="143.0" prefHeight="31.0" prefWidth="428.0" styleClass="textField_username" stylesheets="@profile.css">
+      <TextField fx:id="tf_cert" layoutX="82.0" layoutY="143.0" prefHeight="31.0" prefWidth="428.0" styleClass="textField_username" stylesheets="@profile.css">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></TextField>
@@ -62,7 +62,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <DatePicker fx:id="dp_issue" layoutX="91.0" layoutY="234.0" prefHeight="20.0" prefWidth="189.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="date-picker" stylesheets="@signup.css">
+      <DatePicker fx:id="dp_issue" editable="false" layoutX="91.0" layoutY="234.0" prefHeight="20.0" prefWidth="189.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="date-picker" stylesheets="@signup.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></DatePicker>
@@ -74,7 +74,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </ImageView>
-      <DatePicker fx:id="dp_expire" layoutX="314.0" layoutY="235.0" prefHeight="20.0" prefWidth="189.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="date-picker" stylesheets="@signup.css">
+      <DatePicker fx:id="dp_expire" editable="false" layoutX="314.0" layoutY="235.0" prefHeight="20.0" prefWidth="189.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" styleClass="date-picker" stylesheets="@signup.css">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></DatePicker>

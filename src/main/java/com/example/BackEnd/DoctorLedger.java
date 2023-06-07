@@ -85,7 +85,7 @@ public class DoctorLedger {
         }
     }
 
-    public Doctor getDoctorInstance(String info) {
+    public Doctor getDoctorInstance(String info) throws Exception{
         try {
 
             String doctorInfo = DBFactory.getInstance().createHandler("SQL").getDoctor(info);
@@ -96,9 +96,9 @@ public class DoctorLedger {
 
             return doctor;
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
-            return null;
+            //System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
+            //}.getClass().getEnclosingMethod().getName());
+            throw e;
         }
     }
 

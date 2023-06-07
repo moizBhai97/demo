@@ -22,7 +22,7 @@ public class DoctorController {
 
     }
 
-    public String login(String info)
+    public String login(String info) throws Exception
     {
         try{
             Doctor doctor = doctorLedger.getDoctorInstance(info);
@@ -32,8 +32,8 @@ public class DoctorController {
             return "" + (doctor.getId());
             
         }catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-            return "";
+            //System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            throw e;
         }
         
     }

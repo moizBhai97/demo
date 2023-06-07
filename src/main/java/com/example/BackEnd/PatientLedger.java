@@ -28,13 +28,13 @@ public class PatientLedger {
         
     }
 
-    public void addPatient(String info)
+    public void addPatient(String info) throws Exception
     {
         try{
             dbFactory.createHandler("SQL").addPatient(info);
         }catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-
+            //System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            throw e;
         }
     }
 
@@ -83,7 +83,7 @@ public class PatientLedger {
         return null;
     }    
 
-    public Patient getPatient(String info)
+    public Patient getPatient(String info) throws Exception
     {
         try{
 
@@ -97,8 +97,8 @@ public class PatientLedger {
             return patient;
         } catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-            return null;
+            //System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            throw e;
         }
     }
 
