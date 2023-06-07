@@ -84,7 +84,6 @@ public class CertificateLedger {
 
             DBFactory.getInstance().createHandler("SQL").addCertification(certificate.toString(), docId);
             
-            System.out.println(certificate.toString());
             certificates.add(certificate);
         }
         catch(Exception e)

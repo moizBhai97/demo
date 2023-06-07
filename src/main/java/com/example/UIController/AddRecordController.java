@@ -108,7 +108,6 @@ public class AddRecordController {
         }
         catch(Exception e)
         {
-            //System.out.println(e);
 
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");

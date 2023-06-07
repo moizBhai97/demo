@@ -1,14 +1,12 @@
 package com.example.DBHandler;
 
 import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.ParseException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -858,8 +856,6 @@ public class SQL extends DBHandler {
             pstmt.executeUpdate();
 
         }catch (Exception e) {
-            // con.close();
-            //e.printStackTrace();
             throw e;
         }
     }
@@ -879,7 +875,6 @@ public class SQL extends DBHandler {
         }
         catch(Exception e)
         {
-            //e.printStackTrace();
             throw e;
         }
     }

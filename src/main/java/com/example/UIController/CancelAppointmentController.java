@@ -128,7 +128,6 @@ public class CancelAppointmentController implements Initializable {
         pc.cancelAppointment(obj.toString(), patId, appID);
 
         try {
-            // this.cancelButton.getScene().getWindow().hide();
          FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/manageAppointment.fxml")));
 
@@ -152,6 +151,7 @@ public class CancelAppointmentController implements Initializable {
           
         } catch (Exception e) {
             System.out.println(e);
+            e.printStackTrace();
         }
     }
 

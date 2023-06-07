@@ -128,7 +128,6 @@ public class SignupController implements Initializable
             this.signupButton.getScene().getWindow().hide();
             loadLogin();
         }catch(Exception e){
-            //System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("Account already exists");
@@ -141,7 +140,6 @@ public class SignupController implements Initializable
 
     public void loginHyperlink(ActionEvent event){
         System.out.println("Login hyperlink pressed");
-       // this.signupButton.getScene().getWindow().hide();
         loadLogin();
     }
 

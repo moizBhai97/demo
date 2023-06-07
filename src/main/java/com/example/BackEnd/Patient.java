@@ -220,10 +220,18 @@ public class Patient {
 
     public String getAppointList(int value)
     {
-        if(appointmentLedger == null)
-            populateAppointments();
+        try
+        {
+            if(appointmentLedger == null)
+                populateAppointments();
 
-        return appointmentLedger.getAppointList(value);
+            return appointmentLedger.getAppointList(value);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public void populateAppointments()

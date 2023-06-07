@@ -33,8 +33,6 @@ public class LoginController implements Initializable {
     @FXML
     private Group signupGroup;
 
-    // DummyController dummyController;
-
     boolean isPatient = true;
     PatientController patientController = new PatientController();
     SearchDoctorController searchDoctorController;
@@ -131,10 +129,7 @@ public class LoginController implements Initializable {
                     stage.show();
                     stage.centerOnScreen();
                     
-                } catch (IOException e) {
-                    
-                    //System.err.println(String.format("Error: %s", e.getMessage()));
-                    
+                } catch (IOException e) {         
                     throw e;
                 }
             } else if (!isPatient) {
@@ -142,8 +137,6 @@ public class LoginController implements Initializable {
                 try {
                     int docId = Integer.parseInt(doctorController.login(loginInfo.toString()));
                     System.out.println(docId);
-                    
-                    // this.loginButton.getScene().getWindow().hide();
                     
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation((new URL("file:src/main/resources/com/example/doctorMain.fxml")));
@@ -185,8 +178,6 @@ public class LoginController implements Initializable {
         System.out.println("Signup hyperlink pressed");
 
         try {
-            // this.loginButton.getScene().getWindow().hide();
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/signup.fxml")));
             Parent root = loader.load();
@@ -211,8 +202,6 @@ public class LoginController implements Initializable {
         System.out.println("Back button pressed");
 
         try {
-            // this.loginButton.getScene().getWindow().hide();
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/start.fxml")));
             Parent root = loader.load();
