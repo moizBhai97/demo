@@ -18,23 +18,24 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage2) throws IOException {
-      
-                try {
-                    Parent root = FXMLLoader.load(getClass().getResource("start.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = new Stage();
-                    Image img=new Image("file:src/main/resources/images/image 11.png");
-                    stage.setTitle("HealthySense");
-                    
-                    stage.getIcons().add(img);
 
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("start.fxml"));
+            Scene scene = new Scene(root, 700, 500);
+            Stage stage = new Stage();
+            Image img = new Image("file:src/main/resources/images/image 11.png");
+            stage.setTitle("HealthySense");
+
+            stage.getIcons().add(img);
+            stage.setMinWidth(700);
+            stage.setMinHeight(500);
             
-       
+
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 

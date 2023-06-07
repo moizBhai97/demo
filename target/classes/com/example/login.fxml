@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -100,6 +100,11 @@
                         <Hyperlink layoutX="124.0" onAction="#signupHyperlink" text="SignUp" textFill="#2854c3" />
                      </children>
                   </Group>
+                  <Hyperlink fx:id="backBtn" onAction="#backBtnPressed" text="Back To Start" textFill="#2854c3">
+                     <VBox.margin>
+                        <Insets top="-15.0" />
+                     </VBox.margin>
+                  </Hyperlink>
                </children>
             </VBox>
          </children>

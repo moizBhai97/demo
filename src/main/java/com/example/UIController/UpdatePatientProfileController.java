@@ -23,7 +23,6 @@ import javafx.scene.effect.BoxBlur;
 import javafx.scene.effect.Effect;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -258,7 +257,7 @@ public class UpdatePatientProfileController implements Initializable{
             if(parent!=null){
                 ((AnchorPane)parent).getChildren().clear();
             }
-            ((AnchorPane)rootPane).getChildren().add(root);
+            ((AnchorPane)parent).getChildren().add(root);
             
         }
         catch(Exception e)

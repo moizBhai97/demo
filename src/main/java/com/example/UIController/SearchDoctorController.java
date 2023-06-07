@@ -705,13 +705,11 @@ public class SearchDoctorController implements Initializable {
 
             Parent root = loader.load();
             Stage stage = (Stage) logoutBtn.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(new Scene(root,  700, 500));
 
-            stage.setMinWidth(825);
-            stage.setMinHeight(480);
+            stage.setMinWidth(700);
+            stage.setMinHeight(500);
 
-            stage.setWidth(825);
-            stage.setHeight(480);
 
             stage.show();
             stage.centerOnScreen();

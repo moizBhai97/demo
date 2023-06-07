@@ -196,19 +196,41 @@ public class LoginController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/signup.fxml")));
             Parent root = loader.load();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 700, 500);
             Stage stage = (Stage) this.loginButton.getScene().getWindow();
             stage.setScene(scene);
 
-            stage.setMinWidth(825);
-            stage.setMinHeight(480);
+            
+            stage.setMinWidth(700);
+            stage.setMinHeight(500);
 
-            stage.setWidth(825);
-            stage.setHeight(480);
 
             stage.show();
             stage.centerOnScreen();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML 
+    public void backBtnPressed(ActionEvent event){
+        System.out.println("Back button pressed");
+
+        try {
+            // this.loginButton.getScene().getWindow().hide();
+
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/start.fxml")));
+            Parent root = loader.load();
+            Scene scene = new Scene(root, 700, 500);
+            Stage stage = (Stage) this.loginButton.getScene().getWindow();
+            stage.setScene(scene);
+
+            
+            stage.setMinWidth(700);
+            stage.setMinHeight(500);
+    }
+    catch (IOException e) {
             e.printStackTrace();
         }
     }

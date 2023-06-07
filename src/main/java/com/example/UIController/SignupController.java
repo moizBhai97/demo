@@ -153,7 +153,7 @@ public class SignupController implements Initializable
 
     public void loginHyperlink(ActionEvent event){
         System.out.println("Login hyperlink pressed");
-        this.signupButton.getScene().getWindow().hide();
+       // this.signupButton.getScene().getWindow().hide();
         loadLogin();
     }
 
@@ -172,7 +172,7 @@ public class SignupController implements Initializable
             loader.setController(loginController);
 
             Parent root = loader.load();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root,700,500);
             Stage stage = (Stage) this.signupButton.getScene().getWindow();
             stage.setScene(scene);
             stage.show();

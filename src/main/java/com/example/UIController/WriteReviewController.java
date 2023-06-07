@@ -92,9 +92,9 @@ public class WriteReviewController implements Initializable{
             alert.showAndWait();
             
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
+            loader.setLocation((new URL("file:src/main/resources/com/example/manageAppointment.fxml")));
 
-            SearchDoctorController controller = new SearchDoctorController();
+            ManageAppointmentController controller = new ManageAppointmentController();
             controller.setData(patientController, patId);
             loader.setController(controller);
 
