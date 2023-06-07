@@ -1,5 +1,9 @@
 package com.example.BackEnd;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.text.ParseException;
+
 abstract public class DBHandler {
 
   public abstract void bookAppointment(String info);
@@ -10,7 +14,7 @@ abstract public class DBHandler {
   public abstract String getTopDoctors();
   public abstract String getAppointmentDoctors(int patId);
   public abstract String getAppointmentPatients(int docId);
-  public abstract String getPatient(String info);
+  public abstract String getPatient(String info) throws SQLException, IOException, ParseException, Exception;
   public abstract String getPatientHistory(int patId);
   public abstract String getDoctor(String info);
   public abstract String getReviewList(int docId);

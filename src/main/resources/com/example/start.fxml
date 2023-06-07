@@ -12,11 +12,11 @@
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="564.0" prefWidth="657.0" style="-fx-background-color: white;" stylesheets="@login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.StartController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: white;" stylesheets="@login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.StartController">
    <children>
       <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Pane prefHeight="564.0" prefWidth="658.0" style="-fx-background-color: white;" stylesheets="@login.css">
+            <Pane prefWidth="700.0" style="-fx-background-color: white;" stylesheets="@login.css">
                <children>
                   <Label layoutX="273.0" layoutY="29.0" prefHeight="23.0" prefWidth="193.0" text="HealthySense" textFill="#2854c3">
                      <font>
@@ -28,7 +28,7 @@
                         <Image url="@../../images/image%2011.png" />
                      </image>
                   </ImageView>
-                  <Button fx:id="patientButton" contentDisplay="TOP" layoutX="385.0" layoutY="123.0" mnemonicParsing="false" onAction="#patientButton" styleClass="docButton" stylesheets="@login.css" text="Continue As Patient">
+                  <Button fx:id="patientButton" contentDisplay="TOP" layoutX="392.0" layoutY="123.0" mnemonicParsing="false" onAction="#patientButton" prefHeight="247.0" prefWidth="224.0" styleClass="docButton" stylesheets="@login.css" text="Continue As Patient">
                      <graphic>
                         <ImageView accessibleRole="BUTTON" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -47,7 +47,7 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="doctorButton" contentDisplay="TOP" layoutX="53.0" layoutY="123.0" mnemonicParsing="false" onAction="#doctorButton" prefHeight="244.0" prefWidth="220.0" styleClass="docButton" stylesheets="@login.css" text="Continue As Doctor">
+                  <Button fx:id="doctorButton" contentDisplay="TOP" layoutX="73.0" layoutY="123.0" mnemonicParsing="false" onAction="#doctorButton" prefHeight="244.0" prefWidth="224.0" styleClass="docButton" stylesheets="@login.css" text="Continue As Doctor">
                      <graphic>
                         <ImageView accessibleRole="BUTTON" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                            <image>

@@ -255,7 +255,7 @@ public class UpdatePatientProfileController implements Initializable{
             if(parent!=null){
                 ((AnchorPane)parent).getChildren().clear();
             }
-            ((AnchorPane)rootPane).getChildren().add(root);
+            ((AnchorPane)parent).getChildren().add(root);
             
         }
         catch(Exception e)
