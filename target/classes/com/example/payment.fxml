@@ -15,7 +15,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="parentPane" prefHeight="564.0" prefWidth="657.0" styleClass="big_pane" stylesheets="@payment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="parentPane" prefHeight="564.0" prefWidth="657.0" styleClass="big_pane" stylesheets="@payment.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER" layoutX="15.0" layoutY="31.0" AnchorPane.bottomAnchor="31.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.399999999999977" AnchorPane.topAnchor="31.0">
          <children>

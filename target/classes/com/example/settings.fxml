@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.paint.Color?>
 
-<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="657.0" styleClass="big_pane" stylesheets="@settings.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="564.0" prefWidth="657.0" styleClass="big_pane" stylesheets="@settings.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button contentDisplay="TOP" graphicTextGap="0.0" layoutX="40.0" layoutY="40.0" mnemonicParsing="false" onAction="#updateProfilePressed" styleClass="editProfile" stylesheets="@settings.css" text="Edit Profile" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="40.0">
          <graphic>

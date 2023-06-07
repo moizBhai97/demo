@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.Color?>
 
 
-<AnchorPane styleClass="doc_pane" stylesheets="@manageAppointment.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.SingleReviewController">
+<AnchorPane styleClass="doc_pane" stylesheets="@manageAppointment.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.SingleReviewController">
    <children>
       <Label fx:id="text" alignment="TOP_LEFT" layoutX="17.0" layoutY="35.0" maxWidth="500.0" style="-fx-font-size: 12; -fx-text-fill: #8C8FA5;" text="mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm" wrapText="true" />
       <Label fx:id="name" layoutX="17.0" layoutY="18.0" prefHeight="13.0" prefWidth="213.0" style="-fx-font-size: 14; -fx-text-fill: #00000;" text="Moiz" wrapText="true" />

@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="593.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #2854C3; -fx-border-width: 2;" stylesheets="@profile.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane minHeight="-Infinity" minWidth="-Infinity" prefHeight="382.0" prefWidth="593.0" style="-fx-background-color: white; -fx-background-radius: 5; -fx-border-radius: 5; -fx-border-color: #2854C3; -fx-border-width: 2;" stylesheets="@profile.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="btn_cross" layoutX="524.0" layoutY="36.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="41.0" style="-fx-background-color: transparent;" />
       <Label layoutX="85.0" layoutY="118.0" text="Certification Name">
