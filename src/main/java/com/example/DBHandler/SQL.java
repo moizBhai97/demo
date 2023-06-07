@@ -28,10 +28,10 @@ public class SQL extends DBHandler {
         musa = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;";
         abdullah = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;";
 
-        connectionUrl = abdullah +
-                "databaseName=SDA;" +
-                "IntegratedSecurity=true;" +
-                "encrypt=true;trustServerCertificate=true";
+        connectionUrl = abdullah + 
+                        "databaseName=SDA;" + 
+                        "IntegratedSecurity=true;" + 
+                        "encrypt=true;trustServerCertificate=true";
     }
 
     public String getDoctorName(int docId) {
@@ -503,6 +503,7 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
             patient.put("phoneNumber", rs.getString("phone_number"));
             patient.put("gender", rs.getString("gender"));
 
+
             con.close();
             System.out.println(patient.toString());
 
@@ -590,8 +591,8 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
 
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
 
-            // System.out.println("SQL getPatientHistory");
-
+            //System.out.println("SQL getPatientHistory");
+            
             String SQL = "SELECT SID, TYPE, DESCRIPTION FROM PATIENT_HISTORY WHERE ID = ?;";
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, patId);
@@ -601,7 +602,7 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
 
             while (rs.next()) {
                 JSONObject newObj = new JSONObject();
-                newObj.put("sid", rs.getInt("SID"));
+                //newObj.put("sid", rs.getInt("SID"));
                 newObj.put("type", rs.getString("TYPE"));
                 newObj.put("description", rs.getString("DESCRIPTION"));
 
@@ -833,8 +834,9 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
         }
     }
 
-    public void addCertification(String info, int docId) {
-        try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
+    public void addCertification(String info, int docId) throws Exception
+    {
+        try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()){
             JSONObject obj = new JSONObject(info);
             String SQL = "INSERT INTO CERTIFICATIONS (DOCTOR_ID, NAME, APPROVED_STATUS, ISSUE_DATE, EXPIRY_DATE) VALUES (?, ?, ?, ?, ?);";
 
@@ -846,10 +848,12 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
             pstmt.setString(5, obj.getString("expiryDate"));
 
             pstmt.executeUpdate();
-        } catch (SQLException | JSONException e) {
+        }
+        catch (SQLException | JSONException e) {
             // con.close();
-
-            e.printStackTrace();
+            //e.printStackTrace();
+            throw e;
+            //throw new Throwable(e);
         }
     }
 
@@ -893,15 +897,22 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
         }
     }
 
-    public void deletePatientIllness(int patId, int sid) {
-        try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
-            String SQL = "DELETE FROM PATIENT_HISTORY WHERE ID = ? AND SID = ?;";
+    public void deletePatientIllness(int patId, String info)
+    {
+        try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement())
+        {
+            JSONObject obj = new JSONObject(info);
+            String SQL = "DELETE FROM PATIENT_HISTORY WHERE ID = ? AND TYPE = ? AND DESCRIPTION = ?;";
+
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, patId);
-            pstmt.setInt(2, sid);
+            pstmt.setString(2, obj.getString("type"));
+            pstmt.setString(3, obj.getString("description"));
 
             pstmt.executeUpdate();
-        } catch (SQLException e) {
+        }
+        catch(SQLException e)
+        {
             e.printStackTrace();
         }
     }
@@ -944,25 +955,26 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, patId);
             pstmt.setInt(2, docId);
-            pstmt.setString(3, obj.getString("comment"));
+            if(obj.has("comment"))
+                pstmt.setString(3, obj.getString("comment"));
+            else{pstmt.setString(3, null);}
             pstmt.setFloat(4, obj.getFloat("experience"));
-            if (obj.getString("recommend").equals("Yes")) {
-                pstmt.setInt(5, 1);
-            } else {
-                pstmt.setInt(5, 0);
-            }
+            if(obj.getString("recommend").equals("Yes"))
+                {pstmt.setInt(5, 1);}
+            else{pstmt.setInt(5, 0);}
             pstmt.setFloat(6, obj.getFloat("checkupRating"));
             pstmt.setFloat(7, obj.getFloat("environmentRating"));
             pstmt.setFloat(8, obj.getFloat("staffRating"));
             pstmt.executeUpdate();
 
-            String SQL2 = "UPDATE Doctors SET RATING = (SELECT AVG(EXPERIENCE) FROM Reviews WHERE DOCTOR_ID = ?) WHERE ID = ?;";
-            PreparedStatement pstmt2 = con.prepareStatement(SQL2);
-            pstmt2.setInt(1, docId);
-            pstmt2.setInt(2, docId);
-
-            pstmt2.executeUpdate();
-        } catch (SQLException | JSONException e) {
+            // String SQL2 = "UPDATE Doctors SET RATING = (SELECT AVG(EXPERIENCE) FROM Reviews WHERE DOCTOR_ID = ?) WHERE ID = ?;";
+            // PreparedStatement pstmt2 = con.prepareStatement(SQL2);
+            // pstmt2.setInt(1, docId);
+            // pstmt2.setInt(2, docId);
+            
+            // pstmt2.executeUpdate();
+        }
+        catch (SQLException | JSONException e) {
             // con.close();
 
             e.printStackTrace();

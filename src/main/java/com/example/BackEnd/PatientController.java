@@ -74,9 +74,9 @@ public class PatientController {
         patientLedger.getPatient(patId).addIllness(patId, info);
     }
 
-    public void removeIllness(int patId, int sid)
+    public void removeIllness(int patId, String info)
     {
-        patientLedger.getPatient(patId).removeIllness(patId, sid);
+        patientLedger.getPatient(patId).removeIllness(patId, info);
     }
 
     public String getPatientHistory(int patId)

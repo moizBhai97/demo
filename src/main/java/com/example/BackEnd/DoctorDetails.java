@@ -113,10 +113,16 @@ public class DoctorDetails {
         return certificateLedger;
     }
 
-    public void addCertification(String info, int docId)
+    public void addCertification(String info, int docId) throws Exception
     {
-        certificateLedger.addCertification(info, docId);
-
+        try
+        {
+            certificateLedger.addCertification(info, docId);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            throw e;
+        }          
     }
 
     public String getCertificates()
