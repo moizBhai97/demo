@@ -261,6 +261,7 @@ public class UpdatePatientProfileController implements Initializable{
         catch(Exception e)
         {
             System.out.println(e);
+            e.printStackTrace();
         }
     }
 

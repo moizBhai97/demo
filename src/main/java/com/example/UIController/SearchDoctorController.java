@@ -463,13 +463,6 @@ public class SearchDoctorController implements Initializable {
 
     }
 
-    // public void searchDoctor(String value) {
-    //     resetFilterPane();
-    //     String result = patientController.searchDoctor(value);
-    //     createDoctorCards(result);
-
-    // }
-
     public void createDoctorCards(String result) {
         try {
             results_flowpane.getChildren().clear();

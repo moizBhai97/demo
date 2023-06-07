@@ -21,6 +21,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class LoginController implements Initializable {
@@ -32,6 +34,10 @@ public class LoginController implements Initializable {
     private TextField emailTextField;
     @FXML
     private Group signupGroup;
+
+    
+    @FXML
+    private AnchorPane rootPane;
 
     // DummyController dummyController;
 
@@ -131,10 +137,7 @@ public class LoginController implements Initializable {
                     stage.show();
                     stage.centerOnScreen();
                     
-                } catch (IOException e) {
-                    
-                    //System.err.println(String.format("Error: %s", e.getMessage()));
-                    
+                } catch (IOException e) {         
                     throw e;
                 }
             } else if (!isPatient) {
@@ -142,8 +145,6 @@ public class LoginController implements Initializable {
                 try {
                     int docId = Integer.parseInt(doctorController.login(loginInfo.toString()));
                     System.out.println(docId);
-                    
-                    // this.loginButton.getScene().getWindow().hide();
                     
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation((new URL("file:src/main/resources/com/example/doctorMain.fxml")));
@@ -185,8 +186,6 @@ public class LoginController implements Initializable {
         System.out.println("Signup hyperlink pressed");
 
         try {
-            // this.loginButton.getScene().getWindow().hide();
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/signup.fxml")));
             Parent root = loader.load();
@@ -211,8 +210,6 @@ public class LoginController implements Initializable {
         System.out.println("Back button pressed");
 
         try {
-            // this.loginButton.getScene().getWindow().hide();
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/start.fxml")));
             Parent root = loader.load();
@@ -227,6 +224,13 @@ public class LoginController implements Initializable {
     catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    
+    @FXML
+    public void rootPaneOnMouseClicked(MouseEvent  event) {
+        rootPane.requestFocus();
+      
     }
 
 }

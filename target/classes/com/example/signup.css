@@ -71,7 +71,14 @@
 
 }
 
-.combo-box .text-input .promt-text {
-    -fx-prompt-text-fill: rgb(241, 0, 0) ;
+/* .combo-box .text-field {
+    -fx-prompt-text-fill: rgba(211, 211, 211) ;
+} */
+
+
+.comboBox {
+  -fx-effect: innershadow(gaussian, #aaaac2, 100, 0, 0, 0);
+
+
 }
 

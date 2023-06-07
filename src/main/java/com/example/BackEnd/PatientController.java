@@ -18,7 +18,6 @@ public class PatientController {
         try{
             patientLedger.addPatient(info);
         }catch (Exception e) {
-            //System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             throw e;
         }
     }
@@ -40,8 +39,6 @@ public class PatientController {
             return "" + (patient.getpatId());
             
         }catch (Exception e) {
-            //System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-            
             throw e;
         }
         
