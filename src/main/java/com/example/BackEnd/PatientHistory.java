@@ -36,17 +36,17 @@ public class PatientHistory {
     {
         JSONObject obj = new JSONObject(info);
 
-        if(obj.has("sid"))
-        {
-            //this.sid = obj.getInt("sid");
+        // if(obj.has("sid"))
+        // {
+        //     this.sid = obj.getInt("sid");
+        //     this.type = obj.getString("type");
+        //     this.description = obj.getString("description");
+        // }
+        // else
+        //{
             this.type = obj.getString("type");
             this.description = obj.getString("description");
-        }
-        else
-        {
-            this.type = obj.getString("type");
-            this.description = obj.getString("description");
-        }
+        //}
     }
 
     @Override
