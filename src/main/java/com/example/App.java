@@ -1,6 +1,12 @@
 package com.example;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -48,9 +54,30 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
+   public void setServerName(String name) {
+    String filePath = "config.json"; // replace with the actual file path
+    try {
+        // Read the contents of the JSON file
+        File file = new File(filePath);
+        FileReader reader = new FileReader(file);
+        JSONObject json = new JSONObject(new JSONTokener(reader));
+
+        // Update the serverName property
+        json.put("serverName", name);
+
+        // Write the changes back to the file
+        FileWriter writer = new FileWriter(file);
+        writer.write(json.toString());
+        writer.flush();
+        writer.close();
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
     public static void main(String[] args) {
         launch();
-        System.out.println("Hello World!");
+       //App app = new App();
+       //app.setServerName("localhost");
     }
 
 }
