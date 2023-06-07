@@ -25,7 +25,6 @@ public class PatientController {
 
     public String login(String info) throws Exception
     {
-        System.out.println("Pateint controller login");
         try{
 
             Patient patient = patientLedger.getPatient(info);
@@ -37,10 +36,6 @@ public class PatientController {
             patient.populateAppointments();
             doctorLedger.setAppointmentDoctors(patient.getpatId());
             doctorLedger.setTopDoctors();
-
-            System.out.println("Patient controller login success");
-
-            System.out.println("Login: " + patient.toString());
 
             return "" + (patient.getpatId());
             
@@ -60,13 +55,21 @@ public class PatientController {
         }catch (Exception e) {
 
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return "";
         }
     }
 
     public void updateProfile(int patId, String info)
     {
-        patientLedger.updateProfile(patId, info);
+        try
+        {
+            patientLedger.updateProfile(patId, info);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
 
     }
 
@@ -82,14 +85,27 @@ public class PatientController {
 
     public void removeIllness(int patId, String info)
     {
-        patientLedger.getPatient(patId).removeIllness(patId, info);
+        try
+        {
+            patientLedger.getPatient(patId).removeIllness(patId, info);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public String getPatientHistory(int patId)
     {
-        Patient patient = patientLedger.getPatient(patId);
-
-        return patient.getHistory();
+        try
+        {
+            return patientLedger.getPatient(patId).getHistory();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public void submitReview(String info, int docId, int patId)
@@ -101,6 +117,7 @@ public class PatientController {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
 
         }
     }
@@ -114,6 +131,7 @@ public class PatientController {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
 
         }
     }
@@ -127,6 +145,7 @@ public class PatientController {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
 
         }
     }
@@ -140,35 +159,52 @@ public class PatientController {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
     public String getAppointList(int patId, int value) 
     {
-        String info = patientLedger.getPatient(patId).getAppointList(value);
-
-        JSONArray arr = new JSONArray(info);
-
-        for(int i=0; i<arr.length(); i++)
+        try
         {
-            arr.getJSONObject(i).put("name", doctorLedger.getDoctor(arr.getJSONObject(i).getInt("docId")).getName());
-            arr.getJSONObject(i).put("rating", doctorLedger.getDoctor(arr.getJSONObject(i).getInt("docId")).getRating());
-        }
+            String info = patientLedger.getPatient(patId).getAppointList(value);
 
-        return arr.toString();
+            JSONArray arr = new JSONArray(info);
+
+            for(int i=0; i<arr.length(); i++)
+            {
+                arr.getJSONObject(i).put("name", doctorLedger.getDoctor(arr.getJSONObject(i).getInt("docId")).getName());
+                arr.getJSONObject(i).put("rating", doctorLedger.getDoctor(arr.getJSONObject(i).getInt("docId")).getRating());
+            }
+
+            return arr.toString();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public String getAppointment(int patId, int appId) 
     {
-        String info = patientLedger.getPatient(patId).getAppointment(appId);
+        try
+        {
+            String info = patientLedger.getPatient(patId).getAppointment(appId);
 
-        JSONObject obj = new JSONObject(info);
+            JSONObject obj = new JSONObject(info);
 
-        obj.put("doctor", new JSONObject(doctorLedger.getDoctor(obj.getInt("docId")).getDetails()));
+            obj.put("doctor", new JSONObject(doctorLedger.getDoctor(obj.getInt("docId")).getDetails()));
 
-        obj.put("patient", new JSONObject(patientLedger.getPatient(patId).getDetails()));
+            obj.put("patient", new JSONObject(patientLedger.getPatient(patId).getDetails()));
 
-        return obj.toString();
+            return obj.toString();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public void cancelAppointment(String Reason, int patId, int appId) 
@@ -180,6 +216,7 @@ public class PatientController {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
@@ -192,6 +229,7 @@ public class PatientController {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
@@ -204,6 +242,7 @@ public class PatientController {
 
         }catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return "";
         }
     }
@@ -217,6 +256,7 @@ public class PatientController {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }
@@ -246,6 +286,7 @@ public class PatientController {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }
@@ -259,30 +300,56 @@ public class PatientController {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }
 
     public String searchDoctor(String name) {
-        return doctorLedger.getDoctor(name);
+
+        try
+        {
+            return doctorLedger.getDoctor(name);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public String getTopDoctors(){
-        return doctorLedger.getTopDoctors();
+        try
+        {
+            return doctorLedger.getTopDoctors();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
     
     public String sortDoctors(String name, String type,Boolean reversed, double ratingFilter, String specialtyFilter) {
 
-        if (type.equals("A-Z")) {
-            return doctorLedger.sortByAlphabetical(name,reversed,ratingFilter,specialtyFilter);
+        try
+        {
+            if (type.equals("A-Z")) {
+                return doctorLedger.sortByAlphabetical(name,reversed,ratingFilter,specialtyFilter);
+            }
+            else if (type.equals("Rating")) {
+               return doctorLedger.sortByRating(name,reversed,ratingFilter,specialtyFilter);
+            }
+            else if (type.equals("Price")) {
+                return doctorLedger.sortByPrice(name,reversed,ratingFilter,specialtyFilter);
+            }
+                return "Invalid type";
         }
-        else if (type.equals("Rating")) {
-           return doctorLedger.sortByRating(name,reversed,ratingFilter,specialtyFilter);
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
         }
-        else if (type.equals("Price")) {
-            return doctorLedger.sortByPrice(name,reversed,ratingFilter,specialtyFilter);
-        }
-            return "Invalid type";
         
     }
 }

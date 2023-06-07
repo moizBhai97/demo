@@ -118,7 +118,6 @@ public class PendingAppointmentController implements Initializable {
         System.out.println("Resch Button Clicked");
 
         try {
-            // this.cancelBtn.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/cancel.fxml")));
@@ -153,8 +152,6 @@ public class PendingAppointmentController implements Initializable {
     }
 
     public void rschButton(ActionEvent event) {
-        System.out.println("Resch Button Clicked");
-
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/resch.fxml")));

@@ -50,28 +50,6 @@ public class DoctorDetails {
         reviewLedger = new ReviewLedger();
         certificateLedger = new CertificateLedger();
     }
-    
-    public DoctorDetails(String specialization, String description, String location, int stats, int patients, int experience, float rating, String services, String workingHours, float fee, String avail, float checkupRating, float environmentRating, float staffRating, int reviews, int docId)
-    {
-        this.specialization = specialization;
-        this.description = description;
-        this.location = location;
-        this.stats = stats;
-        this.patients = patients;
-        this.experience = experience;
-        this.rating = rating;
-        this.services = services;
-        this.workingHours = workingHours;
-        this.fee = fee;
-        this.availability = avail;
-        this.checkupRating = checkupRating;
-        this.environmentRating = environmentRating;
-        this.staffRating = staffRating;
-        this.reviews = reviews;
-
-        reviewLedger = new ReviewLedger(docId);
-        certificateLedger = new CertificateLedger(docId);
-    }
 
     public DoctorDetails(String info, int docId)
     {
@@ -104,10 +82,10 @@ public class DoctorDetails {
         catch(Exception e)
         {
             System.out.println(e + "\nError in DoctorDetails constructor.");
+            e.printStackTrace();
         }
     }
 
-    // temp
     public CertificateLedger getCertiLedger()
     {
         return certificateLedger;
@@ -127,7 +105,15 @@ public class DoctorDetails {
 
     public String getCertificates()
     {
-        return certificateLedger.getCertificates();
+        try
+        {
+            return certificateLedger.getCertificates();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public String getSpecialization()
@@ -312,13 +298,13 @@ public class DoctorDetails {
 
     private boolean isDayTime(String time) 
     {
-        // Assuming day time slots are from 9 AM to 6 PM
+        // Assuming day time slots are from 8 AM to 5 PM
         return time.compareTo("08:00") >= 0 && time.compareTo("17:00") < 0;
     }
     
     private boolean isNightTime(String time) 
     {
-        //Assuming night time slots are from 6 PM to 10 PM
+        //Assuming night time slots are from 5 PM to 11 PM
         return time.compareTo("17:00") >= 0 && time.compareTo("23:00") < 0;
     }
 
@@ -351,6 +337,7 @@ public class DoctorDetails {
         catch (Exception e) 
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }
@@ -408,7 +395,6 @@ public class DoctorDetails {
     @Override
     public String toString()
     {
-        System.out.println("DoctorDetails toString");
         try
         {
             JSONParser parser = new JSONParser(); 
@@ -423,12 +409,12 @@ public class DoctorDetails {
                     obj.put(key, get(key));
             }
 
-            System.out.println(obj.toString());
             return obj.toString();
         }
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     } 

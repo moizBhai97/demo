@@ -70,8 +70,6 @@ public class PendingConsultationPatientCard {
         System.out.println("View Button Clicked");
 
         try {
-           // this.viewBtn.getScene().getWindow().hide();
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/consultationDetails.fxml")));
             

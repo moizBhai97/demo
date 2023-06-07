@@ -53,13 +53,11 @@ public class CertificateController implements Initializable{
         if(pc == null)
         {
             jsonString = dc.getCertificates(docId);
-        
-            //dc.getCertificates(docId);
+
         }
         else if(dc == null)
         {
             jsonString = pc.getCertificates(docId);
-            //pc.getCertificates(docId);
         }
 
         setCertificates(jsonString);

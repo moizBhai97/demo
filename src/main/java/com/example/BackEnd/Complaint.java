@@ -8,9 +8,16 @@ public class Complaint {
     String reason; 
 
     public Complaint(int patID, String details, int docID) {
-        this.patID = patID;
-        this.docID = docID;
-        JSONObject json = new JSONObject(details);
-        this.reason = json.getString("reason");
+        try
+        {
+            this.patID = patID;
+            this.docID = docID;
+            JSONObject json = new JSONObject(details);
+            this.reason = json.getString("reason");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }

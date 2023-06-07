@@ -22,33 +22,42 @@ public class Patient {
     private AppointmentLedger appointmentLedger;
     private List<PatientHistory> patientHistoryList;
 
-    public Patient()
-    {
-    }
-
     public Patient(int patId)
     {
-        this.patId = patId;
-        this.name = DBFactory.getInstance().createHandler("SQL").getPatientName(patId);
+        try
+        {
+            this.patId = patId;
+            this.name = DBFactory.getInstance().createHandler("SQL").getPatientName(patId);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public String getName()
     {
-        System.out.println("Patient name: " + name);
         return name;
     }
 
     public Patient(String info)
     {
-        JSONObject obj = new JSONObject(info);
+        try
+        {
+            JSONObject obj = new JSONObject(info);
 
-        this.patId = obj.getInt("patId");
-        this.name = obj.getString("name");
-        this.email = obj.getString("email");
-        this.DOB = obj.getString("DOB");
-        this.country = obj.getString("country");
-        this.phoneNumber = obj.getString("phoneNumber");
-        this.gender = obj.getString("gender");
+            this.patId = obj.getInt("patId");
+            this.name = obj.getString("name");
+            this.email = obj.getString("email");
+            this.DOB = obj.getString("DOB");
+            this.country = obj.getString("country");
+            this.phoneNumber = obj.getString("phoneNumber");
+            this.gender = obj.getString("gender");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public int getpatId()
@@ -102,15 +111,22 @@ public class Patient {
     
     public void updateProfile(String info)
     {
-        JSONObject obj = new JSONObject(info);
+        try
+        {
+            JSONObject obj = new JSONObject(info);
         
 
-        this.name = obj.getString("name");
-        this.email = obj.getString("email");
-        this.DOB = obj.getString("DOB");
-        this.phoneNumber = obj.getString("phoneNumber");
-        this.gender = obj.getString("gender");
-        this.country = obj.getString("country");
+            this.name = obj.getString("name");
+            this.email = obj.getString("email");
+            this.DOB = obj.getString("DOB");
+            this.phoneNumber = obj.getString("phoneNumber");
+            this.gender = obj.getString("gender");
+            this.country = obj.getString("country");
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void setHistory()
@@ -153,12 +169,12 @@ public class Patient {
                 jsonArray.put(obj);
             }
             
-            //System.out.println(jsonArray.toString());
             return jsonArray.toString();
         }
         catch(Exception e)
         {
             System.out.println(e);
+            e.printStackTrace();
             return "[]";
         }
     }
@@ -172,6 +188,7 @@ public class Patient {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
@@ -184,6 +201,7 @@ public class Patient {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
@@ -196,6 +214,7 @@ public class Patient {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
@@ -209,10 +228,16 @@ public class Patient {
 
     public void populateAppointments()
     {
-        System.out.println("Populating appointments");
-        appointmentLedger = new AppointmentLedger();
+        try
+        {
+            appointmentLedger = new AppointmentLedger();
             
-        appointmentLedger.setPatientAppointments(this.patId);
+            appointmentLedger.setPatientAppointments(this.patId);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public void cancelAppointment(String Reason, int appId)
@@ -224,6 +249,7 @@ public class Patient {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
@@ -236,26 +262,43 @@ public class Patient {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
     public String getAppointment(int appId)
     {
-        return appointmentLedger.getAppointment(appId).toString();
+        try
+        {
+            return appointmentLedger.getAppointment(appId).toString();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public String getDetails()
     {
-        JSONObject obj = new JSONObject();
+        try
+        {
+            JSONObject obj = new JSONObject();
 
-        obj.put("name", name);
-        obj.put("email", email);
-        obj.put("DOB", DOB);
-        obj.put("country", country);
-        obj.put("phoneNumber", phoneNumber);
-        obj.put("gender", gender);
+            obj.put("name", name);
+            obj.put("email", email);
+            obj.put("DOB", DOB);
+            obj.put("country", country);
+            obj.put("phoneNumber", phoneNumber);
+            obj.put("gender", gender);
 
-        return obj.toString();
+            return obj.toString();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public void addIllness(int patId, String info)throws Exception
@@ -271,17 +314,24 @@ public class Patient {
 
     public void removeIllness(int patId, String info)
     {
-        // remove fromm list
-        JSONObject obj = new JSONObject(info);
-        for(int i = 0; i < patientHistoryList.size(); i++)
+        try
         {
-            if(patientHistoryList.get(i).getType().equals(obj.get("type")) && patientHistoryList.get(i).getDescription().equals(obj.get("description")))
+            // remove fromm list
+            JSONObject obj = new JSONObject(info);
+            for(int i = 0; i < patientHistoryList.size(); i++)
             {
-                patientHistoryList.remove(i);
-                break;
+                if(patientHistoryList.get(i).getType().equals(obj.get("type")) && patientHistoryList.get(i).getDescription().equals(obj.get("description")))
+                {
+                    patientHistoryList.remove(i);
+                    break;
+                }
             }
+            DBFactory.getInstance().createHandler("SQL").deletePatientIllness(patId, info);
         }
-        DBFactory.getInstance().createHandler("SQL").deletePatientIllness(patId, info);
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public String get(String value)
@@ -339,6 +389,7 @@ public class Patient {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     } 

@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-//import javax.print.Doc;
-
 import com.example.BackEnd.DoctorController;
 import com.example.BackEnd.PatientController;
 
@@ -41,7 +39,6 @@ public class StartController implements Initializable{
         System.out.println("Patient Button pressed");
 
         try {
-           // this.patientButton.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/login.fxml")));
@@ -72,7 +69,7 @@ public class StartController implements Initializable{
         System.out.println("Doctor Button pressed");
 
         try {
-            //this.doctorButton.getScene().getWindow().hide();
+
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/login.fxml")));

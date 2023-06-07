@@ -53,7 +53,6 @@ public class LoginController implements Initializable {
 
             signupGroup.setVisible(false);
         }
-        // /loginButton.fire();
         return;
     }
 

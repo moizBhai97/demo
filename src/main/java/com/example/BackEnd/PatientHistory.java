@@ -3,8 +3,7 @@ package com.example.BackEnd;
 import org.json.JSONObject;
 
 public class PatientHistory {
-    
-    //private int sid;
+
     private String type;
     private String description;
 
@@ -24,7 +23,6 @@ public class PatientHistory {
         this.description = description;
     }
 
-    public PatientHistory(){}
 
     public PatientHistory(String type, String description)
     {
@@ -34,30 +32,35 @@ public class PatientHistory {
 
     public PatientHistory(String info)
     {
-        JSONObject obj = new JSONObject(info);
+        try
+        {
+            JSONObject obj = new JSONObject(info);
 
-        // if(obj.has("sid"))
-        // {
-        //     this.sid = obj.getInt("sid");
-        //     this.type = obj.getString("type");
-        //     this.description = obj.getString("description");
-        // }
-        // else
-        //{
             this.type = obj.getString("type");
             this.description = obj.getString("description");
-        //}
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public String toString()
     {
-        JSONObject obj = new JSONObject();
+        try
+        {
+            JSONObject obj = new JSONObject();
 
-        //obj.put("sid", sid);
-        obj.put("type", type);
-        obj.put("description", description);
+            obj.put("type", this.type);
+            obj.put("description", this.description);
 
-        return obj.toString();
+            return obj.toString();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 }

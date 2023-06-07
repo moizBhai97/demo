@@ -20,7 +20,6 @@ public class DoctorLedger {
     }
 
     public void setTopDoctors() {
-        System.out.println("Ledger Setting top doctors");
         try {
             String doctors = DBFactory.getInstance().createHandler("SQL").getTopDoctors();
 
@@ -39,9 +38,11 @@ public class DoctorLedger {
             topDoctors.toString();
             doctorList.addAll( topDoctors);
             removeDuplicates();
+
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+
+            e.printStackTrace();
         }
     }
 
@@ -57,11 +58,9 @@ public class DoctorLedger {
                 doctorList.add(doctor);
             }
 
-            //System.out.println(doctorList.toString());
-
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
@@ -92,9 +91,9 @@ public class DoctorLedger {
 
             Doctor doctor = new Doctor(doctorInfo);
             doctorList.add(doctor);
-            System.out.println("-----" + doctorList.toString());
 
             return doctor;
+
         } catch (Exception e) {
             //System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
             //}.getClass().getEnclosingMethod().getName());
@@ -103,24 +102,34 @@ public class DoctorLedger {
     }
 
     public String getDoctor(String name) {
-        String json = DBFactory.getInstance().createHandler("SQL").getDoctors(name);
+        try
+        {
+            String json = DBFactory.getInstance().createHandler("SQL").getDoctors(name);
 
-        JSONArray jsonArray = new JSONArray(json);
+            JSONArray jsonArray = new JSONArray(json);
 
-        JSONArray jsonDoctors = new JSONArray();
+            JSONArray jsonDoctors = new JSONArray();
 
-        List<Doctor> doctors = new ArrayList<>();
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-            Doctor doctor = new Doctor(jsonObject.toString());
-            jsonDoctors.put(new JSONObject(doctor.toString()));
-            doctors.add(doctor);
+            List<Doctor> doctors = new ArrayList<>();
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                Doctor doctor = new Doctor(jsonObject.toString());
+                jsonDoctors.put(new JSONObject(doctor.toString()));
+                doctors.add(doctor);
+            }
+
+            doctorList.addAll(doctors);
+            removeDuplicates();
+
+            return jsonDoctors.toString();
         }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
 
-        doctorList.addAll(doctors);
-        removeDuplicates();
-
-        return jsonDoctors.toString();
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public String sortByAlphabetical(String name, Boolean reversed, double ratingFilter, String specialtyFilter) {
@@ -132,7 +141,6 @@ public class DoctorLedger {
                 .filter(doctor -> doctor.getName().toLowerCase().contains(name.toLowerCase()))
                 .collect(Collectors.toList());
         // Sort the list alphabetically by name
-        // print
 
         if (ratingFilter != -1) {
             // Filter the list to only include doctors with the given rating
@@ -203,8 +211,6 @@ public class DoctorLedger {
 
     public Doctor getDoctor(int docId) 
     {
-        System.out.println("Ledger getDoctor\n" + doctorList.toString());
-
         for(int i = 0; i < doctorList.size(); i++)
         {
             if(doctorList.get(i).getId() == docId)
@@ -224,6 +230,7 @@ public class DoctorLedger {
 
         } catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
@@ -266,13 +273,21 @@ public class DoctorLedger {
 
     public String getTopDoctors() {
 
-        JSONArray doctors = new JSONArray();
-        for (int i = 0; i < topDoctors.size(); i++) {
-            doctors.put(new JSONObject(topDoctors.get(i).toString()));
-            System.out.println(topDoctors.get(i).toString());
-        }
+        try
+        {
+            JSONArray doctors = new JSONArray();
+            for (int i = 0; i < topDoctors.size(); i++) {
+                doctors.put(new JSONObject(topDoctors.get(i).toString()));
+                System.out.println(topDoctors.get(i).toString());
+            }
 
-        return doctors.toString();
+            return doctors.toString();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
 }

@@ -121,7 +121,6 @@ public class ManageReviewController implements Initializable {
 
     
     public void backBtnPressed(ActionEvent event){
-        //  prevPane.setVisible(true);
         AnchorPane mainParentPane = (AnchorPane)prevPane.getParent();
         //remove last 
         mainParentPane.getChildren().remove(mainParentPane.getChildren().size()-1);

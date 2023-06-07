@@ -25,7 +25,6 @@ public class Doctor {
 
     public String getDetails() 
     {
-        System.out.println("Doctor getDetails");
         try 
         {
             String details = doctorDetails.toString();
@@ -39,36 +38,48 @@ public class Doctor {
             obj.put("phoneNumber", phoneNumber);
             obj.put("gender", gender);
 
-            System.out.println("--------------------------------"+obj.toString());
             return obj.toString();
             
         } 
         catch (Exception e) 
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }
 
     public Doctor(int docId) 
     {
-        this.id = docId;
-        this.name = DBFactory.getInstance().createHandler("SQL").getDoctorName(docId);
+        try
+        {
+            this.id = docId;
+            this.name = DBFactory.getInstance().createHandler("SQL").getDoctorName(docId);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     
     public Doctor(String data) 
     {
-        System.out.println("Constructing JSON doctor");
-
-        JSONObject jsonObject = new JSONObject(data);
-        this.id = jsonObject.getInt("id");
-        this.name = jsonObject.getString("name");
-        this.email = jsonObject.getString("email");
-        this.DOB = jsonObject.getString("DOB");
-        this.country = jsonObject.getString("country");
-        this.phoneNumber = jsonObject.getString("phoneNumber");
-        this.gender = jsonObject.getString("gender");
-        this.doctorDetails = new DoctorDetails(jsonObject.getJSONObject("details").toString(), id);
+        try
+        {
+            JSONObject jsonObject = new JSONObject(data);
+            this.id = jsonObject.getInt("id");
+            this.name = jsonObject.getString("name");
+            this.email = jsonObject.getString("email");
+            this.DOB = jsonObject.getString("DOB");
+            this.country = jsonObject.getString("country");
+            this.phoneNumber = jsonObject.getString("phoneNumber");
+            this.gender = jsonObject.getString("gender");
+            this.doctorDetails = new DoctorDetails(jsonObject.getJSONObject("details").toString(), id);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     
     public Doctor()
@@ -78,28 +89,56 @@ public class Doctor {
     
     public void setDoctorDetails(String info)
     {
-        JSONObject obj = new JSONObject(info);
+        try
+        {
+            JSONObject obj = new JSONObject(info);
         
-        this.doctorDetails = new DoctorDetails(obj.toString(), id);
-        
+            this.doctorDetails = new DoctorDetails(obj.toString(), id);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     
     public void setAppointments(int docId)
     {
-        if(appointmentLedger == null)
+        try
+        {
+            if(appointmentLedger == null)
             appointmentLedger = new AppointmentLedger();
             
-        appointmentLedger.setDoctorAppointments(docId);
+            appointmentLedger.setDoctorAppointments(docId);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public String getAppointList(int value)
     {
-        return appointmentLedger.getAppointList(value);
+        try
+        {
+            return appointmentLedger.getAppointList(value);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public void verifyPayment(int appId)
     {
-        appointmentLedger.getAppointment(appId).verifyPayment();
+        try
+        {
+            appointmentLedger.getAppointment(appId).verifyPayment();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
     }
     
     public int getId() {
@@ -170,24 +209,38 @@ public class Doctor {
 
     public String getAppointment(int appId)
     {
-        System.out.println("Getting appointment");
-        System.out.println(appointmentLedger.getAppointment(appId).toString());
-        return appointmentLedger.getAppointment(appId).toString();
+        try
+        {
+            return appointmentLedger.getAppointment(appId).toString();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     public String getMainDetails()
     {
-        JSONObject obj = new JSONObject();
+        try
+        {
+            JSONObject obj = new JSONObject();
 
-        obj.put("name", name);
-        obj.put("email", email);
-        obj.put("DOB", DOB);
-        obj.put("country", country);
-        obj.put("phoneNumber", phoneNumber);
-        obj.put("gender", gender);
-        
+            obj.put("name", name);
+            obj.put("email", email);
+            obj.put("DOB", DOB);
+            obj.put("country", country);
+            obj.put("phoneNumber", phoneNumber);
+            obj.put("gender", gender);
+            
 
-        return obj.toString();
+            return obj.toString();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     private String get(String key) {
@@ -232,6 +285,7 @@ public class Doctor {
         } catch (Exception e) 
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
             return null;
         }
     }

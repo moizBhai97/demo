@@ -217,8 +217,6 @@ public class UpdatePatientProfileController implements Initializable{
                 alert.setHeaderText("No changes made");
                 alert.setContentText("Please make some changes to update profile");
                 alert.showAndWait();
-
-                //System.out.println("No changes made");
                 return;
             }
             

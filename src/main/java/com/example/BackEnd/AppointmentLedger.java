@@ -27,7 +27,7 @@ public class AppointmentLedger {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-
+            e.printStackTrace();
         }
     }
 
@@ -40,7 +40,7 @@ public class AppointmentLedger {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-
+            e.printStackTrace();
         }
     }
 
@@ -57,6 +57,7 @@ public class AppointmentLedger {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
     }
 
@@ -95,52 +96,71 @@ public class AppointmentLedger {
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
         }
 
     }
 
     public Appointment getAppointment(int appId)
     {
-        for(int i = 0; i < appointments.size(); i++)
+        try
         {
-            if(appointments.get(i).getAppId() == appId)
+            for(int i = 0; i < appointments.size(); i++)
             {
-                return appointments.get(i);
+                if(appointments.get(i).getAppId() == appId)
+                {
+                    return appointments.get(i);
+                }
             }
-        }
 
-        return null;
+            return null;
+        }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public String getAppointList(int value)
     {
-        JSONArray objs = new JSONArray();
-            
-        for(int i = 0; i < appointments.size(); i++ )
+        try
         {
-            if(appointments.get(i).getStatus().equals("Booked") && value == 1)
+            JSONArray objs = new JSONArray();
+            
+            for(int i = 0; i < appointments.size(); i++ )
             {
-                JSONObject obj = new JSONObject(appointments.get(i).toString());
-                
-                objs.put(obj);
+                if(appointments.get(i).getStatus().equals("Booked") && value == 1)
+                {
+                    JSONObject obj = new JSONObject(appointments.get(i).toString());
+                    
+                    objs.put(obj);
+                }
+                else if(value == 2 && (appointments.get(i).getStatus().equals("Completed") || appointments.get(i).getStatus().equals("Cancelled")))
+                {
+                    JSONObject obj = new JSONObject(appointments.get(i).toString());
+                    
+                    objs.put(obj);
+                }
+                else if(value == 3 && appointments.get(i).getStatus().equals("Completed"))
+                {
+                    JSONObject obj = new JSONObject(appointments.get(i).toString());
+                    
+                    objs.put(obj);
+                } 
             }
-            else if(value == 2 && (appointments.get(i).getStatus().equals("Completed") || appointments.get(i).getStatus().equals("Cancelled")))
-            {
-                JSONObject obj = new JSONObject(appointments.get(i).toString());
-                
-                objs.put(obj);
-            }
-            else if(value == 3 && appointments.get(i).getStatus().equals("Completed"))
-            {
-                JSONObject obj = new JSONObject(appointments.get(i).toString());
-                
-                objs.put(obj);
-            } 
+
+            return objs.toString();
         }
+        catch(Exception e)
+        {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
 
-        System.out.println(objs.toString());
+            e.printStackTrace();
 
-        return objs.toString();
+            return "NULL";
+        }
     }
 
     public void setPatientAppointments(int patId)

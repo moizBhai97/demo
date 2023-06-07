@@ -107,7 +107,6 @@ public class ConsultationControllerDoctor  implements Initializable
         System.out.println("View Button Clicked");
 
         try {
-           // this.viewBtn.getScene().getWindow().hide();
 
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/patient_details.fxml")));
@@ -116,11 +115,7 @@ public class ConsultationControllerDoctor  implements Initializable
 
             patientDetailsController.setData(dc, docId, patId,rootPane);
             loader.setController(patientDetailsController);
-            
-            //-------------------------------------------------------------------------------------------------//
-            //-------------------------------------------------------------------------------------------------//
-            
-            
+                   
             AnchorPane pane = loader.load();
             AnchorPane.setTopAnchor(pane, 0.0);
             AnchorPane.setBottomAnchor(pane, 0.0);
@@ -140,8 +135,6 @@ public class ConsultationControllerDoctor  implements Initializable
     {
         try
         {
-           // this.reportBtn.getScene().getWindow().hide();
-
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/report.fxml")));
 
