@@ -75,6 +75,9 @@
     -fx-prompt-text-fill: rgba(211, 211, 211) ;
 } */
 
-#genderComboBox .prompt-text{
-    -fx-text-fill: #aaaaaa;
+
+.comboBox {
+  -fx-effect: innershadow(gaussian, #aaaac2, 100, 0, 0, 0);
+
+
 }

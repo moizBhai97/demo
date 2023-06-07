@@ -21,6 +21,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class LoginController implements Initializable {
@@ -32,6 +34,10 @@ public class LoginController implements Initializable {
     private TextField emailTextField;
     @FXML
     private Group signupGroup;
+
+    
+    @FXML
+    private AnchorPane rootPane;
 
     // DummyController dummyController;
 
@@ -233,6 +239,13 @@ public class LoginController implements Initializable {
     catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    
+    @FXML
+    public void rootPaneOnMouseClicked(MouseEvent  event) {
+        rootPane.requestFocus();
+      
     }
 
 }
