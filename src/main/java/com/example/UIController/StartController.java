@@ -53,16 +53,13 @@ public class StartController implements Initializable{
             loader.setController(loginController);
 
             Parent root = loader.load();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 700, 500);
             Stage stage = (Stage) patientButton.getScene().getWindow();
             stage.setScene(scene);
 
-            stage.setMinWidth(825);
-            stage.setMinHeight(480);
+            stage.setMinWidth(700);
+            stage.setMinHeight(500);
 
-
-            stage.setWidth(825);
-            stage.setHeight(480);
 
             stage.show();
             stage.centerOnScreen();
@@ -87,15 +84,12 @@ public class StartController implements Initializable{
             loader.setController(loginController);
 
             Parent root = loader.load();
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root, 700, 500);
             Stage stage = (Stage) doctorButton.getScene().getWindow();
             stage.setScene(scene);
 
-            stage.setMinWidth(825);
-            stage.setMinHeight(480);
-
-            stage.setWidth(825);
-            stage.setHeight(480);
+            stage.setMinWidth(700);
+            stage.setMinHeight(500);
 
             stage.show();
             stage.centerOnScreen();

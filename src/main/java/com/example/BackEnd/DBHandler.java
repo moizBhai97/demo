@@ -1,5 +1,9 @@
 package com.example.BackEnd;
 
+import java.io.IOException;
+import java.sql.SQLException;
+import java.text.ParseException;
+
 abstract public class DBHandler {
 
   public abstract void bookAppointment(String info);

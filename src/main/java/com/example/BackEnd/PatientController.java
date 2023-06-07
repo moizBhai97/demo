@@ -3,8 +3,6 @@ package com.example.BackEnd;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import javafx.scene.control.Alert;
-
 public class PatientController {
 
     private DoctorLedger doctorLedger;

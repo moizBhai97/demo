@@ -469,12 +469,12 @@ public class SearchDoctorController implements Initializable {
 
     }
 
-    public void searchDoctor(String value) {
-        resetFilterPane();
-        String result = patientController.searchDoctor(value);
-        createDoctorCards(result);
+    // public void searchDoctor(String value) {
+    //     resetFilterPane();
+    //     String result = patientController.searchDoctor(value);
+    //     createDoctorCards(result);
 
-    }
+    // }
 
     public void createDoctorCards(String result) {
         try {
@@ -511,8 +511,7 @@ public class SearchDoctorController implements Initializable {
 
     public void searchTextKeyPressed(ActionEvent event) {
 
-        System.out.println("searched");
-        String result = " ";
+       
 
         Media media = null;
         try {
@@ -525,7 +524,6 @@ public class SearchDoctorController implements Initializable {
         mediaPlayer = new MediaPlayer(media);
         if (mediaPlayer.getStatus() != MediaPlayer.Status.STOPPED) {
             mediaPlayer.stop();
-            System.out.println("stopped");
         }
         searhcedName = searchBar.getText();
         mediaPlayer.setAutoPlay(true);
@@ -559,7 +557,8 @@ public class SearchDoctorController implements Initializable {
         Task<String> task = new Task<String>() {
             @Override
             protected String call() throws Exception {
-                return patientController.searchDoctor(searhcedName);
+
+                return patientController.searchDoctor(searhcedName.trim());
             }
         };
 
@@ -706,13 +705,11 @@ public class SearchDoctorController implements Initializable {
 
             Parent root = loader.load();
             Stage stage = (Stage) logoutBtn.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            stage.setScene(new Scene(root,  700, 500));
 
-            stage.setMinWidth(825);
-            stage.setMinHeight(480);
+            stage.setMinWidth(700);
+            stage.setMinHeight(500);
 
-            stage.setWidth(825);
-            stage.setHeight(480);
 
             stage.show();
             stage.centerOnScreen();
