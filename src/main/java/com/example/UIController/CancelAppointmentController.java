@@ -1,6 +1,7 @@
 package com.example.UIController;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import org.json.JSONObject;
@@ -12,7 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
@@ -111,36 +114,43 @@ public class CancelAppointmentController implements Initializable {
             info = reason.getText();
         }
 
-        JSONObject obj = new JSONObject();
+        Alert confirmation = new Alert(AlertType.CONFIRMATION);
+        confirmation.setTitle("Confirm Cancellation");
+        confirmation.setHeaderText("Are you sure you want to cancel this Appointment?");
+        Optional<ButtonType> result = confirmation.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.YES) {
 
-        obj.put("reason", info);
+            JSONObject obj = new JSONObject();
 
-        pc.cancelAppointment(obj.toString(), patId, appID);
+            obj.put("reason", info);
 
-        try {
-         FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/manageAppointment.fxml")));
+            pc.cancelAppointment(obj.toString(), patId, appID);
 
-            ManageAppointmentController manageAppointmentController = new ManageAppointmentController();
-            manageAppointmentController.setData(pc, patId);
-            loader.setController(manageAppointmentController);
+            try {
+            FXMLLoader loader = new FXMLLoader();
+                loader.setLocation((new URL("file:src/main/resources/com/example/manageAppointment.fxml")));
 
-            AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, 0.0);
-            AnchorPane.setBottomAnchor(pane, 0.0);
-            AnchorPane.setLeftAnchor(pane, 0.0);
-            AnchorPane.setRightAnchor(pane, 0.0);
-            AnchorPane parent = (AnchorPane) prevPane.getParent();
+                ManageAppointmentController manageAppointmentController = new ManageAppointmentController();
+                manageAppointmentController.setData(pc, patId);
+                loader.setController(manageAppointmentController);
 
-            SearchDoctorController.clearHeaderTitles();
-            SearchDoctorController.addHeaderTitle("Manage Appointment");
-            if (parent != null) {
-                parent.getChildren().clear();
+                AnchorPane pane = loader.load();
+                AnchorPane.setTopAnchor(pane, 0.0);
+                AnchorPane.setBottomAnchor(pane, 0.0);
+                AnchorPane.setLeftAnchor(pane, 0.0);
+                AnchorPane.setRightAnchor(pane, 0.0);
+                AnchorPane parent = (AnchorPane) prevPane.getParent();
+
+                SearchDoctorController.clearHeaderTitles();
+                SearchDoctorController.addHeaderTitle("Manage Appointment");
+                if (parent != null) {
+                    parent.getChildren().clear();
+                }
+                parent.getChildren().add(pane);
+            
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-            parent.getChildren().add(pane);
-          
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

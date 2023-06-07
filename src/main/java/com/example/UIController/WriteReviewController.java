@@ -7,7 +7,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
@@ -15,6 +17,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import org.controlsfx.control.Rating;
@@ -77,6 +80,8 @@ public class WriteReviewController implements Initializable{
     void submitButton(ActionEvent event) {
         try
         {
+            
+
             boolean hasComment = true;
             if(commentBox == null || commentBox.getText() == "" || commentBox.getText().isBlank())
                 hasComment = false;
@@ -136,7 +141,7 @@ public class WriteReviewController implements Initializable{
             ((AnchorPane)parent).getChildren().add(anchorPane);
             SearchDoctorController.clearHeaderTitles();
             SearchDoctorController.addHeaderTitle("Search Doctors");
-
+            
         }
         catch (Exception e) {
             e.printStackTrace();

@@ -43,9 +43,11 @@ public class SQL extends DBHandler {
     }
 
     public SQL() {
-        moiz = "jdbc:sqlserver://MOIZ-KHAN;";
-        musa = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;";
+        moiz     = "jdbc:sqlserver://MOIZ-KHAN;";
         abdullah = "jdbc:sqlserver://BOREDAF\\SQLEXPRESS;";
+        musa     = "jdbc:sqlserver://DESKTOP-NO4AAI8\\SQLEXPRESS;";
+
+        String serverName = getServerName();
 
         connectionUrl = musa + 
                         "databaseName=SDA;" + 
@@ -457,6 +459,7 @@ public class SQL extends DBHandler {
             pstmt.setString(4, obj.getString("country"));
             pstmt.setString(5, obj.getString("phoneNumber"));
             pstmt.setString(6, obj.getString("gender"));
+            System.out.println(obj.getString("gender"));
             pstmt.setInt(7, patId);
 
             pstmt.executeUpdate();
@@ -902,11 +905,13 @@ public class SQL extends DBHandler {
                 pstmt.setString(3, null);
             }
             pstmt.setFloat(4, obj.getFloat("experience"));
-            if (obj.getString("recommend").equals("Yes")) {
-                pstmt.setInt(5, 1);
-            } else {
-                pstmt.setInt(5, 0);
-            }
+            if(obj.has("recommend")) {
+                if (obj.getBoolean("recommend") == true) {
+                    pstmt.setBoolean(5, true);
+                } else {
+                    pstmt.setBoolean(5, false);
+                }
+            }else{pstmt.setBoolean(5, false);}
             pstmt.setFloat(6, obj.getFloat("checkupRating"));
             pstmt.setFloat(7, obj.getFloat("environmentRating"));
             pstmt.setFloat(8, obj.getFloat("staffRating"));

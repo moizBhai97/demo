@@ -2,6 +2,7 @@ package com.example.UIController;
 
 import java.io.File;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import org.json.JSONArray;
@@ -24,6 +25,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -687,18 +689,25 @@ public class SearchDoctorController implements Initializable {
                 return;
             }
 
-            FXMLLoader loader = new FXMLLoader(new URL("file:src/main/resources/com/example/start.fxml"));
+            Alert confirmation = new Alert(AlertType.CONFIRMATION);
+            confirmation.setTitle("Confirm Logout");
+            confirmation.setHeaderText("Are you sure you want to Logout?");
+            Optional<ButtonType> result = confirmation.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.YES) {
 
-            Parent root = loader.load();
-            Stage stage = (Stage) logoutBtn.getScene().getWindow();
-            stage.setScene(new Scene(root,  700, 500));
+                FXMLLoader loader = new FXMLLoader(new URL("file:src/main/resources/com/example/start.fxml"));
 
-            stage.setMinWidth(700);
-            stage.setMinHeight(500);
+                Parent root = loader.load();
+                Stage stage = (Stage) logoutBtn.getScene().getWindow();
+                stage.setScene(new Scene(root,  700, 500));
+
+                stage.setMinWidth(700);
+                stage.setMinHeight(500);
 
 
-            stage.show();
-            stage.centerOnScreen();
+                stage.show();
+                stage.centerOnScreen();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

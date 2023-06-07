@@ -106,7 +106,7 @@ public class PaymentController implements Initializable {
         alert.setTitle("Confirm Payment");
         alert.setHeaderText("Are you sure you want to make this payment?");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
+        if (result.isPresent() && result.get() == ButtonType.YES) {
             try {
                 JSONObject obj = new JSONObject(appoint);
 
