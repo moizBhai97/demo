@@ -143,7 +143,6 @@ public class SignupController implements Initializable {
     }
 
     public void loginHyperlink(ActionEvent event) {
-        System.out.println("Login hyperlink pressed");
         loadLogin();
     }
 

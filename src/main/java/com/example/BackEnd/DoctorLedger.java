@@ -40,7 +40,6 @@ public class DoctorLedger {
             removeDuplicates();
 
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
 
             e.printStackTrace();
         }
@@ -59,7 +58,6 @@ public class DoctorLedger {
             }
 
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -123,7 +121,6 @@ public class DoctorLedger {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
 
             e.printStackTrace();
             return "";
@@ -164,7 +161,7 @@ public class DoctorLedger {
         for (int i = 0; i < tempDoctors.size(); i++) {
             doctors.put(new JSONObject(tempDoctors.get(i).toString()));
         }
-        // System.out.println(doctors.toString());
+        //   ln(doctors.toString());
         return doctors.toString();
 
     }
@@ -227,7 +224,6 @@ public class DoctorLedger {
             doctorList.add(doctor);
 
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -265,7 +261,7 @@ public class DoctorLedger {
         for (int i = 0; i < tempDoctors.size(); i++) {
             doctors.put(new JSONObject(tempDoctors.get(i).toString()));
         }
-        // System.out.println(doctors.toString());
+        //   ln(doctors.toString());
         return doctors.toString();
     }
 
@@ -276,7 +272,6 @@ public class DoctorLedger {
             JSONArray doctors = new JSONArray();
             for (int i = 0; i < topDoctors.size(); i++) {
                 doctors.put(new JSONObject(topDoctors.get(i).toString()));
-                System.out.println(topDoctors.get(i).toString());
             }
 
             return doctors.toString();

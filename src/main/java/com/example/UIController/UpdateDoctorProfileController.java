@@ -112,7 +112,6 @@ public class UpdateDoctorProfileController implements Initializable{
             }
             catch(Exception e)
             {
-                System.out.println(e);
             }
         }
         flowPane.getChildren().add(addPane);
@@ -122,7 +121,6 @@ public class UpdateDoctorProfileController implements Initializable{
     @FXML
     void addCertification(ActionEvent event) {
 
-        System.out.println("Add Certification Button pressed");
 
         try {
 

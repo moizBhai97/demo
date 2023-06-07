@@ -124,7 +124,7 @@ public class UpdatePatientProfileController implements Initializable{
             }
             catch(Exception e)
             {
-                System.out.println(e);
+                e.printStackTrace();
             }
         }
         flowPane.getChildren().add(addPane);
@@ -170,7 +170,7 @@ public class UpdatePatientProfileController implements Initializable{
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -260,7 +260,6 @@ public class UpdatePatientProfileController implements Initializable{
         }
         catch(Exception e)
         {
-            System.out.println(e);
             e.printStackTrace();
         }
     }

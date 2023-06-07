@@ -48,7 +48,6 @@ public class DoctorController {
             doctorLedger.getDoctor(docId).getDoctorDetails().addCertification(info, docId);
 
         }catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             throw e;
         }
@@ -63,7 +62,6 @@ public class DoctorController {
             return certificates.toString();
 
         }catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return "";
         }
@@ -86,7 +84,6 @@ public class DoctorController {
         try{
             return doctorLedger.getDoctor(docId).getMainDetails();
         }catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return "";
         }
@@ -119,7 +116,6 @@ public class DoctorController {
         }
         catch (Exception e) 
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return "";
         }
@@ -171,7 +167,6 @@ public class DoctorController {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }

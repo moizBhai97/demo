@@ -81,7 +81,6 @@ public class DoctorDetails {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nError in DoctorDetails constructor.");
             e.printStackTrace();
         }
     }
@@ -336,7 +335,6 @@ public class DoctorDetails {
         } 
         catch (Exception e) 
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }
@@ -413,7 +411,6 @@ public class DoctorDetails {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }

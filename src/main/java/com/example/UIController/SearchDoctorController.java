@@ -225,7 +225,7 @@ public class SearchDoctorController implements Initializable {
             }
 
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -442,7 +442,6 @@ public class SearchDoctorController implements Initializable {
     public void setData(PatientController patientController, int patId) {
         this.patientController = patientController;
         this.patId = patId;
-        System.out.println(patId);
     }
 
     public void setPatientController(PatientController patientController) {

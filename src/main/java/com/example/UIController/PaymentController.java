@@ -77,7 +77,6 @@ public class PaymentController  implements Initializable
 
             formattedDate = formattedDate + " | " + time;
 
-            System.out.println(formattedDate);
             dateTime.setText(formattedDate);
 
             amount.setText(fee);
@@ -88,7 +87,6 @@ public class PaymentController  implements Initializable
         }
         catch(Exception e)
         {
-            System.out.println(e);
             e.printStackTrace();
         }
     }
@@ -148,7 +146,6 @@ public class PaymentController  implements Initializable
         }
         catch(Exception e)
         {
-            System.out.println(e);
             e.printStackTrace();
         }
     }
@@ -163,7 +160,6 @@ public class PaymentController  implements Initializable
         }
         catch(Exception e)
         {
-            System.out.println(e);
             e.printStackTrace();
         }
     }

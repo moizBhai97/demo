@@ -46,8 +46,6 @@ public class SQL extends DBHandler {
 
             return rs.getString("NAME");
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }
@@ -67,8 +65,6 @@ public class SQL extends DBHandler {
 
             return rs.getString("NAME");
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }
@@ -86,8 +82,6 @@ public class SQL extends DBHandler {
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -104,8 +98,6 @@ public class SQL extends DBHandler {
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -154,15 +146,12 @@ public class SQL extends DBHandler {
                 pstmt.executeUpdate();
             }
         } catch (SQLException e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
 
     public String getReviewList(int docId) {
         try (Connection con = DriverManager.getConnection(connectionUrl)) {
-            System.out.println("SQL getReviewList");
 
             String SQL = "SELECT * FROM Reviews WHERE DOCTOR_ID = ?;";
             PreparedStatement pstmt = con.prepareStatement(SQL);
@@ -186,8 +175,6 @@ public class SQL extends DBHandler {
 
             return reviews.toString();
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }
@@ -229,7 +216,6 @@ public class SQL extends DBHandler {
 
             return appId;
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return -1;
         }
@@ -244,7 +230,6 @@ public class SQL extends DBHandler {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -296,8 +281,6 @@ public class SQL extends DBHandler {
 
             return obj.toString();
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }
@@ -324,8 +307,6 @@ public class SQL extends DBHandler {
 
             return schedule.toString();
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }
@@ -393,13 +374,10 @@ public class SQL extends DBHandler {
 
     public String getTopDoctors() {
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
-            System.out.println("SQL getTopDoctors");
 
             String SQL = "SELECT TOP 4 *, (SELECT COUNT(Distinct PATIENT_ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients FROM DOCTORS d ORDER BY (((SELECT AVG(EXPERIENCE) FROM REVIEWS WHERE DOCTOR_ID = d.ID)/5)*60 + (SELECT (AVG(checkupRating)+ AVG(environmentRating)+ AVG(staffRating))/3.0 FROM REVIEWS WHERE DOCTOR_ID = d.ID)*40) DESC";
 
             ResultSet rs = stmt.executeQuery(SQL);
-            System.out.println(rs.toString());
-
             JSONArray doctors = new JSONArray();
 
             while (rs.next()) {
@@ -440,14 +418,12 @@ public class SQL extends DBHandler {
             return doctors.toString();
 
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }
     }
 
     public void updatePatientProfile(int patId, String info) {
-        System.out.println("SQL updatePatientProfile");
 
         JSONObject obj = new JSONObject(info);
 
@@ -467,7 +443,6 @@ public class SQL extends DBHandler {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -499,12 +474,9 @@ public class SQL extends DBHandler {
             patient.put("phoneNumber", rs.getString("phone_number"));
             patient.put("gender", rs.getString("gender"));
 
-
             con.close();
-            System.out.println(patient.toString());
 
             return patient.toString();
-
         } catch (Exception e) {
             throw e;
         }
@@ -557,9 +529,7 @@ public class SQL extends DBHandler {
                     services += rs2.getString("DESCRIPTION") + "\n";
                 }
                 detailsObj.put("services", services);
-
                 doctorObj.put("details", detailsObj);
-                System.out.println(doctorObj.toString());
 
                 con.close();
                 return doctorObj.toString();
@@ -571,7 +541,6 @@ public class SQL extends DBHandler {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             throw e;
         }
 
@@ -602,7 +571,6 @@ public class SQL extends DBHandler {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }
@@ -611,8 +579,6 @@ public class SQL extends DBHandler {
     public String getPatientAppointments(int patId) {
 
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
-
-            System.out.println("SQL getPatientAppointments");
 
             String SQL = "SELECT * FROM Appointments WHERE PATIENT_ID = ?;";
             PreparedStatement pstmt = con.prepareStatement(SQL);
@@ -652,7 +618,6 @@ public class SQL extends DBHandler {
 
             return appointments.toString();
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }
@@ -660,8 +625,6 @@ public class SQL extends DBHandler {
 
     public String getDoctorAppointments(int docId) {
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
-
-            System.out.println("SQL getDoctorAppointments");
 
             String SQL = "SELECT * FROM Appointments WHERE DOCTOR_ID = ?;";
             PreparedStatement pstmt = con.prepareStatement(SQL);
@@ -701,7 +664,6 @@ public class SQL extends DBHandler {
 
             return appointments.toString();
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }
@@ -709,7 +671,6 @@ public class SQL extends DBHandler {
 
     public String getAppointmentDoctors(int patId) {
         try (Connection con = DriverManager.getConnection(connectionUrl)) {
-            System.out.println("SQL getAppointmentDoctors");
 
             String SQL = "SELECT *, (SELECT COUNT(Distinct PATIENT_ID) FROM Appointments WHERE DOCTOR_ID = d.id AND STATUS = 'Completed') as Patients FROM Doctors d WHERE ID IN (SELECT DOCTOR_ID FROM Appointments WHERE PATIENT_ID = ?);";
             PreparedStatement pstmt = con.prepareStatement(SQL);
@@ -757,8 +718,6 @@ public class SQL extends DBHandler {
 
             return doctors.toString();
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }
@@ -766,7 +725,6 @@ public class SQL extends DBHandler {
 
     public String getAppointmentPatients(int docId) {
         try (Connection con = DriverManager.getConnection(connectionUrl)) {
-            System.out.println("SQL getAppointmentPatients");
 
             String SQL = "SELECT * FROM Patients WHERE ID IN (SELECT PATIENT_ID FROM Appointments WHERE DOCTOR_ID = ?);";
             PreparedStatement pstmt = con.prepareStatement(SQL);
@@ -792,9 +750,6 @@ public class SQL extends DBHandler {
 
             return patients.toString();
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
-            e.printStackTrace();
             return null;
         }
     }
@@ -901,7 +856,6 @@ public class SQL extends DBHandler {
 
     public String getCertificates(int docId) {
         try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
-            System.out.println("SQL getCertificates");
 
             String SQL = "SELECT * FROM CERTIFICATIONS WHERE DOCTOR_ID = ?;";
             PreparedStatement pstmt = con.prepareStatement(SQL);
@@ -922,8 +876,6 @@ public class SQL extends DBHandler {
 
             return certificates.toString();
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {
-            }.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }

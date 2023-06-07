@@ -74,16 +74,11 @@ public class ReportController implements Initializable {
 
         if(selectedRadioButton == null)
         {
-            System.out.println("Please select a reason");
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("No Reason Selected!");
             alert.setContentText("Please select a reason to reschedule your appointment.");
-            alert.showAndWait().ifPresent(rs -> {
-                if (rs == javafx.scene.control.ButtonType.OK) {
-                    System.out.println("Pressed OK.");
-                }
-            });
+            alert.showAndWait();
             return;
         }
         
@@ -92,16 +87,11 @@ public class ReportController implements Initializable {
         if (info.equals("Other")) {
 
             if (reason.getText().isEmpty()) {
-                System.out.println("Please enter a reason");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("No Reason Entered!");
                 alert.setContentText("Please enter a reason in the text area.");
-                alert.showAndWait().ifPresent(rs -> {
-                    if (rs == javafx.scene.control.ButtonType.OK) {
-                        System.out.println("Pressed OK.");
-                    }
-                });
+                alert.showAndWait();
                 return;
             }
 
@@ -135,7 +125,6 @@ public class ReportController implements Initializable {
 
 
         } catch (Exception e) {
-            System.out.println(e);
             e.printStackTrace();
         }
     }

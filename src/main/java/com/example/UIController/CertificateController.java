@@ -88,7 +88,6 @@ public class CertificateController implements Initializable{
                 certificateList.add(temp);
             }
 
-            System.out.println(arr.toString());
 
             table.setItems(certificateList);
 
@@ -105,7 +104,6 @@ public class CertificateController implements Initializable{
         }
         catch(Exception e)
         {
-            System.out.println(e);
             e.printStackTrace();
         }
     }

@@ -69,7 +69,6 @@ public class LoginController implements Initializable {
     }
 
     public void loginButton(ActionEvent event) throws Exception{
-        System.out.println("Login Button pressed");
         try{
             //  this.loginButton.getScene().getWindow().hide();
             
@@ -78,11 +77,7 @@ public class LoginController implements Initializable {
                 alert.setTitle("Invalid Input");
                 alert.setHeaderText("Error: Empty Fields");
                 alert.setContentText("Please fill all fields");
-                alert.showAndWait().ifPresent(rs -> {
-                    if (rs == ButtonType.OK) {
-                        System.out.println("Pressed OK.");
-                    }
-                });
+                alert.showAndWait();
 
                 return;
             }
@@ -107,14 +102,11 @@ public class LoginController implements Initializable {
             loginInfo.put("email", this.emailTextField.getText());
             loginInfo.put("password", this.passwordTextField.getText());
             
-            System.out.println(loginInfo.toString());
 
             if (isPatient) {
                 try {
-                    System.out.println("Patient login");
 
                     int patId = Integer.parseInt(patientController.login(loginInfo.toString()));
-                    System.out.println(patId);
                     // this.loginButton.getScene().getWindow().hide();
 
                     FXMLLoader loader = new FXMLLoader();
@@ -144,7 +136,6 @@ public class LoginController implements Initializable {
                 
                 try {
                     int docId = Integer.parseInt(doctorController.login(loginInfo.toString()));
-                    System.out.println(docId);
                     
                     FXMLLoader loader = new FXMLLoader();
                     loader.setLocation((new URL("file:src/main/resources/com/example/doctorMain.fxml")));
@@ -183,7 +174,6 @@ public class LoginController implements Initializable {
 
     @FXML
     public void signupHyperlink(ActionEvent event) {
-        System.out.println("Signup hyperlink pressed");
 
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -207,7 +197,6 @@ public class LoginController implements Initializable {
 
     @FXML 
     public void backBtnPressed(ActionEvent event){
-        System.out.println("Back button pressed");
 
         try {
             FXMLLoader loader = new FXMLLoader();

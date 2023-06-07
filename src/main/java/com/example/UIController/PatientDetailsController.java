@@ -70,7 +70,7 @@ public class PatientDetailsController implements Initializable{
         
         String jsonString = dc.getPatientDetails(patId);
 
-        System.out.println(jsonString);
+        
 
         JSONObject obj = new JSONObject(jsonString);
 
@@ -129,7 +129,7 @@ public class PatientDetailsController implements Initializable{
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            
             e.printStackTrace();
         }
     }
@@ -173,7 +173,7 @@ public class PatientDetailsController implements Initializable{
                         setOnMousePressed(event -> {
                             if (event.isPrimaryButtonDown() && !isEmpty()) {
                                 JSONObject obj = getTableRow().getItem();
-                                System.out.println("Appointment Id: "+obj.toString());
+                                
                                 getAppointment(obj.getInt("appId"), getScene().getWindow());
                             }
                         });
@@ -222,7 +222,7 @@ public class PatientDetailsController implements Initializable{
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            
             e.printStackTrace();
         }
     }
@@ -251,7 +251,7 @@ public class PatientDetailsController implements Initializable{
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            
             e.printStackTrace();
         }
         

@@ -70,12 +70,12 @@ public class AddCertificationController{
                 alert.showAndWait();
                 return;
             }
-            if(this.tf_cert.getText().length() > 255){
+            if(this.tf_cert.getText().length() > 40){
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Invalid Input");
-                alert.setContentText("Maximum length of certification name is 20 characters");
+                alert.setContentText("Maximum length of certification name is 40 characters");
                 alert.showAndWait();
                 return;
             }
@@ -95,11 +95,8 @@ public class AddCertificationController{
             json.put("expiryDate", this.dp_expire.getValue().toString());
             json.put("approvedStatus", "Pending");
             
-            System.out.println(json.toString());
-            
             doctorController.addCertification(json.toString(), docId);
             certificates.put(json);
-            System.out.println(certificates.toString());
             
             this.btn_approval.getScene().getWindow().hide();
         }

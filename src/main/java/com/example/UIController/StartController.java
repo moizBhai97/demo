@@ -36,7 +36,6 @@ public class StartController implements Initializable{
     }
 
     public void patientButton(ActionEvent event){
-        System.out.println("Patient Button pressed");
 
         try {
 
@@ -66,8 +65,6 @@ public class StartController implements Initializable{
     }
 
     public void doctorButton(ActionEvent event){
-        System.out.println("Doctor Button pressed");
-
         try {
 
 
