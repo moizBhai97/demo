@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="aPane" prefHeight="35.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="aPane" prefHeight="35.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label fx:id="type" layoutX="204.0" layoutY="5.0" prefHeight="25.0" text="Surgery" AnchorPane.rightAnchor="14.0" />
       <HBox layoutX="10.0" layoutY="5.0" prefHeight="25.0" AnchorPane.leftAnchor="10.0">

@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="564.0" prefWidth="657.0" styleClass="big_pane" stylesheets="@patient_details.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="564.0" prefWidth="657.0" styleClass="big_pane" stylesheets="@patient_details.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Button fx:id="backBtn" alignment="CENTER" mnemonicParsing="false" onAction="#backBtnPressed" style="-fx-background-color: transparent;" styleClass="button_back" text="&lt;  Back" textAlignment="CENTER" textFill="#2854c3" wrapText="true" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <font>
