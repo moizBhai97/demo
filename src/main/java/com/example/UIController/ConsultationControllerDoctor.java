@@ -104,8 +104,6 @@ public class ConsultationControllerDoctor  implements Initializable
 
     public void viewButton(ActionEvent event) 
     {
-        System.out.println("View Button Clicked");
-
         try {
 
             FXMLLoader loader = new FXMLLoader();
@@ -156,7 +154,7 @@ public class ConsultationControllerDoctor  implements Initializable
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -186,7 +184,6 @@ public class ConsultationControllerDoctor  implements Initializable
         }
         catch(Exception e)
         {
-            System.out.println(e);
             e.printStackTrace();
         }
     }

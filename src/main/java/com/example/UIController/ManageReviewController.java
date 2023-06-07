@@ -37,7 +37,6 @@ public class ManageReviewController implements Initializable {
 
     public void setData(PatientController pc, int patId, int docId, AnchorPane prevPane)
     {
-        System.out.println("Rev: " + docId);
         this.docId = docId;
         this.patientController = pc;
         this.patId = patId;

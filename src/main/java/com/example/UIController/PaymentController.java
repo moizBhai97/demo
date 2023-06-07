@@ -78,7 +78,6 @@ public class PaymentController implements Initializable {
 
             formattedDate = formattedDate + " | " + time;
 
-            System.out.println(formattedDate);
             dateTime.setText(formattedDate);
 
             amount.setText(fee);
@@ -86,8 +85,9 @@ public class PaymentController implements Initializable {
             totalAmount.setText(fee);
 
             name.setText(docName);
-        } catch (Exception e) {
-            System.out.println(e);
+        }
+        catch(Exception e)
+        {
             e.printStackTrace();
         }
     }
@@ -101,67 +101,67 @@ public class PaymentController implements Initializable {
         this.prev = prev;
     }
 
-   public void paymentButton(ActionEvent event) {
-    Alert alert = new Alert(AlertType.CONFIRMATION);
-    alert.setTitle("Confirm Payment");
-    alert.setHeaderText("Are you sure you want to make this payment?");
-    Optional<ButtonType> result = alert.showAndWait();
-    if (result.isPresent() && result.get() == ButtonType.OK) {
-        try {
-            JSONObject obj = new JSONObject(appoint);
+    public void paymentButton(ActionEvent event) {
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirm Payment");
+        alert.setHeaderText("Are you sure you want to make this payment?");
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.YES) {
+            try {
+                JSONObject obj = new JSONObject(appoint);
 
-            JSONObject payment = new JSONObject();
-            payment.put("amount", fee);
-            payment.put("status", false);
-            payment.put("date", date);
-            payment.put("time", time);
+                JSONObject payment = new JSONObject();
+                payment.put("amount", fee);
+                payment.put("status", false);
+                payment.put("date", date);
+                payment.put("time", time);
 
-            obj.put("payment", payment);
+                obj.put("payment", payment);
 
-            pc.saveAppointment(obj.toString(), patId);
+                pc.saveAppointment(obj.toString(), patId);
 
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors - Copy.fxml")));
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors - Copy.fxml")));
 
-            SearchDoctorController searchDoctorController = new SearchDoctorController();
-            searchDoctorController.setData(pc, patId);
-            loader.setController(searchDoctorController);
+                SearchDoctorController searchDoctorController = new SearchDoctorController();
+                searchDoctorController.setData(pc, patId);
+                loader.setController(searchDoctorController);
 
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            prev.getWindow().hide();
-            this.paymentBtn.getScene().getWindow().hide();
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                prev.getWindow().hide();
+                this.paymentBtn.getScene().getWindow().hide();
 
-            Stage prevWin = (Stage) prev.getWindow();
+                Stage prevWin = (Stage) prev.getWindow();
 
-            stage.setWidth(prevWin.getWidth());
-            stage.setHeight(prevWin.getHeight());
-            stage.setX(prevWin.getX());
-            stage.setY(prevWin.getY());
+                stage.setWidth(prevWin.getWidth());
+                stage.setHeight(prevWin.getHeight());
+                stage.setX(prevWin.getX());
+                stage.setY(prevWin.getY());
 
-            stage.setMinWidth(825);
-            stage.setMinHeight(680);
+                stage.setMinWidth(825);
+                stage.setMinHeight(680);
 
-            stage.show();
-            stage.centerOnScreen();
-        }
-        catch(Exception e)
-        {
-            System.out.println(e);
-            e.printStackTrace();
+                stage.show();
+                stage.centerOnScreen();
+            }
+            catch(Exception e)
+            {
+                e.printStackTrace();
+            }
         }
     }
-}
 
     public void cancelButton(ActionEvent event) {
         try {
             pc.cancelSlot(appoint, patId);
 
             this.cancelBtn.getScene().getWindow().hide();
-        } catch (Exception e) {
-            System.out.println(e);
+        }
+        catch(Exception e)
+        {
             e.printStackTrace();
         }
     }

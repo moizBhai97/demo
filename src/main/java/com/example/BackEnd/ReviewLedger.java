@@ -135,7 +135,6 @@ public class ReviewLedger {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }

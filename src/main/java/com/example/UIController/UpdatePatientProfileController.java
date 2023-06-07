@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -46,13 +47,13 @@ public class UpdatePatientProfileController implements Initializable{
     @FXML
     private FlowPane flowPane;
     @FXML
-    private TextField tf_country;
+    private ComboBox cb_country;
     @FXML
     private DatePicker dp_dob;
     @FXML
     private TextField tf_email;
     @FXML
-    private TextField tf_gender;
+    private ComboBox cb_gender;
     @FXML
     private TextField tf_number;
     @FXML
@@ -83,16 +84,25 @@ public class UpdatePatientProfileController implements Initializable{
         tf_username.setText(data.getString("name"));
         tf_email.setText(data.getString("email"));
         dp_dob.getEditor().setText(data.getString("DOB"));
-        tf_country.setText(data.getString("country"));
         tf_number.setText(data.getString("phoneNumber"));
-        tf_gender.setText(data.getString("gender"));
+        
+        cb_country.getSelectionModel().clearSelection();
+        cb_country.setValue(data.getString("country"));
+
+
+        cb_gender.getSelectionModel().clearSelection();
+        cb_gender.setValue(data.getString("gender"));
+
 
         username = tf_username.getText();
         email = tf_email.getText();
         dob = dp_dob.getEditor().getText();
-        country = tf_country.getText();
+        country = cb_country.getEditor().getText();
         number = tf_number.getText();
-        gender = tf_gender.getText();
+        gender = cb_gender.getEditor().getText();
+
+       
+
 
         history = new JSONArray(patientController.getPatientHistory(patId));
         
@@ -124,7 +134,7 @@ public class UpdatePatientProfileController implements Initializable{
             }
             catch(Exception e)
             {
-                System.out.println(e);
+                e.printStackTrace();
             }
         }
         flowPane.getChildren().add(addPane);
@@ -170,7 +180,7 @@ public class UpdatePatientProfileController implements Initializable{
         }
         catch(Exception e)
         {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -179,10 +189,44 @@ public class UpdatePatientProfileController implements Initializable{
 
         try{
 
+            if(tf_username.getText().trim().isBlank() || tf_email.getText().trim().isBlank() || tf_number.getText().trim().isBlank()){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Input");
+                alert.setHeaderText("Error: Empty fields");
+                alert.setContentText("Please fill all the fields");
+                alert.showAndWait();
+                return;
+            }
+            if(!tf_username.getText().matches("[a-zA-Z._ ]+")){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Input");
+                alert.setHeaderText("Error: Invalid Name");
+                alert.setContentText("Name should only contain alphabets, spaces, '.' and '_'");
+                alert.showAndWait();
+                return;
+            }
+            if (!tf_email.getText().matches("[a-zA-Z0-9._]+@[a-zA-Z0-9]+\\.[a-zA-Z]+")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Input");
+                alert.setHeaderText("Error: Invalid Email");
+                alert.setContentText("Please enter a valid email address.");
+                alert.showAndWait();
+                return;
+            }
+            if (!tf_number.getText().matches("[0-9]+") || tf_number.getText().trim().length() != 11) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Input");
+                alert.setHeaderText("Error: Invalid Phone Number");
+                alert.setContentText("Please enter a valid phone number.");
+                alert.showAndWait();
+                return;
+            }
+
+
             boolean isChanged = false;
-            if(!country.equals(tf_country.getText()))
+            if(!country.equals(cb_country.getEditor().getText()))
             {
-                country = tf_country.getText();
+                country = cb_country.getEditor().getText();
                 isChanged = true;
             }
             if(!dob.equals(dp_dob.getEditor().getText()))
@@ -190,14 +234,14 @@ public class UpdatePatientProfileController implements Initializable{
                 dob = dp_dob.getEditor().getText();
                 isChanged = true;
             }
-            if(!email.equals(tf_email.getText()))
+            if(!email.equals(tf_email.getText().trim()))
             {
                 email = tf_email.getText();
                 isChanged = true;
             }
-            if(!gender.equals(tf_gender.getText()))
+            if(!gender.equals(cb_gender.getEditor().getText()))
             {
-                gender = tf_gender.getText();
+                gender = cb_gender.getEditor().getText();
                 isChanged = true;
             }
             if(!number.equals(tf_number.getText()))
@@ -224,9 +268,9 @@ public class UpdatePatientProfileController implements Initializable{
             profile.put("name", this.tf_username.getText());
             profile.put("email", this.tf_email.getText());
             profile.put("DOB", this.dp_dob.getEditor().getText());
-            profile.put("country", this.tf_country.getText());
+            profile.put("country", this.cb_country.getValue().toString());
             profile.put("phoneNumber", this.tf_number.getText());
-            profile.put("gender", this.tf_gender.getText());
+            profile.put("gender", this.cb_gender.getValue().toString());
 
             patientController.updateProfile(patId, profile.toString());
 
@@ -260,7 +304,6 @@ public class UpdatePatientProfileController implements Initializable{
         }
         catch(Exception e)
         {
-            System.out.println(e);
             e.printStackTrace();
         }
     }

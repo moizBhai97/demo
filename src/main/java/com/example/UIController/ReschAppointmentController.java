@@ -109,7 +109,7 @@ public class ReschAppointmentController implements Initializable {
 
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d MMMM, EEEE", Locale.ENGLISH);
         String formattedDate = dateConvert.format(outputFormatter);
-        System.out.println(formattedDate);
+        
         datePick.setText(formattedDate);
 
 
@@ -143,7 +143,7 @@ public class ReschAppointmentController implements Initializable {
             day.setStyle("-fx-background-color: #2854C3; -fx-border-color: #2854C3; -fx-text-fill: white;");
             night.setStyle(
                     "-fx-background-color: transparent; -fx-border-color: #8C8FA5; -fx-border-width: 1px 1px 1px 1px; -fx-text-fill: black;");
-            System.out.println(pc.getSchedule(docId, date, time));
+            
             refreshToggleButtonGroup(pc.getSchedule(docId, date, time));
         }
     }
@@ -155,7 +155,7 @@ public class ReschAppointmentController implements Initializable {
             night.setStyle("-fx-background-color: #2854C3; -fx-border-color: #2854C3; -fx-text-fill: white;");
             day.setStyle(
                     "-fx-background-color: transparent; -fx-border-color: #8C8FA5; -fx-border-width: 1px 1px 1px 1px; -fx-text-fill: black;");
-            System.out.println(pc.getSchedule(docId, date, time));
+            
             refreshToggleButtonGroup(pc.getSchedule(docId, date, time));
         }
     }
@@ -163,16 +163,12 @@ public class ReschAppointmentController implements Initializable {
     public void reschButton(ActionEvent event) 
     {
         if (selectedTime == null) {
-            System.out.println("Please select a time");
+            
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("No Time Selected!");
             alert.setContentText("Please select a time to reschedule your appointment.");
-            alert.showAndWait().ifPresent(rs -> {
-                if (rs == javafx.scene.control.ButtonType.OK) {
-                    System.out.println("Pressed OK.");
-                }
-            });
+            alert.showAndWait();
             return;
         }
 
@@ -180,16 +176,12 @@ public class ReschAppointmentController implements Initializable {
 
         if(selectedRadioButton == null)
         {
-            System.out.println("Please select a reason");
+            
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error");
             alert.setHeaderText("No Reason Selected!");
             alert.setContentText("Please select a reason to reschedule your appointment.");
-            alert.showAndWait().ifPresent(rs -> {
-                if (rs == javafx.scene.control.ButtonType.OK) {
-                    System.out.println("Pressed OK.");
-                }
-            });
+            alert.showAndWait();
             return;
         }
 
@@ -198,16 +190,12 @@ public class ReschAppointmentController implements Initializable {
         if (data.equals("Other")) {
 
             if (reason.getText().isEmpty()) {
-                System.out.println("Please enter a reason");
+                
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("No Reason Entered!");
                 alert.setContentText("Please enter a reason in the text area.");
-                alert.showAndWait().ifPresent(rs -> {
-                    if (rs == javafx.scene.control.ButtonType.OK) {
-                        System.out.println("Pressed OK.");
-                    }
-                });
+                alert.showAndWait();
                 return;
             }
 
@@ -248,7 +236,7 @@ public class ReschAppointmentController implements Initializable {
 
 
         } catch (Exception e) {
-            System.out.println(e);
+            
         }
     }
 
@@ -260,11 +248,11 @@ public class ReschAppointmentController implements Initializable {
 
         date = dateConvert.toString();
 
-        System.out.println(pc.getSchedule(docId, date, time));
+        
 
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d MMMM, EEEE", Locale.ENGLISH);
         String formattedDate = dateConvert.format(outputFormatter);
-        System.out.println(formattedDate);
+        
         datePick.setText(formattedDate);
 
         refreshToggleButtonGroup(pc.getSchedule(docId, date, time));
@@ -295,7 +283,7 @@ public class ReschAppointmentController implements Initializable {
 
             if (!(button.getUserData() instanceof Boolean && (boolean) button.getUserData())) {
                 selectedTime = null;
-                System.out.println("Selected ToggleButton text: " + selectedTime);
+                
                 continue;
             }
 
@@ -306,7 +294,7 @@ public class ReschAppointmentController implements Initializable {
             else {
                 button.setStyle("-fx-background-color: #2854C3; -fx-border-color: #2854C3; -fx-text-fill: white;");
                 selectedTime = selectedButton.getText();
-                System.out.println("Selected ToggleButton text: " + selectedTime);
+                
             }
         }
     }

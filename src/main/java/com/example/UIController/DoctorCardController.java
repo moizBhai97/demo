@@ -73,10 +73,6 @@ public class DoctorCardController {
         this.patientId = patientId;
     }
 
-    public void setDoctor(DoctorTemp doctor) {
-        docName.setText(doctor.name);
-    }
-
     public void setPrevPane(AnchorPane prevPane) {
         this.prevPane = prevPane;
     }
@@ -118,7 +114,6 @@ public class DoctorCardController {
 
     // button action
     public void viewProfileBtn(ActionEvent event) {
-        System.out.println("book button clicked");
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/doctor_details.fxml")));

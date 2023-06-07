@@ -83,7 +83,6 @@ public class Payment {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + "Payment" + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }

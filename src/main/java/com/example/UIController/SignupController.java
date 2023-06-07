@@ -129,6 +129,12 @@ public class SignupController implements Initializable {
             
             patientController.signup(patient.toString());
 
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Success");
+            alert.setHeaderText("Account created successfully");
+            alert.setContentText("Your account has been created successfully. Please login to continue.");
+            alert.showAndWait();
+
             this.signupButton.getScene().getWindow().hide();
             loadLogin();
         }catch(Exception e){
@@ -143,7 +149,6 @@ public class SignupController implements Initializable {
     }
 
     public void loginHyperlink(ActionEvent event) {
-        System.out.println("Login hyperlink pressed");
         loadLogin();
     }
 

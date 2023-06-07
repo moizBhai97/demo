@@ -39,7 +39,6 @@ public class PrimaryController {
             }
          
         }catch(Exception e){
-            System.out.println(e);
         }
     }
 

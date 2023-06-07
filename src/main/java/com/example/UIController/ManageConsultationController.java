@@ -87,7 +87,6 @@ public class ManageConsultationController implements Initializable {
 
     public String getPendingAppointments() {
         // Dummy Data for JSON array
-        System.out.println("Pending Appointments");
         String result = doctorController.getAppointList(docId, 1);
 
         return result;
@@ -95,7 +94,6 @@ public class ManageConsultationController implements Initializable {
 
     public String getCompletedAppointments() {
         // Dummy Data for JSON array
-        System.out.println("Completed Appointments");
         String result = doctorController.getAppointList(docId, 2);
 
         return result;

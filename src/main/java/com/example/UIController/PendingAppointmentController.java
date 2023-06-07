@@ -115,7 +115,6 @@ public class PendingAppointmentController implements Initializable {
     }
 
     public void cancelButton(ActionEvent event) {
-        System.out.println("Resch Button Clicked");
 
         try {
 

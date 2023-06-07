@@ -137,7 +137,6 @@ public class Appointment {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -165,7 +164,6 @@ public class Appointment {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }

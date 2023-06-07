@@ -111,7 +111,7 @@
                               </TextField>
                            </children>
                         </VBox>
-                        <VBox fillWidth="false" maxHeight="489.0" prefHeight="489.0" prefWidth="268.0" style="-fx-border-color: bebebe; -fx-border-radius: 4;" HBox.hgrow="ALWAYS">
+                        <VBox maxHeight="489.0" prefHeight="489.0" prefWidth="268.0" style="-fx-border-color: bebebe; -fx-border-radius: 4;" HBox.hgrow="ALWAYS">
                            <children>
                               <HBox prefHeight="38.0" prefWidth="259.0" spacing="130.0" VBox.vgrow="NEVER">
                                  <children>

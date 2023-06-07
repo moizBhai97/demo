@@ -173,7 +173,6 @@ public class Patient {
         }
         catch(Exception e)
         {
-            System.out.println(e);
             e.printStackTrace();
             return "[]";
         }
@@ -187,7 +186,6 @@ public class Patient {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -200,7 +198,6 @@ public class Patient {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -213,7 +210,6 @@ public class Patient {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -256,7 +252,6 @@ public class Patient {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -269,7 +264,6 @@ public class Patient {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -396,7 +390,6 @@ public class Patient {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return null;
         }

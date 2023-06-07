@@ -68,15 +68,11 @@ public class PatientRecordCardController implements Initializable{
 
             FlowPane flowPane = (FlowPane)aPane.getParent();
             int index = flowPane.getChildren().indexOf(aPane);
-            System.out.println(index);
-            System.out.println(idTag);
             
             flowPane.getChildren().remove(aPane);
 
-            System.out.println(history.toString());
             history.remove(index);
             patientController.removeIllness(patId, info);
-            System.out.println(history.toString());
             
             for(int i = index; i < flowPane.getChildren().size(); i++)
             {

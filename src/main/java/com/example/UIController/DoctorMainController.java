@@ -1,6 +1,7 @@
 package com.example.UIController;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.example.BackEnd.DoctorController;
@@ -14,7 +15,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.effect.InnerShadow;
 import javafx.scene.image.ImageView;
@@ -241,19 +245,25 @@ public class DoctorMainController implements Initializable {
                 return;
             }
 
-            FXMLLoader loader = new FXMLLoader(new URL("file:src/main/resources/com/example/start.fxml"));
+            Alert confirmation = new Alert(AlertType.CONFIRMATION);
+            confirmation.setTitle("Confirm Logout");
+            confirmation.setHeaderText("Are you sure you want to Logout?");
+            Optional<ButtonType> result = confirmation.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.YES) {                
+                FXMLLoader loader = new FXMLLoader(new URL("file:src/main/resources/com/example/start.fxml"));
 
-            Parent root = loader.load();
-            Stage stage = (Stage) logoutBtn.getScene().getWindow();
-            stage.setScene(new Scene(root, 700, 500));
-            
-            
-            stage.setMinWidth(700);
-            stage.setMinHeight(500);
+                Parent root = loader.load();
+                Stage stage = (Stage) logoutBtn.getScene().getWindow();
+                stage.setScene(new Scene(root, 700, 500));
+                
+                
+                stage.setMinWidth(700);
+                stage.setMinHeight(500);
 
-            
-            stage.show();
-            stage.centerOnScreen();
+                
+                stage.show();
+                stage.centerOnScreen();
+            }
 
         } catch (Exception e) {
             e.printStackTrace();

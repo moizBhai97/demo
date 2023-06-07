@@ -51,7 +51,6 @@ public class AddRecordController {
     {
         this.patId = patId;
         this.history = history;
-        System.out.println("Patient ID: " + this.patId);
         this.patientController = patientController;
     }
     
@@ -87,9 +86,9 @@ public class AddRecordController {
             }
             
             //SET RESTRICTION 
-            if(description.length() > 20)
+            if(description.length() > 40)
             {
-                descriptionError.setText("*(max characters: 20)");
+                descriptionError.setText("*(max characters: 40)");
                 descriptionError.setVisible(true);
                 flag = true;
             }
@@ -102,7 +101,6 @@ public class AddRecordController {
             
             patientController.addIllness(patId, record.toString());
             history.put(record);
-            System.out.println(history.toString());
 
             this.addButton.getScene().getWindow().hide();
         }

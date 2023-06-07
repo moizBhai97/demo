@@ -67,8 +67,6 @@ public class PendingConsultationPatientCard {
 
     public void viewButton(ActionEvent event) 
     {
-        System.out.println("View Button Clicked");
-
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/consultationDetails.fxml")));

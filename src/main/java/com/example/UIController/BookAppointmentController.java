@@ -134,7 +134,8 @@ public class BookAppointmentController implements Initializable {
                 cancel_pane.setVisible(true);
             }
         } catch (Exception e) {
-            System.out.println(e);
+
+            e.printStackTrace();
         }
     }
 
@@ -147,7 +148,7 @@ public class BookAppointmentController implements Initializable {
                 confirm_pane.setVisible(true);
             }
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
 
@@ -168,7 +169,7 @@ public class BookAppointmentController implements Initializable {
 
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d MMMM, EEEE", Locale.ENGLISH);
         String formattedDate = dateConvert.format(outputFormatter);
-        System.out.println(formattedDate);
+
         datePick.setText(formattedDate);
 
         JSONArray objs = new JSONArray(pc.getSchedule(docId, date, time));
@@ -208,7 +209,7 @@ public class BookAppointmentController implements Initializable {
             selectedTime = null;
             day.setStyle("-fx-background-color: #2854C3; -fx-border-color: #2854C3; -fx-text-fill: white;");
             night.setStyle("-fx-background-color: transparent; -fx-border-color: #8C8FA5; -fx-border-width: 1px 1px 1px 1px; -fx-text-fill: black;");
-            System.out.println(pc.getSchedule(docId, date, time));
+
             refreshToggleButtonGroup(pc.getSchedule(docId, date, time));
         }
     }
@@ -221,7 +222,7 @@ public class BookAppointmentController implements Initializable {
             selectedTime = null;
             night.setStyle("-fx-background-color: #2854C3; -fx-border-color: #2854C3; -fx-text-fill: white;");
             day.setStyle("-fx-background-color: transparent; -fx-border-color: #8C8FA5; -fx-border-width: 1px 1px 1px 1px; -fx-text-fill: black;");
-            System.out.println(pc.getSchedule(docId, date, time));
+
             refreshToggleButtonGroup(pc.getSchedule(docId, date, time));
         }
     }
@@ -233,12 +234,10 @@ public class BookAppointmentController implements Initializable {
         LocalDate dateConvert = LocalDate.parse(dateUnformatted, inputFormatter);
 
         date = dateConvert.toString();
-
-        System.out.println(pc.getSchedule(docId, date, time));
-
+        
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d MMMM, EEEE", Locale.ENGLISH);
         String formattedDate = dateConvert.format(outputFormatter);
-        System.out.println(formattedDate);
+
         datePick.setText(formattedDate);
 
         refreshToggleButtonGroup(pc.getSchedule(docId, date, time));
@@ -283,7 +282,6 @@ public class BookAppointmentController implements Initializable {
             {
                 button.setStyle("-fx-background-color: #2854C3; -fx-border-color: #2854C3; -fx-text-fill: white;");
                 selectedTime=selectedButton.getText();
-                System.out.println("Selected ToggleButton text: " + selectedTime);
             }
         }
     }
@@ -327,30 +325,21 @@ public class BookAppointmentController implements Initializable {
         try
         {
             if (selectedTime == null) {
-                System.out.println("Please select a time");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("No Time Selected!");
                 alert.setContentText("Please select a time to reschedule your appointment.");
-                alert.showAndWait().ifPresent(rs -> {
-                    if (rs == javafx.scene.control.ButtonType.OK) {
-                        System.out.println("Pressed OK.");
-                    }
-                });
+                alert.showAndWait();
+
                 return;
             }
 
             if (problem_text.getText().isEmpty()) {
-                System.out.println("Please enter a reason");
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("No Reason Entered!");
                 alert.setContentText("Please enter a reason in the text area.");
-                alert.showAndWait().ifPresent(rs -> {
-                    if (rs == javafx.scene.control.ButtonType.OK) {
-                        System.out.println("Pressed OK.");
-                    }
-                });
+                alert.showAndWait();
                 return;
             }
 
@@ -383,8 +372,6 @@ public class BookAppointmentController implements Initializable {
             double parentTopLeftX = point.getX();
             double parentTopLeftY = point.getY();
 
-            System.out.println(parentTopLeftX + " " + parentTopLeftY);
-
             // Set the child stage position relative to the parent's top left corner
             stage.setX(parentTopLeftX);
             stage.setY(parentTopLeftY);
@@ -396,7 +383,6 @@ public class BookAppointmentController implements Initializable {
         }
         catch(Exception e)
         {
-            System.out.println(e);
             e.printStackTrace();
         }
     }

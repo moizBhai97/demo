@@ -35,7 +35,6 @@ public class PatientLedger {
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -54,7 +53,6 @@ public class PatientLedger {
             }
 
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
@@ -78,8 +76,6 @@ public class PatientLedger {
         try{
 
             String patientInfo = dbFactory.createHandler("SQL").getPatient(info);
-            System.out.println(patientInfo);
-
 
             Patient patient = new Patient(patientInfo);
             patientList.add(patient);
@@ -97,7 +93,6 @@ public class PatientLedger {
             return getPatient(patId).getDetails();
         } catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
             return "";
         }
@@ -112,7 +107,6 @@ public class PatientLedger {
 
         } catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
             e.printStackTrace();
         }
     }
