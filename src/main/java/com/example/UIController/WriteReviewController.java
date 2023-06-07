@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
@@ -68,7 +69,11 @@ public class WriteReviewController implements Initializable{
             if(recommend.getSelectedToggle() != null){
                 if(((RadioButton)recommend.getSelectedToggle()).getText().equals("Yes"))
                 {
-                    review.put("recommend", "Yes");
+                    review.put("recommend", true);
+                }
+                else
+                {
+                    review.put("recommend", false);
                 }
             }
 
@@ -80,7 +85,12 @@ public class WriteReviewController implements Initializable{
 
             patientController.submitReview(review.toString(), docId, patId);
 
-            this.submitButton.getScene().getWindow().hide();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Review Submission");
+            alert.setHeaderText("Review Submitted");
+            alert.setContentText("Your review has been submitted successfully");
+            alert.showAndWait();
+            
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/search_doctors.fxml")));
 

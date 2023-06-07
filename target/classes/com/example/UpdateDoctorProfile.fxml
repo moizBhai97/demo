@@ -74,7 +74,7 @@
                                  </cursor>
                               </TextField>
                               <Label text="DOB" />
-                              <TextField fx:id="tf_dob" editable="false" prefHeight="35.0" prefWidth="259.0" promptText="30/10/2003" style="-fx-background-color: #e2e2e2; -fx-border-radius: 4;" styleClass="textField_username" stylesheets="@profile.css">
+                              <TextField fx:id="tf_dob" editable="false" prefHeight="35.0" prefWidth="259.0" promptText="amnairum@gmail.com" style="-fx-background-color: #e2e2e2; -fx-border-radius: 4;" styleClass="textField_username" stylesheets="@profile.css" text="1/1/2003">
                                  <font>
                                     <Font size="14.0" />
                                  </font>

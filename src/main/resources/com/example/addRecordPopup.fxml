@@ -14,9 +14,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="pane_add_rec" prefHeight="200.0" prefWidth="204.0" style="-fx-border-radius: 5; -fx-background-color: ededed;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="parentPane" prefHeight="200.0" prefWidth="204.0" style="-fx-border-radius: 5; -fx-background-color: white; -fx-background-radius: 5; -fx-border-color: #2854C3; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox layoutY="45.0" prefHeight="111.0" prefWidth="203.0" spacing="6.0" style="-fx-background-color: ededed; -fx-border-radius: 5;">
+      <VBox layoutX="-1.0" layoutY="45.0" prefHeight="122.0" prefWidth="204.0" spacing="6.0" style="-fx-background-color: transparent; -fx-border-radius: 5;">
          <children>
             <HBox prefHeight="17.0" prefWidth="142.0">
                <children>
@@ -28,7 +28,7 @@
                   <Label fx:id="typeError" prefHeight="17.0" prefWidth="190.0" text="(error)" textFill="RED" visible="false" />
                </children>
             </HBox>
-            <ComboBox fx:id="typeComboBox" prefHeight="25.0" prefWidth="185.0" styleClass="inner_big_pane1" stylesheets="@profile.css" visibleRowCount="3">
+            <ComboBox fx:id="typeComboBox" prefHeight="25.0" prefWidth="185.0" style="-fx-background-color: ededed;" stylesheets="@profile.css" visibleRowCount="3">
                <items>
                   <FXCollections fx:factory="observableArrayList">
                      <String fx:id="type_1" fx:value="Allergy" />
@@ -68,9 +68,14 @@
       </Label>
       <Line endX="103.0" layoutX="87.0" layoutY="45.0" startX="-72.0" stroke="#bebebe" />
       <Label layoutX="121.0" layoutY="-35.0" text="Label" />
-      <Button fx:id="addButton" layoutX="83.0" layoutY="167.0" mnemonicParsing="false" onAction="#addRecord" style="-fx-background-color: #2854C3;" text="Add" textFill="WHITE">
+      <Button fx:id="addButton" layoutX="137.0" layoutY="167.0" mnemonicParsing="false" onAction="#addRecord" prefWidth="55.0" style="-fx-background-color: #2854C3;" text="Add" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor></Button>
+      <Button fx:id="cancelButton" layoutX="79.0" layoutY="167.0" minHeight="26.0" mnemonicParsing="false" onAction="#cancel" prefHeight="24.0" prefWidth="55.0" style="-fx-background-color: white; -fx-border-color: #2854C3; -fx-background-radius: 3; -fx-border-radius: 3;" text="Cancel">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </Pane>

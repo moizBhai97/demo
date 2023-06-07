@@ -104,12 +104,13 @@ public class Patient {
     {
         JSONObject obj = new JSONObject(info);
         
-        this.patId = obj.getInt("patId");
+
         this.name = obj.getString("name");
         this.email = obj.getString("email");
         this.DOB = obj.getString("DOB");
         this.phoneNumber = obj.getString("phoneNumber");
         this.gender = obj.getString("gender");
+        this.country = obj.getString("country");
     }
 
     public void setHistory()
@@ -264,11 +265,19 @@ public class Patient {
         DBFactory.getInstance().createHandler("SQL").addPatientIllness(patId, info);
     }
 
-    public void removeIllness(int patId, int sid)
+    public void removeIllness(int patId, String info)
     {
         // remove fromm list
-        
-        DBFactory.getInstance().createHandler("SQL").deletePatientIllness(patId, sid);
+        JSONObject obj = new JSONObject(info);
+        for(int i = 0; i < patientHistoryList.size(); i++)
+        {
+            if(patientHistoryList.get(i).getType().equals(obj.get("type")) && patientHistoryList.get(i).getDescription().equals(obj.get("description")))
+            {
+                patientHistoryList.remove(i);
+                break;
+            }
+        }
+        DBFactory.getInstance().createHandler("SQL").deletePatientIllness(patId, info);
     }
 
     public String get(String value)

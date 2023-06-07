@@ -42,8 +42,10 @@ public class Review {
     {
         JSONObject obj = new JSONObject(info);
         experience = obj.getFloat("experience");
-        comment = obj.getString("comment");
-        recommend = obj.getBoolean("recommend");
+        if(obj.has("comment"))
+            comment = obj.getString("comment");
+        if(obj.has("recommend"))
+            recommend = obj.getBoolean("recommend");
         checkupRating = obj.getFloat("checkupRating");
         environmentRating = obj.getFloat("environmentRating");
         staffRating = obj.getFloat("staffRating");

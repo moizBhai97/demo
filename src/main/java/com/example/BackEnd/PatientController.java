@@ -3,6 +3,8 @@ package com.example.BackEnd;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javafx.scene.control.Alert;
+
 public class PatientController {
 
     private DoctorLedger doctorLedger;
@@ -46,6 +48,12 @@ public class PatientController {
             
         }catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Error: Invalid Credentials");
+            alert.setContentText("Email and Password do not Match");
+            alert.showAndWait();
+
             return "";
         }
         
@@ -74,9 +82,9 @@ public class PatientController {
         patientLedger.getPatient(patId).addIllness(patId, info);
     }
 
-    public void removeIllness(int patId, int sid)
+    public void removeIllness(int patId, String info)
     {
-        patientLedger.getPatient(patId).removeIllness(patId, sid);
+        patientLedger.getPatient(patId).removeIllness(patId, info);
     }
 
     public String getPatientHistory(int patId)
