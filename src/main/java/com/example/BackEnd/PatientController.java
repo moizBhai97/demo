@@ -13,14 +13,13 @@ public class PatientController {
         patientLedger = new PatientLedger();
     }
 
-    public void signup(String info)
+    public void signup(String info) throws Exception
     {
         try{
             patientLedger.addPatient(info);
         }catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-            e.printStackTrace();
-
+            //System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            throw e;
         }
     }
 
@@ -41,7 +40,8 @@ public class PatientController {
             return "" + (patient.getpatId());
             
         }catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            //System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            
             throw e;
         }
         
@@ -73,15 +73,13 @@ public class PatientController {
 
     }
 
-    public void addIllness(int patId, String info)
+    public void addIllness(int patId, String info) throws Exception
     {
-        try
-        {
+        try{
             patientLedger.getPatient(patId).addIllness(patId, info);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
+
+        }catch(Exception e){
+            throw e;
         }
     }
 

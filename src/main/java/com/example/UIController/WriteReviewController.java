@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.ToggleGroup;
@@ -37,17 +38,39 @@ public class WriteReviewController implements Initializable{
     private Rating staffRating;
     @FXML
     private Button submitButton;
+    @FXML
+    private Label experience;
+    @FXML
+    private Label specialization;
+    @FXML
+    private Label rating;    
+    @FXML
+    private Label patients;    
+    @FXML
+    private Label name;
+
 
     private AnchorPane prevPane;
 
     PatientController patientController;
     int docId ;
     int patId ;
+    int appId ;
     Scene prev;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         commentBox.setWrapText(true);
+        String info = patientController.getAppointment(patId, appId);
+
+        JSONObject obj = new JSONObject(info);
+
+        name.setText(obj.getJSONObject("doctor").getString("name"));
+        specialization.setText(obj.getJSONObject("doctor").getString("specialization"));
+        patients.setText(obj.getJSONObject("doctor").getString("patients"));
+        experience.setText(obj.getJSONObject("doctor").getString("experience"));
+        rating.setText(String.format("%.1f", obj.getJSONObject("doctor").getFloat("rating")));
+
     }
 
     @FXML
@@ -120,10 +143,11 @@ public class WriteReviewController implements Initializable{
         }
     }
     
-    public void setData(PatientController patientController, int docId, int patId, AnchorPane prevPane, Scene prev) {
+    public void setData(PatientController patientController, int docId, int patId, int appId, AnchorPane prevPane, Scene prev) {
         this.patientController = patientController;
         this.docId = docId;
         this.patId = patId;
+        this.appId = appId;
         this.prevPane = prevPane;
         this.prev = prev;
     }

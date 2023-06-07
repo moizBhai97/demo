@@ -45,19 +45,17 @@ public class SignupController implements Initializable
 
     PatientController patientController = new PatientController();
     DoctorController doctorController = new DoctorController();
-
+    
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // TODO Auto-generated method stub
         return;
     }
-
-    public void signupButton(ActionEvent event){
-        System.out.println("Signup button pressed");
-
+    
+    public void signupButton(ActionEvent event) throws Exception{
         try{
 
-            if(nameTextField.getText().equals("") || emailTextField.getText().equals("") || passwordTextField.getText().equals("") || DOBdatePicker.getValue() == null || genderComboBox.getValue() == null || countryComboBox.getValue() == null || phoneNumberTextField.getText().equals("")){
+            if(nameTextField.getText().trim().isBlank() || emailTextField.getText().trim().isBlank() || passwordTextField.getText().trim().isBlank() || phoneNumberTextField.getText().trim().isBlank()){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Input");
                 alert.setHeaderText("Error: Empty fields");
@@ -65,20 +63,19 @@ public class SignupController implements Initializable
                 alert.showAndWait();
                 return;
             }
-
-            if(nameTextField.getText().isBlank() || emailTextField.getText().isBlank() || passwordTextField.getText().isBlank() || phoneNumberTextField.getText().isBlank()){
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Invalid Input");
-                alert.setHeaderText("Error: Empty fields");
-                alert.setContentText("Please fill all the fields");
-                alert.showAndWait();
-                
-            }
             if(!nameTextField.getText().matches("[a-zA-Z._ ]+")){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Input");
                 alert.setHeaderText("Error: Invalid Name");
                 alert.setContentText("Name should only contain alphabets, spaces, '.' and '_'");
+                alert.showAndWait();
+                return;
+            }
+            if (!emailTextField.getText().matches("[a-zA-Z0-9._]+@[a-zA-Z0-9]+\\.[a-zA-Z]+")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Invalid Input");
+                alert.setHeaderText("Error: Invalid Email");
+                alert.setContentText("Please enter a valid email address.");
                 alert.showAndWait();
                 return;
             }
@@ -106,15 +103,7 @@ public class SignupController implements Initializable
                 alert.showAndWait();
                 return;
             }
-            if (!emailTextField.getText().matches("[a-zA-Z0-9._]+@[a-zA-Z0-9]+\\.[a-zA-Z]+")) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Invalid Input");
-                alert.setHeaderText("Error: Invalid Email");
-                alert.setContentText("Please enter a valid email address.");
-                alert.showAndWait();
-                return;
-            }
-            if (!phoneNumberTextField.getText().matches("[0-9]+") || phoneNumberTextField.getText().length() != 11) {
+            if (!phoneNumberTextField.getText().matches("[0-9]+") || phoneNumberTextField.getText().trim().length() != 11) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Invalid Input");
                 alert.setHeaderText("Error: Invalid Phone Number");
@@ -126,20 +115,27 @@ public class SignupController implements Initializable
             
             JSONObject patient = new JSONObject();
             
-            patient.put("name", nameTextField.getText());
-            patient.put("email", emailTextField.getText());
-            patient.put("password", passwordTextField.getText());
+            patient.put("name", nameTextField.getText().trim());
+            patient.put("email", emailTextField.getText().trim());
+            patient.put("password", passwordTextField.getText().trim());
             patient.put("DOB", DOBdatePicker.getValue().toString());
             patient.put("gender", genderComboBox.getValue().toString());
             patient.put("country", countryComboBox.getValue().toString());
-            patient.put("phoneNumber", phoneNumberTextField.getText());
+            patient.put("phoneNumber", phoneNumberTextField.getText().trim());
             
             patientController.signup(patient.toString());
 
             this.signupButton.getScene().getWindow().hide();
             loadLogin();
         }catch(Exception e){
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            //System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Account already exists");
+            alert.setContentText("An account has already been made using that email address");
+            alert.showAndWait();
+
+            throw e;
         }
     }
 

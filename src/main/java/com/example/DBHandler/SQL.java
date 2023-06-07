@@ -474,7 +474,7 @@ public class SQL extends DBHandler {
         }
     }
 
-public String getPatient(String info) throws SQLException, IOException, ParseException, Exception {
+    public String getPatient(String info) throws Exception{
 
         JSONObject information = new JSONObject(info);
 
@@ -511,9 +511,10 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
             throw e;
         }
 
+
     }
 
-    public String getDoctor(String info) {
+    public String getDoctor(String info) throws Exception{
 
         try
         {
@@ -567,14 +568,13 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
 
             } catch (SQLException | JSONException e) {
                 e.printStackTrace();
-                return "[]";
+                throw e;
             }
         }
         catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-            e.printStackTrace();
-            return null;
+            throw e;
         }
 
     }
@@ -838,8 +838,10 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
         }
     }
 
-    public void addPatient(String info) {
-        try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
+    public void addPatient(String info) throws Exception
+    {
+        try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement())
+        {
 
             JSONObject obj = new JSONObject(info);
             String SQL = "INSERT INTO PATIENTS (NAME, EMAIL, PASSWORD, DOB, COUNTRY, PHONE_NUMBER, GENDER) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -855,13 +857,16 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
 
             pstmt.executeUpdate();
 
-        }catch (SQLException | JSONException e) {
-            e.printStackTrace();
+        }catch (Exception e) {
+            // con.close();
+            //e.printStackTrace();
+            throw e;
         }
     }
 
-    public void addPatientIllness(int patId, String info) {
-        try (Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()) {
+    public void addPatientIllness(int patId, String info) throws Exception
+    {
+        try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement() ){
             JSONObject obj = new JSONObject(info);
             String SQL = "INSERT INTO PATIENT_HISTORY (ID, TYPE, DESCRIPTION) VALUES (?, ?, ?);";
 
@@ -871,8 +876,11 @@ public String getPatient(String info) throws SQLException, IOException, ParseExc
             pstmt.setString(3, obj.getString("description"));
 
             pstmt.executeUpdate();
-        } catch (SQLException | JSONException e) {
-            e.printStackTrace();
+        }
+        catch(Exception e)
+        {
+            //e.printStackTrace();
+            throw e;
         }
     }
 

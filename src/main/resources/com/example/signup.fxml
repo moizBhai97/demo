@@ -163,7 +163,7 @@
                                     </ImageView>
                                  </children>
                               </Pane>
-                              <ComboBox fx:id="genderComboBox" layoutX="27.0" prefHeight="26.0" prefWidth="208.0" promptText="Gender" styleClass="big_pane" stylesheets="@signup.css">
+                              <ComboBox fx:id="genderComboBox" layoutX="27.0" prefHeight="26.0" prefWidth="208.0" promptText="Gender" stylesheets="@signup.css">
                                  <items>
                                     <FXCollections fx:factory="observableArrayList">
                                        <String fx:id="gender_1" fx:value="Male" />

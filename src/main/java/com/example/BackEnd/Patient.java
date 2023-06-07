@@ -301,17 +301,14 @@ public class Patient {
         }
     }
 
-    public void addIllness(int patId, String info)
+    public void addIllness(int patId, String info)throws Exception
     {
-        try
-        {
+        try{
             PatientHistory history = new PatientHistory(info);
             patientHistoryList.add(history);
             DBFactory.getInstance().createHandler("SQL").addPatientIllness(patId, info);
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
+        }catch(Exception e){
+            throw e;
         }
     }
 
