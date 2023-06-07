@@ -1,6 +1,8 @@
 package com.example.DBHandler;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,6 +32,50 @@ public class SQL extends DBHandler {
                         "databaseName=SDA;" + 
                         "IntegratedSecurity=true;" + 
                         "encrypt=true;trustServerCertificate=true";
+    }
+
+    public void createDatabaseAndTables(String createDatabaseSqlFilePath, String createTablesSqlFilePath) {
+        try (Connection con = DriverManager.getConnection(connectionUrl)) {
+            // Create the database
+            executeSqlScript(con, createDatabaseSqlFilePath);
+
+            // Use the database
+            con.setCatalog("SDA");
+
+            // Create the tables
+            executeSqlScript(con, createTablesSqlFilePath);
+
+            System.out.println("Database and tables created successfully.");
+
+        } catch (SQLException e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
+        }
+    }
+
+    private void executeSqlScript(Connection con, String sqlFilePath) {
+        try {
+            StringBuilder sql = new StringBuilder();
+            BufferedReader reader = new BufferedReader(new FileReader(sqlFilePath));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sql.append(line);
+                sql.append("\n");
+            }
+            reader.close();
+
+            String[] statements = sql.toString().split(";");
+            for (String statement : statements) {
+                if (!statement.trim().isEmpty()) {
+                    PreparedStatement pstmt = con.prepareStatement(statement);
+                    pstmt.execute();
+                }
+            }
+
+        } catch (IOException | SQLException e) {
+            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
+            e.printStackTrace();
+        }
     }
 
     public String getDoctorName(int docId) {
