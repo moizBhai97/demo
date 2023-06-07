@@ -83,7 +83,7 @@ public class PatientLedger {
         return null;
     }    
 
-    public Patient getPatient(String info)
+    public Patient getPatient(String info) throws Exception
     {
         try{
 
@@ -98,7 +98,8 @@ public class PatientLedger {
         } catch(Exception e)
         {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-            return null;
+            throw e;
+            //return null;
         }
     }
 

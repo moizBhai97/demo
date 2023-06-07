@@ -23,7 +23,7 @@ public class PatientController {
         }
     }
 
-    public String login(String info)
+    public String login(String info) throws Exception
     {
         System.out.println("Pateint controller login");
         try{
@@ -46,7 +46,7 @@ public class PatientController {
             
         }catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-            return "";
+            throw e;
         }
         
     }

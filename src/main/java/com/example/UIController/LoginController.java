@@ -142,7 +142,7 @@ public class LoginController implements Initializable {
                 stage.show();
                 stage.centerOnScreen();
 
-            } catch (IOException e) {
+            } catch (Exception e) {
                 System.err.println(String.format("Error: %s", e.getMessage()));
             }
         } else if (!isPatient) {
