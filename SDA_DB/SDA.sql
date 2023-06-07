@@ -785,24 +785,6 @@ BEGIN
     SET @doctorId = @doctorId + 1;
 END
 GO
-     
-
-
--- INSERT INTO APPOINTMENTS (DOCTOR_ID, PATIENT_ID, DATE, TIME, STATUS, PROBLEM)
--- VALUES 
---   (101, 1, '2023-06-06', '10:00:00', 'Completed', 'My skin is dry.'),
---   (102, 1, '2023-06-07', '11:00:00', 'Completed', 'My skin is dry.'),
---   (103, 1, '2023-06-08', '12:00:00', 'Completed', 'My skin is dry.'),
---   (104, 1, '2023-06-09', '13:00:00', 'Completed', 'My skin is dry.'),
---   (105, 1, '2023-06-10', '14:00:00', 'Completed', 'My skin is dry.');
-
--- INSERT INTO PAYMENTS (APPOINTMENT_ID, DATE, TIME, STATUS, AMOUNT)
--- VALUES 
---   (6, '2023-06-06', '10:00:00', 1, 1200),
---   (7, '2023-06-07', '11:00:00', 1, 1500),
---   (8, '2023-06-08', '12:00:00', 1, 2000),
---   (9, '2023-06-09', '13:00:00', 1, 1000),
---   (10, '2023-06-10', '14:00:00', 1, 800);
 
 -- Select * from APPOINTMENTS;
 
