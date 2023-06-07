@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="564.0" prefWidth="657.0" styleClass="big_pane" stylesheets="@resch.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Button fx:id="backBtn" mnemonicParsing="false" onAction="#backBtnPressed" prefHeight="25.0" prefWidth="82.0" style="-fx-background-color: transparent;" styleClass="Butt_inner_pane" text="&lt;  Back" textFill="#2854c3" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <HBox alignment="CENTER" layoutX="11.0" layoutY="49.0" AnchorPane.bottomAnchor="22.600000000000023" AnchorPane.leftAnchor="11.0" AnchorPane.rightAnchor="11.0" AnchorPane.topAnchor="49.0">
+         <children>
+            <Pane>
+               <children>
+                  <Pane fx:id="big_pane1" layoutY="95.0" prefHeight="302.0" prefWidth="310.0" styleClass="big_pane" stylesheets="@resch.css">
+                     <children>
+                        <Label layoutX="46.0" layoutY="16.0" text="Reason" textFill="#2854c3">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <RadioButton fx:id="radio1" layoutX="58.0" layoutY="52.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@resch.css" text="I’m not available on schedule" textFill="#8c8f85">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="radios" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="radio11" layoutX="58.0" layoutY="84.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@resch.css" text="I’m having a schedule clash" textFill="#8c8f85" toggleGroup="$radios" />
+                        <RadioButton fx:id="radio1211" layoutX="58.0" layoutY="115.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@resch.css" text="I donot want to tell" textFill="#8c8f85" toggleGroup="$radios" />
+                        <RadioButton fx:id="radio12111" layoutX="58.0" layoutY="145.0" mnemonicParsing="false" styleClass="radio_butt" stylesheets="@resch.css" text="Other" textFill="#8c8f85" toggleGroup="$radios" />
+                        <TextArea fx:id="reason" layoutX="54.0" layoutY="179.0" prefHeight="104.0" prefWidth="254.0" promptText="Enter Reason">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></TextArea>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="big_pane11" layoutX="319.0" layoutY="109.0" prefHeight="262.0" prefWidth="299.0" styleClass="big_pane" stylesheets="@resch.css">
+                     <children>
+                        <Label fx:id="datePick" alignment="BASELINE_LEFT" layoutX="46.0" layoutY="16.0" prefHeight="31.0" prefWidth="254.0" text="21 January, Friday" textFill="#8c8fa5" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Pane layoutX="-121.0" layoutY="16.0" prefHeight="31.0" prefWidth="160.0">
+                           <children>
+                              <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="134.0" layoutY="2.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/Calendar.png" />
+                                 </image>
+                              </ImageView>
+                              <DatePicker fx:id="datePicker" editable="false" layoutX="-1.0" layoutY="3.0" onAction="#datePickerPressed" prefHeight="18.0" prefWidth="160.0" styleClass="date-picker" stylesheets="@resch.css">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </DatePicker>
+                              <Pane layoutX="-2.0" prefHeight="31.0" prefWidth="137.0" />
+                           </children>
+                        </Pane>
+                        <ToggleButton fx:id="day" alignment="BASELINE_LEFT" layoutX="14.0" layoutY="64.0" mnemonicParsing="false" onAction="#morningButton" prefHeight="49.0" prefWidth="134.0" selected="true" styleClass="button_big" stylesheets="@resch.css" text="Day" textFill="WHITE">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/Group%20500.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="period" />
+                           </toggleGroup>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ToggleButton>
+                        <ToggleButton fx:id="night" alignment="BASELINE_LEFT" layoutX="165.0" layoutY="64.0" mnemonicParsing="false" onAction="#nightButton" prefHeight="49.0" prefWidth="134.0" styleClass="button_night" stylesheets="@resch.css" text="Night" toggleGroup="$period">
+                           <graphic>
+                              <ImageView fitHeight="24.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/Group%20502.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </ToggleButton>
+                        <HBox fx:id="timesBox" layoutX="14.0" layoutY="131.0" prefHeight="50.0" prefWidth="286.0" spacing="10.0">
+                           <children>
+                              <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="button_big" stylesheets="@resch.css" text="9:30 am" textFill="WHITE">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="times" />
+                                 </toggleGroup>
+                              </ToggleButton>
+                              <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@resch.css" text="10:30 am" toggleGroup="$times" />
+                              <ToggleButton mnemonicParsing="false" prefHeight="49.0" prefWidth="85.0" selected="true" styleClass="inner_big_pane3" stylesheets="@resch.css" text="11:30 am" toggleGroup="$times" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </Pane>
+                  <Button fx:id="reschButton" layoutX="388.0" layoutY="378.0" mnemonicParsing="false" onAction="#reschButton" prefHeight="50.0" prefWidth="226.0" styleClass="button_big" stylesheets="@resch.css" text="Reschedule Appointment" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Pane fx:id="inner_big_pane12" prefHeight="94.0" prefWidth="245.0" styleClass="inner_big_pane1" stylesheets="@doctor_details.css">
+                     <children>
+                        <Pane layoutY="7.0" prefHeight="79.0" prefWidth="103.0">
+                           <children>
+                              <ImageView fitHeight="58.0" fitWidth="55.0" layoutX="24.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2020.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="name" layoutX="85.0" layoutY="14.0" text="Dr. Amna Irum" textFill="#979797">
+                           <font>
+                              <Font name="System Bold" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="specialization" layoutX="85.0" layoutY="38.0" text="Dermatologist" textFill="#979797" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane113" layoutX="262.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
+                     <children>
+                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
+                           <children>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="10.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2016.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="patients" alignment="CENTER" contentDisplay="CENTER" layoutX="36.0" layoutY="49.0" prefHeight="25.0" prefWidth="41.0" styleClass="texty" stylesheets="@doctor_details.css" text="90" textAlignment="CENTER">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="35.0" layoutY="72.0" text="Patients" />
+                     </children>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane1111" layoutX="388.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
+                     <children>
+                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
+                           <children>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="17.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2017%20(2).png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="experience" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="47.0" prefHeight="25.0" prefWidth="31.0" styleClass="texty" stylesheets="@doctor_details.css" text="5" textAlignment="CENTER">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="28.0" layoutY="72.0" text="Experience" />
+                        <Label fx:id="experience1" alignment="CENTER" contentDisplay="CENTER" layoutX="46.0" layoutY="47.0" styleClass="texty" stylesheets="@doctor_details.css" text="+ Years">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </Pane>
+                  <Pane fx:id="inner_big_pane1121" layoutX="512.0" prefHeight="94.0" prefWidth="114.0" styleClass="inner_big_pane2" stylesheets="@doctor_details.css">
+                     <children>
+                        <Pane layoutX="29.0" prefHeight="49.0" prefWidth="55.0">
+                           <children>
+                              <ImageView fitHeight="31.0" fitWidth="35.0" layoutX="12.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../images/image%2018.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Label fx:id="rating" alignment="CENTER" contentDisplay="CENTER" layoutX="34.0" layoutY="47.0" prefHeight="25.0" prefWidth="45.0" styleClass="texty" stylesheets="@doctor_details.css" text="4.8">
+                           <font>
+                              <Font name="Serif Regular" size="16.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="37.0" layoutY="72.0" text="Ratings" />
+                     </children>
+                  </Pane>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+   </children>
+   <effect>
+      <InnerShadow height="30.35" radius="16.4325" width="37.38" />
+   </effect>
+</AnchorPane>

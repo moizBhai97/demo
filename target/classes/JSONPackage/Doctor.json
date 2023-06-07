@@ -1,0 +1,26 @@
+{
+    "id": "{{id}}",
+    "name": "{{name}}",
+    "email": "{{email}}",
+    "DOB": "{{DOB}}",
+    "country": "{{country}}",
+    "phoneNumber": "{{phoneNumber}}",
+    "gender": "{{gender}}",
+    "details:":  {
+                    "specialization": "{{specialization}}",
+                    "description": "{{description}}",
+                    "location": "{{location}}",
+                    "stats": "{{stats}}",
+                    "patients": "{{patients}}",
+                    "experience": "{{experience}}",
+                    "rating": "{{rating}}",
+                    "services": "{{services}}",
+                    "workingHours": "{{workingHours}}",
+                    "fee": "{{fee}}",
+                    "checkupRating": "{{checkupRating}}",
+                    "environmentRating": "{{environmentRating}}",
+                    "staffRating": "{{staffRating}}",
+                    "reviews": "{{reviews}}",
+                    "availability": "{{availability}}"
+                  }
+  }

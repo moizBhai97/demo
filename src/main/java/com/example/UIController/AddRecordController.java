@@ -19,34 +19,26 @@ public class AddRecordController {
 
     @FXML
     private Button addButton;
-
+    @FXML
+    private Button cancelButton;
     @FXML
     private Label descriptionError;
-
     @FXML
     private TextField descriptionTextBox;
-
     @FXML
     private Pane pane_add_rec;
-
     @FXML
     private ComboBox<?> typeComboBox;
-
     @FXML
     private Label typeError;
-
     @FXML
     private String type_1;
-
     @FXML
     private String type_2;
-
     @FXML
     private String type_3;
-
     @FXML
     private String type_4;
-
     @FXML
     private String type_5;
 
@@ -93,7 +85,7 @@ public class AddRecordController {
                 flag = true;
             }
             
-            //SET RESTRICTION
+            //SET RESTRICTION 
             if(description.length() > 20)
             {
                 descriptionError.setText("*(max characters: 20)");
@@ -117,5 +109,10 @@ public class AddRecordController {
         {
             System.out.println(e);
         }
+    }
+
+    @FXML
+    void cancel(ActionEvent event) {
+        this.cancelButton.getScene().getWindow().hide();
     }
 }

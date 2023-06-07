@@ -58,10 +58,10 @@ public class AddCertificationController{
     }
 
     @FXML
-    void addCertification(ActionEvent event) {
+    void addCertification(ActionEvent event) throws Exception{
 
         try{
-            if(this.tf_cert.getText().isEmpty() || this.dp_issue.getValue() == null || this.dp_expire.getValue() == null){
+            if(this.tf_cert.getText().isEmpty() || this.tf_cert.getText().isBlank()|| this.dp_issue.getValue() == null || this.dp_expire.getValue() == null){
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -70,7 +70,7 @@ public class AddCertificationController{
                 alert.showAndWait();
                 return;
             }
-            if(this.tf_cert.getText().length() > 20){
+            if(this.tf_cert.getText().length() > 255){
 
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
@@ -105,7 +105,14 @@ public class AddCertificationController{
         }
         catch(Exception e){
 
-            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Duplicate Certification");
+            alert.setContentText("The Certification has already been added");
+            alert.showAndWait();
+
+            //e.printStackTrace();
+            throw e;
         }
     }
 

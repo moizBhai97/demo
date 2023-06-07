@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="564.0" prefWidth="657.0" style="-fx-background-color: white;" stylesheets="@login.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.UIController.StartController">
+   <children>
+      <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Pane prefHeight="564.0" prefWidth="658.0" style="-fx-background-color: white;" stylesheets="@login.css">
+               <children>
+                  <Label layoutX="273.0" layoutY="29.0" prefHeight="23.0" prefWidth="193.0" text="HealthySense" textFill="#2854c3">
+                     <font>
+                        <Font name="SansSerif Bold" size="25.0" />
+                     </font>
+                  </Label>
+                  <ImageView fitHeight="105.0" fitWidth="96.0" layoutX="185.0" layoutY="-9.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../images/image%2011.png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="patientButton" contentDisplay="TOP" layoutX="385.0" layoutY="123.0" mnemonicParsing="false" onAction="#patientButton" styleClass="docButton" stylesheets="@login.css" text="Continue As Patient">
+                     <graphic>
+                        <ImageView accessibleRole="BUTTON" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/patientIcon.png" />
+                           </image>
+                           <effect>
+                              <Shadow height="0.0" radius="0.0" width="0.0">
+                                 <color>
+                                    <Color red="0.1568627506494522" green="0.3294117748737335" blue="0.7647058963775635" />
+                                 </color>
+                              </Shadow>
+                           </effect>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+                  <Button fx:id="doctorButton" contentDisplay="TOP" layoutX="53.0" layoutY="123.0" mnemonicParsing="false" onAction="#doctorButton" prefHeight="244.0" prefWidth="220.0" styleClass="docButton" stylesheets="@login.css" text="Continue As Doctor">
+                     <graphic>
+                        <ImageView accessibleRole="BUTTON" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/doctorIcon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Button>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

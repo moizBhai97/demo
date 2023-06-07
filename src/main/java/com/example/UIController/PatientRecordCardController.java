@@ -32,7 +32,7 @@ public class PatientRecordCardController implements Initializable{
 
     int patId;
     JSONArray history;
-    JSONObject obj;
+    String info;
     int sid;
     int idTag;
 
@@ -41,6 +41,7 @@ public class PatientRecordCardController implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
 
+        JSONObject obj = new JSONObject(info);
         this.index.setText(idTag + ". ");
         this.type.setText(obj.getString("type"));
         this.description.setText(obj.getString("description"));
@@ -55,8 +56,8 @@ public class PatientRecordCardController implements Initializable{
     {
         this.patId = patId;
         this.history = history;
-        obj = new JSONObject(info);
-        sid = obj.getInt("sid");
+        this.info = info;        
+        //sid = obj.getInt("sid");
         idTag = index;
         this.patientController = patientController;
     }
@@ -75,7 +76,7 @@ public class PatientRecordCardController implements Initializable{
 
             System.out.println(history.toString());
             history.remove(index);
-            patientController.removeIllness(patId, sid);
+            patientController.removeIllness(patId, info);
             System.out.println(history.toString());
             
             for(int i = index; i < flowPane.getChildren().size(); i++)

@@ -901,7 +901,7 @@ public class SQL extends DBHandler {
         }
     }
 
-    public void addCertification(String info, int docId)
+    public void addCertification(String info, int docId) throws Exception
     {
         try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement()){
             JSONObject obj = new JSONObject(info);
@@ -916,10 +916,11 @@ public class SQL extends DBHandler {
 
             pstmt.executeUpdate();
         }
-        catch (SQLException | JSONException e) {
+        catch ( Exception e) {
             // con.close();
-
-            e.printStackTrace();
+            //e.printStackTrace();
+            throw e;
+            //throw new Throwable(e);
         }
     }
 
@@ -968,18 +969,21 @@ public class SQL extends DBHandler {
         }
     }
 
-    public void deletePatientIllness(int patId, int sid)
+    public void deletePatientIllness(int patId, String info)
     {
         try(Connection con = DriverManager.getConnection(connectionUrl); Statement stmt = con.createStatement())
         {
-            String SQL = "DELETE FROM PATIENT_HISTORY WHERE ID = ? AND SID = ?;";
+            JSONObject obj = new JSONObject(info);
+            String SQL = "DELETE FROM PATIENT_HISTORY WHERE ID = ? AND TYPE = ? AND DESCRIPTION = ?;";
+
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, patId);
-            pstmt.setInt(2, sid);
+            pstmt.setString(2, obj.getString("type"));
+            pstmt.setString(3, obj.getString("description"));
 
             pstmt.executeUpdate();
         }
-        catch(SQLException e)
+        catch(SQLException | JSONException e)
         {
             e.printStackTrace();
         }
@@ -1029,22 +1033,27 @@ public class SQL extends DBHandler {
             PreparedStatement pstmt = con.prepareStatement(SQL);
             pstmt.setInt(1, patId);
             pstmt.setInt(2, docId);
-            pstmt.setString(3, obj.getString("comment"));
+            if(obj.has("comment"))
+                pstmt.setString(3, obj.getString("comment"));
+            else{pstmt.setString(3, null);}
             pstmt.setFloat(4, obj.getFloat("experience"));
-            if(obj.getString("recommend").equals("Yes"))
-                {pstmt.setInt(5, 1);}
-            else{pstmt.setInt(5, 0);}
+            if(obj.has("recommend")){
+                if(obj.getBoolean("recommend") == true)
+                    {pstmt.setBoolean(5, true);}
+                else{pstmt.setBoolean(5, false);} }
+            else{pstmt.setBoolean(5, false);}
+
             pstmt.setFloat(6, obj.getFloat("checkupRating"));
             pstmt.setFloat(7, obj.getFloat("environmentRating"));
             pstmt.setFloat(8, obj.getFloat("staffRating"));
             pstmt.executeUpdate();
 
-            String SQL2 = "UPDATE Doctors SET RATING = (SELECT AVG(EXPERIENCE) FROM Reviews WHERE DOCTOR_ID = ?) WHERE ID = ?;";
-            PreparedStatement pstmt2 = con.prepareStatement(SQL2);
-            pstmt2.setInt(1, docId);
-            pstmt2.setInt(2, docId);
+            // String SQL2 = "UPDATE Doctors SET RATING = (SELECT AVG(EXPERIENCE) FROM Reviews WHERE DOCTOR_ID = ?) WHERE ID = ?;";
+            // PreparedStatement pstmt2 = con.prepareStatement(SQL2);
+            // pstmt2.setInt(1, docId);
+            // pstmt2.setInt(2, docId);
             
-            pstmt2.executeUpdate();
+            // pstmt2.executeUpdate();
         }
         catch (SQLException | JSONException e) {
             // con.close();

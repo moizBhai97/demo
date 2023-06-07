@@ -38,7 +38,7 @@ public class DoctorController {
         
     }
 
-    public void addCertification(String info, int docId)
+    public void addCertification(String info, int docId) throws Exception
     {
         try{
             //JSONObject json = new JSONObject(info);
@@ -47,6 +47,7 @@ public class DoctorController {
 
         }catch (Exception e) {
             System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            throw e;
         }
         
 

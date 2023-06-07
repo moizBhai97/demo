@@ -58,20 +58,23 @@ public class CertificateLedger {
         return objs.toString();
     }
 
-    public void addCertification(String info, int docId)
+    public void addCertification(String info, int docId)throws Exception
     {
         try
         {
             Certificate certificate = new Certificate(info);
 
+            // DBHandler temp = DBFactory.getInstance().createHandler("SQL");
+            // temp.addCertification(certificate.toString(), docId);
             DBFactory.getInstance().createHandler("SQL").addCertification(certificate.toString(), docId);
             
+            System.out.println(certificate.toString());
             certificates.add(certificate);
         }
         catch(Exception e)
         {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
-
+            //System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {} .getClass().getEnclosingMethod().getName());
+            throw e;
         }
     }
 }

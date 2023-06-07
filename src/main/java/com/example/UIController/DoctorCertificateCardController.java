@@ -41,6 +41,10 @@ public class DoctorCertificateCardController implements Initializable{
             status.setText(" (Pending)");
             status.setVisible(true);
         }
+        else
+        {
+            status.setVisible(false);
+        }
     }
 
     public void setData(int docId, int index, String info, JSONArray certificates)

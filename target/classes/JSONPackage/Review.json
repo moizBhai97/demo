@@ -1,0 +1,9 @@
+{
+    "comment": "{{comment}}",
+    "experience": "{{experience}}",
+    "recommend": "{{recommend}}",
+    "checkupRating": "{{checkupRating}}",
+    "environmentRating": "{{environmentRating}}",
+    "staffRating": "{{staffRating}}",
+    "patId": "{{patId}}"
+}
