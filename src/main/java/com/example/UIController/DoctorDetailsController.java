@@ -195,11 +195,11 @@ public class DoctorDetailsController implements Initializable {
             loader.setLocation((new URL("file:src/main/resources/com/example/manageReview.fxml")));
 
             ManageReviewController reviewsController = new ManageReviewController();
-            reviewsController.setData(pc, patId, docId, rootPane);
+            reviewsController.setData(pc, null, docId, rootPane);
             loader.setController(reviewsController);
 
             AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, -1.0);
+            AnchorPane.setTopAnchor(pane, 0.0);
             AnchorPane.setBottomAnchor(pane, 0.0);
             AnchorPane.setLeftAnchor(pane, 0.0);
             AnchorPane.setRightAnchor(pane, 0.0);

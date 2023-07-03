@@ -267,12 +267,14 @@ public class BookAppointmentController implements Initializable {
         {
             ToggleButton button = (ToggleButton) toggle;
 
-            if(!(button.getUserData() instanceof Boolean && (boolean) button.getUserData()))
+            if(!(button.getUserData() instanceof Boolean && (boolean) button.getUserData()) && button == selectedButton)
             {
                 selectedTime = null;
+            }
+            else if(!(button.getUserData() instanceof Boolean && (boolean) button.getUserData()))
+            {
                 continue;
             }
-
             else if (button != selectedButton) 
             {
                 button.setStyle("-fx-background-color: #eff6fc; -fx-border-color: #eff6fc; -fx-text-fill: black;");

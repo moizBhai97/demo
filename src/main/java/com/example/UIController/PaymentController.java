@@ -101,12 +101,15 @@ public class PaymentController implements Initializable {
         this.prev = prev;
     }
 
-    public void paymentButton(ActionEvent event) {
+    public void paymentButton(ActionEvent event) 
+    {
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirm Payment");
         alert.setHeaderText("Are you sure you want to make this payment?");
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.YES) {
+
+        if (result.isPresent() && result.get() == ButtonType.OK) 
+        {
             try {
                 JSONObject obj = new JSONObject(appoint);
 
@@ -129,22 +132,22 @@ public class PaymentController implements Initializable {
 
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
-                Stage stage = new Stage();
-                stage.setScene(scene);
-                prev.getWindow().hide();
-                this.paymentBtn.getScene().getWindow().hide();
 
                 Stage prevWin = (Stage) prev.getWindow();
 
-                stage.setWidth(prevWin.getWidth());
-                stage.setHeight(prevWin.getHeight());
-                stage.setX(prevWin.getX());
-                stage.setY(prevWin.getY());
+                Stage stage = prevWin;
+
+                stage.setScene(scene);
+
+                this.paymentBtn.getScene().getWindow().hide();
+
+                stage.show();
+                
+                stage.sizeToScene();
 
                 stage.setMinWidth(825);
                 stage.setMinHeight(680);
 
-                stage.show();
                 stage.centerOnScreen();
             }
             catch(Exception e)

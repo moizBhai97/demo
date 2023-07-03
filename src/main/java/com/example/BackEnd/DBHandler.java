@@ -30,6 +30,8 @@ abstract public class DBHandler {
   public abstract String getPatientName(int patId);
   public abstract void updatePayment(int appID);
 
-  public abstract void createDatabaseAndTables(String createDatabaseSqlFilePath, String createTablesSqlFilePath);
-  
+  public abstract void setServer(String server);
+  public abstract Boolean createDatabaseAndTables(String createTablesSqlFilePath);
+  public abstract Boolean testConnection();
+
 }

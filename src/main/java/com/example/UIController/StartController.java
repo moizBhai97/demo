@@ -49,15 +49,17 @@ public class StartController implements Initializable{
             loader.setController(loginController);
 
             Parent root = loader.load();
-            Scene scene = new Scene(root, 700, 500);
+            Scene scene = new Scene(root);
             Stage stage = (Stage) patientButton.getScene().getWindow();
             stage.setScene(scene);
 
-            stage.setMinWidth(700);
-            stage.setMinHeight(500);
-
-
             stage.show();
+
+            stage.sizeToScene();
+
+            stage.setMinWidth(720);
+            stage.setMinHeight(550);
+
             stage.centerOnScreen();
         } catch (IOException e) {
             e.printStackTrace();
@@ -78,14 +80,17 @@ public class StartController implements Initializable{
             loader.setController(loginController);
 
             Parent root = loader.load();
-            Scene scene = new Scene(root, 700, 500);
+            Scene scene = new Scene(root);
             Stage stage = (Stage) doctorButton.getScene().getWindow();
             stage.setScene(scene);
 
-            stage.setMinWidth(700);
-            stage.setMinHeight(500);
-
             stage.show();
+
+            stage.sizeToScene();
+
+            stage.setMinWidth(720);
+            stage.setMinHeight(550);
+
             stage.centerOnScreen();
         } catch (IOException e) {
             e.printStackTrace();

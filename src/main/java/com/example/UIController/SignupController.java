@@ -13,7 +13,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -53,7 +52,6 @@ public class SignupController implements Initializable {
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // TODO Auto-generated method stub
         return;
     }
     
@@ -164,10 +162,18 @@ public class SignupController implements Initializable {
             loader.setController(loginController);
 
             Parent root = loader.load();
-            Scene scene = new Scene(root, 700, 500);
+            Scene scene = new Scene(root);
             Stage stage = (Stage) this.signupButton.getScene().getWindow();
+
             stage.setScene(scene);
+
             stage.show();
+
+            stage.sizeToScene();
+
+            stage.setMinWidth(720);
+            stage.setMinHeight(550);
+
             stage.centerOnScreen();
         } catch (IOException e) {
             e.printStackTrace();

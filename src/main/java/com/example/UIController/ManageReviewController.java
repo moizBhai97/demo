@@ -4,6 +4,7 @@ import java.net.URL;
 
 import org.json.JSONArray;
 
+import com.example.BackEnd.DoctorController;
 import com.example.BackEnd.PatientController;
 
 import javafx.event.ActionEvent;
@@ -25,7 +26,7 @@ public class ManageReviewController implements Initializable {
     ScrollPane reviewsScrollPane;
 
     private PatientController patientController;
-    private int patId;
+    private DoctorController doctorController;
     private int docId;
     private AnchorPane prevPane;
 
@@ -35,12 +36,12 @@ public class ManageReviewController implements Initializable {
         fillReviews();
     }
 
-    public void setData(PatientController pc, int patId, int docId, AnchorPane prevPane)
+    public void setData(PatientController pc, DoctorController dc, int docId, AnchorPane prevPane)
     {
         this.docId = docId;
-        this.patientController = pc;
-        this.patId = patId;
         this.prevPane = prevPane;
+        this.patientController = pc;
+        this.doctorController = dc;
     }
 
     public void fillReviews() {
@@ -91,7 +92,6 @@ public class ManageReviewController implements Initializable {
                     Pane pane = fxmlLoader.load();
                     SingleReviewController singleReviewController = fxmlLoader.getController();
                     singleReviewController .setCard(jsonArray.getJSONObject(i).toString());
-                    singleReviewController .setData(patientController, patId, docId);
 
                     reviewsGridPane.add(pane, 0, rowindex);
 
@@ -113,7 +113,12 @@ public class ManageReviewController implements Initializable {
 
     public String getReviews() 
     {
-        String result = patientController.getReviews(docId);
+        String result = "";
+        if(patientController != null)
+            result = patientController.getReviews(docId);
+        
+        else if(doctorController != null)
+            result = doctorController.getReviews(docId);
 
         return result;
     }

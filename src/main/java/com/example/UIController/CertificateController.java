@@ -85,7 +85,8 @@ public class CertificateController implements Initializable{
 
             for (int i = 0; i < arr.length(); i++) {
                 JSONObject temp = arr.getJSONObject(i);
-                certificateList.add(temp);
+                if(temp.getString("approvedStatus").equals("Approved"))
+                    certificateList.add(temp);
             }
 
 

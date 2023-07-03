@@ -145,7 +145,7 @@ CREATE TABLE CERTIFICATIONS
 (
 	--ID INT IDENTITY(1, 1),
 	DOCTOR_ID INT NOT NULL,
-	NAME VARCHAR(50) NOT NULL,
+	NAME VARCHAR(100) NOT NULL,
 	APPROVED_STATUS VARCHAR(8) NOT NULL CHECK (APPROVED_STATUS IN ('Approved', 'Pending', 'Rejected')),
 	ISSUE_DATE DATE NOT NULL,
 	EXPIRY_DATE DATE NOT NULL,
@@ -773,6 +773,14 @@ VALUES
 (31, 4, 'Satisfied with the treatment, the doctor was friendly.', 4.5, 4.5, 4.0, 4.5, 1),
 (31, 5, 'The diagnosis was accurate, but the doctor seemed distant.', 3.8, 4.0, 3.5, 4.0, 1);
 -- Insert data into APPOINTMENTS table
+-- Insert an appointment with completed status
+INSERT INTO APPOINTMENTS (DOCTOR_ID, PATIENT_ID, DATE, TIME, PROBLEM, STATUS)
+VALUES (1, 1, '2023-06-12', '10:00:00', 'Deep problem', 'Completed');
+
+-- Insert a payment for the appointment with a completed status
+INSERT INTO PAYMENTS (APPOINTMENT_ID, DATE, TIME, AMOUNT, STATUS)
+VALUES (1, '2023-05-12', '10:00:00', 2000.00, 1);
+
 
 -- Insert data into APPOINTMENT_SLOTS table
 

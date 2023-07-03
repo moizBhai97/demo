@@ -3,6 +3,7 @@ package com.example.DBHandler;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,22 +11,29 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import com.example.BackEnd.DBHandler;
+import java.util.concurrent.TimeUnit;
 
 public class SQL extends DBHandler {
-    String connectionUrl;
 
-    public String getServerName() {
+    String connectionUrl;
+    String serverName;
+
+    private String getServerName() 
+    {
         String filePath = "config.json"; // replace with the actual file path
-        String connectionUrl = null;
-        try {
+        String serverName = null;
+        try 
+        {
             // Read the contents of the JSON file
             File file = new File(filePath);
             FileReader reader = new FileReader(file);
@@ -33,35 +41,93 @@ public class SQL extends DBHandler {
             JSONObject json = new JSONObject (parser.parse(reader).toString());
 
             // Get the connectionUrl value from the JSON object
-            connectionUrl = (String) json.get("serverName");
-        } catch (IOException | ParseException e) {
+            serverName = (String) json.get("serverName");
+
+        } 
+        catch (Exception e) 
+        {
+            //e.printStackTrace();
+        }
+
+        return serverName;
+    }
+
+    public void setServer(String name) {
+        String filePath = "config.json"; // replace with the actual file path
+        try {
+            // Read the contents of the JSON file
+            File file = new File(filePath);
+            JSONObject json = new JSONObject();
+
+            // Update the serverName property
+            json.put("serverName", name);
+
+            // Write the changes back to the file
+            FileWriter writer = new FileWriter(file);
+            writer.write(json.toString());
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        return connectionUrl;
     }
 
-    public SQL() {
-        String serverName=getServerName();
-        connectionUrl = "jdbc:sqlserver://"+serverName +
-                ";" + "databaseName=SDA" + 
-                "IntegratedSecurity=true;" +
+    public Boolean testConnection() 
+    {
+        try {
+
+            serverName=getServerName();
+
+            connectionUrl = "jdbc:sqlserver://"+serverName +
+                ";databaseName=SDA" + 
+                ";IntegratedSecurity=true;" +
                 "encrypt=true;trustServerCertificate=true";
+
+            double connectionTimeout = 2.0;
+
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            Future<Connection> future = executor.submit(() -> {
+                try {
+                    return DriverManager.getConnection(connectionUrl);
+                } catch (SQLException e) {
+                    throw new IllegalStateException("Failed to connect to the database.", e);
+                }
+            });
+
+            future.get((long) (connectionTimeout * 1000), TimeUnit.MILLISECONDS);
+
+            return true;
+        } 
+        catch (Exception e) 
+        {
+            return false;
+        }
     }
 
-    public void createDatabaseAndTables(String createDatabaseSqlFilePath, String createTablesSqlFilePath) {
+    public Boolean createDatabaseAndTables(String createTablesSqlFilePath) 
+    {
+        try
+        {
+            serverName=getServerName();
 
-        String serverName=getServerName();
-
-        connectionUrl = "jdbc:sqlserver://"+serverName +
-                ";" + "" + 
-                "IntegratedSecurity=true;" +
+            connectionUrl = "jdbc:sqlserver://" + serverName +
+                ";IntegratedSecurity=true;" +
                 "encrypt=true;trustServerCertificate=true";
+            
+            
+            double connectionTimeout = 2.0;
 
-        try (Connection con = DriverManager.getConnection(connectionUrl)) {
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            Future<Connection> future = executor.submit(() -> {
+                try {
+                    return DriverManager.getConnection(connectionUrl);
+                } catch (SQLException e) {
+                    throw new IllegalStateException("Failed to connect to the database.", e);
+                }
+            });
 
-            System.out.println("Creating database and tables...");
-            // Create the database
-           // executeSqlScript(con, createDatabaseSqlFilePath);
+            Connection con = future.get((long) (connectionTimeout * 1000), TimeUnit.MILLISECONDS);
+            
             String statement=  "IF EXISTS (\n" +
             "    SELECT name\n" +
             "    FROM sys.databases\n" +
@@ -74,8 +140,8 @@ public class SQL extends DBHandler {
             "    DROP DATABASE IF EXISTS SDA;\n" +
             "END\n" +
             "\n" +
-            "-- Create the SDA database\n" +
             "CREATE DATABASE SDA;";
+
             Statement stmt = con.createStatement();
             stmt.executeUpdate(statement);
 
@@ -85,54 +151,53 @@ public class SQL extends DBHandler {
             // Create the tables
             executeSqlScript(con, createTablesSqlFilePath);
 
-            System.out.println("Database and tables created successfully.");
-
-            serverName=getServerName();
-            connectionUrl = "jdbc:sqlserver://"+serverName +
-                ";" + "databaseName=SDA" + 
-                ";IntegratedSecurity=true;" +
-                "encrypt=true;trustServerCertificate=true";
-
-           statement = "CREATE PROCEDURE SLOTS " +
-           "AS " +
-           "BEGIN " +
-           "DECLARE @startDate DATE; " +
-           "DECLARE @endDate DATE; " +
-           "DECLARE @doctorId INT; " +
-           "DECLARE @date DATE; " +
-           "SET @startDate = GETDATE(); " +
-           "SET @endDate = DATEADD(DAY, 10, @startDate); " +
-           "SET @doctorId = 1; " +
-           "WHILE @doctorId <= 31 " +
-           "BEGIN " +
-           "SET @date = @startDate; " +
-           "WHILE @date <= @endDate " +
-           "BEGIN " +
-           "INSERT INTO APPOINTMENT_SLOTS (DOCTOR_ID, [DATE], [TIME], AVAILABLE) " +
-           "VALUES " +
-           "(@doctorId, @date, '10:00:00', 1), " +
-           "(@doctorId, @date, '12:00:00', 1), " +
-           "(@doctorId, @date, '14:00:00', 1), " +
-           "(@doctorId, @date, '18:00:00', 1), " +
-           "(@doctorId, @date, '20:00:00', 1), " +
-           "(@doctorId, @date, '22:00:00', 1); " +
-           "SET @date = DATEADD(DAY, 1, @date); " +
-           "END " +
-           "SET @doctorId = @doctorId + 1; " +
-           "END " +
-           "END";
+            statement = "CREATE PROCEDURE SLOTS " +
+            "AS " +
+            "BEGIN " +
+            "DECLARE @startDate DATE; " +
+            "DECLARE @endDate DATE; " +
+            "DECLARE @doctorId INT; " +
+            "DECLARE @date DATE; " +
+            "SET @startDate = GETDATE(); " +
+            "SET @endDate = DATEADD(DAY, 10, @startDate); " +
+            "SET @doctorId = 1; " +
+            "WHILE @doctorId <= 31 " +
+            "BEGIN " +
+            "SET @date = @startDate; " +
+            "WHILE @date <= @endDate " +
+            "BEGIN " +
+            "INSERT INTO APPOINTMENT_SLOTS (DOCTOR_ID, [DATE], [TIME], AVAILABLE) " +
+            "VALUES " +
+            "(@doctorId, @date, '10:00:00', 1), " +
+            "(@doctorId, @date, '12:00:00', 1), " +
+            "(@doctorId, @date, '14:00:00', 1), " +
+            "(@doctorId, @date, '18:00:00', 1), " +
+            "(@doctorId, @date, '20:00:00', 1), " +
+            "(@doctorId, @date, '22:00:00', 1); " +
+            "SET @date = DATEADD(DAY, 1, @date); " +
+            "END " +
+            "SET @doctorId = @doctorId + 1; " +
+            "END " +
+            "END;";
 
             stmt = con.createStatement();
             stmt.executeUpdate(statement);
 
-            String SQL = "EXEC SLOTS;";
-            PreparedStatement pstmt = con.prepareStatement(SQL);
+            statement = "EXEC SLOTS;";
+            stmt = con.createStatement();
+            stmt.executeUpdate(statement);
+            
+            connectionUrl = "jdbc:sqlserver://"+serverName +
+                ";databaseName=SDA" + 
+                ";IntegratedSecurity=true;" +
+                "encrypt=true;trustServerCertificate=true";
 
-            pstmt.executeUpdate(); 
+            return true;
 
-        } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
-            e.printStackTrace();
+        } 
+        catch (Exception e) 
+        {
+            return false;
         }
     }
 
@@ -156,8 +221,6 @@ public class SQL extends DBHandler {
             }
 
         } catch (Exception e) {
-            System.out.println(e + "\nClass: " + getClass().getName() + "\nFunction: " + new Object() {}.getClass().getEnclosingMethod().getName());
-            e.printStackTrace();
         }
     }
 

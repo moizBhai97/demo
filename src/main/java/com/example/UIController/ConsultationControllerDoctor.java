@@ -164,23 +164,9 @@ public class ConsultationControllerDoctor  implements Initializable
         {
             dc.verifyPayment(docId, appID);
 
-            this.verify.getScene().getWindow().hide();
-
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation((new URL("file:src/main/resources/com/example/app_detailsDoctor.fxml")));
-
-            ConsultationControllerDoctor appointmentControllerDoctor = new ConsultationControllerDoctor();
-            appointmentControllerDoctor.setData(dc, appID, docId, rootPane);
-            loader.setController(appointmentControllerDoctor);
-
-            AnchorPane pane = loader.load();
-            AnchorPane.setTopAnchor(pane, 0.0);
-            AnchorPane.setBottomAnchor(pane, 0.0);
-            AnchorPane.setLeftAnchor(pane, 0.0);
-            AnchorPane.setRightAnchor(pane, 0.0);
-                  
-            ((AnchorPane)rootPane.getParent()).getChildren().add(pane);
-            DoctorMainController.addHeaderTitle("Consultation Details");
+            verify.setDisable(true);
+            verify.setText("Verified");
+            verify.setStyle("-fx-opacity: 1.0; -fx-font-fill: #2854c3;");
         }
         catch(Exception e)
         {

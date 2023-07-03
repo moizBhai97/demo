@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="parentPane" prefHeight="200.0" prefWidth="204.0" style="-fx-border-radius: 5; -fx-background-color: white; -fx-background-radius: 5; -fx-border-color: #2854C3; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<Pane fx:id="parentPane" prefHeight="200.0" prefWidth="204.0" style="-fx-border-radius: 5; -fx-background-color: white; -fx-background-radius: 5; -fx-border-color: #2854C3; -fx-border-width: 2;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox layoutX="-1.0" layoutY="45.0" prefHeight="122.0" prefWidth="204.0" spacing="6.0" style="-fx-background-color: transparent; -fx-border-radius: 5;">
          <children>
@@ -52,7 +52,7 @@
                   <Label fx:id="descriptionError" prefHeight="17.0" prefWidth="116.0" text="(error)" textFill="RED" visible="false" />
                </children>
             </HBox>
-            <TextField fx:id="descriptionTextBox" prefColumnCount="10" promptText="Milk">
+            <TextField fx:id="descriptionTextBox" prefColumnCount="10">
                <cursor>
                   <Cursor fx:constant="TEXT" />
                </cursor></TextField>

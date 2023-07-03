@@ -24,7 +24,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <AnchorPane prefHeight="78.0" styleClass="top_pane" stylesheets="@search_doctors.css" BorderPane.alignment="TOP_RIGHT">
          <children>
@@ -54,7 +54,7 @@
    <center>
       <AnchorPane fx:id="rootPane" prefHeight="564.0" prefWidth="657.0" BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane fx:id="childAnchorPane" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="childAnchorPane" prefHeight="564.0" prefWidth="657.0" style="-fx-background-color: white;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <ImageView fx:id="filter_img" fitHeight="24.0" fitWidth="28.0" layoutX="551.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" visible="false">
                      <image>
@@ -108,18 +108,6 @@
                         </Pane>
                      </children>
                   </Pane>
-                  <Button fx:id="filter_btn" alignment="BASELINE_LEFT" layoutX="518.0" layoutY="42.0" mnemonicParsing="false" onAction="#filter_toggle" onMouseClicked="#filter_toggle" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #2854c3; -fx-text-fill: #ffffff;" text="Filters">
-                     <graphic>
-                        <ImageView fitHeight="17.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../images/image%2028.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor>
-                  </Button>
                   <Label fx:id="doc_count" layoutX="24.0" layoutY="115.0" style="-fx-font-size: 12px; -fx-font-weight: bold;" text="Top Doctors" />
                   <ScrollPane fx:id="results_scrollpane" fitToWidth="true" layoutX="17.0" layoutY="135.0" prefHeight="417.0" prefWidth="631.0" styleClass="scroll_pane" stylesheets="@search_doctors.css" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="9.0" AnchorPane.topAnchor="135.0" />
                   <Pane fx:id="filter_Pane" layoutX="439.0" layoutY="89.0" prefHeight="202.0" prefWidth="200.0" styleClass="filter_pane" stylesheets="@search_doctors_Searched.css">
@@ -147,8 +135,11 @@
                                  <graphic>
                                     <ImageView fx:id="filterRatingAllIcon" fitHeight="13.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../../images/Vector.png" />
+                                          <Image url="@../../images/image%2033.png" />
                                        </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
                                     </ImageView>
                                  </graphic>
                                  <cursor>
@@ -239,6 +230,18 @@
                            </cursor></Button>
                      </children>
                   </Pane>
+                  <Button fx:id="filter_btn" layoutX="512.0" layoutY="44.0" mnemonicParsing="false" onAction="#filter_toggle" prefHeight="25.0" prefWidth="85.0" style="-fx-background-color: #2854c3; -fx-text-fill: #ffffff;" text="Filters">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../images/image%2028.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
                <effect>
                   <InnerShadow radius="8.5" width="15.0" />

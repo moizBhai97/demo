@@ -19,7 +19,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -129,6 +128,7 @@ public class LoginController implements Initializable {
                     stage.setMinHeight(680);
                     
                     stage.show();
+
                     stage.centerOnScreen();
                     
                 } catch (IOException e) {         
@@ -181,16 +181,19 @@ public class LoginController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/signup.fxml")));
             Parent root = loader.load();
-            Scene scene = new Scene(root, 700, 500);
+
             Stage stage = (Stage) this.loginButton.getScene().getWindow();
+            Scene scene = new Scene(root);
+
             stage.setScene(scene);
 
-            
-            stage.setMinWidth(700);
-            stage.setMinHeight(500);
-
-
             stage.show();
+
+            stage.sizeToScene();
+
+            stage.setMinWidth(720);
+            stage.setMinHeight(550);
+
             stage.centerOnScreen();
         } catch (IOException e) {
             e.printStackTrace();
@@ -204,13 +207,18 @@ public class LoginController implements Initializable {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation((new URL("file:src/main/resources/com/example/start.fxml")));
             Parent root = loader.load();
-            Scene scene = new Scene(root, 700, 500);
+            Scene scene = new Scene(root);
             Stage stage = (Stage) this.loginButton.getScene().getWindow();
             stage.setScene(scene);
 
-            
-            stage.setMinWidth(700);
-            stage.setMinHeight(500);
+            stage.show();
+
+            stage.sizeToScene();
+
+            stage.setMinWidth(720);
+            stage.setMinHeight(550);
+
+            stage.centerOnScreen();
     }
     catch (IOException e) {
             e.printStackTrace();

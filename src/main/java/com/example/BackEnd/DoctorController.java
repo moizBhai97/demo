@@ -172,6 +172,35 @@ public class DoctorController {
         }
     }
 
+    public String getReviews(int docId)
+    {
+        try
+        {
+            JSONArray arr= new JSONArray(doctorLedger.getDoctor(docId).getDoctorDetails().getReviewList(docId));
+
+            for(int i=0; i<arr.length(); i++)
+            {
+                int patId = arr.getJSONObject(i).getInt("patId");
+                if(patientLedger.getPatient(patId) == null)
+                {
+                    patientLedger.setPatient(patId);
+                    arr.getJSONObject(i).put("name", patientLedger.getPatient(patId).getName());
+                    continue;
+                }
+
+                arr.getJSONObject(i).put("name", patientLedger.getPatient(patId).getName());
+
+            }
+
+            return arr.toString();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public String getAppointment(int docId, int appId) 
     {
         try

@@ -69,7 +69,10 @@
                   </Pane>
                   <Pane fx:id="searchPane1" maxWidth="-Infinity" prefHeight="28.0" prefWidth="239.0" styleClass="search_pane" stylesheets="@search_doctors_Searched.css">
                      <children>
-                        <PasswordField fx:id="passwordTextField" layoutX="28.0" layoutY="1.0" prefHeight="25.0" prefWidth="207.0" promptText="Password" style="-fx-background-color: transparent;" />
+                        <PasswordField fx:id="passwordTextField" layoutX="28.0" layoutY="1.0" prefHeight="25.0" prefWidth="207.0" promptText="Password" style="-fx-background-color: transparent;">
+                           <cursor>
+                              <Cursor fx:constant="TEXT" />
+                           </cursor></PasswordField>
                         <Pane layoutX="1.0" prefHeight="25.0" prefWidth="33.0">
                            <children>
                               <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="6.0" layoutY="2.0" opacity="0.85" pickOnBounds="true" preserveRatio="true">

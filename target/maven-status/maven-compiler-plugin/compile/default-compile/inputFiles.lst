@@ -4,6 +4,7 @@ C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\Do
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\SearchDoctorController.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\App.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\BackEnd\DBFactory.java
+C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\BackEnd\Setting.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\PendingAppointmentDoctorCard.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\module-info.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\BackEnd\DoctorController.java
@@ -19,11 +20,9 @@ C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\Pa
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\AddCertificationController.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\BackEnd\CertificateLedger.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\DoctorSettingsController.java
-C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\PrimaryController.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\AddRecordController.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\SingleReviewController.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\BackEnd\AppointmentLedger.java
-C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\DoctorTemp.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\PatientDetailsController.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\BackEnd\DoctorDetails.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\UpdateDoctorProfileController.java
@@ -33,7 +32,6 @@ C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\BackEnd\ReviewL
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\PatientAppointmentDetailsController.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\PendingAppointmentController.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\BookAppointmentController.java
-C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\CompletedAppointmentDoctorCard.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\BackEnd\PatientController.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\ReschAppointmentController.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\UpdatePatientProfileController.java
@@ -45,7 +43,6 @@ C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\Ce
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\BackEnd\PatientLedger.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\PendingConsultationPatientCard.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\StartController.java
-C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\DummyController.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\ConsultationControllerDoctor.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\ManageAppointmentController.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\BackEnd\Certificate.java
@@ -55,8 +52,6 @@ C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\BackEnd\Appoint
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\PaymentController.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\CancelAppointmentController.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\LoginController.java
-C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\SecondaryController.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\BackEnd\Complaint.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\BackEnd\Review.java
 C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\UIController\ManageReviewController.java
-C:\Users\moizr\Downloads\demo (1)\demo\src\main\java\com\example\BackEnd\Main.java

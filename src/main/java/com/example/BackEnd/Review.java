@@ -80,7 +80,12 @@ public class Review {
         if(value.equals("experience"))
             return String.valueOf(experience);
         else if(value.equals("comment"))
-            return comment;
+        {
+            if(comment==null)
+                return "";
+            else
+                return comment;
+        }
         else if(value.equals("recommend"))
             return String.valueOf(recommend);
         else if(value.equals("checkupRating"))

@@ -7,6 +7,7 @@ import org.json.JSONObject;
 
 import com.example.BackEnd.DoctorController;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventTarget;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -93,7 +95,13 @@ public class DoctorHomeController implements Initializable{
     private Button appoints;
 
     @FXML
+    private Button reviewButton;
+
+    @FXML
     private Pane big_pane;
+
+    @FXML
+    private AnchorPane rootPane;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) 
@@ -176,6 +184,29 @@ public class DoctorHomeController implements Initializable{
 
             stage.show();
             
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void reviewButton(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation((new URL("file:src/main/resources/com/example/manageReview.fxml")));
+
+            ManageReviewController reviewsController = new ManageReviewController();
+            reviewsController.setData(null, dc, docId, rootPane);
+            loader.setController(reviewsController);
+
+            AnchorPane pane = loader.load();
+            AnchorPane.setTopAnchor(pane, 0.0);
+            AnchorPane.setBottomAnchor(pane, 0.0);
+            AnchorPane.setLeftAnchor(pane, 0.0);
+            AnchorPane.setRightAnchor(pane, 0.0);
+
+            ((AnchorPane) rootPane.getParent()).getChildren().add(pane);
+
+            SearchDoctorController.addHeaderTitle("Reviews");
         } catch (Exception e) {
             e.printStackTrace();
         }

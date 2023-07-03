@@ -118,7 +118,7 @@ public class CancelAppointmentController implements Initializable {
         confirmation.setTitle("Confirm Cancellation");
         confirmation.setHeaderText("Are you sure you want to cancel this Appointment?");
         Optional<ButtonType> result = confirmation.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.YES) {
+        if (result.isPresent() && result.get() == ButtonType.OK) {
 
             JSONObject obj = new JSONObject();
 

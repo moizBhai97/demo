@@ -249,19 +249,20 @@ public class DoctorMainController implements Initializable {
             confirmation.setTitle("Confirm Logout");
             confirmation.setHeaderText("Are you sure you want to Logout?");
             Optional<ButtonType> result = confirmation.showAndWait();
-            if (result.isPresent() && result.get() == ButtonType.YES) {                
+            if (result.isPresent() && result.get() == ButtonType.OK) {                
                 FXMLLoader loader = new FXMLLoader(new URL("file:src/main/resources/com/example/start.fxml"));
 
                 Parent root = loader.load();
                 Stage stage = (Stage) logoutBtn.getScene().getWindow();
-                stage.setScene(new Scene(root, 700, 500));
-                
-                
-                stage.setMinWidth(700);
-                stage.setMinHeight(500);
+                stage.setScene(new Scene(root));
 
-                
                 stage.show();
+
+                stage.sizeToScene();
+
+                stage.setMinWidth(720);
+                stage.setMinHeight(550);
+
                 stage.centerOnScreen();
             }
 

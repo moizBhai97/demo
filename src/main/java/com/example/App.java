@@ -1,14 +1,8 @@
 package com.example;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 
-import org.json.JSONObject;
-import org.json.JSONTokener;
-
-import com.example.BackEnd.DBFactory;
+import com.example.BackEnd.Setting;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -31,10 +25,44 @@ public class App extends Application {
 
     private static Scene scene;
 
+    private void startApp()
+    {
+        try
+        {
+            Parent root = FXMLLoader.load(getClass().getResource("start.fxml"));
+
+            Scene scene = new Scene(root, 700, 500);
+            Stage NewStage = new Stage();
+
+            Image img = new Image("file:src/main/resources/images/image 11.png");
+
+            NewStage.setTitle("HealthySense");
+
+            NewStage.getIcons().add(img);
+            NewStage.setMinWidth(700);
+            NewStage.setMinHeight(500);
+            
+            NewStage.setScene(scene);
+            NewStage.show();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+    }
+
     @Override
-    public void start(Stage stage2) throws IOException {
+    public void start(Stage initialStage) throws IOException {
+
+        Setting setting = new Setting();
 
         try {
+
+            if(setting.testConnection())
+            {
+                startApp();
+                return;
+            }
 
             GridPane grid = new GridPane();
 
@@ -45,74 +73,108 @@ public class App extends Application {
             grid.setHgap(10);
             grid.setAlignment(Pos.CENTER);
 
-            grid.add(new Label("Enter your Server name:"), 0, 0);
+            grid.add(new Label("Enter your Server name"), 0, 0);
 
             TextField textField = new TextField();
             textField.setPromptText("Enter");
             grid.add(textField, 1, 0);
 
-            Button btn = new Button("Connect to Server");
+            Button btn = new Button("Create Database");
 
             btn.setOnAction(e -> {
                 try {
-                    stage.close();
+
+                    if(textField.getText().isEmpty())
+                    {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Error");
+                        alert.setContentText("Please enter server name");
+                        alert.showAndWait();
+                        return;
+                    }
                     
-                    setServerName(textField.getText());
+                    setting.setServer(textField.getText());
 
-                    DBFactory.getInstance().createHandler("SQL").createDatabaseAndTables("SDA_DB/SDA_DATABASE.sql","SDA_DB/SDA.sql");
+                    Boolean flag = setting.createDatabaseAndTables();
 
-                    Parent root = FXMLLoader.load(getClass().getResource("start.fxml"));
-                    Scene scene = new Scene(root, 700, 500);
-                    Stage NewStage = new Stage();
-                    Image img = new Image("file:src/main/resources/images/image 11.png");
-                    NewStage.setTitle("HealthySense");
+                    if (flag) 
+                    {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Success");
+                        alert.setHeaderText("Success");
+                        alert.setContentText("Database created successfully");
+                        alert.showAndWait();
 
-                    NewStage.getIcons().add(img);
-                    NewStage.setMinWidth(700);
-                    NewStage.setMinHeight(500);
-                    
+                        stage.close();
 
-                    NewStage.setScene(scene);
-                    NewStage.show();
-                } catch (Exception e1) {
-                    // TODO Auto-generated catch block
+                        startApp();
+                    } 
+                    else 
+                    {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Error");
+                        alert.setContentText("Database not created");
+                        alert.showAndWait();
+                    }
+                } 
+                catch (Exception e1) 
+                {
                     e1.printStackTrace();
                 }
             });
 
-            grid.add(btn, 0, 1);
+            grid.add(btn, 1, 1);
 
-            Button btn2 = new Button("Use Existing Server");
+            Button btn2 = new Button("Use Existing Database");
 
             btn2.setOnAction(e -> {
                 try {
-                    stage.close();
-                    Parent root = FXMLLoader.load(getClass().getResource("start.fxml"));
-                    Scene scene = new Scene(root, 700, 500);
-                    Stage NewStage = new Stage();
-                    Image img = new Image("file:src/main/resources/images/image 11.png");
-                    NewStage.setTitle("HealthySense");
 
-                    NewStage.getIcons().add(img);
-                    NewStage.setMinWidth(700);
-                    NewStage.setMinHeight(500);
-                    
+                    if(textField.getText().isEmpty())
+                    {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Error");
+                        alert.setContentText("Please enter server name");
+                        alert.showAndWait();
+                        return;
+                    }
 
-                    NewStage.setScene(scene);
-                    NewStage.show();
-                } catch (IOException e1) {
-                    // TODO Auto-generated catch block
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Error");
-                    alert.setHeaderText("Error");
-                    alert.setContentText("Server not found");
-                    alert.showAndWait();
+                    setting.setServer(textField.getText());
 
+                    Boolean flag = setting.testConnection();
+
+                    if(flag)
+                    {
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Success");
+                        alert.setHeaderText("Success");
+                        alert.setContentText("Connected to database successfully");
+                        alert.showAndWait();
+
+                        stage.close();
+
+                        startApp();
+                    }
+                    else
+                    {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error");
+                        alert.setHeaderText("Error");
+                        alert.setContentText("Server not found");
+                        alert.showAndWait();
+                    }
+
+                } 
+                catch (Exception e1) 
+                {
                     e1.printStackTrace();
                 }
             });
 
-            grid.add(btn2,1, 1);
+            grid.add(btn2,0, 1);
 
             Scene scene = new Scene(grid, 400, 200);
             stage.setScene(scene);
@@ -135,30 +197,8 @@ public class App extends Application {
         return fxmlLoader.load();
     }
 
-   public void setServerName(String name) {
-    String filePath = "config.json"; // replace with the actual file path
-    try {
-        // Read the contents of the JSON file
-        File file = new File(filePath);
-        FileReader reader = new FileReader(file);
-        JSONObject json = new JSONObject(new JSONTokener(reader));
-
-        // Update the serverName property
-        json.put("serverName", name);
-
-        // Write the changes back to the file
-        FileWriter writer = new FileWriter(file);
-        writer.write(json.toString());
-        writer.flush();
-        writer.close();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
-}
     public static void main(String[] args) {
         launch();
-       //App app = new App();
-       //app.setServerName("localhost");
     }
 
 }
